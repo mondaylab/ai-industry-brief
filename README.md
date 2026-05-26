@@ -17,6 +17,11 @@
 
 - `index.html`：每日简报聚合首页
 - `briefs/YYYY-MM-DD.html`：每日长图式详情页
+- `skills/ai-industry-brief/`：用于生成、更新与发布简报的 Codex Skill
+
+## Skill
+
+仓库包含可复用的 `$ai-industry-brief` 技能定义，沉淀采集、撰写、版式、归档及 GitHub Pages 发布规则。将该目录安装至 Codex skills 后，可用于每日运行或进一步封装为 CLI / 插件。
 
 ## 许可
 
