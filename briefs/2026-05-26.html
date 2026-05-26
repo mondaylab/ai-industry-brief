@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief | 05/26 · 星期二 | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #7A9E9F;
+  --primary-light: #F1F5F5;
+  --paper: #F8F7F5;
+  --ground: #EDEBE8;
+  --text: #1A1A1A;
+  --body: #555;
+  --rule: #E8E0D8;
+}
+body {
+  background: var(--ground);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+.card {
+  background: var(--paper);
+  max-width: 750px;
+  width: 100%;
+  padding: 44px 40px;
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--primary);
+  margin-bottom: 28px;
+}
+.header-left .brand {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.header-right { text-align: right; }
+.header-right .lab {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.header-right .date { font-size: 12px; color: #999; letter-spacing: 0.03em; }
+.quote-card {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #333;
+}
+.quote-label, .insight-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section { padding: 24px 0; border-bottom: 1px solid var(--rule); }
+.section-header { margin-bottom: 6px; }
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.section-tag svg { flex-shrink: 0; }
+.section-sub {
+  font-size: 11px;
+  color: #999;
+  margin-top: 6px;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+.item { margin-bottom: 26px; }
+.item:last-child { margin-bottom: 0; }
+.item-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.item-tool { color: var(--primary); font-weight: 700; }
+.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-copy { flex: 1; }
+.item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 7px;
+  background: var(--primary-light);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  color: var(--primary);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.item-desc {
+  font-size: 18px;
+  color: var(--body);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.item-source {
+  font-size: 16px;
+  color: var(--primary);
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: 600;
+}
+.item-source:hover { opacity: 1; text-decoration: underline; }
+.source-date {
+  font-size: 12px;
+  color: #999;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.insight-card {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-top: 28px;
+  margin-bottom: 32px;
+}
+.insight-label { margin-bottom: 10px; }
+.insight-text { font-size: 13.5px; color: #444; line-height: 1.9; }
+.method-note { margin-top: 18px; font-size: 11px; color: #999; line-height: 1.75; }
+.footer {
+  border-top: 1px solid var(--primary);
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-lab { font-size: 13px; font-weight: 600; color: var(--primary); letter-spacing: 0.04em; }
+.footer-sub { font-size: 11px; color: #AAA; letter-spacing: 0.03em; }
+@media (max-width: 560px) {
+  body { padding: 0; }
+  .card { padding: 32px 22px; }
+  .header-left .brand { font-size: 31px; }
+  .item-title { font-size: 17px; gap: 8px; }
+  .item-desc { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="header-left"><div class="brand">The AI Brief</div></div>
+    <div class="header-right">
+      <div class="lab">星期一研究室</div>
+      <div class="date">05/26 · 星期二</div>
+    </div>
+  </header>
+
+  <div class="quote-card">
+    <div class="quote-label">今日一句话</div>
+    真正的 AI 入口之争，已从聊天框转向能接管任务的工作现场。
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+        AI 工作台
+      </span>
+    </div>
+    <div class="section-sub">Gemini App · Notion · 飞书 aily</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini App</span><span class="item-divider"> | </span><span class="item-heading">主动简报连接日程</span></span></div>
+      <p class="item-desc">Google 为 Gemini App 引入结合许可数据生成的主动简报，可预先汇聚行程与行动事项。个人 AI 工作台由等候指令，转向每天自动组织注意力。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Notion</span><span class="item-divider"> | </span><span class="item-heading">开放 Agent 工作区</span></span></div>
+      <p class="item-desc">Notion Developer Platform 提供 Agent API、Workers、Webhooks 与命令行工具，让协作内容可触发自动执行。文档和数据库开始同时承担业务运行层角色。</p>
+      <a class="item-source" href="https://www.notion.com/releases/2026-05-13" target="_blank" rel="noopener noreferrer">→ notion.com</a><span class="source-date">2026-05-13 · 最近官方参考</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">飞书 aily</span><span class="item-divider"> | </span><span class="item-heading">企业场景部署智能体</span></span></div>
+      <p class="item-desc">飞书 aily 面向企业提供知识、技能与系统接入的智能体开发能力。办公平台竞争不再止于助手体验，而在能否把 Agent 嵌回组织流程。</p>
+      <a class="item-source" href="https://www.feishu.cn/content/article/7597739180457806780" target="_blank" rel="noopener noreferrer">→ feishu.cn</a><span class="source-date">2026-01-21 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+        AI 流水线
+      </span>
+    </div>
+    <div class="section-sub">Antigravity CLI · Claude Managed Agents · Codex</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Antigravity CLI</span><span class="item-divider"> | </span><span class="item-heading">承接跨界面执行</span></span></div>
+      <p class="item-desc">Google 宣布 Gemini CLI 迁移为 Antigravity CLI，并将能力扩展至编辑器与浏览器中的智能体执行。开发入口正在围绕任务编排而非单轮请求重组。</p>
+      <a class="item-source" href="https://developers.googleblog.com/en/gemini-cli-is-now-antigravity-cli/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-05-20</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Claude</span><span class="item-divider"> | </span><span class="item-heading">Managed Agents 接通 MCP</span></span></div>
+      <p class="item-desc">Anthropic 为 Claude Managed Agents 加入自托管沙箱与 MCP tunnels，使企业工具和受控执行环境可接入 Agent。企业落地重点转向权限与执行边界。</p>
+      <a class="item-source" href="https://claude.com/blog/claude-managed-agents-self-hosted-sandboxes-mcp-tunnels" target="_blank" rel="noopener noreferrer">→ claude.com</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">Codex</span><span class="item-divider"> | </span><span class="item-heading">移动端跟进长任务</span></span></div>
+      <p class="item-desc">OpenAI 发布可跨设备推进 Codex 任务的工作方式，使代码任务在离开桌面后仍可查看与继续。编程 Agent 的价值变成持续协作与成果回收。</p>
+      <a class="item-source" href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-05-14 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 大模型
+      </span>
+    </div>
+    <div class="section-sub">Gemini 3.5 · Gemini Omni · GPT-5.5</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini 3.5</span><span class="item-divider"> | </span><span class="item-heading">强化多步任务推理</span></span></div>
+      <p class="item-desc">Google 发布 Gemini 3.5，强调复杂推理、智能体使用与成本效率提升。头部模型的评判坐标已从回答漂亮，切换到多步骤任务是否跑得稳。</p>
+      <a class="item-source" href="https://blog.google/intl/en-africa/products/explore-get-answers/gemini-3-5/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">统一理解与生成模态</span></span></div>
+      <p class="item-desc">Google 的 I/O 开发者合集披露 Gemini Omni 预览，将文本、图像、音频和视频能力纳入原生全模态方向。应用层的模型路由复杂度随之降低。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">GPT-5.5</span><span class="item-divider"> | </span><span class="item-heading">聚焦复杂工作产出</span></span></div>
+      <p class="item-desc">OpenAI 将 GPT-5.5 定位为加强复杂工作与编码任务的模型，并服务于 Codex 工作流。模型升级正越来越直接地对应可交付的生产任务。</p>
+      <a class="item-source" href="https://openai.com/index/introducing-gpt-5-5/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-04-23 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+        AI 信息美学
+      </span>
+    </div>
+    <div class="section-sub">Google Pics · Gemini Omni · Adobe Firefly</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Google Pics</span><span class="item-divider"> | </span><span class="item-heading">把生图带入编辑现场</span></span></div>
+      <p class="item-desc">Google 公布 Pics，将 Nano Banana 图像能力嵌入可组织、可修改的创意工作区。生成视觉从提示词的一次性输出，转向连续的构图与修订过程。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/sundar-pichai-io-2026/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">跨媒体生成统一化</span></span></div>
+      <p class="item-desc">Gemini Omni 面向原生全模态理解与生成方向亮相，覆盖图像、音频和视频语境。视觉内容生产的入口将更自然地连接脚本、声音与动态画面。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">Adobe Firefly</span><span class="item-divider"> | </span><span class="item-heading">创意 Agent 贯通制作</span></span></div>
+      <p class="item-desc">Adobe 发布 Firefly AI Assistant 与创意 Agent 能力，以辅助生成、修改和品牌化制作。视觉工具的护城河正在转向工作流衔接和商用控制。</p>
+      <a class="item-source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank" rel="noopener noreferrer">→ news.adobe.com</a><span class="source-date">2026-04-15 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <aside class="insight-card">
+    <div class="insight-label">今日洞察</div>
+    <p class="insight-text">模型正在让位于“执行界面”：工作台抢上下文，CLI 抢动作入口，多模态编辑器抢最终产物。能管理权限、连接工具并持续推进任务的平台，将比单纯拥有更强模型的平台更快形成日常依赖。</p>
+    <p class="method-note">采集窗口以 2026-05-20 至 2026-05-26 为优先；窗口内官方新品不足以覆盖所有专栏时，补充项均标注为邻近窗口或最近官方参考。</p>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-lab">星期一研究室</div>
+    <div class="footer-sub">The AI Brief · 每日出品</div>
+  </footer>
+</main>
+</body>
+</html>

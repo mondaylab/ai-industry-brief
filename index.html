@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Brief | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #7A9E9F;
+  --primary-light: #F1F5F5;
+  --paper: #F8F7F5;
+  --ground: #EDEBE8;
+  --text: #1A1A1A;
+}
+body {
+  min-height: 100vh;
+  background: var(--ground);
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  color: var(--text);
+  padding: 52px 22px;
+}
+.page {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+}
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 25px;
+  border-bottom: 1.5px solid var(--primary);
+  margin-bottom: 42px;
+}
+.title {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: clamp(40px, 6vw, 60px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.lab {
+  text-align: right;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+}
+.lead {
+  max-width: 660px;
+  color: #555;
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 22px;
+}
+.brief {
+  display: block;
+  text-decoration: none;
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 26px 25px 24px;
+  min-height: 230px;
+  color: inherit;
+  border: 1px solid transparent;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.brief:hover {
+  border-color: #C8D9D9;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(48, 39, 58, 0.06);
+}
+.date {
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  margin-bottom: 20px;
+}
+.brief h2 {
+  font-size: 24px;
+  line-height: 1.42;
+  margin-bottom: 16px;
+}
+.brief p {
+  color: #606060;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 21px;
+}
+.read {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+.brief.previous { background: #FBFAF8; }
+.footnote {
+  margin-top: 42px;
+  color: #999;
+  font-size: 12px;
+}
+@media (max-width: 560px) {
+  body { padding: 32px 18px; }
+  .masthead { display: block; }
+  .lab { text-align: left; margin-top: 16px; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <h1 class="title">The AI Brief</h1>
+    <div class="lab">星期一研究室<br>AI DAILY ARCHIVE</div>
+  </header>
+  <p class="lead">追踪 AI 工作台、流水线、大模型与信息美学的关键进展。点击日期进入当日长图早报。</p>
+  <section class="grid" aria-label="每日早报">
+    <a class="brief" href="briefs/2026-05-26.html">
+      <div class="date">05/26 · 星期二</div>
+      <h2>入口之争转向工作现场</h2>
+      <p>Antigravity CLI、Managed Agents、Gemini Omni 与创意执行界面的演进。</p>
+      <span class="read">查看今日早报 →</span>
+    </a>
+    <a class="brief previous" href="briefs/2026-05-25.html">
+      <div class="date">05/25 · 星期一</div>
+      <h2>AI 正进入主动工作阶段</h2>
+      <p>Gemini 主动简报、Antigravity CLI、Gemini 3.5 与新的创意工作流。</p>
+      <span class="read">查看昨日早报 →</span>
+    </a>
+  </section>
+  <p class="footnote">The AI Brief · 星期一研究室 · 每日出品</p>
+</main>
+</body>
+</html>
