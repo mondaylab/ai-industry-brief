@@ -29,7 +29,7 @@
 ## Brand
 
 - Public name: `The AI Industry Brief`
-- Producer attribution in upper right: `星期一研究室出品`
+- Producer attribution in upper right: `星期一研究室`
 - Detail footer left: `星期一研究室出品`
 - Detail footer right: `The AI Industry Brief`
 - Archive title: `The AI Industry Brief`
