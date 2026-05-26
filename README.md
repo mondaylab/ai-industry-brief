@@ -1,4 +1,4 @@
-# AI Industry Brief
+# The AI Industry Brief
 
 一份面向团队阅读与复用的 AI 行业简报静态站点，追踪四个方向：
 
