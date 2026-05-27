@@ -24,9 +24,9 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
-- 默认 Cron：`5 1 * * *`
+- 默认 Cron：`50 22 * * *`
 
-`5 1 * * *` 对应北京时间每天 `09:05`。这个时间是按当前日报场景做的默认值，可以在部署前调整。
+`50 22 * * *` 对应北京时间每天 `06:50`。Cloudflare Cron 使用 UTC，因此这里已经完成了时区换算。
 
 ## 必要 Secrets
 
