@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "ai-industry-brief-feishu-push",
+  "main": "src/index.js",
+  "compatibility_date": "2026-05-27",
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "SITE_BASE_URL": "https://mondaylab.github.io/ai-industry-brief",
+    "TIME_ZONE": "Asia/Shanghai"
+  },
+  "triggers": {
+    "crons": [
+      "5 1 * * *"
+    ]
+  }
+}

@@ -18,10 +18,15 @@
 - `index.html`：每日简报聚合首页
 - `briefs/YYYY-MM-DD.html`：每日长图式详情页
 - `skills/ai-industry-brief/`：用于生成、更新与发布简报的 Codex Skill
+- `workers/feishu-brief-push/`：Cloudflare Worker，定时读取公开站点并推送飞书机器人
 
 ## Skill
 
 仓库包含可复用的 `$ai-industry-brief` 技能定义，沉淀采集、撰写、版式、归档及 GitHub Pages 发布规则。将该目录安装至 Codex skills 后，可用于每日运行或进一步封装为 CLI / 插件。
+
+## 飞书推送
+
+仓库同时提供一个独立的 Cloudflare Worker，用于保持“本地生成并发布 GitHub Pages”不变的前提下，把已发布的日报按定时任务推送到飞书群机器人。该 Worker 只消费公开站点，不参与内容生成。
 
 ## 许可
 
