@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Industry Brief | 05/29 · 星期五 | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #A68F8F;
+  --primary-light: #F5F0F0;
+  --paper: #F8F7F5;
+  --ground: #EDEBE8;
+  --text: #1A1A1A;
+  --body: #555;
+  --rule: #E6DDDD;
+}
+body {
+  background: var(--ground);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+.card {
+  background: var(--paper);
+  max-width: 750px;
+  width: 100%;
+  padding: 44px 40px;
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  border-bottom: 1.5px solid var(--primary);
+  margin-bottom: 28px;
+}
+.header-left .brand {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.header-right { text-align: right; }
+.header-right .lab {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.header-right .date { font-size: 12px; color: #999; letter-spacing: 0.03em; }
+.quote-card {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #333;
+}
+.quote-label, .insight-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section { padding: 24px 0; border-bottom: 1px solid var(--rule); }
+.section-header { margin-bottom: 6px; }
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.section-tag svg { flex-shrink: 0; }
+.section-sub {
+  font-size: 11px;
+  color: #999;
+  margin-top: 6px;
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+.item { margin-bottom: 26px; }
+.item:last-child { margin-bottom: 0; }
+.item-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.item-tool { color: var(--primary); font-weight: 700; }
+.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-copy { flex: 1; }
+.item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 7px;
+  background: var(--primary-light);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  color: var(--primary);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.item-desc {
+  font-size: 18px;
+  color: var(--body);
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.item-source {
+  font-size: 16px;
+  color: var(--primary);
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: 600;
+}
+.item-source:hover { opacity: 1; text-decoration: underline; }
+.source-date {
+  font-size: 12px;
+  color: #999;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.insight-card {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-top: 28px;
+  margin-bottom: 32px;
+}
+.insight-label { margin-bottom: 10px; }
+.insight-text { font-size: 13.5px; color: #444; line-height: 1.9; }
+.method-note { margin-top: 18px; font-size: 11px; color: #999; line-height: 1.75; }
+.footer {
+  border-top: 1px solid var(--primary);
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-lab { font-size: 13px; font-weight: 600; color: var(--primary); letter-spacing: 0.04em; }
+.footer-sub { font-size: 11px; color: #AAA; letter-spacing: 0.03em; }
+@media (max-width: 560px) {
+  body { padding: 0; }
+  .card { padding: 32px 22px; }
+  .header-left .brand { font-size: 31px; }
+  .item-title { font-size: 17px; gap: 8px; }
+  .item-desc { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="header-left"><div class="brand">The AI Industry Brief</div></div>
+    <div class="header-right">
+      <div class="lab">星期一研究室</div>
+      <div class="date">05/29 · 星期五</div>
+    </div>
+  </header>
+
+  <div class="quote-card">
+    <div class="quote-label">今日一句话</div>
+    AI 产品栈正在一起向闭环执行收束。
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+        AI 工作台
+      </span>
+    </div>
+    <div class="section-sub">Gemini App · Google Workspace · Notion Developer Platform</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini App</span><span class="item-divider"> | </span><span class="item-heading">主动简报提前开工</span></span></div>
+      <p class="item-desc">Google 为 Gemini App 推出 Daily Brief 与 Spark，结合许可数据主动整理日程、新闻和待办。个人 AI 入口正从问答框，前移成帮用户预排一天的工作前台。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Google Workspace</span><span class="item-divider"> | </span><span class="item-heading">语音入口压低摩擦</span></span></div>
+      <p class="item-desc">Workspace 新增 Gmail、Docs 与 Keep 的语音交互，并把 AI Inbox、Google Pics 等能力铺进套件。办公工作台正把表单式操作，改造成随时可接入的自然语言界面。</p>
+      <a class="item-source" href="https://blog.google/products-and-platforms/products/workspace/workspace-updates/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">Notion Developer Platform</span><span class="item-divider"> | </span><span class="item-heading">内容库开始驱动 Agent</span></span></div>
+      <p class="item-desc">Notion 开放 External Agents、Webhooks、Workers 与 CLI，让数据库与页面事件直接触发自动执行。工作台的竞争点越来越落在上下文沉淀，以及对代理的原生承载能力上。</p>
+      <a class="item-source" href="https://www.notion.com/releases/2026-05-13" target="_blank" rel="noopener noreferrer">→ notion.com</a><span class="source-date">2026-05-13 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+        AI 流水线
+      </span>
+    </div>
+    <div class="section-sub">Cursor Automations · Cursor in Jira · Runway MCP</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Cursor Automations</span><span class="item-divider"> | </span><span class="item-heading">计划任务走向常驻</span></span></div>
+      <p class="item-desc">Cursor 在 5 月 20 日发布 Automations，支持定时运行并可跨仓库或无仓库执行。编码流水线正在从一次性调用模型，升级成可反复触发、持续巡检和回传结果的后台系统。</p>
+      <a class="item-source" href="https://cursor.com/changelog/05-20-26" target="_blank" rel="noopener noreferrer">→ cursor.com</a><span class="source-date">2026-05-20 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Cursor in Jira</span><span class="item-divider"> | </span><span class="item-heading">工单直接拉起编码</span></span></div>
+      <p class="item-desc">Cursor 把 Agent 挂进 Jira ticket，允许从工单上下文直接生成实现与变更草稿。研发团队开始把任务系统与执行代理并排放置，缩短从需求到提交的中间层。</p>
+      <a class="item-source" href="https://cursor.com/changelog/05-19-26" target="_blank" rel="noopener noreferrer">→ cursor.com</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">Runway MCP</span><span class="item-divider"> | </span><span class="item-heading">创意生成接入代理</span></span></div>
+      <p class="item-desc">Runway 在 5 月 27 日发布 MCP server，把图像和视频生成直接接到 Claude、ChatGPT、Cursor 等代理工具链。创意能力开始像数据库和搜索一样，成为可编排的标准节点。</p>
+      <a class="item-source" href="https://runwayml.com/news/mcp" target="_blank" rel="noopener noreferrer">→ runwayml.com</a><span class="source-date">2026-05-27</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 大模型
+      </span>
+    </div>
+    <div class="section-sub">Claude Opus 4.8 · Gemini 3.5 Flash · OpenAI Voice Models</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Claude Opus 4.8</span><span class="item-divider"> | </span><span class="item-heading">编码推理再抬上限</span></span></div>
+      <p class="item-desc">Anthropic 在 5 月 28 日推出 Claude Opus 4.8，强调状态感知推理、工具使用与高强度编码表现。头部模型的竞争焦点继续从单次回答质量，转向长任务里的稳定完成度。</p>
+      <a class="item-source" href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-05-28</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Gemini 3.5 Flash</span><span class="item-divider"> | </span><span class="item-heading">快速模型兼顾执行</span></span></div>
+      <p class="item-desc">Google 把 Gemini 3.5 Flash 作为首个可用版本推出，强调速度、推理与工具执行的平衡。大模型分层不再只是性能分档，而是围绕具体工作流的吞吐与可靠性来定义。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">OpenAI Voice Models</span><span class="item-divider"> | </span><span class="item-heading">语音链路更可产品化</span></span></div>
+      <p class="item-desc">OpenAI 发布 `gpt-realtime-2`、`gpt-translate-2` 和 `gpt-transcribe-2`，把语音交互拆成更清晰的产品层。模型竞争正延伸到延迟、翻译与转写这类可直接装进应用的原生能力。</p>
+      <a class="item-source" href="https://openai.com/index/advancing-voice-intelligence-with-new-models-in-the-api/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-05-07 · 最近官方参考</span>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+        AI 信息美学
+      </span>
+    </div>
+    <div class="section-sub">Google Pics · Aleph 2.0 · Stable Audio 3.0</div>
+    <article class="item">
+      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Google Pics</span><span class="item-divider"> | </span><span class="item-heading">白板直接生设计稿</span></span></div>
+      <p class="item-desc">Google 在 Workspace 更新中推出 Google Pics，让用户从说明、示意图和草图快速生成设计素材。创意入口正在嵌回办公套件，让视觉生产成为知识工作流的一部分。</p>
+      <a class="item-source" href="https://blog.google/products-and-platforms/products/workspace/workspace-updates/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Aleph 2.0</span><span class="item-divider"> | </span><span class="item-heading">改片保留镜头结构</span></span></div>
+      <p class="item-desc">Runway 用 Aleph 2.0 和 Edit Studio 强调局部编辑时保留原视频动作、结构与镜头连贯性。视频生成赛道正在从一次重做，转向接近后期制作的软件化精修能力。</p>
+      <a class="item-source" href="https://runwayml.com/news/introducing-aleph-2-and-edit-studio" target="_blank" rel="noopener noreferrer">→ runwayml.com</a><span class="source-date">2026-05-21 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num">03</span><span class="item-copy"><span class="item-tool">Stable Audio 3.0</span><span class="item-divider"> | </span><span class="item-heading">音频生成迈向制作级</span></span></div>
+      <p class="item-desc">Stability AI 在 5 月 20 日发布 Stable Audio 3.0，强调更长音轨、结构控制与制作级声音资产生成。生成式美学的边界继续扩到声音，使多模态内容生产更接近完整成片流程。</p>
+      <a class="item-source" href="https://stability.ai/news-updates/meet-stable-audio-3-the-model-family-built-for-artistic-experimentation-with-open-weight-models" target="_blank" rel="noopener noreferrer">→ stability.ai</a><span class="source-date">2026-05-20 · 邻近窗口</span>
+    </article>
+  </section>
+
+  <aside class="insight-card">
+    <div class="insight-label">今日洞察</div>
+    <p class="insight-text">今天四个栏目指向同一件事：工作台提前接管注意力，流水线把代理挂进任务系统，模型往长任务稳定性靠拢，创意能力则被接口化。下一轮壁垒不再是单点智能，而是谁能把上下文、执行和生成连成闭环。</p>
+    <p class="method-note">采集窗口以 2026-05-22 至 2026-05-29 为优先；窗口外但仍具参考价值的官方来源，均按邻近窗口或最近官方参考标注。</p>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-lab">星期一研究室出品</div>
+    <div class="footer-sub">The AI Industry Brief</div>
+  </footer>
+</main>
+</body>
+</html>
