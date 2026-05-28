@@ -4,7 +4,7 @@
 
 - Detail file: `briefs/YYYY-MM-DD.html`
 - Archive file: `index.html`
-- Detail structure: opening line, 4 sections x 3 items, closing insight, sourcing note, footer
+- Detail structure: opening line, 4 sections x 2 items, closing insight, sourcing note, footer
 - Archive structure: latest card first; every existing brief remains clickable
 
 ## Sections
@@ -57,7 +57,7 @@ Use an approximately 10%-tinted pale background derived from the day's primary c
 ## Release Gate
 
 1. No template placeholders remain.
-2. The new page contains exactly 4 section containers, 12 content items, and 12 source anchors.
+2. The new page contains exactly 4 section containers, 8 content items, and 8 source anchors.
 3. The archive contains a clickable card for the new page and preserves earlier links.
 4. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
 5. If the site is published, verify the deployed archive and current detail page after Pages builds.
