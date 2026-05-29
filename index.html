@@ -8,15 +8,18 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --primary: #A68F8F;
-  --primary-light: #F5F0F0;
-  --paper: #F8F7F5;
-  --ground: #EDEBE8;
+  --primary: #927BBE;
+  --primary-light: #F2EEF8;
+  --paper: #FCFBF9;
+  --ground: #EFEDF2;
   --text: #1A1A1A;
 }
 body {
   min-height: 100vh;
-  background: var(--ground);
+  background:
+    radial-gradient(circle at 12% 14%, rgba(146, 123, 190, 0.18), transparent 26%),
+    radial-gradient(circle at 88% 18%, rgba(236, 155, 200, 0.10), transparent 23%),
+    var(--ground);
   font-family: 'Noto Sans SC', 'Inter', sans-serif;
   color: var(--text);
   padding: 52px 22px;
@@ -30,13 +33,15 @@ body {
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 25px;
-  border-bottom: 1.5px solid var(--primary);
+  border-top: 6px solid color-mix(in srgb, var(--primary) 78%, #151515);
+  border-bottom: 2px solid var(--text);
+  padding-top: 18px;
   margin-bottom: 42px;
 }
 .title {
   font-family: 'Noto Serif SC', Georgia, serif;
   font-size: clamp(40px, 6vw, 60px);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1;
 }
 .lab {
@@ -62,7 +67,7 @@ body {
   display: block;
   text-decoration: none;
   background: var(--paper);
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 26px 25px 24px;
   min-height: 230px;
   color: inherit;
@@ -70,7 +75,7 @@ body {
   transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 .brief:hover {
-  border-color: #CEDCCF;
+  border-color: color-mix(in srgb, var(--primary) 32%, #CEDCCF);
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(48, 39, 58, 0.06);
 }
@@ -102,7 +107,7 @@ body {
 .brief.previous { background: #FBFAF8; }
 .brief.palette {
   background:
-    linear-gradient(135deg, rgba(165, 132, 245, 0.16), transparent 32%),
+    linear-gradient(135deg, rgba(146, 123, 190, 0.18), transparent 32%),
     linear-gradient(225deg, rgba(236, 155, 200, 0.18), transparent 34%),
     var(--paper);
   border-color: rgba(122, 158, 159, 0.18);
@@ -143,7 +148,7 @@ body {
       <h2>Weekly Palette Demo</h2>
       <p>查看周一到周日的紫、蓝、绿、粉色系在简报组件里的实际效果。</p>
       <div class="palette-strip" aria-hidden="true">
-        <span style="background:#A584F5"></span>
+        <span style="background:#927BBE"></span>
         <span style="background:#6F97A8"></span>
         <span style="background:#7FA6C9"></span>
         <span style="background:#7FA68B"></span>

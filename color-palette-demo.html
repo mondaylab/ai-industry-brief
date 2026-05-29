@@ -7,18 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --paper: #FCFBF9;
+  --ground: #EFEDF2;
+  --text: #151515;
+  --muted: #6C686A;
+}
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 12% 12%, rgba(165, 132, 245, 0.12), transparent 26%),
-    radial-gradient(circle at 88% 26%, rgba(127, 166, 201, 0.12), transparent 24%),
-    #EEECE8;
-  color: #151515;
+    radial-gradient(circle at 12% 12%, rgba(146, 123, 190, 0.18), transparent 28%),
+    radial-gradient(circle at 86% 18%, rgba(236, 155, 200, 0.12), transparent 24%),
+    var(--ground);
+  color: var(--text);
   font-family: 'Source Serif 4', 'Noto Serif SC', serif;
   padding: 42px 18px 60px;
 }
 .page {
-  width: min(1480px, 100%);
+  width: min(1500px, 100%);
   margin: 0 auto;
 }
 .masthead {
@@ -26,14 +32,14 @@ body {
   justify-content: space-between;
   align-items: center;
   border-top: 6px solid #6F97A8;
-  border-bottom: 2px solid #151515;
+  border-bottom: 2px solid var(--text);
   padding: 22px 0 24px;
   margin-bottom: 28px;
 }
 .title {
   font-family: 'Playfair Display', 'Noto Serif SC', serif;
   font-size: clamp(40px, 6vw, 72px);
-  line-height: 0.96;
+  line-height: 0.98;
 }
 .meta {
   text-align: right;
@@ -44,42 +50,123 @@ body {
   letter-spacing: 0.14em;
 }
 .intro {
-  max-width: 760px;
+  max-width: 780px;
   color: #555;
   font-size: 17px;
   line-height: 1.75;
   margin-bottom: 34px;
 }
-.palette-grid {
+.tabs-shell {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 24px;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
 }
-.demo {
+.palette-tabs {
+  position: sticky;
+  top: 24px;
+  border-top: 2px solid var(--text);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.16);
+  padding: 16px 0;
+}
+.tab-control {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.tab-list {
+  display: grid;
+  gap: 8px;
+}
+.tab {
+  --tab-color: #927BBE;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 54px;
+  padding: 10px 12px;
+  color: #302E31;
+  cursor: pointer;
+  border-left: 4px solid transparent;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.tab:hover {
+  background: rgba(252, 251, 249, 0.64);
+}
+.dot {
+  width: 18px;
+  height: 18px;
+  background: var(--tab-color);
+  border: 1px solid rgba(21, 21, 21, 0.14);
+}
+.tab strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.tab span {
+  color: #777;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+.tab code {
+  color: #69666B;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+}
+#day-1:checked ~ .tabs-shell label[for="day-1"],
+#day-2:checked ~ .tabs-shell label[for="day-2"],
+#day-3:checked ~ .tabs-shell label[for="day-3"],
+#day-4:checked ~ .tabs-shell label[for="day-4"],
+#day-5:checked ~ .tabs-shell label[for="day-5"],
+#day-6:checked ~ .tabs-shell label[for="day-6"],
+#day-7:checked ~ .tabs-shell label[for="day-7"] {
+  background: var(--paper);
+  border-left-color: var(--tab-color);
+  transform: translateX(4px);
+}
+.preview-area {
+  min-width: 0;
+}
+.preview {
+  display: none;
+}
+#day-1:checked ~ .tabs-shell .preview[data-day="1"],
+#day-2:checked ~ .tabs-shell .preview[data-day="2"],
+#day-3:checked ~ .tabs-shell .preview[data-day="3"],
+#day-4:checked ~ .tabs-shell .preview[data-day="4"],
+#day-5:checked ~ .tabs-shell .preview[data-day="5"],
+#day-6:checked ~ .tabs-shell .preview[data-day="6"],
+#day-7:checked ~ .tabs-shell .preview[data-day="7"] {
+  display: block;
+}
+.brief-demo {
   --headline-rule: color-mix(in srgb, var(--primary) 78%, #151515);
   --section-ink: var(--primary);
   --section-ink-soft: var(--primary-light);
-  --section-guide: color-mix(in srgb, var(--primary) 42%, transparent);
   position: relative;
   overflow: hidden;
-  background: #FCFBF9;
+  background: var(--paper);
   border: 1px solid #D8D1CB;
-  padding: 22px;
-  min-height: 560px;
+  padding: 32px 34px;
+  min-height: 900px;
   box-shadow: 0 12px 34px rgba(17, 17, 17, 0.05);
 }
-.demo::before {
+.brief-demo::before {
   content: "";
   position: absolute;
-  inset: 14px;
+  inset: 18px;
   pointer-events: none;
   border: 1px solid rgba(21, 21, 21, 0.06);
   background-image:
     linear-gradient(rgba(21, 21, 21, 0.028) 1px, transparent 1px),
     linear-gradient(90deg, rgba(21, 21, 21, 0.028) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-size: 34px 34px;
 }
-.demo > * {
+.brief-demo > * {
   position: relative;
   z-index: 1;
 }
@@ -87,20 +174,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 5px solid var(--headline-rule);
-  border-bottom: 2px solid #151515;
-  padding: 16px 0 18px;
-  margin-bottom: 22px;
+  border-top: 6px solid var(--headline-rule);
+  border-bottom: 2px solid var(--text);
+  padding: 24px 0 26px;
+  margin-bottom: 34px;
 }
 .demo-title {
   font-family: 'Playfair Display', 'Noto Serif SC', serif;
-  font-size: 34px;
+  font-size: clamp(38px, 4.5vw, 64px);
   line-height: 1;
 }
 .demo-date {
   color: #686868;
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-align: right;
@@ -112,12 +199,12 @@ body {
   border-top: 1px solid rgba(21, 21, 21, 0.18);
   border-bottom: 1px solid rgba(21, 21, 21, 0.18);
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) 112px;
-  gap: 16px;
+  grid-template-columns: 74px minmax(0, 1fr) 230px;
+  gap: 28px;
   align-items: center;
-  min-height: 108px;
-  padding: 14px 14px 14px 0;
-  margin-bottom: 30px;
+  min-height: 132px;
+  padding: 18px 22px 18px 0;
+  margin-bottom: 46px;
 }
 .quote::before {
   content: "LEAD";
@@ -128,28 +215,28 @@ body {
   border-right: 1px solid rgba(21, 21, 21, 0.18);
   color: var(--section-ink);
   font-family: 'Inter', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.24em;
   writing-mode: vertical-rl;
 }
 .quote-label {
   color: color-mix(in srgb, var(--section-ink) 64%, #151515);
   font-family: 'Inter', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.18em;
-  margin-bottom: 7px;
+  margin-bottom: 10px;
 }
 .quote-text {
-  font-size: 18px;
-  line-height: 1.45;
+  font-size: 22px;
+  line-height: 1.42;
   font-weight: 600;
 }
 .hero {
-  width: 112px;
-  height: 78px;
-  opacity: 0.78;
+  width: 230px;
+  height: 128px;
+  opacity: 0.74;
 }
 .hero-line {
   fill: none;
@@ -168,50 +255,61 @@ body {
 .sections {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 34px;
+  gap: 36px;
+  margin-bottom: 64px;
 }
 .section-card {
-  background: color-mix(in srgb, #FCFBF9 86%, var(--section-ink-soft));
+  background: color-mix(in srgb, var(--paper) 86%, var(--section-ink-soft));
   border: 1px solid rgba(21, 21, 21, 0.08);
-  box-shadow: 10px 12px 0 color-mix(in srgb, var(--primary) 8%, transparent);
-  padding: 16px 15px;
-  min-height: 174px;
+  box-shadow: 14px 16px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+  padding: 18px 18px 14px;
+  min-height: 338px;
 }
 .section-tag {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: #151515;
+  gap: 12px;
+  color: var(--text);
   font-family: 'Inter', 'Noto Serif SC', serif;
-  font-size: 19px;
+  font-size: 24px;
   font-weight: 800;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 .section-tag::before {
   content: attr(data-num);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 32px;
+  width: 54px;
+  height: 36px;
   background: var(--section-ink);
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   transform: skewX(-12deg);
-  box-shadow: 7px 7px 0 var(--section-ink-soft);
+  box-shadow: 8px 8px 0 var(--section-ink-soft);
+}
+.sub {
+  color: #787878;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 18px 66px;
 }
 .item {
   border: 1px solid rgba(21, 21, 21, 0.07);
   background: rgba(252, 251, 249, 0.72);
-  padding: 12px;
+  padding: 13px 14px;
+}
+.item + .item {
+  margin-top: 12px;
 }
 .item-title {
   display: flex;
   gap: 9px;
   align-items: flex-start;
-  color: #151515;
-  font-size: 17px;
+  color: var(--text);
+  font-size: 18px;
   font-weight: 800;
   line-height: 1.35;
   margin-bottom: 8px;
@@ -224,44 +322,45 @@ body {
 }
 .item p {
   color: #3A3A3A;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.62;
 }
 .insight {
   display: grid;
-  grid-template-columns: 108px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 188px minmax(0, 1fr);
+  gap: 18px;
   align-items: center;
   border-top: 1px solid rgba(21, 21, 21, 0.2);
   border-bottom: 1px solid rgba(21, 21, 21, 0.12);
-  padding: 16px 0;
+  padding: 20px 4px 18px;
 }
 .insight-label {
   justify-self: center;
   width: max-content;
+  transform: translateY(12px);
   color: var(--section-ink);
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 }
 .insight-label::after {
   content: "";
   display: block;
-  width: 36px;
-  height: 36px;
-  margin: 14px auto 0;
+  width: 44px;
+  height: 44px;
+  margin: 22px auto 0;
   border: 2px solid color-mix(in srgb, var(--section-ink) 72%, transparent);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 50%, var(--section-ink) 0 3px, transparent 4px),
+    radial-gradient(circle at 50% 50%, var(--section-ink) 0 4px, transparent 5px),
     linear-gradient(45deg, transparent 58%, color-mix(in srgb, var(--section-ink) 72%, transparent) 59% 64%, transparent 65%);
-  box-shadow: 10px 10px 0 var(--section-ink-soft);
+  box-shadow: 14px 14px 0 var(--section-ink-soft);
 }
 .insight p {
   color: #242424;
-  font-size: 16px;
-  line-height: 1.68;
+  font-size: 18px;
+  line-height: 1.72;
   font-weight: 600;
 }
 .swatch {
@@ -269,7 +368,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 18px;
+  margin-top: 22px;
   color: #666;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -277,8 +376,8 @@ body {
   letter-spacing: 0.05em;
 }
 .chip {
-  width: 86px;
-  height: 20px;
+  width: 120px;
+  height: 24px;
   background: var(--primary);
   border: 1px solid rgba(21, 21, 21, 0.12);
 }
@@ -291,16 +390,24 @@ body {
   font-weight: 800;
   text-decoration: none;
 }
+@media (max-width: 980px) {
+  .tabs-shell { grid-template-columns: 1fr; }
+  .palette-tabs { position: static; }
+  .tab-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (max-width: 760px) {
   body { padding: 28px 14px 46px; }
   .masthead { display: block; }
   .meta { text-align: left; margin-top: 14px; }
-  .palette-grid { grid-template-columns: 1fr; }
-  .quote { grid-template-columns: 46px 1fr; }
+  .tab-list { grid-template-columns: 1fr; }
+  .brief-demo { padding: 24px 20px; min-height: auto; }
+  .demo-head { display: block; }
+  .demo-date { text-align: left; margin-top: 12px; }
+  .quote { grid-template-columns: 48px 1fr; }
   .hero { display: none; }
-  .sections { grid-template-columns: 1fr; }
+  .sections { grid-template-columns: 1fr; gap: 22px; }
   .insight { display: block; }
-  .insight-label { margin-bottom: 14px; }
+  .insight-label { margin-bottom: 14px; transform: none; }
   .insight-label::after { display: none; }
 }
 </style>
@@ -311,73 +418,79 @@ body {
     <h1 class="title">Weekly Palette Demo</h1>
     <div class="meta">THE AI INDUSTRY BRIEF<br>星期一研究室</div>
   </header>
-  <p class="intro">七天色板使用同一套简报组件测试：报头横线、LEAD 引文、专栏编号、动态符号和今日洞察都会跟随每日主色变化。</p>
+  <p class="intro">点击左侧星期标签，查看同一套简报组件在不同每日主色下的实际效果。周一紫色已调整为更内敛的莫兰迪紫。</p>
 
-  <section class="palette-grid" aria-label="七天色板 Demo">
-    <article class="demo" style="--primary:#A584F5;--primary-light:#F2ECFF;">
-      <div class="demo-head">
-        <div class="demo-title">The AI Industry Brief</div>
-        <div class="demo-date">星期一<br>#A584F5</div>
+  <input class="tab-control" type="radio" name="day" id="day-1" checked>
+  <input class="tab-control" type="radio" name="day" id="day-2">
+  <input class="tab-control" type="radio" name="day" id="day-3">
+  <input class="tab-control" type="radio" name="day" id="day-4">
+  <input class="tab-control" type="radio" name="day" id="day-5">
+  <input class="tab-control" type="radio" name="day" id="day-6">
+  <input class="tab-control" type="radio" name="day" id="day-7">
+
+  <section class="tabs-shell" aria-label="七天色板 Demo">
+    <aside class="palette-tabs">
+      <div class="tab-list">
+        <label class="tab" for="day-1" style="--tab-color:#927BBE"><i class="dot"></i><span><strong>星期一</strong>莫兰迪紫</span><code>#927BBE</code></label>
+        <label class="tab" for="day-2" style="--tab-color:#6F97A8"><i class="dot"></i><span><strong>星期二</strong>雾蓝</span><code>#6F97A8</code></label>
+        <label class="tab" for="day-3" style="--tab-color:#7FA6C9"><i class="dot"></i><span><strong>星期三</strong>晴蓝</span><code>#7FA6C9</code></label>
+        <label class="tab" for="day-4" style="--tab-color:#7FA68B"><i class="dot"></i><span><strong>星期四</strong>鼠尾草绿</span><code>#7FA68B</code></label>
+        <label class="tab" for="day-5" style="--tab-color:#6F9F99"><i class="dot"></i><span><strong>星期五</strong>青瓷绿</span><code>#6F9F99</code></label>
+        <label class="tab" for="day-6" style="--tab-color:#8A93B7"><i class="dot"></i><span><strong>星期六</strong>紫蓝</span><code>#8A93B7</code></label>
+        <label class="tab" for="day-7" style="--tab-color:#EC9BC8"><i class="dot"></i><span><strong>星期日</strong>柔粉</span><code>#EC9BC8</code></label>
       </div>
-      <div class="quote">
-        <div><div class="quote-label">今日一句话</div><div class="quote-text">AI 正把知识工作推向主动执行。</div></div>
-        <svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg>
-      </div>
-      <div class="sections">
-        <div class="section-card"><div class="section-tag" data-num="01">AI 工作台</div><div class="item"><div class="item-title">Workspace | 主动整理上下文</div><p>产品入口开始提前组织日程、知识和行动项。</p></div></div>
-        <div class="section-card"><div class="section-tag" data-num="02">AI 大模型</div><div class="item"><div class="item-title">Model | 长任务更稳定</div><p>模型升级越来越直接服务复杂工作产出。</p></div></div>
-      </div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>颜色需要支撑专业感，也要给每日页面留下可识别的情绪差异。</p></div>
-      <div class="swatch"><span>亮紫 / Monday</span><span class="chip"></span></div>
-    </article>
+    </aside>
 
-    <article class="demo" style="--primary:#6F97A8;--primary-light:#F0F5F7;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期二<br>#6F97A8</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">入口之争转向真实工作现场。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 流水线</div><div class="item"><div class="item-title">CLI | 执行入口常驻</div><p>开发工具正在从命令响应走向后台推进。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 信息美学</div><div class="item"><div class="item-title">Media | 生成进入编辑现场</div><p>视觉生产从单次输出转向连续修订。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>雾蓝适合技术理性和工作流主题，安静但不冷。</p></div>
-      <div class="swatch"><span>雾蓝 / Tuesday</span><span class="chip"></span></div>
-    </article>
+    <div class="preview-area">
+      <article class="preview brief-demo" data-day="1" style="--primary:#927BBE;--primary-light:#F2EEF8;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期一<br>#927BBE</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">AI 正把知识工作推向主动执行。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 工作台</div><div class="sub">WORKSPACE · AGENT · CONTEXT</div><div class="item"><div class="item-title">Workspace | 主动整理上下文</div><p>产品入口开始提前组织日程、知识和行动项。</p></div><div class="item"><div class="item-title">Agent | 接管任务前台</div><p>工作台正在从聊天框转向持续执行界面。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 大模型</div><div class="sub">MODEL · REASONING · OUTPUT</div><div class="item"><div class="item-title">Model | 长任务更稳定</div><p>模型升级越来越直接服务复杂工作产出。</p></div><div class="item"><div class="item-title">Reasoning | 多步推理增强</div><p>竞争焦点继续转向真实工作链路。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>莫兰迪紫保留一点活力，但压低饱和度后更像研究品牌，而不是活动海报。</p></div><div class="swatch"><span>莫兰迪紫 / Monday</span><span class="chip"></span></div>
+      </article>
 
-    <article class="demo" style="--primary:#7FA6C9;--primary-light:#EEF5FB;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期三<br>#7FA6C9</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">模型能力正在变成可编排资源。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 大模型</div><div class="item"><div class="item-title">Reasoning | 多步任务增强</div><p>竞争重点转向执行链稳定性。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 工作台</div><div class="item"><div class="item-title">Agent | 内容库触发执行</div><p>知识沉淀开始直接驱动代理动作。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>晴蓝更开放，适合模型、研究和基础设施类主题。</p></div>
-      <div class="swatch"><span>晴蓝 / Wednesday</span><span class="chip"></span></div>
-    </article>
+      <article class="preview brief-demo" data-day="2" style="--primary:#6F97A8;--primary-light:#F0F5F7;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期二<br>#6F97A8</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">入口之争转向真实工作现场。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 流水线</div><div class="sub">CLI · MCP · AUTOMATION</div><div class="item"><div class="item-title">CLI | 执行入口常驻</div><p>开发工具正在从命令响应走向后台推进。</p></div><div class="item"><div class="item-title">Workflow | 任务持续推进</div><p>自动化能力开始承担巡检和回传。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 信息美学</div><div class="sub">MEDIA · DESIGN · EDITING</div><div class="item"><div class="item-title">Media | 生成进入编辑现场</div><p>视觉生产从单次输出转向连续修订。</p></div><div class="item"><div class="item-title">Design | 创意链路接口化</div><p>设计能力开始成为可编排节点。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>雾蓝适合技术理性和工作流主题，安静但不冷。</p></div><div class="swatch"><span>雾蓝 / Tuesday</span><span class="chip"></span></div>
+      </article>
 
-    <article class="demo" style="--primary:#7FA68B;--primary-light:#F0F7F2;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期四<br>#7FA68B</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">企业 AI 开始回到组织流程。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 工作台</div><div class="item"><div class="item-title">Enterprise | 权限边界清晰</div><p>企业落地重点转向安全和系统连接。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 流水线</div><div class="item"><div class="item-title">Workflow | 任务持续推进</div><p>后台代理开始承担流程巡检。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>鼠尾草绿更稳，适合组织、流程和企业场景。</p></div>
-      <div class="swatch"><span>鼠尾草绿 / Thursday</span><span class="chip"></span></div>
-    </article>
+      <article class="preview brief-demo" data-day="3" style="--primary:#7FA6C9;--primary-light:#EEF5FB;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期三<br>#7FA6C9</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">模型能力正在变成可编排资源。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 大模型</div><div class="sub">MODEL · BENCHMARK · REASONING</div><div class="item"><div class="item-title">Reasoning | 多步任务增强</div><p>竞争重点转向执行链稳定性。</p></div><div class="item"><div class="item-title">Benchmark | 评价口径变化</div><p>模型表现越来越围绕可交付任务。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 工作台</div><div class="sub">KNOWLEDGE · AGENT · DATABASE</div><div class="item"><div class="item-title">Agent | 内容库触发执行</div><p>知识沉淀开始直接驱动代理动作。</p></div><div class="item"><div class="item-title">Workspace | 上下文成为资产</div><p>工具竞争正在围绕组织记忆展开。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>晴蓝更开放，适合模型、研究和基础设施类主题。</p></div><div class="swatch"><span>晴蓝 / Wednesday</span><span class="chip"></span></div>
+      </article>
 
-    <article class="demo" style="--primary:#6F9F99;--primary-light:#EEF6F3;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期五<br>#6F9F99</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">AI 产品栈正在向闭环执行收束。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 信息美学</div><div class="item"><div class="item-title">Creative | 接入代理链路</div><p>创意生成成为可编排节点。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 大模型</div><div class="item"><div class="item-title">Voice | 产品链路拆清</div><p>语音能力更直接装进应用。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>青瓷绿有轻盈的科技感，适合周五的综合收束。</p></div>
-      <div class="swatch"><span>青瓷绿 / Friday</span><span class="chip"></span></div>
-    </article>
+      <article class="preview brief-demo" data-day="4" style="--primary:#7FA68B;--primary-light:#F0F7F2;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期四<br>#7FA68B</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">企业 AI 开始回到组织流程。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 工作台</div><div class="sub">ENTERPRISE · ACCESS · SECURITY</div><div class="item"><div class="item-title">Enterprise | 权限边界清晰</div><p>企业落地重点转向安全和系统连接。</p></div><div class="item"><div class="item-title">Knowledge | 组织记忆可调用</div><p>内部知识开始接入自动执行流程。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 流水线</div><div class="sub">PROCESS · TASK · SYSTEM</div><div class="item"><div class="item-title">Workflow | 任务持续推进</div><p>后台代理开始承担流程巡检。</p></div><div class="item"><div class="item-title">System | 工具边界重组</div><p>应用之间的协作变成产品能力。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>鼠尾草绿更稳，适合组织、流程和企业场景。</p></div><div class="swatch"><span>鼠尾草绿 / Thursday</span><span class="chip"></span></div>
+      </article>
 
-    <article class="demo" style="--primary:#8A93B7;--primary-light:#F1F2F8;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期六<br>#8A93B7</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">周末观察更适合拉开尺度。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 趋势</div><div class="item"><div class="item-title">Pattern | 从单点到系统</div><p>周末更适合做跨栏目脉络整理。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 产业</div><div class="item"><div class="item-title">Market | 平台边界重划</div><p>接口、模型和工作流同时变化。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>紫蓝更沉静，适合周末长线观察。</p></div>
-      <div class="swatch"><span>紫蓝 / Saturday</span><span class="chip"></span></div>
-    </article>
+      <article class="preview brief-demo" data-day="5" style="--primary:#6F9F99;--primary-light:#EEF6F3;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期五<br>#6F9F99</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">AI 产品栈正在向闭环执行收束。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 信息美学</div><div class="sub">CREATIVE · MEDIA · INTERFACE</div><div class="item"><div class="item-title">Creative | 接入代理链路</div><p>创意生成成为可编排节点。</p></div><div class="item"><div class="item-title">Editing | 后期能力产品化</div><p>视频和音频生成正在靠近制作流程。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 大模型</div><div class="sub">VOICE · REALTIME · PRODUCT</div><div class="item"><div class="item-title">Voice | 产品链路拆清</div><p>语音能力更直接装进应用。</p></div><div class="item"><div class="item-title">Realtime | 延迟成为体验指标</div><p>模型竞争进入产品工程细节。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>青瓷绿有轻盈的科技感，适合周五的综合收束。</p></div><div class="swatch"><span>青瓷绿 / Friday</span><span class="chip"></span></div>
+      </article>
 
-    <article class="demo" style="--primary:#EC9BC8;--primary-light:#FDF0F7;">
-      <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期日<br>#EC9BC8</div></div>
-      <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">信息美学正在成为产品能力。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
-      <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 信息美学</div><div class="item"><div class="item-title">Design | 创意工作流成形</div><p>生成、编辑和品牌控制连接成链。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 工作台</div><div class="item"><div class="item-title">Notebook | 灵感沉淀为任务</div><p>知识工具开始承接创意过程。</p></div></div></div>
-      <div class="insight"><div class="insight-label">今日洞察</div><p>柔粉给周日一点内容美学和轻编辑气质。</p></div>
-      <div class="swatch"><span>柔粉 / Sunday</span><span class="chip"></span></div>
-    </article>
+      <article class="preview brief-demo" data-day="6" style="--primary:#8A93B7;--primary-light:#F1F2F8;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期六<br>#8A93B7</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">周末观察更适合拉开尺度。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 趋势</div><div class="sub">PATTERN · STRATEGY · SIGNAL</div><div class="item"><div class="item-title">Pattern | 从单点到系统</div><p>周末更适合做跨栏目脉络整理。</p></div><div class="item"><div class="item-title">Strategy | 竞争层级上移</div><p>能力优势逐渐转化为组织优势。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 产业</div><div class="sub">MARKET · PLATFORM · VALUE</div><div class="item"><div class="item-title">Market | 平台边界重划</div><p>接口、模型和工作流同时变化。</p></div><div class="item"><div class="item-title">Value | 价值链重新分配</div><p>应用层开始争夺上下文和入口。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>紫蓝更沉静，适合周末长线观察。</p></div><div class="swatch"><span>紫蓝 / Saturday</span><span class="chip"></span></div>
+      </article>
+
+      <article class="preview brief-demo" data-day="7" style="--primary:#EC9BC8;--primary-light:#FDF0F7;">
+        <div class="demo-head"><div class="demo-title">The AI Industry Brief</div><div class="demo-date">星期日<br>#EC9BC8</div></div>
+        <div class="quote"><div><div class="quote-label">今日一句话</div><div class="quote-text">信息美学正在成为产品能力。</div></div><svg class="hero" viewBox="0 0 230 154" aria-hidden="true"><path class="hero-soft" d="M25 118 C44 82,72 77,94 98 S142 126,174 91 C190 73,207 72,219 82 L219 142 L25 142 Z"/><circle class="hero-soft" cx="175" cy="44" r="26"/><path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M153 35H197 M153 53H197"/><circle class="hero-ink" cx="70" cy="43" r="10"/><path class="hero-soft" d="M47 132 C48 97,56 63,70 63 C84 63,92 97,93 132 Z"/><path class="hero-line" d="M59 78 C42 83,33 94,27 109 M129 67 H147 M138 58V76"/></svg></div>
+        <div class="sections"><div class="section-card"><div class="section-tag" data-num="01">AI 信息美学</div><div class="sub">DESIGN · IMAGE · STORY</div><div class="item"><div class="item-title">Design | 创意工作流成形</div><p>生成、编辑和品牌控制连接成链。</p></div><div class="item"><div class="item-title">Image | 视觉入口更自然</div><p>创作工具正在贴近真实生产语境。</p></div></div><div class="section-card"><div class="section-tag" data-num="02">AI 工作台</div><div class="sub">NOTEBOOK · IDEA · TASK</div><div class="item"><div class="item-title">Notebook | 灵感沉淀为任务</div><p>知识工具开始承接创意过程。</p></div><div class="item"><div class="item-title">Canvas | 白板进入生成现场</div><p>草图和说明成为可执行输入。</p></div></div></div>
+        <div class="insight"><div class="insight-label">今日洞察</div><p>柔粉给周日一点内容美学和轻编辑气质。</p></div><div class="swatch"><span>柔粉 / Sunday</span><span class="chip"></span></div>
+      </article>
+    </div>
   </section>
   <a class="back" href="index.html">← 返回简报首页</a>
 </main>
