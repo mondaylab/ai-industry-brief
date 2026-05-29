@@ -17,7 +17,21 @@
 | AI 大模型 | Model launches, evaluations, benchmarks | Claude, GPT, Gemini, DeepSeek, Kimi model update |
 | AI 信息美学 | Image/media generation and creator tools | GPT-Image, Gemini image, Flux, Ideogram, Adobe Firefly |
 
-## Layout
+## Archive Layout
+
+- Archive/homepage uses a neutral black/white/gray shell even when the detail pages use weekday Morandi colors.
+- Top visible brand text is Chinese-first: `每日 AI 行业简报`; upper right remains `星期一研究室`.
+- Top navigation labels are Chinese and ordered: `今日`, `色板`, `往期`.
+- The hero section keeps the English publication masthead `The AI Industry Brief`, a phone-shaped daily-paper preview, and three action buttons:
+  - `阅读最新一期` links to the latest detail page.
+  - `查看七天色板` switches to the palette panel without forcing scroll-to-top.
+  - `查看往期` switches to the previous-issues panel without forcing scroll-to-top.
+- The archive/recommendation panel is visibly named `往期`; do not use `历史归档` or `精彩推荐` as the section heading.
+- Weekly palette on the homepage uses individual swatch archive cards with weekday shorthand, Chinese tone name, and hex code. Avoid plain oval/pill strips.
+- Keep `color-palette-demo.html` as a broader design-system preview page with comfortable left/right margins and a tabbed seven-day preview.
+- If homepage card markup changes, update the Feishu push worker archive parser so scheduled pushes can still locate the latest issue headline and summary.
+
+## Detail Layout
 
 - Detail pages use a two-column editorial layout.
 - Detail pages should feel like a landscape A3 editorial sheet, not a tall poster:

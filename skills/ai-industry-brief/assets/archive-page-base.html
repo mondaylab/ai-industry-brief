@@ -4,136 +4,794 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Industry Brief | 星期一研究室</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --primary: #927BBE;
-  --primary-light: #F2EEF8;
-  --paper: #FCFBF9;
-  --ground: #EFEDF2;
-  --text: #1A1A1A;
+  --primary: #171717;
+  --primary-light: #F4F4F1;
+  --ink: #111111;
+  --muted: #6F6F6A;
+  --line: rgba(17, 17, 17, 0.12);
+  --paper: #FFFEFC;
+  --panel: rgba(255, 254, 252, 0.78);
+  --ground: #F1F0EC;
 }
+html { scroll-behavior: smooth; }
 body {
   min-height: 100vh;
-  background: var(--ground);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(17, 17, 17, 0.055), transparent 24%),
+    radial-gradient(circle at 82% 10%, rgba(17, 17, 17, 0.035), transparent 22%),
+    linear-gradient(135deg, #F7F6F2 0%, #ECEBE6 50%, #FAF9F4 100%);
+  color: var(--ink);
   font-family: 'Noto Sans SC', 'Inter', sans-serif;
-  color: var(--text);
-  padding: 52px 22px;
+  padding: 24px;
 }
+a { color: inherit; text-decoration: none; }
 .page {
-  width: min(1040px, 100%);
+  width: min(1240px, 100%);
   margin: 0 auto;
 }
-.masthead {
+.shell {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - 48px);
+  border: 1px solid rgba(34, 28, 43, 0.12);
+  border-radius: 34px;
+  background:
+    linear-gradient(90deg, rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+    rgba(255, 254, 252, 0.78);
+  background-size: 72px 72px;
+  box-shadow: 0 28px 80px rgba(17, 17, 17, 0.10);
+  backdrop-filter: blur(22px);
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding-bottom: 25px;
-  border-bottom: 1.5px solid var(--primary);
-  margin-bottom: 42px;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 254, 252, 0.78);
+  backdrop-filter: blur(18px);
 }
-.title {
-  font-family: 'Noto Serif SC', Georgia, serif;
-  font-size: clamp(40px, 6vw, 60px);
-  letter-spacing: -0.04em;
-  line-height: 1;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--primary-light);
+}
+.brand-mark::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 9px 0 0 rgba(17, 17, 17, 0.18), 0 9px 0 rgba(17, 17, 17, 0.10);
+}
+.nav-tabs {
+  display: inline-flex;
+  padding: 5px;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+}
+.tab-control { position: absolute; opacity: 0; pointer-events: none; }
+.nav-tabs label {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 9px 15px;
+  color: var(--muted);
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+#tab-today:checked ~ .shell label[for="tab-today"],
+#tab-archive:checked ~ .shell label[for="tab-archive"],
+#tab-palette:checked ~ .shell label[for="tab-palette"] {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 8px 22px rgba(17, 17, 17, 0.12);
 }
 .lab {
-  text-align: right;
-  color: var(--primary);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-}
-.lead {
-  max-width: 660px;
-  color: #555;
-  font-size: 17px;
-  line-height: 1.8;
-  margin-bottom: 36px;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 22px;
-}
-.brief {
-  display: block;
-  text-decoration: none;
-  background: var(--paper);
-  border-radius: 10px;
-  padding: 26px 25px 24px;
-  min-height: 230px;
-  color: inherit;
-  border: 1px solid transparent;
-  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
-}
-.brief:hover {
-  border-color: #C8D9D9;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(48, 39, 58, 0.06);
-}
-.date {
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  margin-bottom: 20px;
-}
-.brief h2 {
-  font-size: 24px;
-  line-height: 1.42;
-  margin-bottom: 16px;
-}
-.brief p {
-  color: #606060;
-  font-size: 14px;
-  line-height: 1.7;
-  margin-bottom: 21px;
-}
-.read {
-  display: inline-flex;
-  align-items: center;
-  color: var(--primary);
+  color: var(--ink);
   font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
-.brief.previous { background: #FBFAF8; }
-.footnote {
-  margin-top: 42px;
-  color: #999;
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.75fr);
+  gap: 44px;
+  align-items: center;
+  padding: clamp(34px, 6vw, 76px);
+  padding-bottom: 34px;
+}
+.hero-copy { position: relative; z-index: 2; }
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.kicker::before {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: currentColor;
+}
+h1 {
+  max-width: 760px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: clamp(52px, 8vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+.lead {
+  max-width: 620px;
+  margin-top: 26px;
+  color: #4F4F4A;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.button:hover {
+  border-color: rgba(17, 17, 17, 0.32);
+  background: rgba(255, 255, 255, 0.92);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.08);
+}
+.button.primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+.button.primary:hover {
+  background: #2A2A27;
+  color: #fff;
+}
+.signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+  max-width: 690px;
+}
+.signal {
+  min-height: 112px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 254, 252, 0.58);
+}
+.signal strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.signal span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.phone-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 650px;
+}
+.route-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+.route-lines path {
+  fill: none;
+  stroke: rgba(23, 19, 30, 0.16);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 8;
+}
+.route-lines circle { fill: var(--ink); opacity: 0.42; }
+.phone {
+  position: relative;
+  z-index: 2;
+  width: min(360px, 92vw);
+  min-height: 612px;
+  padding: 14px;
+  border: 1px solid rgba(23, 19, 30, 0.28);
+  border-radius: 44px;
+  background: linear-gradient(145deg, #111111, #3C3C38);
+  box-shadow: 0 28px 80px rgba(17, 17, 17, 0.22);
+  transform: rotate(2deg);
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 92px;
+  height: 22px;
+  border-radius: 999px;
+  background: #17131E;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+.phone-screen {
+  overflow: hidden;
+  min-height: 584px;
+  border-radius: 33px;
+  background: #FFFEFC;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+.mobile-paper {
+  padding: 42px 22px 22px;
+}
+.mobile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.mobile-top strong {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 26px;
+  line-height: 0.95;
+}
+.mobile-date {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: right;
+}
+.mobile-headline {
+  padding: 20px 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-headline h2 {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 28px;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+}
+.mobile-headline p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.mobile-sections {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+}
+.mobile-section {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
+  align-items: stretch;
+  min-height: 72px;
+}
+.mobile-num {
+  border-radius: 16px;
+  background: var(--primary-light);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+.mobile-section div:last-child {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.mobile-section b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.mobile-section span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.orbit-note {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  z-index: 3;
+  width: 168px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 254, 252, 0.84);
+  box-shadow: 0 14px 34px rgba(51, 40, 72, 0.12);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+.orbit-note span { color: var(--ink); }
+.content {
+  padding: 0 clamp(24px, 6vw, 76px) clamp(34px, 6vw, 76px);
+}
+.panel { display: none; }
+#tab-today:checked ~ .shell .panel.today,
+#tab-archive:checked ~ .shell .panel.archive,
+#tab-palette:checked ~ .shell .panel.palette { display: block; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+.eyebrow {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.panel-head h2 {
+  margin-top: 8px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1;
+}
+.panel-head p {
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.brief-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.brief-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--panel);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.brief-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(17, 17, 17, 0.28);
+  box-shadow: 0 18px 46px rgba(17, 17, 17, 0.10);
+}
+.brief-card.featured {
+  grid-column: span 2;
+  background:
+    linear-gradient(135deg, rgba(17, 17, 17, 0.055), transparent 42%),
+    rgba(255, 254, 252, 0.78);
+}
+.date {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.brief-card h3 {
+  margin-top: 24px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 25px;
+  line-height: 1.28;
+}
+.brief-card p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.72;
+}
+.read {
+  margin-top: auto;
+  padding-top: 20px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+.archive-list {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 254, 252, 0.68);
+}
+.archive-item {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.archive-item:last-child { border-bottom: 0; }
+.archive-item:hover { background: rgba(242, 238, 248, 0.55); }
+.archive-title {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 23px;
+  line-height: 1.25;
+}
+.archive-desc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.archive-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.palette-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+}
+.palette-card {
+  min-height: 270px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 254, 252, 0.72);
+}
+.palette-atlas {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(78px, 1fr));
+  gap: 10px;
+  margin-top: 26px;
+}
+.palette-swatch {
+  --swatch: #111;
+  position: relative;
+  overflow: hidden;
+  min-height: 156px;
+  padding: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 18px;
+  background: #FFFEFC;
+}
+.palette-swatch::before {
+  content: "";
+  position: absolute;
+  inset: 10px 10px auto;
+  height: 74px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 42%),
+    var(--swatch);
+}
+.palette-swatch::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -28px;
+  width: 84px;
+  height: 84px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--swatch) 22%, transparent);
+}
+.palette-swatch b,
+.palette-swatch span,
+.palette-swatch code {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.palette-swatch b {
+  margin-top: 88px;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.palette-swatch span {
+  margin-top: 4px;
+  color: var(--muted);
   font-size: 12px;
 }
-@media (max-width: 560px) {
-  body { padding: 32px 18px; }
-  .masthead { display: block; }
-  .lab { text-align: left; margin-top: 16px; }
+.palette-swatch code {
+  margin-top: 12px;
+  color: rgba(17, 17, 17, 0.46);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+.palette-swatch:nth-child(even) { transform: translateY(16px); }
+.style-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 270px;
+  padding: 22px;
+  border-radius: 28px;
+  background: var(--ink);
+  color: #fff;
+}
+.style-note p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.footnote {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 34px;
+  color: rgba(23, 19, 30, 0.45);
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 980px) {
+  body { padding: 14px; }
+  .shell { border-radius: 26px; }
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .hero { grid-template-columns: 1fr; padding: 34px 22px; }
+  .phone-stage { min-height: 560px; }
+  .brief-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .palette-board { grid-template-columns: 1fr; }
+  .palette-atlas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .nav-tabs { width: 100%; overflow-x: auto; }
+  .nav-tabs label { flex: 1; text-align: center; white-space: nowrap; }
+  h1 { font-size: 48px; letter-spacing: -0.045em; }
+  .signal-row, .brief-grid { grid-template-columns: 1fr; }
+  .brief-card.featured { grid-column: span 1; }
+  .archive-item { grid-template-columns: 1fr; gap: 10px; }
+  .archive-arrow { display: none; }
+  .phone { width: min(330px, 94vw); transform: none; }
+  .orbit-note { right: 8px; bottom: 28px; }
+  .panel-head { display: block; }
+  .panel-head p { margin-top: 12px; }
+  .footnote { display: block; line-height: 1.9; }
+  .palette-atlas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .palette-swatch:nth-child(even) { transform: none; }
 }
 </style>
 </head>
 <body>
 <main class="page">
-  <header class="masthead">
-    <h1 class="title">The AI Industry Brief</h1>
-    <div class="lab">星期一研究室<br>AI INDUSTRY ARCHIVE</div>
-  </header>
-  <p class="lead">追踪 AI 在知识工作、研发流水线、基础模型与创意产业中的关键进展。点击日期进入当日行业简报。</p>
-  <section class="grid" aria-label="每日早报">
-    <a class="brief" href="briefs/2026-05-26.html">
-      <div class="date">05/26 · 星期二</div>
-      <h2>入口之争转向工作现场</h2>
-      <p>Antigravity CLI、Managed Agents、Gemini Omni 与创意执行界面的演进。</p>
-      <span class="read">查看今日早报 →</span>
-    </a>
-    <a class="brief previous" href="briefs/2026-05-25.html">
-      <div class="date">05/25 · 星期一</div>
-      <h2>AI 正进入主动工作阶段</h2>
-      <p>Gemini 主动简报、Antigravity CLI、Gemini 3.5 与新的创意工作流。</p>
-      <span class="read">查看昨日早报 →</span>
-    </a>
+  <input class="tab-control" type="radio" name="home-tab" id="tab-today" checked>
+  <input class="tab-control" type="radio" name="home-tab" id="tab-archive">
+  <input class="tab-control" type="radio" name="home-tab" id="tab-palette">
+
+  <section class="shell" aria-label="The AI Industry Brief 首页">
+    <nav class="topbar" aria-label="首页导航">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>每日 AI 行业简报</span>
+      </a>
+      <div class="nav-tabs" role="tablist" aria-label="内容切换">
+        <label for="tab-today" role="tab">今日</label>
+        <label for="tab-palette" role="tab">色板</label>
+        <label for="tab-archive" role="tab">往期</label>
+      </div>
+      <div class="lab">星期一研究室</div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Daily intelligence for AI builders</div>
+        <h1>The AI Industry Brief</h1>
+        <p class="lead">把一天的 AI 行业动态压缩进一份可读、可归档、可复用的报刊。用更轻的界面，追踪工作台、流水线、大模型与信息美学的结构性变化。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="briefs/2026-05-29.html">阅读最新一期</a>
+          <label class="button" for="tab-palette" data-preserve-scroll>查看七天色板</label>
+          <label class="button" for="tab-archive" data-preserve-scroll>查看往期</label>
+        </div>
+        <div class="signal-row" aria-label="简报栏目">
+          <div class="signal"><strong>04</strong><span>固定栏目：AI 工作台、AI 信息美学、AI 流水线、AI 大模型。</span></div>
+          <div class="signal"><strong>03</strong><span>每个栏目筛选三条高信号动态，避免信息噪音。</span></div>
+          <div class="signal"><strong>07</strong><span>七天主色系统，保持日更节奏里的视觉识别。</span></div>
+        </div>
+      </div>
+
+      <div class="phone-stage" aria-hidden="true">
+        <svg class="route-lines" viewBox="0 0 520 650">
+          <path d="M40 116 C150 52, 302 62, 438 132 S490 336, 376 380 S152 366, 112 482 S252 618, 468 540" />
+          <path d="M70 520 C132 420, 236 446, 296 320 S370 126, 478 88" />
+          <circle cx="40" cy="116" r="5" />
+          <circle cx="376" cy="380" r="5" />
+          <circle cx="468" cy="540" r="5" />
+        </svg>
+        <div class="phone">
+          <div class="phone-screen">
+            <article class="mobile-paper">
+              <div class="mobile-top">
+                <strong>AI<br>Brief</strong>
+                <div class="mobile-date">05/29<br>FRIDAY</div>
+              </div>
+              <div class="mobile-headline">
+                <h2>编排层开始接管产品栈</h2>
+                <p>工作台、流水线、模型与创意接口同时朝闭环执行收束。</p>
+              </div>
+              <div class="mobile-sections">
+                <div class="mobile-section"><span class="mobile-num">01</span><div><b>AI 工作台</b><span>上下文、代理入口和任务界面重新组合。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">02</span><div><b>AI 信息美学</b><span>生成媒体从结果展示走向连续编辑。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">03</span><div><b>AI 流水线</b><span>CLI、MCP 与自动化成为新的执行骨架。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">04</span><div><b>AI 大模型</b><span>模型能力更贴近长任务和产品交付。</span></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="orbit-note">One phone.<br><span>One daily paper.</span><br>Readable intelligence.</div>
+      </div>
+    </section>
+
+    <section class="content">
+      <section class="panel today">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Latest Edition</div>
+            <h2>今日简报</h2>
+          </div>
+          <p>首页保留足够留白，把最新一期作为入口，同时把值得回看的内容整理成往期推荐。</p>
+        </div>
+        <div class="brief-grid">
+          <a class="brief-card featured" href="briefs/2026-05-29.html">
+            <div class="date">05/29 · 星期五</div>
+            <h3>编排层开始接管产品栈</h3>
+            <p>工作台、流水线、模型与创意接口同时朝闭环执行收束。</p>
+            <span class="read">查看今日早报 →</span>
+          </a>
+          <a class="brief-card" href="briefs/2026-05-28.html">
+            <div class="date">05/28 · 星期四</div>
+            <h3>上下文接口成为新分界</h3>
+            <p>工作台、代理编排、长任务模型与创意 MCP 同步靠拢。</p>
+            <span class="read">查看前一期 →</span>
+          </a>
+          <a class="brief-card" href="color-palette-demo.html">
+            <div class="date">Style System</div>
+            <h3>Weekly Palette Demo</h3>
+            <p>查看周一到周日的紫、蓝、绿、粉色系在简报组件里的实际效果。</p>
+            <span class="read">查看色板 →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="panel archive">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Previous Issues</div>
+            <h2>往期</h2>
+          </div>
+          <p>从过往简报中挑出值得回看的行业信号，适合快速补齐 AI 产品栈、模型能力和创意工具的连续变化。</p>
+        </div>
+        <div class="archive-list">
+          <a class="archive-item" href="briefs/2026-05-29.html"><div class="date">05/29 · 星期五</div><div><div class="archive-title">编排层开始接管产品栈</div><div class="archive-desc">工作台、流水线、模型与创意接口同时朝闭环执行收束。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-28.html"><div class="date">05/28 · 星期四</div><div><div class="archive-title">上下文接口成为新分界</div><div class="archive-desc">工作台、代理编排、长任务模型与创意 MCP 同步靠拢。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-27.html"><div class="date">05/27 · 星期三</div><div><div class="archive-title">任务入口开始主动编排</div><div class="archive-desc">Daily Brief、Goal mode、Gemini 3.5 与 Aleph 2.0 指向持续执行链。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-26.html"><div class="date">05/26 · 星期二</div><div><div class="archive-title">入口之争转向工作现场</div><div class="archive-desc">Antigravity CLI、Managed Agents、Gemini Omni 与创意执行界面的演进。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-25.html"><div class="date">05/25 · 星期一</div><div><div class="archive-title">AI 正进入主动工作阶段</div><div class="archive-desc">Gemini 主动简报、Antigravity CLI、Gemini 3.5 与新的创意工作流。</div></div><span class="archive-arrow">→</span></a>
+        </div>
+      </section>
+
+      <section class="panel palette">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Visual System</div>
+            <h2>七天色板</h2>
+          </div>
+          <p>用紫、蓝、绿、粉色系建立轻量但稳定的日更识别，避免每期页面变成孤立视觉。</p>
+        </div>
+        <div class="palette-board">
+          <a class="palette-card" href="color-palette-demo.html">
+            <div class="date">Weekly Palette Demo</div>
+            <h3 class="archive-title">从周一到周日的主色预览</h3>
+            <div class="palette-atlas" aria-label="七天主色色票">
+              <div class="palette-swatch" style="--swatch:#927BBE"><b>MON</b><span>莫兰迪紫</span><code>#927BBE</code></div>
+              <div class="palette-swatch" style="--swatch:#6F97A8"><b>TUE</b><span>雾蓝</span><code>#6F97A8</code></div>
+              <div class="palette-swatch" style="--swatch:#7FA6C9"><b>WED</b><span>晴蓝</span><code>#7FA6C9</code></div>
+              <div class="palette-swatch" style="--swatch:#7FA68B"><b>THU</b><span>鼠尾草绿</span><code>#7FA68B</code></div>
+              <div class="palette-swatch" style="--swatch:#6F9F99"><b>FRI</b><span>青瓷绿</span><code>#6F9F99</code></div>
+              <div class="palette-swatch" style="--swatch:#8A93B7"><b>SAT</b><span>紫蓝</span><code>#8A93B7</code></div>
+              <div class="palette-swatch" style="--swatch:#EC9BC8"><b>SUN</b><span>柔粉</span><code>#EC9BC8</code></div>
+            </div>
+          </a>
+          <div class="style-note">
+            <div class="eyebrow">Design Note</div>
+            <p>首页保持黑白灰基调，把每日主色留给简报正文和色板样本，展示系统本身更克制。</p>
+            <a class="button" href="color-palette-demo.html">打开完整 Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footnote">
+        <span>星期一研究室出品</span>
+        <span>The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</span>
+      </footer>
+    </section>
   </section>
-  <p class="footnote">The AI Industry Brief · 星期一研究室出品</p>
 </main>
+<script>
+document.querySelectorAll('[data-preserve-scroll]').forEach((label) => {
+  label.addEventListener('click', (event) => {
+    const target = document.getElementById(label.getAttribute('for'));
+    if (!target) return;
+    event.preventDefault();
+    const x = window.scrollX;
+    const y = window.scrollY;
+    target.checked = true;
+    target.dispatchEvent(new Event('change', { bubbles: true }));
+    window.scrollTo(x, y);
+  });
+});
+</script>
 </body>
 </html>

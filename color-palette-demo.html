@@ -8,30 +8,30 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --paper: #FCFBF9;
-  --ground: #EFEDF2;
+  --paper: #FFFEFC;
+  --ground: #F1F0EC;
   --text: #151515;
-  --muted: #6C686A;
+  --muted: #6B6B66;
 }
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at 12% 12%, rgba(146, 123, 190, 0.18), transparent 28%),
-    radial-gradient(circle at 86% 18%, rgba(236, 155, 200, 0.12), transparent 24%),
+    radial-gradient(circle at 12% 12%, rgba(17, 17, 17, 0.055), transparent 28%),
+    radial-gradient(circle at 86% 18%, rgba(17, 17, 17, 0.035), transparent 24%),
     var(--ground);
   color: var(--text);
   font-family: 'Source Serif 4', 'Noto Serif SC', serif;
-  padding: 42px 18px 60px;
+  padding: 46px clamp(34px, 5vw, 88px) 68px;
 }
 .page {
-  width: min(1500px, 100%);
+  width: min(1380px, 100%);
   margin: 0 auto;
 }
 .masthead {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 6px solid #6F97A8;
+  border-top: 6px solid var(--text);
   border-bottom: 2px solid var(--text);
   padding: 22px 0 24px;
   margin-bottom: 28px;
@@ -92,7 +92,7 @@ body {
   transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 .tab:hover {
-  background: rgba(252, 251, 249, 0.64);
+  background: rgba(255, 254, 252, 0.72);
 }
 .dot {
   width: 18px;
@@ -125,7 +125,7 @@ body {
 #day-6:checked ~ .tabs-shell label[for="day-6"],
 #day-7:checked ~ .tabs-shell label[for="day-7"] {
   background: var(--paper);
-  border-left-color: var(--tab-color);
+  border-left-color: var(--text);
   transform: translateX(4px);
 }
 .preview-area {
@@ -396,7 +396,7 @@ body {
   .tab-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 760px) {
-  body { padding: 28px 14px 46px; }
+  body { padding: 28px 16px 46px; }
   .masthead { display: block; }
   .meta { text-align: left; margin-top: 14px; }
   .tab-list { grid-template-columns: 1fr; }

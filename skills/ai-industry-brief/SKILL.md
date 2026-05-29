@@ -33,9 +33,16 @@ Produce a concise, source-grounded daily industry brief and maintain its publish
 ## Build
 
 1. Generate `briefs/YYYY-MM-DD.html` from `brief-data/YYYY-MM-DD.json` using the weekday palette and fixed branding from the spec.
-2. Update `index.html` with a new date card in reverse chronological order; retain earlier entries.
+2. Update `index.html` with the latest issue, the `往期` recommendation list, and the weekly palette entry; retain earlier issue links.
 3. Preserve linkable sources and source-date labels in each brief.
-4. Preserve the editorial two-column section layout from the base template:
+4. Preserve the archive/homepage layout from the base template:
+   - keep the outer homepage shell neutral black/white/gray; do not tint the global page chrome with the weekday color.
+   - top navigation uses Chinese labels in this order: `今日`, `色板`, `往期`.
+   - hero action buttons use `阅读最新一期`, `查看七天色板`, `查看往期`; tab-switching buttons must not force the page to scroll back to the top.
+   - use a phone-shaped preview to express “one phone contains one daily paper”.
+   - weekly palette display uses swatch archive cards (`MON`-`SUN`, Chinese tone name, hex code), not plain pill/oval strips.
+   - `往期` replaces `历史归档` or `精彩推荐` as the visible archive/recommendation section name.
+5. Preserve the editorial two-column section layout from the base template:
    - keep the desktop sheet closer to a landscape A3 editorial page than a tall long-image poster.
    - top row: `01 AI 工作台`, `02 AI 信息美学`
    - bottom row: `03 AI 流水线`, `04 AI 大模型`
@@ -50,7 +57,7 @@ Produce a concise, source-grounded daily industry brief and maintain its publish
 2. Re-run dedup check to ensure no overlap with historical items before release.
 3. Open the archive and new detail page in a browser; confirm card navigation, header, footer, wrapping, small-screen readability, horizontal section order, and Morandi-derived section marker colors.
 4. When publishing is requested or already configured, commit only relevant site and skill files, push to the configured GitHub repository, and verify the GitHub Pages URL after deployment.
-5. When a scheduled automation drives the workflow, keep its branding, footer, archive, and publish instructions synchronized with this skill.
+5. When a scheduled automation drives the workflow, keep its branding, footer, archive, worker parsers, and publish instructions synchronized with this skill.
 
 ## Resources
 

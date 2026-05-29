@@ -228,11 +228,21 @@ function buildFeishuCard({ archiveUrl, detailUrl, card, date, quote }) {
 
 function extractArchiveCard(html, detailPath) {
   const normalizedPath = detailPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const pattern = new RegExp(
-    `<a class="brief(?: previous)?" href="${normalizedPath}">[\\s\\S]*?<h2>([\\s\\S]*?)<\\/h2>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`,
-    "i",
-  );
-  const match = html.match(pattern);
+  const patterns = [
+    new RegExp(
+      `<a class="[^"]*brief-card[^"]*" href="${normalizedPath}">[\\s\\S]*?<h3[^>]*>([\\s\\S]*?)<\\/h3>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`,
+      "i",
+    ),
+    new RegExp(
+      `<a class="archive-item" href="${normalizedPath}">[\\s\\S]*?<div class="archive-title">([\\s\\S]*?)<\\/div>[\\s\\S]*?<div class="archive-desc">([\\s\\S]*?)<\\/div>`,
+      "i",
+    ),
+    new RegExp(
+      `<a class="brief(?: previous)?" href="${normalizedPath}">[\\s\\S]*?<h2>([\\s\\S]*?)<\\/h2>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`,
+      "i",
+    ),
+  ];
+  const match = patterns.map((pattern) => html.match(pattern)).find(Boolean);
 
   if (!match) {
     throw new Error(`Could not find archive card for ${detailPath}.`);
