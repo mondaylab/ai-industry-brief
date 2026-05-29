@@ -4,6 +4,7 @@
 
 - Detail file: `briefs/YYYY-MM-DD.html`
 - Archive file: `index.html`
+- Data config file: `brief-data/YYYY-MM-DD.json`
 - Detail structure: opening line, 4 sections x 2 items, closing insight, sourcing note, footer
 - Archive structure: latest card first; every existing brief remains clickable
 
@@ -21,6 +22,8 @@
 - Prefer sources published in the seven days up to the brief date.
 - Use official/primary URLs wherever available.
 - Add visible dates to source links. Mark items outside the preferred window as `邻近窗口` or `最近官方参考`.
+- Daily draft data must be prepared in `brief-data/YYYY-MM-DD.json` before HTML generation.
+- New daily items must not duplicate historical entries by source URL or item title.
 - Title form: `产品/工具名 | 核心动作短语`; action phrase no longer than 15 Chinese characters.
 - Description form: fact, then meaning or impact; target 60-80 Chinese characters.
 - Opening line: one judgment, maximum 50 Chinese characters.
@@ -58,6 +61,7 @@ Use an approximately 10%-tinted pale background derived from the day's primary c
 
 1. No template placeholders remain.
 2. The new page contains exactly 4 section containers, 8 content items, and 8 source anchors.
-3. The archive contains a clickable card for the new page and preserves earlier links.
-4. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
-5. If the site is published, verify the deployed archive and current detail page after Pages builds.
+3. Dedup check passes: `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`.
+4. The archive contains a clickable card for the new page and preserves earlier links.
+5. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
+6. If the site is published, verify the deployed archive and current detail page after Pages builds.

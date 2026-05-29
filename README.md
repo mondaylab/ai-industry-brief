@@ -17,8 +17,20 @@
 
 - `index.html`：每日简报聚合首页
 - `briefs/YYYY-MM-DD.html`：每日长图式详情页
+- `brief-data/YYYY-MM-DD.json`：每日结构化数据配置（生成详情页前的单一事实源）
 - `skills/ai-industry-brief/`：用于生成、更新与发布简报的 Codex Skill
 - `workers/feishu-brief-push/`：Cloudflare Worker，定时读取公开站点并推送飞书机器人
+
+## 数据配置与去重
+
+为避免“每天条目和历史重复”，新增了数据配置与去重校验流程：
+
+1. 从 `brief-data/_template.json` 复制生成当天配置 `brief-data/YYYY-MM-DD.json`
+2. 填写 4 个栏目 x 2 条内容（共 8 条）
+3. 生成页面前运行：
+   - `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`
+
+该校验会与历史 `brief-data/*.json` 和 `briefs/*.html` 比较，阻止重复的来源 URL 或重复条目标题进入当天简报。
 
 ## Skill
 

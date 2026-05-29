@@ -24,9 +24,9 @@ body {
 }
 .card {
   background: var(--paper);
-  max-width: 750px;
+  max-width: 920px;
   width: 100%;
-  padding: 44px 40px;
+  padding: 38px 34px;
   font-family: 'Noto Sans SC', 'Inter', sans-serif;
 }
 .header {
@@ -72,7 +72,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
-.section { padding: 24px 0; border-bottom: 1px solid var(--rule); }
+.section { padding: 18px 0; border-bottom: 1px solid var(--rule); }
 .section-header { margin-bottom: 6px; }
 .section-tag {
   display: inline-flex;
@@ -91,20 +91,30 @@ body {
   font-size: 11px;
   color: #999;
   margin-top: 6px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   letter-spacing: 0.02em;
 }
-.item { margin-bottom: 26px; }
-.item:last-child { margin-bottom: 0; }
+.section-items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.item {
+  margin-bottom: 0;
+  background: #FBFAF8;
+  border: 1px solid #EEE6E6;
+  border-radius: 8px;
+  padding: 14px 14px 12px;
+}
 .item-title {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 10px;
-  line-height: 1.45;
+  margin-bottom: 8px;
+  line-height: 1.4;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
 }
 .item-tool { color: var(--primary); font-weight: 700; }
 .item-divider, .item-heading { color: var(--text); font-weight: 700; }
@@ -113,12 +123,12 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 46px;
-  height: 34px;
+  min-width: 40px;
+  height: 30px;
   padding: 0 10px;
   border-radius: 7px;
   background: var(--primary-light);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
   font-family: 'Noto Sans SC', 'Inter', sans-serif;
   color: var(--primary);
@@ -126,14 +136,14 @@ body {
   line-height: 1;
 }
 .item-desc {
-  font-size: 18px;
+  font-size: 15px;
   color: var(--body);
-  line-height: 1.75;
-  margin-bottom: 14px;
-  font-weight: 500;
+  line-height: 1.62;
+  margin-bottom: 10px;
+  font-weight: 450;
 }
 .item-source {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--primary);
   text-decoration: none;
   opacity: 0.9;
@@ -170,7 +180,8 @@ body {
   body { padding: 0; }
   .card { padding: 32px 22px; }
   .header-left .brand { font-size: 31px; }
-  .item-title { font-size: 17px; gap: 8px; }
+  .section-items { grid-template-columns: 1fr; }
+  .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
 }
 </style>
@@ -198,6 +209,7 @@ body {
       </span>
     </div>
     <div class="section-sub">Gemini App · Notion</div>
+    <div class="section-items">
     <article class="item">
       <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini App</span><span class="item-divider"> | </span><span class="item-heading">主动简报连接日程</span></span></div>
       <p class="item-desc">Google 为 Gemini App 引入结合许可数据生成的主动简报，可预先汇聚行程与行动事项。个人 AI 工作台由等候指令，转向每天自动组织注意力。</p>
@@ -208,6 +220,7 @@ body {
       <p class="item-desc">Notion Developer Platform 提供 Agent API、Workers、Webhooks 与命令行工具，让协作内容可触发自动执行。文档和数据库开始同时承担业务运行层角色。</p>
       <a class="item-source" href="https://www.notion.com/releases/2026-05-13" target="_blank" rel="noopener noreferrer">→ notion.com</a><span class="source-date">2026-05-13 · 最近官方参考</span>
     </article>
+    </div>
   </section>
 
   <section class="section">
@@ -218,6 +231,7 @@ body {
       </span>
     </div>
     <div class="section-sub">Antigravity CLI · Claude Managed Agents</div>
+    <div class="section-items">
     <article class="item">
       <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Antigravity CLI</span><span class="item-divider"> | </span><span class="item-heading">承接跨界面执行</span></span></div>
       <p class="item-desc">Google 宣布 Gemini CLI 迁移为 Antigravity CLI，并将能力扩展至编辑器与浏览器中的智能体执行。开发入口正在围绕任务编排而非单轮请求重组。</p>
@@ -228,6 +242,7 @@ body {
       <p class="item-desc">Anthropic 为 Claude Managed Agents 加入自托管沙箱与 MCP tunnels，使企业工具和受控执行环境可接入 Agent。企业落地重点转向权限与执行边界。</p>
       <a class="item-source" href="https://claude.com/blog/claude-managed-agents-self-hosted-sandboxes-mcp-tunnels" target="_blank" rel="noopener noreferrer">→ claude.com</a><span class="source-date">2026-05-19 · 邻近窗口</span>
     </article>
+    </div>
   </section>
 
   <section class="section">
@@ -238,6 +253,7 @@ body {
       </span>
     </div>
     <div class="section-sub">Gemini 3.5 · Gemini Omni</div>
+    <div class="section-items">
     <article class="item">
       <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini 3.5</span><span class="item-divider"> | </span><span class="item-heading">强化多步任务推理</span></span></div>
       <p class="item-desc">Google 发布 Gemini 3.5，强调复杂推理、智能体使用与成本效率提升。头部模型的评判坐标已从回答漂亮，切换到多步骤任务是否跑得稳。</p>
@@ -248,6 +264,7 @@ body {
       <p class="item-desc">Google 的 I/O 开发者合集披露 Gemini Omni 预览，将文本、图像、音频和视频能力纳入原生全模态方向。应用层的模型路由复杂度随之降低。</p>
       <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
     </article>
+    </div>
   </section>
 
   <section class="section">
@@ -258,6 +275,7 @@ body {
       </span>
     </div>
     <div class="section-sub">Google Pics · Gemini Omni</div>
+    <div class="section-items">
     <article class="item">
       <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Google Pics</span><span class="item-divider"> | </span><span class="item-heading">把生图带入编辑现场</span></span></div>
       <p class="item-desc">Google 公布 Pics，将 Nano Banana 图像能力嵌入可组织、可修改的创意工作区。生成视觉从提示词的一次性输出，转向连续的构图与修订过程。</p>
@@ -268,6 +286,7 @@ body {
       <p class="item-desc">Gemini Omni 面向原生全模态理解与生成方向亮相，覆盖图像、音频和视频语境。视觉内容生产的入口将更自然地连接脚本、声音与动态画面。</p>
       <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
     </article>
+    </div>
   </section>
 
   <aside class="insight-card">
