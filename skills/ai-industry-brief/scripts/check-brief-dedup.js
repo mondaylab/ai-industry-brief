@@ -81,13 +81,13 @@ function ensureCandidateShape(candidate) {
     if (!Array.isArray(section.items)) {
       fail(`section "${section.name || "unknown"}" must include items array`);
     }
-    if (section.items.length !== 2) {
-      fail(`section "${section.name || "unknown"}" must contain exactly 2 items`);
+    if (section.items.length !== 3) {
+      fail(`section "${section.name || "unknown"}" must contain exactly 3 items`);
     }
     itemCount += section.items.length;
   }
-  if (itemCount !== 8) {
-    fail(`candidate JSON must contain exactly 8 items, got ${itemCount}`);
+  if (itemCount !== 12) {
+    fail(`candidate JSON must contain exactly 12 items, got ${itemCount}`);
   }
 }
 
@@ -160,7 +160,7 @@ function main() {
     process.exit(2);
   }
 
-  console.log(`Dedup check passed for ${candidateArg} (8 items, no historical overlap).`);
+  console.log(`Dedup check passed for ${candidateArg} (12 items, no historical overlap).`);
 }
 
 main();

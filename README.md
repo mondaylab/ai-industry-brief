@@ -26,7 +26,7 @@
 为避免“每天条目和历史重复”，新增了数据配置与去重校验流程：
 
 1. 从 `brief-data/_template.json` 复制生成当天配置 `brief-data/YYYY-MM-DD.json`
-2. 填写 4 个栏目 x 2 条内容（共 8 条）
+2. 填写 4 个栏目 x 3 条内容（共 12 条）
 3. 生成页面前运行：
    - `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`
 

@@ -100,6 +100,24 @@ body {
   font-weight: 700;
 }
 .brief.previous { background: #FBFAF8; }
+.brief.palette {
+  background:
+    linear-gradient(135deg, rgba(165, 132, 245, 0.16), transparent 32%),
+    linear-gradient(225deg, rgba(236, 155, 200, 0.18), transparent 34%),
+    var(--paper);
+  border-color: rgba(122, 158, 159, 0.18);
+}
+.palette-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin: 18px 0 21px;
+}
+.palette-strip span {
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+}
 .footnote {
   margin-top: 42px;
   color: #999;
@@ -120,6 +138,21 @@ body {
   </header>
   <p class="lead">追踪 AI 在知识工作、研发流水线、基础模型与创意产业中的关键进展。点击日期进入当日行业简报。</p>
   <section class="grid" aria-label="每日早报">
+    <a class="brief palette" href="color-palette-demo.html">
+      <div class="date">STYLE SYSTEM · 七天色板</div>
+      <h2>Weekly Palette Demo</h2>
+      <p>查看周一到周日的紫、蓝、绿、粉色系在简报组件里的实际效果。</p>
+      <div class="palette-strip" aria-hidden="true">
+        <span style="background:#A584F5"></span>
+        <span style="background:#6F97A8"></span>
+        <span style="background:#7FA6C9"></span>
+        <span style="background:#7FA68B"></span>
+        <span style="background:#6F9F99"></span>
+        <span style="background:#8A93B7"></span>
+        <span style="background:#EC9BC8"></span>
+      </div>
+      <span class="read">查看色板 Demo →</span>
+    </a>
     <a class="brief" href="briefs/2026-05-29.html">
       <div class="date">05/29 · 星期五</div>
       <h2>编排层开始接管产品栈</h2>

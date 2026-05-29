@@ -18,7 +18,7 @@ Produce a concise, source-grounded daily industry brief and maintain its publish
 
 1. Use current web search and prefer official release notes, company blogs, developer posts, or primary documentation.
 2. Search the four sections: AI 工作台, AI 流水线, AI 大模型, AI 信息美学.
-3. Select two worthwhile items per section, prioritizing the last seven days.
+3. Select three worthwhile items per section, prioritizing the last seven days.
 4. Record a real URL and publication date for every item. Label any item outside the preferred window as `邻近窗口` or `最近官方参考`; never imply it is new today.
 5. Before writing HTML, run dedup check and resolve any conflicts:
    - `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`
@@ -26,7 +26,7 @@ Produce a concise, source-grounded daily industry brief and maintain its publish
 ## Write
 
 1. Write one decisive opening line under 50 Chinese characters.
-2. For each of 8 items, use `产品/工具名 | 核心动作短语`; keep the action phrase within 15 Chinese characters.
+2. For each of 12 items, use `产品/工具名 | 核心动作短语`; keep the action phrase within 15 Chinese characters.
 3. Describe fact first and industry impact second in roughly 60-80 Chinese characters.
 4. Write a cross-section insight under 150 Chinese characters with a clear judgment.
 
@@ -35,12 +35,20 @@ Produce a concise, source-grounded daily industry brief and maintain its publish
 1. Generate `briefs/YYYY-MM-DD.html` from `brief-data/YYYY-MM-DD.json` using the weekday palette and fixed branding from the spec.
 2. Update `index.html` with a new date card in reverse chronological order; retain earlier entries.
 3. Preserve linkable sources and source-date labels in each brief.
+4. Preserve the editorial two-column section layout from the base template:
+   - keep the desktop sheet closer to a landscape A3 editorial page than a tall long-image poster.
+   - top row: `01 AI 工作台`, `02 AI 信息美学`
+   - bottom row: `03 AI 流水线`, `04 AI 大模型`
+   - keep the low-contrast route-map layer, paper grid, and waypoint-style section cards for an international editorial/map-poster feel.
+   - section number markers, shadows, and guide lines must derive from the day's `--primary` and `--primary-light` colors.
+   - item markers inside sections should use non-numeric symbols (`◆`, `◇`, `◈`) instead of `01/02/03`.
+   - keep the desktop dynamic row-height alignment script when generating or editing detail pages.
 
 ## Check And Publish
 
-1. Check for unresolved placeholders and confirm four sections, eight items, and eight source links.
+1. Check for unresolved placeholders and confirm four sections, twelve items, and twelve source links.
 2. Re-run dedup check to ensure no overlap with historical items before release.
-3. Open the archive and new detail page in a browser; confirm card navigation, header, footer, wrapping, and small-screen readability.
+3. Open the archive and new detail page in a browser; confirm card navigation, header, footer, wrapping, small-screen readability, horizontal section order, and Morandi-derived section marker colors.
 4. When publishing is requested or already configured, commit only relevant site and skill files, push to the configured GitHub repository, and verify the GitHub Pages URL after deployment.
 5. When a scheduled automation drives the workflow, keep its branding, footer, archive, and publish instructions synchronized with this skill.
 

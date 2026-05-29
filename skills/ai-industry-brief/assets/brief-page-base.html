@@ -4,185 +4,498 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Industry Brief | 05/26 · 星期二 | 星期一研究室</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --primary: #7A9E9F;
-  --primary-light: #F1F5F5;
-  --paper: #F8F7F5;
-  --ground: #EDEBE8;
-  --text: #1A1A1A;
-  --body: #555;
-  --rule: #E8E0D8;
+  --primary: #6F97A8;
+  --primary-light: #F0F5F7;
+  --paper: #FCFBF9;
+  --ground: #EEECE8;
+  --text: #151515;
+  --body: #2E2E2E;
+  --rule: #D9D2CE;
+  --headline-rule: color-mix(in srgb, var(--primary) 78%, #151515);
+  --section-ink: var(--primary);
+  --section-ink-soft: var(--primary-light);
+  --section-guide: color-mix(in srgb, var(--primary) 42%, transparent);
 }
 body {
-  background: var(--ground);
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 26%),
+    radial-gradient(circle at 88% 78%, rgba(127, 166, 201, 0.12), transparent 24%),
+    var(--ground);
   display: flex;
   justify-content: center;
-  padding: 40px 16px;
+  padding: 36px 14px;
 }
 .card {
+  position: relative;
+  overflow: visible;
   background: var(--paper);
-  max-width: 920px;
+  max-width: 1480px;
   width: 100%;
-  padding: 38px 34px;
-  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  min-height: min(1046px, calc((100vw - 28px) / 1.414));
+  height: auto;
+  padding: 36px 38px;
+  border: 1px solid #D8D1CB;
+  box-shadow: 0 6px 30px rgba(17, 17, 17, 0.05);
+  font-family: 'Source Serif 4', 'Noto Serif SC', serif;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  background-image:
+    linear-gradient(rgba(21, 21, 21, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+}
+.card::after {
+  content: "THE AI INDUSTRY BRIEF / GLOBAL SIGNALS";
+  position: absolute;
+  right: 28px;
+  top: 112px;
+  color: rgba(21, 21, 21, 0.18);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  writing-mode: vertical-rl;
+  pointer-events: none;
 }
 .header {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  padding-bottom: 20px;
-  border-bottom: 1.5px solid var(--primary);
-  margin-bottom: 28px;
+  align-items: center;
+  padding-bottom: 26px;
+  border-bottom: 2px solid var(--text);
+  border-top: 6px solid var(--headline-rule);
+  padding-top: 24px;
+  margin-bottom: 34px;
 }
 .header-left .brand {
-  font-family: 'Noto Serif SC', Georgia, serif;
-  font-size: 38px;
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 42px;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
   line-height: 1;
 }
 .header-right { text-align: right; }
 .header-right .lab {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 0.05em;
-  margin-bottom: 4px;
-}
-.header-right .date { font-size: 12px; color: #999; letter-spacing: 0.03em; }
-.quote-card {
-  background: var(--primary-light);
-  border-left: 4px solid var(--primary);
-  border-radius: 6px;
-  padding: 16px 20px;
-  margin-bottom: 32px;
-  font-size: 14px;
-  line-height: 1.85;
-  color: #333;
-}
-.quote-label, .insight-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-.section { padding: 18px 0; border-bottom: 1px solid var(--rule); }
-.section-header { margin-bottom: 6px; }
-.section-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--primary);
-  color: #fff;
   font-size: 12px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 4px;
-  letter-spacing: 0.02em;
+  color: #5A5A5A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
-.section-tag svg { flex-shrink: 0; }
-.section-sub {
-  font-size: 11px;
-  color: #999;
-  margin-top: 6px;
-  margin-bottom: 14px;
-  letter-spacing: 0.02em;
+.header-right .date { font-size: 11px; color: #777; letter-spacing: 0.08em; }
+.quote-card {
+  position: relative;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--primary-light) 72%, transparent), transparent 42%),
+    #F8F6F2;
+  border-top: 1px solid rgba(21, 21, 21, 0.18);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.18);
+  border-left: 0;
+  border-radius: 0;
+  padding: 18px 22px 18px 0;
+  margin-bottom: 46px;
+  font-size: 22px;
+  line-height: 1.42;
+  color: var(--body);
+  font-weight: 500;
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) 230px;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
 }
-.section-items {
+.quote-card::before {
+  content: "LEAD";
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(21, 21, 21, 0.18);
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.quote-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero-illustration {
+  position: relative;
+  width: 230px;
+  height: 128px;
+  z-index: 1;
+  justify-self: end;
+  pointer-events: none;
+  opacity: 0.74;
+}
+.hero-line {
+  fill: none;
+  stroke: var(--section-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero-soft {
+  fill: var(--section-ink-soft);
+  stroke: color-mix(in srgb, var(--section-ink) 28%, transparent);
+  stroke-width: 1;
+}
+.hero-ink {
+  fill: color-mix(in srgb, var(--section-ink) 72%, #151515);
+}
+.hero-label {
+  fill: rgba(21, 21, 21, 0.28);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.quote-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--section-ink) 64%, #151515);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.insight-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section { padding: 14px 0 16px; border-bottom: 0; }
+.sections-layout {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  column-gap: 46px;
+  row-gap: 78px;
+  align-items: stretch;
+  overflow: visible;
+  padding: 8px 10px 4px;
+}
+.sections-layout::before {
+  content: "AI INDUSTRY MAP";
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 0 12px;
+  background: var(--paper);
+  color: rgba(21, 21, 21, 0.34);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+.sections-layout > .section {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 18px 18px 14px;
+  background: color-mix(in srgb, var(--paper) 86%, var(--section-ink-soft));
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  box-shadow: 14px 16px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.sections-layout > .section::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 42px;
+  height: 14px;
+  background: var(--section-ink-soft);
+  border: 1px solid rgba(21, 21, 21, 0.09);
+  transform: skewX(-18deg);
+}
+.sections-layout > .section::after {
+  content: "SIGNAL NODE";
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  color: rgba(21, 21, 21, 0.17);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.sections-layout > .section:nth-of-type(odd) {
+  padding-right: 18px;
+}
+.sections-layout > .section:nth-of-type(even) {
+  padding-left: 18px;
+}
+.sections-layout > .section:nth-of-type(n + 3) {
+  padding-top: 18px;
+}
+.section-header {
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 46px;
+}
+.section-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Inter', 'Noto Serif SC', serif;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 0;
+  border-bottom: 0;
+}
+.section-tag::before {
+  content: attr(data-num);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 36px;
+  background: var(--section-ink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  transform: skewX(-12deg);
+  box-shadow: 8px 8px 0 var(--section-ink-soft);
+}
+.section-tag::after {
+  content: "";
+  position: absolute;
+  left: 64px;
+  right: -96px;
+  top: 50%;
+  z-index: -1;
+  border-top: 1px dashed var(--section-guide);
+  transform: translateY(-50%) rotate(-3deg);
+}
+.section-tag svg { display: none; }
+.section-sub {
+  font-size: 10px;
+  color: #787878;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  margin-left: 66px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.item + .item {
+  margin-top: 10px;
+  padding-top: 0;
 }
 .item {
   margin-bottom: 0;
-  background: #FBFAF8;
-  border: 1px solid #EEE6E6;
-  border-radius: 8px;
-  padding: 14px 14px 12px;
+  background: rgba(252, 251, 249, 0.66);
+  border: 1px solid rgba(21, 21, 21, 0.07);
+  border-radius: 2px;
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
 }
 .item-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1.4;
+  margin-bottom: 6px;
+  line-height: 1.32;
   display: flex;
   align-items: flex-start;
   gap: 8px;
 }
-.item-tool { color: var(--primary); font-weight: 700; }
+.item-tool { color: #1C1C1C; font-weight: 700; }
 .item-divider, .item-heading { color: var(--text); font-weight: 700; }
 .item-copy { flex: 1; }
 .item-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 40px;
+  min-width: 26px;
   height: 30px;
-  padding: 0 10px;
-  border-radius: 7px;
-  background: var(--primary-light);
-  font-size: 13px;
+  padding: 0 8px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0;
   font-weight: 700;
-  font-family: 'Noto Sans SC', 'Inter', sans-serif;
-  color: var(--primary);
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  color: var(--section-ink);
   flex-shrink: 0;
   line-height: 1;
 }
+.item-num::before {
+  content: attr(data-mark);
+  font-size: 17px;
+  color: var(--section-ink);
+  line-height: 1;
+}
 .item-desc {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--body);
-  line-height: 1.62;
-  margin-bottom: 10px;
-  font-weight: 450;
+  line-height: 1.58;
+  margin-bottom: 8px;
+  font-weight: 400;
+  flex: 1 1 auto;
 }
 .item-source {
-  font-size: 14px;
-  color: var(--primary);
+  font-size: 13px;
+  color: #444;
   text-decoration: none;
   opacity: 0.9;
-  font-weight: 600;
+  font-weight: 500;
 }
 .item-source:hover { opacity: 1; text-decoration: underline; }
 .source-date {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: #7C7C7C;
   margin-left: 8px;
   font-weight: 500;
 }
 .insight-card {
-  background: var(--primary-light);
-  border-left: 4px solid var(--primary);
-  border-radius: 6px;
-  padding: 20px 24px;
-  margin-top: 28px;
-  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.12);
+  border-left: 0;
+  border-radius: 0;
+  padding: 20px 4px 18px;
+  margin-top: 64px;
+  margin-bottom: 38px;
+  display: grid;
+  grid-template-columns: 188px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: center;
 }
-.insight-label { margin-bottom: 10px; }
-.insight-text { font-size: 13.5px; color: #444; line-height: 1.9; }
-.method-note { margin-top: 18px; font-size: 11px; color: #999; line-height: 1.75; }
+.insight-label {
+  position: relative;
+  justify-self: center;
+  width: max-content;
+  transform: translateY(12px);
+  margin-bottom: 0;
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.insight-label::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-top: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid color-mix(in srgb, var(--section-ink) 72%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, var(--section-ink) 0 4px, transparent 5px),
+    linear-gradient(45deg, transparent 58%, color-mix(in srgb, var(--section-ink) 72%, transparent) 59% 64%, transparent 65%);
+  box-shadow: 14px 14px 0 var(--section-ink-soft);
+  opacity: 0.9;
+}
+.insight-text {
+  font-size: 18px;
+  color: #242424;
+  line-height: 1.72;
+  font-weight: 500;
+}
+.method-note {
+  grid-column: 2;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #7A7A7A;
+  line-height: 1.6;
+}
 .footer {
-  border-top: 1px solid var(--primary);
-  padding-top: 18px;
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid var(--text);
+  padding-top: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.footer-lab { font-size: 13px; font-weight: 600; color: var(--primary); letter-spacing: 0.04em; }
-.footer-sub { font-size: 11px; color: #AAA; letter-spacing: 0.03em; }
+.footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
 @media (max-width: 560px) {
   body { padding: 0; }
-  .card { padding: 32px 22px; }
-  .header-left .brand { font-size: 31px; }
-  .section-items { grid-template-columns: 1fr; }
+  .card { padding: 32px 22px; aspect-ratio: auto; }
+  .card::before, .card::after, .sections-layout::before { display: none; }
+  .header-left .brand { font-size: 34px; }
+  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
+  .quote-card::before { display: none; }
+  .hero-illustration { display: none; }
+  .sections-layout > .section:nth-of-type(odd),
+  .sections-layout > .section:nth-of-type(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .sections-layout > .section::before,
+  .sections-layout > .section::after { display: none; }
+  .sections-layout > .section:nth-of-type(n + 3) { padding-top: 14px; }
+  .section-header { min-height: 40px; }
+  .section-tag { font-size: 18px; gap: 10px; }
+  .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
+  .section-tag::after { right: -48px; left: 56px; }
+  .section-sub { margin-left: 56px; }
+  .section-items { gap: 0; }
+  .item { min-height: auto; }
+  .item + .item { margin-top: 6px; padding-top: 8px; }
+  .section + .section { margin-top: 10px; padding-top: 14px; }
+  .item-num { min-width: 22px; padding: 0 6px; }
   .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
+  .insight-card { display: block; padding: 18px 0; }
+  .insight-label { margin-bottom: 10px; }
+  .insight-text { font-size: 16px; }
+  .method-note { margin-top: 12px; }
 }
 </style>
 </head>
@@ -197,97 +510,134 @@ body {
   </header>
 
   <div class="quote-card">
-    <div class="quote-label">今日一句话</div>
-    真正的 AI 入口之争，已从聊天框转向能接管任务的工作现场。
+    <div class="quote-copy">
+      <div class="quote-label">今日一句话</div>
+      真正的 AI 入口之争，已从聊天框转向能接管任务的工作现场。
+    </div>
+    <svg class="hero-illustration" viewBox="0 0 230 154" aria-hidden="true" focusable="false">
+      <path class="hero-soft" d="M25 118 C44 82, 72 77, 94 98 S142 126, 174 91 C190 73, 207 72, 219 82 L219 142 L25 142 Z" />
+      <circle class="hero-soft" cx="175" cy="44" r="26" />
+      <path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M175 18C185 31,185 57,175 70 M153 35H197 M153 53H197" />
+      <path class="hero-line" d="M46 108 L66 72 L86 108 M55 92H77" />
+      <circle class="hero-ink" cx="70" cy="43" r="10" />
+      <path class="hero-soft" d="M47 132 C48 97, 56 63, 70 63 C84 63, 92 97, 93 132 Z" />
+      <path class="hero-line" d="M59 78 C42 83, 33 94, 27 109 M82 78 C100 83, 113 94, 121 109" />
+      <circle class="hero-line" cx="31" cy="102" r="10" />
+      <path class="hero-line" d="M38 109 L49 120" />
+      <path class="hero-line" d="M129 67 H147 M138 58 V76 M125 92 H154 M132 103 H149" />
+      <text class="hero-label" x="118" y="132">GLOBAL SIGNALS</text>
+    </svg>
   </div>
 
+  <div class="sections-layout">
   <section class="section">
     <div class="section-header">
-      <span class="section-tag">
+      <span class="section-tag" data-num="01">
         <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
         AI 工作台
       </span>
     </div>
-    <div class="section-sub">Gemini App · Notion</div>
+    <div class="section-sub">Gemini App · Notion · 飞书 aily</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini App</span><span class="item-divider"> | </span><span class="item-heading">主动简报连接日程</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Gemini App</span><span class="item-divider"> | </span><span class="item-heading">主动简报连接日程</span></span></div>
       <p class="item-desc">Google 为 Gemini App 引入结合许可数据生成的主动简报，可预先汇聚行程与行动事项。个人 AI 工作台由等候指令，转向每天自动组织注意力。</p>
       <a class="item-source" href="https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Notion</span><span class="item-divider"> | </span><span class="item-heading">开放 Agent 工作区</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Notion</span><span class="item-divider"> | </span><span class="item-heading">开放 Agent 工作区</span></span></div>
       <p class="item-desc">Notion Developer Platform 提供 Agent API、Workers、Webhooks 与命令行工具，让协作内容可触发自动执行。文档和数据库开始同时承担业务运行层角色。</p>
       <a class="item-source" href="https://www.notion.com/releases/2026-05-13" target="_blank" rel="noopener noreferrer">→ notion.com</a><span class="source-date">2026-05-13 · 最近官方参考</span>
     </article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
-        AI 流水线
-      </span>
-    </div>
-    <div class="section-sub">Antigravity CLI · Claude Managed Agents</div>
-    <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Antigravity CLI</span><span class="item-divider"> | </span><span class="item-heading">承接跨界面执行</span></span></div>
-      <p class="item-desc">Google 宣布 Gemini CLI 迁移为 Antigravity CLI，并将能力扩展至编辑器与浏览器中的智能体执行。开发入口正在围绕任务编排而非单轮请求重组。</p>
-      <a class="item-source" href="https://developers.googleblog.com/en/gemini-cli-is-now-antigravity-cli/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-05-20</span>
-    </article>
-    <article class="item">
-      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Claude</span><span class="item-divider"> | </span><span class="item-heading">Managed Agents 接通 MCP</span></span></div>
-      <p class="item-desc">Anthropic 为 Claude Managed Agents 加入自托管沙箱与 MCP tunnels，使企业工具和受控执行环境可接入 Agent。企业落地重点转向权限与执行边界。</p>
-      <a class="item-source" href="https://claude.com/blog/claude-managed-agents-self-hosted-sandboxes-mcp-tunnels" target="_blank" rel="noopener noreferrer">→ claude.com</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">飞书 aily</span><span class="item-divider"> | </span><span class="item-heading">企业场景部署智能体</span></span></div>
+      <p class="item-desc">飞书 aily 面向企业提供知识、技能与系统接入的智能体开发能力。办公平台竞争不再止于助手体验，而在能否把 Agent 嵌回组织流程。</p>
+      <a class="item-source" href="https://www.feishu.cn/content/article/7597739180457806780" target="_blank" rel="noopener noreferrer">→ feishu.cn</a><span class="source-date">2026-01-21 · 最近官方参考</span>
     </article>
     </div>
   </section>
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
-        AI 大模型
-      </span>
-    </div>
-    <div class="section-sub">Gemini 3.5 · Gemini Omni</div>
-    <div class="section-items">
-    <article class="item">
-      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Gemini 3.5</span><span class="item-divider"> | </span><span class="item-heading">强化多步任务推理</span></span></div>
-      <p class="item-desc">Google 发布 Gemini 3.5，强调复杂推理、智能体使用与成本效率提升。头部模型的评判坐标已从回答漂亮，切换到多步骤任务是否跑得稳。</p>
-      <a class="item-source" href="https://blog.google/intl/en-africa/products/explore-get-answers/gemini-3-5/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
-    </article>
-    <article class="item">
-      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">统一理解与生成模态</span></span></div>
-      <p class="item-desc">Google 的 I/O 开发者合集披露 Gemini Omni 预览，将文本、图像、音频和视频能力纳入原生全模态方向。应用层的模型路由复杂度随之降低。</p>
-      <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
-    </article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-header">
-      <span class="section-tag">
+      <span class="section-tag" data-num="02">
         <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
         AI 信息美学
       </span>
     </div>
-    <div class="section-sub">Google Pics · Gemini Omni</div>
+    <div class="section-sub">Google Pics · Gemini Omni · Adobe Firefly</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num">01</span><span class="item-copy"><span class="item-tool">Google Pics</span><span class="item-divider"> | </span><span class="item-heading">把生图带入编辑现场</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Google Pics</span><span class="item-divider"> | </span><span class="item-heading">把生图带入编辑现场</span></span></div>
       <p class="item-desc">Google 公布 Pics，将 Nano Banana 图像能力嵌入可组织、可修改的创意工作区。生成视觉从提示词的一次性输出，转向连续的构图与修订过程。</p>
       <a class="item-source" href="https://blog.google/innovation-and-ai/sundar-pichai-io-2026/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">跨媒体生成统一化</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">跨媒体生成统一化</span></span></div>
       <p class="item-desc">Gemini Omni 面向原生全模态理解与生成方向亮相，覆盖图像、音频和视频语境。视觉内容生产的入口将更自然地连接脚本、声音与动态画面。</p>
       <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
     </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Adobe Firefly</span><span class="item-divider"> | </span><span class="item-heading">创意 Agent 贯通制作</span></span></div>
+      <p class="item-desc">Adobe 发布 Firefly AI Assistant 与创意 Agent 能力，以辅助生成、修改和品牌化制作。视觉工具的护城河正在转向工作流衔接和商用控制。</p>
+      <a class="item-source" href="https://news.adobe.com/news/2026/04/adobe-new-creative-agent" target="_blank" rel="noopener noreferrer">→ news.adobe.com</a><span class="source-date">2026-04-15 · 最近官方参考</span>
+    </article>
     </div>
   </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="03">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+        AI 流水线
+      </span>
+    </div>
+    <div class="section-sub">Antigravity CLI · Claude Managed Agents · Codex</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Antigravity CLI</span><span class="item-divider"> | </span><span class="item-heading">承接跨界面执行</span></span></div>
+      <p class="item-desc">Google 宣布 Gemini CLI 迁移为 Antigravity CLI，并将能力扩展至编辑器与浏览器中的智能体执行。开发入口正在围绕任务编排而非单轮请求重组。</p>
+      <a class="item-source" href="https://developers.googleblog.com/en/gemini-cli-is-now-antigravity-cli/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-05-20</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Claude</span><span class="item-divider"> | </span><span class="item-heading">Managed Agents 接通 MCP</span></span></div>
+      <p class="item-desc">Anthropic 为 Claude Managed Agents 加入自托管沙箱与 MCP tunnels，使企业工具和受控执行环境可接入 Agent。企业落地重点转向权限与执行边界。</p>
+      <a class="item-source" href="https://claude.com/blog/claude-managed-agents-self-hosted-sandboxes-mcp-tunnels" target="_blank" rel="noopener noreferrer">→ claude.com</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Codex</span><span class="item-divider"> | </span><span class="item-heading">移动端跟进长任务</span></span></div>
+      <p class="item-desc">OpenAI 发布可跨设备推进 Codex 任务的工作方式，使代码任务在离开桌面后仍可查看与继续。编程 Agent 的价值变成持续协作与成果回收。</p>
+      <a class="item-source" href="https://openai.com/index/work-with-codex-from-anywhere/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-05-14 · 最近官方参考</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="04">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 大模型
+      </span>
+    </div>
+    <div class="section-sub">Gemini 3.5 · Gemini Omni · GPT-5.5</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Gemini 3.5</span><span class="item-divider"> | </span><span class="item-heading">强化多步任务推理</span></span></div>
+      <p class="item-desc">Google 发布 Gemini 3.5，强调复杂推理、智能体使用与成本效率提升。头部模型的评判坐标已从回答漂亮，切换到多步骤任务是否跑得稳。</p>
+      <a class="item-source" href="https://blog.google/intl/en-africa/products/explore-get-answers/gemini-3-5/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-19 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini Omni</span><span class="item-divider"> | </span><span class="item-heading">统一理解与生成模态</span></span></div>
+      <p class="item-desc">Google 的 I/O 开发者合集披露 Gemini Omni 预览，将文本、图像、音频和视频能力纳入原生全模态方向。应用层的模型路由复杂度随之降低。</p>
+      <a class="item-source" href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank" rel="noopener noreferrer">→ blog.google</a><span class="source-date">2026-05-20</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">GPT-5.5</span><span class="item-divider"> | </span><span class="item-heading">聚焦复杂工作产出</span></span></div>
+      <p class="item-desc">OpenAI 将 GPT-5.5 定位为加强复杂工作与编码任务的模型，并服务于 Codex 工作流。模型升级正越来越直接地对应可交付的生产任务。</p>
+      <a class="item-source" href="https://openai.com/index/introducing-gpt-5-5/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-04-23 · 最近官方参考</span>
+    </article>
+    </div>
+  </section>
+  </div>
 
   <aside class="insight-card">
     <div class="insight-label">今日洞察</div>
@@ -300,5 +650,73 @@ body {
     <div class="footer-sub">The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</div>
   </footer>
 </main>
+<script>
+(() => {
+  const MOBILE_BREAKPOINT = 560;
+
+  function resetHeights(items) {
+    items.forEach((el) => {
+      el.style.minHeight = "";
+      el.style.height = "";
+    });
+  }
+
+  function syncPairHeights(leftSection, rightSection) {
+    if (!leftSection || !rightSection) return;
+    const leftItems = Array.from(leftSection.querySelectorAll(".section-items .item"));
+    const rightItems = Array.from(rightSection.querySelectorAll(".section-items .item"));
+    resetHeights(leftItems);
+    resetHeights(rightItems);
+
+    const rows = Math.max(leftItems.length, rightItems.length);
+    for (let i = 0; i < rows; i += 1) {
+      const l = leftItems[i];
+      const r = rightItems[i];
+      const h = Math.max(l ? l.offsetHeight : 0, r ? r.offsetHeight : 0);
+      if (l) {
+        l.style.minHeight = `${h}px`;
+        l.style.height = `${h}px`;
+      }
+      if (r) {
+        r.style.minHeight = `${h}px`;
+        r.style.height = `${h}px`;
+      }
+    }
+  }
+
+  function applyDynamicRowHeights() {
+    const sections = Array.from(document.querySelectorAll(".sections-layout > .section"));
+    if (sections.length < 4) return;
+    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+    sections.forEach((section) => {
+      resetHeights(Array.from(section.querySelectorAll(".section-items .item")));
+    });
+    if (isMobile) return;
+
+    // Row 1: left(AI工作台) vs right(AI信息美学)
+    syncPairHeights(sections[0], sections[1]);
+    // Row 2: left(AI流水线) vs right(AI大模型)
+    syncPairHeights(sections[2], sections[3]);
+  }
+
+  let rafId = null;
+  function schedule() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      applyDynamicRowHeights();
+      rafId = null;
+    });
+  }
+
+  window.addEventListener("load", schedule);
+  window.addEventListener("resize", schedule);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(schedule).catch(() => {});
+  }
+  const ro = new ResizeObserver(() => schedule());
+  document.querySelectorAll(".sections-layout > .section").forEach((s) => ro.observe(s));
+  schedule();
+})();
+</script>
 </body>
 </html>
