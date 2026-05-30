@@ -28,9 +28,9 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
 - 截图宽高：`1600 x 2200`
-- 默认 Cron：`40 22 * * *`
+- 默认 Cron：`30 23 * * *`
 
-`40 22 * * *` 对应北京时间每天 `06:40`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。建议日报生成任务放在北京时间 `06:00`，给内容生成、提交和 GitHub Pages 部署留出约 40 分钟缓冲。
+`30 23 * * *` 对应北京时间每天 `07:30`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。建议日报生成任务放在北京时间 `06:00` 左右，给内容生成、提交和 GitHub Pages 部署留出缓冲；Worker 还会在当天详情页尚未发布时短暂重试，避免 Pages 传播延迟导致当天漏推。
 
 ## 必要 Secrets
 
@@ -70,6 +70,8 @@ Cloudflare API Token 需要能调用 Browser Rendering API。建议创建专用 
 - `SCREENSHOT_HEIGHT`：截图浏览器视口高度。
 - `SCREENSHOT_WAIT_MS`：页面打开后截图前的等待时间，默认 `800`。
 - `SCREENSHOT_NAVIGATION_TIMEOUT_MS`：页面导航超时时间，默认 `20000`。
+- `MAX_SITE_WAIT_MS`：定时触发后等待当天详情页发布的最长时间，默认 `1800000`。
+- `SITE_WAIT_INTERVAL_MS`：当天详情页未发布时的重试间隔，默认 `120000`。
 
 ## 本地开发
 

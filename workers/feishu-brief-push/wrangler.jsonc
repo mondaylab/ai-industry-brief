@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "ai-industry-brief-feishu-push",
+  "account_id": "b4026cc4d5eb4098eff686201af1f4c4",
   "main": "src/index.js",
   "compatibility_date": "2026-05-27",
   "observability": {
@@ -13,11 +14,13 @@
     "SCREENSHOT_WIDTH": "1600",
     "SCREENSHOT_HEIGHT": "2200",
     "SCREENSHOT_WAIT_MS": "800",
-    "SCREENSHOT_NAVIGATION_TIMEOUT_MS": "20000"
+    "SCREENSHOT_NAVIGATION_TIMEOUT_MS": "20000",
+    "MAX_SITE_WAIT_MS": "1800000",
+    "SITE_WAIT_INTERVAL_MS": "120000"
   },
   "triggers": {
     "crons": [
-      "40 22 * * *"
+      "30 23 * * *"
     ]
   }
 }

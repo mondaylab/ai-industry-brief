@@ -2,6 +2,8 @@ const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/ai-industry-brief";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
 const DEFAULT_SCREENSHOT_HEIGHT = 2200;
+const DEFAULT_MAX_SITE_WAIT_MS = 30 * 60 * 1000;
+const DEFAULT_SITE_WAIT_INTERVAL_MS = 2 * 60 * 1000;
 
 export default {
   async fetch(request, env, ctx) {
@@ -80,11 +82,16 @@ async function pushBriefImage({ env, requestedDate, requestId }) {
   assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
   assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
 
+  const pageMeta = await waitForPageMeta({
+    env,
+    detailUrl,
+    requestId,
+    date,
+  });
   const screenshot = await captureBriefScreenshot({
     env,
     url: `${detailUrl}?image_push=${encodeURIComponent(date)}`,
   });
-  const pageMeta = await fetchPageMeta(detailUrl);
   const tenantAccessToken = await getTenantAccessToken(env);
   const imageKey = await uploadFeishuImage({
     tenantAccessToken,
@@ -117,6 +124,45 @@ async function pushBriefImage({ env, requestedDate, requestId }) {
     screenshotBytes: screenshot.byteLength,
     responseText,
   };
+}
+
+async function waitForPageMeta({ env, detailUrl, requestId, date }) {
+  const maxWaitMs = numberFromEnv(env.MAX_SITE_WAIT_MS, DEFAULT_MAX_SITE_WAIT_MS);
+  const intervalMs = numberFromEnv(env.SITE_WAIT_INTERVAL_MS, DEFAULT_SITE_WAIT_INTERVAL_MS);
+  const startedAt = Date.now();
+  let attempt = 0;
+  let lastError = null;
+
+  while (Date.now() - startedAt <= maxWaitMs) {
+    attempt += 1;
+    try {
+      return await fetchPageMeta(detailUrl);
+    } catch (error) {
+      lastError = error;
+      const elapsedMs = Date.now() - startedAt;
+      if (!isRetryablePageMetaError(error) || elapsedMs + intervalMs > maxWaitMs) {
+        break;
+      }
+
+      log("brief_page_not_ready", {
+        requestId,
+        date,
+        detailUrl,
+        attempt,
+        elapsedMs,
+        retryInMs: intervalMs,
+        error: error instanceof Error ? error.message : String(error),
+      });
+      await sleep(intervalMs);
+    }
+  }
+
+  throw lastError || new Error(`Timed out waiting for page metadata ${detailUrl}`);
+}
+
+function isRetryablePageMetaError(error) {
+  if (!(error instanceof Error)) return false;
+  return /status (404|408|425|429|500|502|503|504)\b/.test(error.message);
 }
 
 async function captureBriefScreenshot({ env, url }) {
@@ -369,6 +415,10 @@ function normalizeBaseUrl(value) {
 function numberFromEnv(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function jsonResponse(status, data) {
