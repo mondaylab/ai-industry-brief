@@ -303,7 +303,27 @@ async function sendWebhook(webhook, payload) {
     throw new Error(`Feishu webhook failed with ${response.status}: ${responseText}`);
   }
 
+  assertFeishuWebhookAccepted(responseText);
+
   return responseText;
+}
+
+function assertFeishuWebhookAccepted(responseText) {
+  if (!responseText.trim()) {
+    return;
+  }
+
+  let data;
+  try {
+    data = JSON.parse(responseText);
+  } catch {
+    return;
+  }
+
+  const statusCode = data.StatusCode ?? data.code;
+  if (statusCode !== undefined && statusCode !== 0) {
+    throw new Error(`Feishu webhook rejected message: ${responseText}`);
+  }
 }
 
 function isManualTriggerAuthorized(request, env) {
