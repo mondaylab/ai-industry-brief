@@ -155,7 +155,12 @@ ${sectionsHtml}
   html = replaceOne(html, /<p class="insight-text">[\s\S]*?<\/p>/, `<p class="insight-text">${escapeHtml(data.insight)}</p>`, "detail insight");
   html = replaceOne(html, /<p class="method-note">[\s\S]*?<\/p>/, `<p class="method-note">${escapeHtml(data.methodNote)}</p>`, "detail method note");
   html = replaceOne(html, /<div class="footer-lab">[\s\S]*?<\/div>/, '<div class="footer-lab">星期一研究室出品</div>', "detail footer left");
-  html = replaceOne(html, /<div class="footer-sub">[\s\S]*?<\/div>/, '<div class="footer-sub">The AI Industry Brief</div>', "detail footer right");
+  html = replaceOne(
+    html,
+    /<div class="footer-sub">[\s\S]*?<\/div>/,
+    '<div class="footer-sub">The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</div>',
+    "detail footer right"
+  );
 
   fs.writeFileSync(path.join(BRIEFS_DIR, `${data.date}.html`), html);
 }
