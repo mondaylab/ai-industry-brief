@@ -227,7 +227,7 @@ async function buildWebhookPayload(env, { archiveUrl, detailUrl, date, headline,
         enable_forward: true,
       },
       header: {
-        template: "grey",
+        template: "green",
         title: {
           tag: "plain_text",
           content: `每日 AI 行业简报 · ${date}`,
