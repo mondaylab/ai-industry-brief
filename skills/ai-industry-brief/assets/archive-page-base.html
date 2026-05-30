@@ -119,7 +119,7 @@ a { color: inherit; text-decoration: none; }
   border: 0;
   background: transparent;
   color: var(--ink);
-  cursor: help;
+  cursor: pointer;
   font-family: inherit;
   font-size: 13px;
   font-weight: 700;
@@ -130,23 +130,21 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;
 }
 .github-link {
   display: inline-grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.64);
+  order: 2;
+  width: 18px;
+  height: 18px;
   color: var(--ink);
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  cursor: pointer;
+  transition: opacity 160ms ease;
 }
 .github-link:hover,
 .github-link:focus-visible {
-  border-color: rgba(17, 17, 17, 0.34);
-  background: rgba(255, 255, 255, 0.94);
-  transform: translateY(-1px);
+  opacity: 0.68;
 }
 .github-link svg {
   width: 18px;
@@ -155,6 +153,8 @@ a { color: inherit; text-decoration: none; }
 }
 .lab-tooltip {
   position: relative;
+  order: 1;
+  cursor: pointer;
 }
 .lab-tooltip-panel {
   position: absolute;
