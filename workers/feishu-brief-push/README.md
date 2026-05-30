@@ -28,9 +28,9 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
 - 截图宽高：`1600 x 2200`
-- 默认 Cron：`50 22 * * *`
+- 默认 Cron：`40 22 * * *`
 
-`50 22 * * *` 对应北京时间每天 `06:50`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。建议日报生成任务放在北京时间 `06:00`，给内容生成、提交和 GitHub Pages 部署留出约 50 分钟缓冲。
+`40 22 * * *` 对应北京时间每天 `06:40`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。建议日报生成任务放在北京时间 `06:00`，给内容生成、提交和 GitHub Pages 部署留出约 40 分钟缓冲。
 
 ## 必要 Secrets
 
