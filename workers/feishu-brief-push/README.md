@@ -27,7 +27,7 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
-- 截图宽高：`1600 x 1200`
+- 截图宽高：`1600 x 2200`
 - 默认 Cron：`50 22 * * *`
 
 `50 22 * * *` 对应北京时间每天 `06:50`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。
@@ -68,7 +68,8 @@ Cloudflare API Token 需要能调用 Browser Rendering API。建议创建专用 
 - `TIME_ZONE`：推送日期计算时区。
 - `SCREENSHOT_WIDTH`：截图浏览器视口宽度。
 - `SCREENSHOT_HEIGHT`：截图浏览器视口高度。
-- `SCREENSHOT_WAIT_MS`：页面打开后截图前的等待时间，默认 `1200`。
+- `SCREENSHOT_WAIT_MS`：页面打开后截图前的等待时间，默认 `800`。
+- `SCREENSHOT_NAVIGATION_TIMEOUT_MS`：页面导航超时时间，默认 `20000`。
 
 ## 本地开发
 

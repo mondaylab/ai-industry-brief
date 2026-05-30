@@ -1,7 +1,7 @@
 const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/ai-industry-brief";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
-const DEFAULT_SCREENSHOT_HEIGHT = 1200;
+const DEFAULT_SCREENSHOT_HEIGHT = 2200;
 
 export default {
   async fetch(request, env, ctx) {
@@ -135,10 +135,13 @@ async function captureBriefScreenshot({ env, url }) {
         deviceScaleFactor: 1,
       },
       screenshotOptions: {
-        fullPage: true,
         type: "png",
       },
-      waitForTimeout: numberFromEnv(env.SCREENSHOT_WAIT_MS, 1200),
+      gotoOptions: {
+        waitUntil: "load",
+        timeout: numberFromEnv(env.SCREENSHOT_NAVIGATION_TIMEOUT_MS, 20000),
+      },
+      waitForTimeout: numberFromEnv(env.SCREENSHOT_WAIT_MS, 800),
     }),
   });
 
