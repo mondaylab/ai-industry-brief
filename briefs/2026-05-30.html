@@ -317,18 +317,19 @@ body {
 .section-items {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 18px;
+  flex: 1 1 auto;
 }
 .item + .item {
-  margin-top: 10px;
-  padding-top: 0;
+  margin-top: 0;
 }
 .item {
+  flex: 0 0 auto;
   margin-bottom: 0;
   background: rgba(252, 251, 249, 0.66);
   border: 1px solid rgba(21, 21, 21, 0.07);
   border-radius: 2px;
-  padding: 10px 12px 12px;
+  padding: 22px 30px 24px;
   display: flex;
   flex-direction: column;
 }
@@ -336,11 +337,11 @@ body {
   font-size: 18px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 14px;
   line-height: 1.32;
   display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 12px;
 }
 .item-tool { color: #1C1C1C; font-weight: 700; }
 .item-divider, .item-heading { color: var(--text); font-weight: 700; }
@@ -370,10 +371,10 @@ body {
 .item-desc {
   font-size: 16px;
   color: var(--body);
-  line-height: 1.58;
-  margin-bottom: 8px;
+  line-height: 1.72;
+  margin-bottom: 0;
   font-weight: 400;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
 }
 .item-source {
   font-size: 13px;
@@ -381,6 +382,8 @@ body {
   text-decoration: none;
   opacity: 0.9;
   font-weight: 500;
+  margin-top: auto;
+  padding-top: 20px;
 }
 .item-source:hover { opacity: 1; text-decoration: underline; }
 .source-date {
@@ -485,9 +488,9 @@ body {
   .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
   .section-tag::after { right: -48px; left: 56px; }
   .section-sub { margin-left: 56px; }
-  .section-items { gap: 0; }
-  .item { min-height: auto; }
-  .item + .item { margin-top: 6px; padding-top: 8px; }
+  .section-items { gap: 10px; }
+  .item { flex: 0 1 auto; min-height: auto; }
+  .item + .item { margin-top: 0; }
   .section + .section { margin-top: 10px; padding-top: 14px; }
   .item-num { min-width: 22px; padding: 0 6px; }
   .item-title { font-size: 16px; gap: 8px; }
@@ -651,73 +654,5 @@ body {
     <div class="footer-sub">The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</div>
   </footer>
 </main>
-<script>
-(() => {
-  const MOBILE_BREAKPOINT = 560;
-
-  function resetHeights(items) {
-    items.forEach((el) => {
-      el.style.minHeight = "";
-      el.style.height = "";
-    });
-  }
-
-  function syncPairHeights(leftSection, rightSection) {
-    if (!leftSection || !rightSection) return;
-    const leftItems = Array.from(leftSection.querySelectorAll(".section-items .item"));
-    const rightItems = Array.from(rightSection.querySelectorAll(".section-items .item"));
-    resetHeights(leftItems);
-    resetHeights(rightItems);
-
-    const rows = Math.max(leftItems.length, rightItems.length);
-    for (let i = 0; i < rows; i += 1) {
-      const l = leftItems[i];
-      const r = rightItems[i];
-      const h = Math.max(l ? l.offsetHeight : 0, r ? r.offsetHeight : 0);
-      if (l) {
-        l.style.minHeight = `${h}px`;
-        l.style.height = `${h}px`;
-      }
-      if (r) {
-        r.style.minHeight = `${h}px`;
-        r.style.height = `${h}px`;
-      }
-    }
-  }
-
-  function applyDynamicRowHeights() {
-    const sections = Array.from(document.querySelectorAll(".sections-layout > .section"));
-    if (sections.length < 4) return;
-    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
-    sections.forEach((section) => {
-      resetHeights(Array.from(section.querySelectorAll(".section-items .item")));
-    });
-    if (isMobile) return;
-
-    // Row 1: left(AI工作台) vs right(AI信息美学)
-    syncPairHeights(sections[0], sections[1]);
-    // Row 2: left(AI流水线) vs right(AI大模型)
-    syncPairHeights(sections[2], sections[3]);
-  }
-
-  let rafId = null;
-  function schedule() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      applyDynamicRowHeights();
-      rafId = null;
-    });
-  }
-
-  window.addEventListener("load", schedule);
-  window.addEventListener("resize", schedule);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(schedule).catch(() => {});
-  }
-  const ro = new ResizeObserver(() => schedule());
-  document.querySelectorAll(".sections-layout > .section").forEach((s) => ro.observe(s));
-  schedule();
-})();
-</script>
 </body>
 </html>
