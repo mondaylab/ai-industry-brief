@@ -119,7 +119,7 @@ a { color: inherit; text-decoration: none; }
   border: 0;
   background: transparent;
   color: var(--ink);
-  cursor: help;
+  cursor: pointer;
   font-family: inherit;
   font-size: 13px;
   font-weight: 700;
@@ -130,23 +130,21 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;
 }
 .github-link {
   display: inline-grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.64);
+  order: 2;
+  width: 18px;
+  height: 18px;
   color: var(--ink);
-  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+  cursor: pointer;
+  transition: opacity 160ms ease;
 }
 .github-link:hover,
 .github-link:focus-visible {
-  border-color: rgba(17, 17, 17, 0.34);
-  background: rgba(255, 255, 255, 0.94);
-  transform: translateY(-1px);
+  opacity: 0.68;
 }
 .github-link svg {
   width: 18px;
@@ -155,6 +153,8 @@ a { color: inherit; text-decoration: none; }
 }
 .lab-tooltip {
   position: relative;
+  order: 1;
+  cursor: pointer;
 }
 .lab-tooltip-panel {
   position: absolute;
@@ -742,7 +742,7 @@ h1 {
         <h1>The AI Industry Brief</h1>
         <p class="lead">把一天的 AI 行业动态压缩进一份可读、可归档、可复用的报刊。用更轻的界面，追踪工作台、流水线、大模型与信息美学的结构性变化。</p>
         <div class="hero-actions">
-          <a class="button primary" href="briefs/2026-05-30.html">阅读最新一期</a>
+          <a class="button primary" href="briefs/2026-05-31.html">阅读最新一期</a>
           <label class="button" for="tab-palette" data-preserve-scroll>查看七天色板</label>
           <label class="button" for="tab-archive" data-preserve-scroll>查看往期</label>
         </div>
@@ -766,17 +766,17 @@ h1 {
             <article class="mobile-paper">
               <div class="mobile-top">
                 <strong>AI<br>Brief</strong>
-                <div class="mobile-date">05/30<br>SATURDAY</div>
+                <div class="mobile-date">05/31<br>SUNDAY</div>
               </div>
               <div class="mobile-headline">
-                <h2>代理面板开始吞并产品栈</h2>
-                <p>工作台、创意接口与模型评测都在朝持续执行靠拢。</p>
+                <h2>代理默认层继续下沉</h2>
+                <p>工作入口、执行链路、模型底座与创意资产都在被重排。</p>
               </div>
               <div class="mobile-sections">
-                <div class="mobile-section"><span class="mobile-num">01</span><div><b>AI 工作台</b><span>计划模式与文档代理开始前置到主界面。</span></div></div>
-                <div class="mobile-section"><span class="mobile-num">02</span><div><b>AI 信息美学</b><span>来源验证与跨应用创意编排同时成型。</span></div></div>
-                <div class="mobile-section"><span class="mobile-num">03</span><div><b>AI 流水线</b><span>长跑模式、循环任务和托管代理补齐执行层。</span></div></div>
-                <div class="mobile-section"><span class="mobile-num">04</span><div><b>AI 大模型</b><span>默认模型、快模与安全前沿一起重排分层。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">01</span><div><b>AI 工作台</b><span>日常办公入口继续吸收计划、搜索和交付代理。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">02</span><div><b>AI 信息美学</b><span>创意系统开始同时管理生成、身份和来源。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">03</span><div><b>AI 流水线</b><span>编码与数据工具把长期任务交给可审计执行链。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">04</span><div><b>AI 大模型</b><span>模型竞争转向低延迟、多上下文和安全治理。</span></div></div>
               </div>
             </article>
           </div>
@@ -795,16 +795,16 @@ h1 {
           <p>首页保留足够留白，把最新一期作为入口，同时把值得回看的内容整理成往期推荐。</p>
         </div>
         <div class="brief-grid">
-          <a class="brief-card featured" href="briefs/2026-05-30.html">
+          <a class="brief-card featured" href="briefs/2026-05-31.html">
+            <div class="date">05/31 · 星期日</div>
+            <h3>代理默认层继续下沉</h3>
+            <p>工作入口、执行链路、模型底座与创意资产都在被重排。</p>
+            <span class="read">查看今日早报 →</span>
+          </a>
+          <a class="brief-card" href="briefs/2026-05-30.html">
             <div class="date">05/30 · 星期六</div>
             <h3>代理面板开始吞并产品栈</h3>
             <p>工作台、创意接口与模型评测都在朝持续执行靠拢。</p>
-            <span class="read">查看今日早报 →</span>
-          </a>
-          <a class="brief-card" href="briefs/2026-05-29.html">
-            <div class="date">05/29 · 星期五</div>
-            <h3>编排层开始接管产品栈</h3>
-            <p>工作台、流水线、模型与创意接口同时朝闭环执行收束。</p>
             <span class="read">查看前一期 →</span>
           </a>
           <a class="brief-card" href="color-palette-demo.html">
@@ -825,6 +825,7 @@ h1 {
           <p>从过往简报中挑出值得回看的行业信号，适合快速补齐 AI 产品栈、模型能力和创意工具的连续变化。</p>
         </div>
         <div class="archive-list">
+          <a class="archive-item" href="briefs/2026-05-31.html"><div class="date">05/31 · 星期日</div><div><div class="archive-title">代理默认层继续下沉</div><div class="archive-desc">工作入口、执行链路、模型底座与创意资产都在被重排。</div></div><span class="archive-arrow">→</span></a>
           <a class="archive-item" href="briefs/2026-05-30.html"><div class="date">05/30 · 星期六</div><div><div class="archive-title">代理面板开始吞并产品栈</div><div class="archive-desc">工作台、创意接口与模型评测都在朝持续执行靠拢。</div></div><span class="archive-arrow">→</span></a>
           <a class="archive-item" href="briefs/2026-05-29.html"><div class="date">05/29 · 星期五</div><div><div class="archive-title">编排层开始接管产品栈</div><div class="archive-desc">工作台、流水线、模型与创意接口同时朝闭环执行收束。</div></div><span class="archive-arrow">→</span></a>
           <a class="archive-item" href="briefs/2026-05-28.html"><div class="date">05/28 · 星期四</div><div><div class="archive-title">上下文接口成为新分界</div><div class="archive-desc">工作台、代理编排、长任务模型与创意 MCP 同步靠拢。</div></div><span class="archive-arrow">→</span></a>
