@@ -1,5 +1,7 @@
 const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/ai-industry-brief";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
+const DEFAULT_SCREENSHOT_WIDTH = 1600;
+const DEFAULT_SCREENSHOT_HEIGHT = 1200;
 
 export default {
   async fetch(request, env, ctx) {
@@ -8,7 +10,7 @@ export default {
     if (url.pathname === "/healthz") {
       return jsonResponse(200, {
         ok: true,
-        service: "ai-industry-brief-feishu-push",
+        service: "ai-industry-brief-feishu-image-push",
       });
     }
 
@@ -23,7 +25,7 @@ export default {
       const requestedDate = url.searchParams.get("date");
 
       try {
-        const result = await pushBrief({
+        const result = await pushBriefImage({
           env,
           requestedDate,
           requestId: crypto.randomUUID(),
@@ -33,7 +35,7 @@ export default {
           ...result,
         });
       } catch (error) {
-        log("manual_push_failed", {
+        log("manual_image_push_failed", {
           error: error instanceof Error ? error.message : String(error),
           requestedDate,
         });
@@ -52,11 +54,11 @@ export default {
 
   async scheduled(_controller, env, ctx) {
     ctx.waitUntil(
-      pushBrief({
+      pushBriefImage({
         env,
         requestId: crypto.randomUUID(),
       }).catch((error) => {
-        log("scheduled_push_failed", {
+        log("scheduled_image_push_failed", {
           error: error instanceof Error ? error.message : String(error),
         });
         throw error;
@@ -65,74 +67,210 @@ export default {
   },
 };
 
-async function pushBrief({ env, requestedDate, requestId }) {
+async function pushBriefImage({ env, requestedDate, requestId }) {
   const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
   const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
   const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
   const archiveUrl = `${siteBaseUrl}/`;
-  const detailPath = `briefs/${date}.html`;
-  const detailUrl = `${siteBaseUrl}/${detailPath}`;
+  const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
 
   assertRequiredSecret(env, "FEISHU_BOT_WEBHOOK");
+  assertRequiredSecret(env, "FEISHU_APP_ID");
+  assertRequiredSecret(env, "FEISHU_APP_SECRET");
+  assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
+  assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
 
-  const [archiveHtml, detailHtml] = await Promise.all([
-    fetchText(`${archiveUrl}?ts=${encodeURIComponent(date)}`),
-    fetchText(`${detailUrl}?ts=${encodeURIComponent(date)}`),
-  ]);
-
-  const card = extractArchiveCard(archiveHtml, detailPath);
-  const quote = extractQuote(detailHtml);
-  const message = buildFeishuCard({
+  const screenshot = await captureBriefScreenshot({
+    env,
+    url: `${detailUrl}?image_push=${encodeURIComponent(date)}`,
+  });
+  const pageMeta = await fetchPageMeta(detailUrl);
+  const tenantAccessToken = await getTenantAccessToken(env);
+  const imageKey = await uploadFeishuImage({
+    tenantAccessToken,
+    filename: `ai-industry-brief-${date}.png`,
+    imageBytes: screenshot,
+  });
+  const payload = await buildWebhookPayload(env, {
     archiveUrl,
     detailUrl,
-    card,
     date,
-    quote,
+    headline: pageMeta.headline,
+    imageKey,
   });
+  const responseText = await sendWebhook(env.FEISHU_BOT_WEBHOOK, payload);
 
-  const payload = await buildFeishuPayload(env, message);
-  const response = await fetch(env.FEISHU_BOT_WEBHOOK, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const responseText = await response.text();
-  if (!response.ok) {
-    throw new Error(`Feishu webhook failed with ${response.status}: ${responseText}`);
-  }
-
-  log("brief_pushed", {
+  log("brief_image_pushed", {
     requestId,
     date,
     detailUrl,
+    imageKey,
+    screenshotBytes: screenshot.byteLength,
   });
 
   return {
     date,
     detailUrl,
     archiveUrl,
-    headline: card.headline,
-    quote,
+    headline: pageMeta.headline,
+    imageKey,
+    screenshotBytes: screenshot.byteLength,
     responseText,
   };
 }
 
-function isManualTriggerAuthorized(request, env) {
-  if (!env.MANUAL_TRIGGER_TOKEN) {
-    return false;
+async function captureBriefScreenshot({ env, url }) {
+  const endpoint = `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/browser-rendering/screenshot`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${env.CLOUDFLARE_API_TOKEN}`,
+      "content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      url,
+      viewport: {
+        width: numberFromEnv(env.SCREENSHOT_WIDTH, DEFAULT_SCREENSHOT_WIDTH),
+        height: numberFromEnv(env.SCREENSHOT_HEIGHT, DEFAULT_SCREENSHOT_HEIGHT),
+        deviceScaleFactor: 1,
+      },
+      screenshotOptions: {
+        fullPage: true,
+        type: "png",
+      },
+      waitForTimeout: numberFromEnv(env.SCREENSHOT_WAIT_MS, 1200),
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Cloudflare screenshot failed with ${response.status}: ${await response.text()}`);
   }
 
-  const header = request.headers.get("authorization") || "";
-  return header === `Bearer ${env.MANUAL_TRIGGER_TOKEN}`;
+  return response.arrayBuffer();
 }
 
-async function buildFeishuPayload(env, card) {
+async function fetchPageMeta(url) {
+  const response = await fetch(url, {
+    headers: {
+      "cache-control": "no-cache",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch page metadata ${url}: ${response.status}`);
+  }
+
+  const html = await response.text();
+  const headline =
+    matchText(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i) ||
+    matchText(html, /<title[^>]*>([\s\S]*?)<\/title>/i) ||
+    "The AI Industry Brief";
+
+  return {
+    headline,
+  };
+}
+
+async function getTenantAccessToken(env) {
+  const response = await fetch(
+    "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify({
+        app_id: env.FEISHU_APP_ID,
+        app_secret: env.FEISHU_APP_SECRET,
+      }),
+    },
+  );
+  const data = await response.json();
+
+  if (!response.ok || data.code !== 0 || !data.tenant_access_token) {
+    throw new Error(`Failed to get Feishu tenant token: ${JSON.stringify(data)}`);
+  }
+
+  return data.tenant_access_token;
+}
+
+async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
+  const form = new FormData();
+  form.append("image_type", "message");
+  form.append("image", new File([imageBytes], filename, { type: "image/png" }));
+
+  const response = await fetch("https://open.feishu.cn/open-apis/im/v1/images", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${tenantAccessToken}`,
+    },
+    body: form,
+  });
+  const data = await response.json();
+
+  if (!response.ok || data.code !== 0 || !data.data?.image_key) {
+    throw new Error(`Failed to upload Feishu image: ${JSON.stringify(data)}`);
+  }
+
+  return data.data.image_key;
+}
+
+async function buildWebhookPayload(env, { archiveUrl, detailUrl, date, headline, imageKey }) {
   const payload = {
     msg_type: "interactive",
-    card,
+    card: {
+      config: {
+        wide_screen_mode: true,
+        enable_forward: true,
+      },
+      header: {
+        template: "grey",
+        title: {
+          tag: "plain_text",
+          content: `每日 AI 行业简报 · ${date}`,
+        },
+        subtitle: {
+          tag: "plain_text",
+          content: "星期一研究室",
+        },
+      },
+      elements: [
+        {
+          tag: "markdown",
+          content: `**${escapeForMarkdown(headline)}**`,
+        },
+        {
+          tag: "img",
+          img_key: imageKey,
+          alt: {
+            tag: "plain_text",
+            content: `The AI Industry Brief ${date}`,
+          },
+        },
+        {
+          tag: "action",
+          actions: [
+            {
+              tag: "button",
+              text: {
+                tag: "plain_text",
+                content: "查看当日详情",
+              },
+              type: "primary",
+              url: detailUrl,
+            },
+            {
+              tag: "button",
+              text: {
+                tag: "plain_text",
+                content: "打开首页",
+              },
+              url: archiveUrl,
+            },
+          ],
+        },
+      ],
+    },
   };
 
   if (!env.FEISHU_BOT_SECRET) {
@@ -146,6 +284,32 @@ async function buildFeishuPayload(env, card) {
     sign,
     ...payload,
   };
+}
+
+async function sendWebhook(webhook, payload) {
+  const response = await fetch(webhook, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify(payload),
+  });
+  const responseText = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`Feishu webhook failed with ${response.status}: ${responseText}`);
+  }
+
+  return responseText;
+}
+
+function isManualTriggerAuthorized(request, env) {
+  if (!env.MANUAL_TRIGGER_TOKEN) {
+    return false;
+  }
+
+  const header = request.headers.get("authorization") || "";
+  return header === `Bearer ${env.MANUAL_TRIGGER_TOKEN}`;
 }
 
 async function buildFeishuSignature(timestamp, secret) {
@@ -165,121 +329,6 @@ async function buildFeishuSignature(timestamp, secret) {
   return arrayBufferToBase64(signature);
 }
 
-function buildFeishuCard({ archiveUrl, detailUrl, card, date, quote }) {
-  return {
-    config: {
-      wide_screen_mode: true,
-      enable_forward: true,
-    },
-    header: {
-      template: "blue",
-      title: {
-        tag: "plain_text",
-        content: `The AI Industry Brief · ${date}`,
-      },
-      subtitle: {
-        tag: "plain_text",
-        content: "星期一研究室",
-      },
-    },
-    elements: [
-      {
-        tag: "markdown",
-        content: `**${escapeForMarkdown(card.headline)}**\n${escapeForMarkdown(card.summary)}`,
-      },
-      {
-        tag: "markdown",
-        content: `> ${escapeForMarkdown(quote)}`,
-      },
-      {
-        tag: "action",
-        actions: [
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "查看当日详情",
-            },
-            type: "primary",
-            url: detailUrl,
-          },
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "打开归档首页",
-            },
-            url: archiveUrl,
-          },
-        ],
-      },
-      {
-        tag: "note",
-        elements: [
-          {
-            tag: "plain_text",
-            content: `来源站点已发布：${detailUrl}`,
-          },
-        ],
-      },
-    ],
-  };
-}
-
-function extractArchiveCard(html, detailPath) {
-  const normalizedPath = detailPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const patterns = [
-    new RegExp(
-      `<a class="[^"]*brief-card[^"]*" href="${normalizedPath}">[\\s\\S]*?<h3[^>]*>([\\s\\S]*?)<\\/h3>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`,
-      "i",
-    ),
-    new RegExp(
-      `<a class="archive-item" href="${normalizedPath}">[\\s\\S]*?<div class="archive-title">([\\s\\S]*?)<\\/div>[\\s\\S]*?<div class="archive-desc">([\\s\\S]*?)<\\/div>`,
-      "i",
-    ),
-    new RegExp(
-      `<a class="brief(?: previous)?" href="${normalizedPath}">[\\s\\S]*?<h2>([\\s\\S]*?)<\\/h2>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`,
-      "i",
-    ),
-  ];
-  const match = patterns.map((pattern) => html.match(pattern)).find(Boolean);
-
-  if (!match) {
-    throw new Error(`Could not find archive card for ${detailPath}.`);
-  }
-
-  return {
-    headline: decodeHtml(stripTags(match[1])).trim(),
-    summary: decodeHtml(stripTags(match[2])).trim(),
-  };
-}
-
-function extractQuote(html) {
-  const match = html.match(
-    /<div class="quote-label">[\s\S]*?<\/div>\s*([^<]+)\s*<\/div>/i,
-  );
-
-  if (!match) {
-    throw new Error("Could not extract quote from detail page.");
-  }
-
-  return decodeHtml(match[1]).trim();
-}
-
-async function fetchText(url) {
-  const response = await fetch(url, {
-    headers: {
-      "cache-control": "no-cache",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: ${response.status}`);
-  }
-
-  return response.text();
-}
-
 function formatDateInTimeZone(date, timeZone) {
   const formatter = new Intl.DateTimeFormat("en-CA", {
     timeZone,
@@ -292,6 +341,11 @@ function formatDateInTimeZone(date, timeZone) {
 
 function normalizeBaseUrl(value) {
   return value.replace(/\/+$/, "");
+}
+
+function numberFromEnv(value, fallback) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
 }
 
 function jsonResponse(status, data) {
@@ -308,7 +362,7 @@ function log(event, fields) {
     JSON.stringify({
       event,
       ...fields,
-      service: "ai-industry-brief-feishu-push",
+      service: "ai-industry-brief-feishu-image-push",
     }),
   );
 }
@@ -328,6 +382,16 @@ function arrayBufferToBase64(buffer) {
   return btoa(binary);
 }
 
+function escapeForMarkdown(value) {
+  return value.replace(/[\\`*_{}[\]()#+\-.!|>]/g, "\\$&");
+}
+
+function matchText(value, pattern) {
+  const match = value.match(pattern);
+  if (!match) return "";
+  return decodeHtml(stripTags(match[1])).trim();
+}
+
 function stripTags(value) {
   return value.replace(/<[^>]*>/g, "");
 }
@@ -340,8 +404,4 @@ function decodeHtml(value) {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'");
-}
-
-function escapeForMarkdown(value) {
-  return value.replace(/[\\`*_{}[\]()#+\-.!|>]/g, "\\$&");
 }
