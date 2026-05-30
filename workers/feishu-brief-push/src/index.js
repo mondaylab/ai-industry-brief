@@ -2,8 +2,7 @@ const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/ai-industry-brief";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
 const DEFAULT_SCREENSHOT_HEIGHT = 2200;
-const DEFAULT_MAX_SITE_WAIT_MS = 30 * 60 * 1000;
-const DEFAULT_SITE_WAIT_INTERVAL_MS = 2 * 60 * 1000;
+const PRIMARY_CRON = "40 22 * * *";
 
 export default {
   async fetch(request, env, ctx) {
@@ -25,11 +24,14 @@ export default {
       }
 
       const requestedDate = url.searchParams.get("date");
+      const force = url.searchParams.get("force") === "1";
 
       try {
-        const result = await pushBriefImage({
+        const result = await pushBriefIfNeeded({
           env,
           requestedDate,
+          force,
+          source: "manual",
           requestId: crypto.randomUUID(),
         });
         return jsonResponse(200, {
@@ -54,10 +56,12 @@ export default {
     });
   },
 
-  async scheduled(_controller, env, ctx) {
+  async scheduled(controller, env, ctx) {
     ctx.waitUntil(
-      pushBriefImage({
+      pushBriefIfNeeded({
         env,
+        source: "scheduled",
+        cron: controller?.cron,
         requestId: crypto.randomUUID(),
       }).catch((error) => {
         log("scheduled_image_push_failed", {
@@ -69,7 +73,7 @@ export default {
   },
 };
 
-async function pushBriefImage({ env, requestedDate, requestId }) {
+async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cron, requestId }) {
   const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
   const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
   const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
@@ -82,12 +86,116 @@ async function pushBriefImage({ env, requestedDate, requestId }) {
   assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
   assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
 
-  const pageMeta = await waitForPageMeta({
-    env,
-    detailUrl,
-    requestId,
-    date,
-  });
+  const state = getPushStateStore(env);
+  const isPatrol = source === "scheduled" && cron !== PRIMARY_CRON;
+  if (!state && isPatrol) {
+    log("brief_image_push_skipped", {
+      requestId,
+      date,
+      source,
+      cron,
+      reason: "missing_state_store",
+    });
+    return {
+      date,
+      detailUrl,
+      archiveUrl,
+      skipped: true,
+      reason: "missing_state_store",
+    };
+  }
+
+  const stateKey = `brief-push:${date}`;
+  const existing = state ? await readPushState(state, stateKey) : null;
+  if (!force && existing?.status === "sent") {
+    log("brief_image_push_skipped", {
+      requestId,
+      date,
+      source,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    });
+    return {
+      date,
+      detailUrl,
+      archiveUrl,
+      skipped: true,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    };
+  }
+
+  const pageMeta = await tryFetchPageMeta(detailUrl);
+  if (!pageMeta.ok) {
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "waiting_for_page",
+        date,
+        detailUrl,
+        source,
+        cron,
+        checkedAt: new Date().toISOString(),
+        error: pageMeta.error,
+      });
+    }
+    log("brief_page_not_ready", {
+      requestId,
+      date,
+      detailUrl,
+      source,
+      cron,
+      error: pageMeta.error,
+    });
+    return {
+      date,
+      detailUrl,
+      archiveUrl,
+      skipped: true,
+      reason: "page_not_ready",
+      error: pageMeta.error,
+    };
+  }
+
+  try {
+    const result = await pushBriefImage({
+      env,
+      date,
+      archiveUrl,
+      detailUrl,
+      pageMeta: pageMeta.value,
+      requestId,
+    });
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "sent",
+        date,
+        detailUrl,
+        source,
+        cron,
+        sentAt: new Date().toISOString(),
+        headline: result.headline,
+        imageKey: result.imageKey,
+        screenshotBytes: result.screenshotBytes,
+      });
+    }
+    return result;
+  } catch (error) {
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "failed",
+        date,
+        detailUrl,
+        source,
+        cron,
+        failedAt: new Date().toISOString(),
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+    throw error;
+  }
+}
+
+async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
   const screenshot = await captureBriefScreenshot({
     env,
     url: `${detailUrl}?image_push=${encodeURIComponent(date)}`,
@@ -124,45 +232,6 @@ async function pushBriefImage({ env, requestedDate, requestId }) {
     screenshotBytes: screenshot.byteLength,
     responseText,
   };
-}
-
-async function waitForPageMeta({ env, detailUrl, requestId, date }) {
-  const maxWaitMs = numberFromEnv(env.MAX_SITE_WAIT_MS, DEFAULT_MAX_SITE_WAIT_MS);
-  const intervalMs = numberFromEnv(env.SITE_WAIT_INTERVAL_MS, DEFAULT_SITE_WAIT_INTERVAL_MS);
-  const startedAt = Date.now();
-  let attempt = 0;
-  let lastError = null;
-
-  while (Date.now() - startedAt <= maxWaitMs) {
-    attempt += 1;
-    try {
-      return await fetchPageMeta(detailUrl);
-    } catch (error) {
-      lastError = error;
-      const elapsedMs = Date.now() - startedAt;
-      if (!isRetryablePageMetaError(error) || elapsedMs + intervalMs > maxWaitMs) {
-        break;
-      }
-
-      log("brief_page_not_ready", {
-        requestId,
-        date,
-        detailUrl,
-        attempt,
-        elapsedMs,
-        retryInMs: intervalMs,
-        error: error instanceof Error ? error.message : String(error),
-      });
-      await sleep(intervalMs);
-    }
-  }
-
-  throw lastError || new Error(`Timed out waiting for page metadata ${detailUrl}`);
-}
-
-function isRetryablePageMetaError(error) {
-  if (!(error instanceof Error)) return false;
-  return /status (404|408|425|429|500|502|503|504)\b/.test(error.message);
 }
 
 async function captureBriefScreenshot({ env, url }) {
@@ -218,6 +287,35 @@ async function fetchPageMeta(url) {
   return {
     headline,
   };
+}
+
+async function tryFetchPageMeta(url) {
+  try {
+    return {
+      ok: true,
+      value: await fetchPageMeta(url),
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
+}
+
+function getPushStateStore(env) {
+  return env.BRIEF_PUSH_STATE || null;
+}
+
+async function readPushState(state, key) {
+  const value = await state.get(key, "json");
+  return value && typeof value === "object" ? value : null;
+}
+
+async function writePushState(state, key, value) {
+  await state.put(key, JSON.stringify(value), {
+    expirationTtl: 60 * 60 * 24 * 14,
+  });
 }
 
 async function getTenantAccessToken(env) {
@@ -415,10 +513,6 @@ function normalizeBaseUrl(value) {
 function numberFromEnv(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function jsonResponse(status, data) {

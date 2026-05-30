@@ -28,9 +28,11 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
 - 截图宽高：`1600 x 2200`
-- 默认 Cron：`30 23 * * *`
+- 默认 Cron：`40 22 * * *`，并在失败后每 30 分钟巡逻一次
 
-`30 23 * * *` 对应北京时间每天 `07:30`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。建议日报生成任务放在北京时间 `06:00` 左右，给内容生成、提交和 GitHub Pages 部署留出缓冲；Worker 还会在当天详情页尚未发布时短暂重试，避免 Pages 传播延迟导致当天漏推。
+`40 22 * * *` 对应北京时间每天 `06:40`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。后续 `10/40 23-1 * * *` 对应北京时间 `07:10`、`07:40`、`08:10`、`08:40`、`09:10`、`09:40` 的巡逻触发。
+
+Worker 会用 `BRIEF_PUSH_STATE` KV 记录每天是否已经推送：如果 06:40 时当天详情页还未发布，就记录 `waiting_for_page` 并退出；后续巡逻发现页面可访问后补推；推送成功后记录 `sent`，后续巡逻自动跳过，避免重复发群。
 
 ## 必要 Secrets
 
@@ -70,8 +72,10 @@ Cloudflare API Token 需要能调用 Browser Rendering API。建议创建专用 
 - `SCREENSHOT_HEIGHT`：截图浏览器视口高度。
 - `SCREENSHOT_WAIT_MS`：页面打开后截图前的等待时间，默认 `800`。
 - `SCREENSHOT_NAVIGATION_TIMEOUT_MS`：页面导航超时时间，默认 `20000`。
-- `MAX_SITE_WAIT_MS`：定时触发后等待当天详情页发布的最长时间，默认 `1800000`。
-- `SITE_WAIT_INTERVAL_MS`：当天详情页未发布时的重试间隔，默认 `120000`。
+
+## 必要 Bindings
+
+- `BRIEF_PUSH_STATE`：KV namespace，用于记录每天是否已推送，防止巡逻触发重复发送。
 
 ## 本地开发
 
@@ -99,6 +103,23 @@ curl -H "Authorization: Bearer <MANUAL_TRIGGER_TOKEN>" \
 npm install
 npm run check
 npm run deploy
+```
+
+首次部署前创建 KV，并把返回的 namespace id 写入 `wrangler.jsonc` 的 `kv_namespaces`：
+
+```bash
+npx wrangler kv namespace create BRIEF_PUSH_STATE
+```
+
+配置示例：
+
+```jsonc
+"kv_namespaces": [
+  {
+    "binding": "BRIEF_PUSH_STATE",
+    "id": "<namespace_id>"
+  }
+]
 ```
 
 部署前请确认：
