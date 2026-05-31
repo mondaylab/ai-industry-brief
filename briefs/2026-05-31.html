@@ -27,7 +27,7 @@ body {
     var(--ground);
   display: flex;
   justify-content: center;
-  padding: 36px 14px;
+  padding: 36px clamp(32px, 4vw, 72px);
 }
 .card {
   position: relative;
@@ -37,7 +37,7 @@ body {
   width: 100%;
   min-height: min(1046px, calc((100vw - 28px) / 1.414));
   height: auto;
-  padding: 36px 38px;
+  padding: 36px clamp(52px, 4.6vw, 72px);
   border: 1px solid #D8D1CB;
   box-shadow: 0 6px 30px rgba(17, 17, 17, 0.05);
   font-family: 'Source Serif 4', 'Noto Serif SC', serif;
