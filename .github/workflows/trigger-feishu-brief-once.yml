@@ -7,9 +7,20 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Feishu brief worker
+      - name: Capture brief screenshot
         run: |
           set -euo pipefail
-          curl -sS --max-time 180 -D /tmp/headers.txt -o /tmp/body.txt -w "HTTP_STATUS=%{http_code}\n" "https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev/__once-text/bfc0afce3fad50dde12a39b8b03e485445bcdb7f07346cf3"
+          npx -y playwright@latest install --with-deps chromium
+          npx -y playwright@latest screenshot --browser=chromium --viewport-size=1600,2200 --full-page "https://mondaylab.github.io/ai-industry-brief/briefs/2026-06-01.html?feishu_push=1" brief.png
+          test -s brief.png
+          ls -lh brief.png
+      - name: Upload screenshot to Feishu worker
+        run: |
+          set -euo pipefail
+          curl -sS --max-time 180 -D /tmp/headers.txt -o /tmp/body.txt -w "HTTP_STATUS=%{http_code}\n" \
+            -X POST \
+            -H "Content-Type: image/png" \
+            --data-binary @brief.png \
+            "https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev/__once-upload/bfc0afce3fad50dde12a39b8b03e485445bcdb7f07346cf3"
           cat /tmp/headers.txt
           cat /tmp/body.txt
