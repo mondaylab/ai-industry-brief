@@ -10,6 +10,6 @@ jobs:
       - name: Trigger Feishu brief worker
         run: |
           set -euo pipefail
-          curl -sS --max-time 180 -D /tmp/headers.txt -o /tmp/body.txt -w "HTTP_STATUS=%{http_code}\n" "https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev/__once/bfc0afce3fad50dde12a39b8b03e485445bcdb7f07346cf3"
+          curl -sS --max-time 180 -D /tmp/headers.txt -o /tmp/body.txt -w "HTTP_STATUS=%{http_code}\n" "https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev/__once-text/bfc0afce3fad50dde12a39b8b03e485445bcdb7f07346cf3"
           cat /tmp/headers.txt
           cat /tmp/body.txt
