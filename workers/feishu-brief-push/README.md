@@ -19,6 +19,7 @@
 - `GET /healthz`：健康检查。
 - `GET /send?date=YYYY-MM-DD`：手动触发某一天的截图推送。
 - `GET /send-link?date=YYYY-MM-DD`：手动补发某一天的链接卡片；不截图，适合截图服务不可用时补发。
+- `GET /send-image-url?date=YYYY-MM-DD&image_url=<PNG_URL>`：手动发送已发布 PNG 图片卡片；适合本地或 CI 先截图、上传到本站后补发图片。
 - `GET /send-report?url=<REPORT_URL>`：手动触发某个已发布周报/专题页的截图推送。
 - `POST /send-report`：用 JSON 触发周报/专题页截图推送，适合生成脚本或 Skill 调用。
 
@@ -56,6 +57,10 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 `40 22 * * *` 对应北京时间每天 `06:40`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。后续 `10,40 23,0,1 * * *` 对应北京时间 `07:10`、`07:40`、`08:10`、`08:40`、`09:10`、`09:40` 的巡逻触发，并合并为单个 Cron trigger 以避开 Cloudflare trigger 数量限制。
 
 Worker 会用 `BRIEF_PUSH_STATE` KV 记录每天是否已经推送：如果 06:40 时当天详情页还未发布，就记录 `waiting_for_page` 并退出；后续巡逻发现页面可访问后补推；推送成功后记录 `sent`，后续巡逻自动跳过，避免重复发群。
+
+如果截图链路失败或超时，scheduled 任务会自动降级发送当天链接卡片，并把当天 `brief-push:YYYY-MM-DD` 状态写为 `sent`、`deliveryMode: "link_fallback"`。这样每日定时任务不会因为 Browser Rendering 暂时不可用而完全漏发；需要图片版时，可在截图服务恢复后用 `GET /send?date=YYYY-MM-DD&force=1` 手动重发。
+
+如果图片已由本地浏览器或 CI 生成并发布到本站，可用 `/send-image-url` 直接让 Worker 拉取 PNG、上传飞书并发送图片卡片。`image_url` 默认必须位于 `SITE_BASE_URL` 同源路径下。
 
 ## 必要 Secrets
 

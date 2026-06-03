@@ -124,6 +124,58 @@ export default {
       }
     }
 
+    if (url.pathname === "/send-image-url") {
+      if (!isManualTriggerAuthorized(request, env)) {
+        return jsonResponse(401, {
+          ok: false,
+          error: "Unauthorized manual trigger.",
+        });
+      }
+      if (request.method !== "GET") {
+        return jsonResponse(405, {
+          ok: false,
+          error: "GET required.",
+        });
+      }
+
+      const requestedDate = url.searchParams.get("date");
+      const imageUrl = normalizeSameOriginAssetUrl(url.searchParams.get("image_url"), env);
+      const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
+      const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
+      const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
+      const archiveUrl = `${siteBaseUrl}/`;
+      const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
+      const pageMeta = await fetchPageMeta(detailUrl);
+      const imageBytes = await fetchImageBytes(imageUrl);
+      const tenantAccessToken = await getTenantAccessToken(env);
+      const imageKey = await uploadFeishuImage({
+        tenantAccessToken,
+        filename: `ai-industry-brief-${date}.png`,
+        imageBytes,
+      });
+      const card = buildFeishuCard({
+        archiveUrl,
+        detailUrl,
+        date,
+        headline: pageMeta.headline,
+        imageKey,
+      });
+      const delivery = await sendFeishuBotMessage({
+        tenantAccessToken,
+        chatId: env.FEISHU_CHAT_ID,
+        card,
+      });
+
+      return jsonResponse(200, {
+        ok: true,
+        date,
+        detailUrl,
+        imageUrl,
+        imageKey,
+        messageId: delivery.messageId,
+      });
+    }
+
     return jsonResponse(404, {
       ok: false,
       error: "Not found.",
@@ -255,6 +307,43 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     }
     return result;
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    if (source === "scheduled") {
+      log("brief_image_push_fallback_to_link", {
+        requestId,
+        date,
+        detailUrl,
+        source,
+        cron,
+        error: errorMessage,
+      });
+      const fallback = await pushBriefLink({
+        env,
+        requestedDate: date,
+        force: true,
+        requestId,
+      });
+      if (state) {
+        await writePushState(state, stateKey, {
+          status: "sent",
+          date,
+          detailUrl,
+          source,
+          cron,
+          sentAt: new Date().toISOString(),
+          headline: fallback.headline,
+          deliveryMode: "link_fallback",
+          fallbackFrom: "image",
+          error: errorMessage,
+        });
+      }
+      return {
+        ...fallback,
+        deliveryMode: "link_fallback",
+        fallbackFrom: "image",
+        fallbackError: errorMessage,
+      };
+    }
     if (state) {
       await writePushState(state, stateKey, {
         status: "failed",
@@ -263,7 +352,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
         source,
         cron,
         failedAt: new Date().toISOString(),
-        error: error instanceof Error ? error.message : String(error),
+        error: errorMessage,
       });
     }
     throw error;
@@ -520,6 +609,43 @@ async function capturePageScreenshot({ env, url }) {
   }
 
   return response.arrayBuffer();
+}
+
+async function fetchImageBytes(imageUrl) {
+  const response = await fetch(imageUrl, {
+    headers: {
+      "cache-control": "no-cache",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch image ${imageUrl}: ${response.status}`);
+  }
+
+  const contentType = response.headers.get("content-type") || "";
+  if (!contentType.includes("image/png")) {
+    throw new Error(`Expected PNG image at ${imageUrl}, got ${contentType || "unknown content type"}`);
+  }
+
+  return response.arrayBuffer();
+}
+
+function normalizeSameOriginAssetUrl(value, env) {
+  if (!value) {
+    throw new Error("Missing image_url.");
+  }
+
+  const imageUrl = new URL(value);
+  if (imageUrl.protocol !== "https:") {
+    throw new Error("image_url must use https.");
+  }
+
+  const siteBaseUrl = new URL(normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL));
+  if (imageUrl.origin !== siteBaseUrl.origin || !imageUrl.pathname.startsWith("/ai-industry-brief/")) {
+    throw new Error(`image_url must be under ${siteBaseUrl.origin}/ai-industry-brief/.`);
+  }
+
+  return imageUrl.toString();
 }
 
 async function parseReportRequest(request, env) {
