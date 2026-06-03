@@ -2,6 +2,8 @@
 
 这个 Worker 负责每天打开已发布的 AI 行业简报详情页，截成一张 PNG，并通过飞书自建应用机器人 IM API 自动发送到飞书群。
 
+它也提供周报/专题页复用入口：周报生成并发布为公网 URL 后，调用 Worker 即可截图并发送到同一个飞书机器人群。
+
 ## 工作流
 
 1. 计算当天日期，默认使用 `Asia/Shanghai`。
@@ -16,12 +18,32 @@
 - `scheduled`：按 `wrangler.jsonc` 里的 Cron 定时执行。
 - `GET /healthz`：健康检查。
 - `GET /send?date=YYYY-MM-DD`：手动触发某一天的截图推送。
+- `GET /send-report?url=<REPORT_URL>`：手动触发某个已发布周报/专题页的截图推送。
+- `POST /send-report`：用 JSON 触发周报/专题页截图推送，适合生成脚本或 Skill 调用。
 
 手动触发必须带请求头：
 
 ```text
 Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 ```
+
+周报推送的 POST 请求体：
+
+```json
+{
+  "url": "https://mondaylab.github.io/ai-industry-brief/reports/2026-week-23.html",
+  "title": "The AI Industry Brief 周报 · 2026 W23",
+  "label": "AI 行业周报",
+  "id": "2026-week-23",
+  "force": false
+}
+```
+
+- `url` 必填，默认只允许 `SITE_BASE_URL` 同源地址，避免把截图服务开放成任意 URL 代理。
+- `title` 可选；不填时从页面 `<h1>` 或 `<title>` 自动读取。
+- `label` 可选，默认 `AI 行业周报`，用于飞书卡片标题。
+- `id` 可选，用于 KV 去重；不填时从 URL path 自动生成。
+- `force` 可选，`true` 或 query `force=1` 会跳过去重并重发。
 
 ## 默认配置
 
@@ -74,6 +96,7 @@ Cloudflare API Token 需要能调用 Browser Rendering API。建议创建专用 
 - `SCREENSHOT_HEIGHT`：截图浏览器视口高度。
 - `SCREENSHOT_WAIT_MS`：页面打开后截图前的等待时间，默认 `800`。
 - `SCREENSHOT_NAVIGATION_TIMEOUT_MS`：页面导航超时时间，默认 `20000`。
+- `ALLOW_EXTERNAL_REPORT_URLS`：可选。默认不开启；设为字符串 `"true"` 后，`/send-report` 才允许截图非本站 URL。
 
 ## 必要 Bindings
 
@@ -97,6 +120,20 @@ http://127.0.0.1:8787/__scheduled
 ```bash
 curl -H "Authorization: Bearer <MANUAL_TRIGGER_TOKEN>" \
   "http://127.0.0.1:8787/send?date=2026-05-29"
+```
+
+周报生成后触发：
+
+```bash
+curl -X POST \
+  -H "Authorization: Bearer <MANUAL_TRIGGER_TOKEN>" \
+  -H "Content-Type: application/json" \
+  --data '{
+    "url": "https://mondaylab.github.io/ai-industry-brief/reports/2026-week-23.html",
+    "title": "The AI Industry Brief 周报 · 2026 W23",
+    "id": "2026-week-23"
+  }' \
+  "http://127.0.0.1:8787/send-report"
 ```
 
 ## 部署

@@ -50,6 +50,46 @@ export default {
       }
     }
 
+    if (url.pathname === "/send-report") {
+      if (!isManualTriggerAuthorized(request, env)) {
+        return jsonResponse(401, {
+          ok: false,
+          error: "Unauthorized manual trigger.",
+        });
+      }
+
+      let reportRequest;
+      try {
+        reportRequest = await parseReportRequest(request, env);
+      } catch (error) {
+        return jsonResponse(400, {
+          ok: false,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+
+      try {
+        const result = await pushReportImage({
+          env,
+          ...reportRequest,
+          requestId: crypto.randomUUID(),
+        });
+        return jsonResponse(200, {
+          ok: true,
+          ...result,
+        });
+      } catch (error) {
+        log("report_image_push_failed", {
+          error: error instanceof Error ? error.message : String(error),
+          reportUrl: reportRequest.reportUrl,
+        });
+        return jsonResponse(500, {
+          ok: false,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    }
+
     return jsonResponse(404, {
       ok: false,
       error: "Not found.",
@@ -197,7 +237,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
 }
 
 async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
-  const screenshot = await captureBriefScreenshot({
+  const screenshot = await capturePageScreenshot({
     env,
     url: `${detailUrl}?image_push=${encodeURIComponent(date)}`,
   });
@@ -242,7 +282,105 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
   };
 }
 
-async function captureBriefScreenshot({ env, url }) {
+async function pushReportImage({ env, reportUrl, title, label, reportId, force, requestId }) {
+  assertRequiredSecret(env, "FEISHU_APP_ID");
+  assertRequiredSecret(env, "FEISHU_APP_SECRET");
+  assertRequiredSecret(env, "FEISHU_CHAT_ID");
+  assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
+  assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
+
+  const state = getPushStateStore(env);
+  const stateKey = `report-push:${reportId}`;
+  const existing = state ? await readPushState(state, stateKey) : null;
+  if (!force && existing?.status === "sent") {
+    log("report_image_push_skipped", {
+      requestId,
+      reportId,
+      reportUrl,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    });
+    return {
+      reportId,
+      reportUrl,
+      skipped: true,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    };
+  }
+
+  try {
+    const pageMeta = await fetchPageMeta(reportUrl);
+    const headline = title || pageMeta.headline || "The AI Industry Brief 周报";
+    const screenshot = await capturePageScreenshot({
+      env,
+      url: addQueryParam(reportUrl, "image_push", "weekly-report"),
+    });
+    const tenantAccessToken = await getTenantAccessToken(env);
+    const imageKey = await uploadFeishuImage({
+      tenantAccessToken,
+      filename: `ai-industry-brief-report-${reportId}.png`,
+      imageBytes: screenshot,
+    });
+    const card = buildReportCard({
+      reportUrl,
+      title: headline,
+      label,
+      imageKey,
+    });
+    const delivery = await sendFeishuBotMessage({
+      tenantAccessToken,
+      chatId: env.FEISHU_CHAT_ID,
+      card,
+    });
+
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "sent",
+        reportId,
+        reportUrl,
+        title: headline,
+        sentAt: new Date().toISOString(),
+        deliveryMode: delivery.mode,
+        imageKey,
+        screenshotBytes: screenshot.byteLength,
+      });
+    }
+
+    log("report_image_pushed", {
+      requestId,
+      reportId,
+      reportUrl,
+      deliveryMode: delivery.mode,
+      imageKey,
+      screenshotBytes: screenshot.byteLength,
+    });
+
+    return {
+      reportId,
+      reportUrl,
+      title: headline,
+      deliveryMode: delivery.mode,
+      messageId: delivery.messageId,
+      imageKey,
+      screenshotBytes: screenshot.byteLength,
+      responseText: delivery.responseText,
+    };
+  } catch (error) {
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "failed",
+        reportId,
+        reportUrl,
+        failedAt: new Date().toISOString(),
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+    throw error;
+  }
+}
+
+async function capturePageScreenshot({ env, url }) {
   const endpoint = `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/browser-rendering/screenshot`;
   const response = await fetch(endpoint, {
     method: "POST",
@@ -273,6 +411,62 @@ async function captureBriefScreenshot({ env, url }) {
   }
 
   return response.arrayBuffer();
+}
+
+async function parseReportRequest(request, env) {
+  const requestUrl = new URL(request.url);
+  let body = {};
+  if (request.method === "POST") {
+    const contentType = request.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      throw new Error("POST /send-report requires application/json.");
+    }
+    body = await request.json();
+  } else if (request.method !== "GET") {
+    throw new Error("/send-report only supports GET and POST.");
+  }
+
+  const reportUrl = String(body.url || requestUrl.searchParams.get("url") || "").trim();
+  if (!reportUrl) {
+    throw new Error("Missing required report url.");
+  }
+
+  const parsedReportUrl = normalizeReportUrl(reportUrl, env);
+  const title = stringOrNull(body.title || requestUrl.searchParams.get("title"));
+  const label = stringOrNull(body.label || requestUrl.searchParams.get("label")) || "AI 行业周报";
+  const force = parseBoolean(body.force) || requestUrl.searchParams.get("force") === "1";
+  const reportId =
+    sanitizeSlug(stringOrNull(body.id || requestUrl.searchParams.get("id")) || slugFromUrl(parsedReportUrl));
+
+  return {
+    reportUrl: parsedReportUrl,
+    title,
+    label,
+    reportId,
+    force,
+  };
+}
+
+function normalizeReportUrl(value, env) {
+  let reportUrl;
+  try {
+    reportUrl = new URL(value);
+  } catch {
+    throw new Error("Report url must be an absolute http(s) URL.");
+  }
+
+  if (!["http:", "https:"].includes(reportUrl.protocol)) {
+    throw new Error("Report url must use http or https.");
+  }
+
+  if (env.ALLOW_EXTERNAL_REPORT_URLS !== "true") {
+    const siteBaseUrl = new URL(normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL));
+    if (reportUrl.origin !== siteBaseUrl.origin) {
+      throw new Error(`Report url must be under ${siteBaseUrl.origin}.`);
+    }
+  }
+
+  return reportUrl.toString();
 }
 
 async function fetchPageMeta(url) {
@@ -426,6 +620,54 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
   };
 }
 
+function buildReportCard({ reportUrl, title, label, imageKey }) {
+  return {
+    config: {
+      wide_screen_mode: true,
+      enable_forward: true,
+    },
+    header: {
+      template: "blue",
+      title: {
+        tag: "plain_text",
+        content: label,
+      },
+      subtitle: {
+        tag: "plain_text",
+        content: "星期一研究室",
+      },
+    },
+    elements: [
+      {
+        tag: "markdown",
+        content: `**${escapeForMarkdown(title)}**`,
+      },
+      {
+        tag: "img",
+        img_key: imageKey,
+        alt: {
+          tag: "plain_text",
+          content: title,
+        },
+      },
+      {
+        tag: "action",
+        actions: [
+          {
+            tag: "button",
+            text: {
+              tag: "plain_text",
+              content: "查看周报",
+            },
+            type: "primary",
+            url: reportUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
 async function sendFeishuBotMessage({ tenantAccessToken, chatId, card }) {
   const response = await fetch("https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id", {
     method: "POST",
@@ -491,6 +733,40 @@ function normalizeBaseUrl(value) {
 function numberFromEnv(value, fallback) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function addQueryParam(value, key, paramValue) {
+  const url = new URL(value);
+  url.searchParams.set(key, paramValue);
+  return url.toString();
+}
+
+function stringOrNull(value) {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed || null;
+}
+
+function parseBoolean(value) {
+  return value === true || value === "true" || value === 1 || value === "1";
+}
+
+function slugFromUrl(value) {
+  const url = new URL(value);
+  const pathSlug = url.pathname
+    .replace(/\/+$/g, "")
+    .split("/")
+    .filter(Boolean)
+    .pop();
+  return sanitizeSlug(pathSlug || url.hostname);
+}
+
+function sanitizeSlug(value) {
+  const slug = String(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || crypto.randomUUID();
 }
 
 function jsonResponse(status, data) {
