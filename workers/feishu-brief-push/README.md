@@ -1,6 +1,6 @@
 # Feishu Brief Image Push Worker
 
-这个 Worker 负责每天打开已发布的 AI 行业简报详情页，截成一张 PNG，并自动发送到飞书群。推荐使用飞书自建应用机器人通过 IM API 发送；旧的自定义群机器人 webhook 仅作为兼容 fallback。
+这个 Worker 负责每天打开已发布的 AI 行业简报详情页，截成一张 PNG，并通过飞书自建应用机器人 IM API 自动发送到飞书群。
 
 ## 工作流
 
@@ -9,8 +9,7 @@
 3. 使用 Cloudflare Browser Rendering REST API 截取整页 PNG。
 4. 用飞书自建应用凭证获取 `tenant_access_token`。
 5. 上传截图到飞书图片接口，拿到 `image_key`。
-6. 优先通过飞书自建应用机器人 IM API 向目标群发送含图片的互动卡片。
-7. 如果未配置 `FEISHU_CHAT_ID`，则回退到飞书群自定义机器人 webhook。
+6. 通过飞书自建应用机器人 IM API 向目标群发送含图片的互动卡片。
 
 ## 运行方式
 
@@ -40,21 +39,14 @@ Worker 会用 `BRIEF_PUSH_STATE` KV 记录每天是否已经推送：如果 06:4
 ```bash
 wrangler secret put FEISHU_APP_ID
 wrangler secret put FEISHU_APP_SECRET
+wrangler secret put FEISHU_CHAT_ID
 wrangler secret put CLOUDFLARE_ACCOUNT_ID
 wrangler secret put CLOUDFLARE_API_TOKEN
-```
-
-推荐配置目标群：
-
-```bash
-wrangler secret put FEISHU_CHAT_ID
 ```
 
 可选：
 
 ```bash
-wrangler secret put FEISHU_BOT_WEBHOOK
-wrangler secret put FEISHU_BOT_SECRET
 wrangler secret put MANUAL_TRIGGER_TOKEN
 ```
 
@@ -68,12 +60,7 @@ wrangler secret put MANUAL_TRIGGER_TOKEN
 
 如果目标群是外部群，OpenAPI 可能会拒绝自动邀请机器人并返回 `232033`。这种情况下需要群主或管理员在飞书客户端群设置中手动添加应用机器人。
 
-兼容 fallback：
-
-1. 创建飞书自定义群机器人，复制 webhook 到 `FEISHU_BOT_WEBHOOK`。
-2. 如果群机器人启用了签名校验，把签名密钥写入 `FEISHU_BOT_SECRET`。
-
-截图图片需要先通过飞书开放平台上传，所以无论是否使用 webhook fallback，都必须有自建应用凭证。
+截图图片需要先通过飞书开放平台上传，所以必须有自建应用凭证。
 
 Cloudflare API Token 需要能调用 Browser Rendering API。建议创建专用 token，只给这个 Worker 使用，不要复用个人全局 token。
 
@@ -141,6 +128,6 @@ npx wrangler kv namespace create BRIEF_PUSH_STATE
 
 1. GitHub Pages 上当天详情页已经可访问。
 2. Cloudflare API Token 已具备 Browser Rendering API 调用权限。
-3. 飞书自建应用机器人已加入目标群，且 `FEISHU_CHAT_ID` 已配置；或者已配置 webhook fallback。
+3. 飞书自建应用机器人已加入目标群，且 `FEISHU_CHAT_ID` 已配置。
 4. 飞书自建应用已具备图片上传和发送消息权限。
 5. 所有 secrets 均通过 `wrangler secret put` 写入，不要提交到仓库。

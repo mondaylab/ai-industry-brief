@@ -82,11 +82,9 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
 
   assertRequiredSecret(env, "FEISHU_APP_ID");
   assertRequiredSecret(env, "FEISHU_APP_SECRET");
+  assertRequiredSecret(env, "FEISHU_CHAT_ID");
   assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
   assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
-  if (!env.FEISHU_CHAT_ID) {
-    assertRequiredSecret(env, "FEISHU_BOT_WEBHOOK");
-  }
 
   const state = getPushStateStore(env);
   const isPatrol = source === "scheduled" && cron !== PRIMARY_CRON;
@@ -216,13 +214,11 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
     headline: pageMeta.headline,
     imageKey,
   });
-  const delivery = env.FEISHU_CHAT_ID
-    ? await sendFeishuBotMessage({
-        tenantAccessToken,
-        chatId: env.FEISHU_CHAT_ID,
-        card,
-      })
-    : await sendWebhook(env.FEISHU_BOT_WEBHOOK, await buildWebhookPayload(env, card));
+  const delivery = await sendFeishuBotMessage({
+    tenantAccessToken,
+    chatId: env.FEISHU_CHAT_ID,
+    card,
+  });
 
   log("brief_image_pushed", {
     requestId,
@@ -461,65 +457,6 @@ async function sendFeishuBotMessage({ tenantAccessToken, chatId, card }) {
   };
 }
 
-async function buildWebhookPayload(env, card) {
-  const payload = {
-    msg_type: "interactive",
-    card,
-  };
-
-  if (!env.FEISHU_BOT_SECRET) {
-    return payload;
-  }
-
-  const timestamp = String(Math.floor(Date.now() / 1000));
-  const sign = await buildFeishuSignature(timestamp, env.FEISHU_BOT_SECRET);
-  return {
-    timestamp,
-    sign,
-    ...payload,
-  };
-}
-
-async function sendWebhook(webhook, payload) {
-  const response = await fetch(webhook, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify(payload),
-  });
-  const responseText = await response.text();
-
-  if (!response.ok) {
-    throw new Error(`Feishu webhook failed with ${response.status}: ${responseText}`);
-  }
-
-  assertFeishuWebhookAccepted(responseText);
-
-  return {
-    mode: "webhook",
-    responseText,
-  };
-}
-
-function assertFeishuWebhookAccepted(responseText) {
-  if (!responseText.trim()) {
-    return;
-  }
-
-  let data;
-  try {
-    data = parseJsonResponse(responseText);
-  } catch {
-    return;
-  }
-
-  const statusCode = data.StatusCode ?? data.code;
-  if (statusCode !== undefined && statusCode !== 0) {
-    throw new Error(`Feishu webhook rejected message: ${responseText}`);
-  }
-}
-
 function parseJsonResponse(value) {
   try {
     return JSON.parse(value);
@@ -535,23 +472,6 @@ function isManualTriggerAuthorized(request, env) {
 
   const header = request.headers.get("authorization") || "";
   return header === `Bearer ${env.MANUAL_TRIGGER_TOKEN}`;
-}
-
-async function buildFeishuSignature(timestamp, secret) {
-  const encoder = new TextEncoder();
-  const keyMaterial = await crypto.subtle.importKey(
-    "raw",
-    encoder.encode(`${timestamp}\n${secret}`),
-    {
-      name: "HMAC",
-      hash: "SHA-256",
-    },
-    false,
-    ["sign"],
-  );
-
-  const signature = await crypto.subtle.sign("HMAC", keyMaterial, encoder.encode(""));
-  return arrayBufferToBase64(signature);
 }
 
 function formatDateInTimeZone(date, timeZone) {
