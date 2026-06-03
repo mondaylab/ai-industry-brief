@@ -80,11 +80,13 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   const archiveUrl = `${siteBaseUrl}/`;
   const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
 
-  assertRequiredSecret(env, "FEISHU_BOT_WEBHOOK");
   assertRequiredSecret(env, "FEISHU_APP_ID");
   assertRequiredSecret(env, "FEISHU_APP_SECRET");
   assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
   assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
+  if (!env.FEISHU_CHAT_ID) {
+    assertRequiredSecret(env, "FEISHU_BOT_WEBHOOK");
+  }
 
   const state = getPushStateStore(env);
   const isPatrol = source === "scheduled" && cron !== PRIMARY_CRON;
@@ -174,6 +176,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
         cron,
         sentAt: new Date().toISOString(),
         headline: result.headline,
+        deliveryMode: result.deliveryMode,
         imageKey: result.imageKey,
         screenshotBytes: result.screenshotBytes,
       });
@@ -206,19 +209,26 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
     filename: `ai-industry-brief-${date}.png`,
     imageBytes: screenshot,
   });
-  const payload = await buildWebhookPayload(env, {
+  const card = buildFeishuCard({
     archiveUrl,
     detailUrl,
     date,
     headline: pageMeta.headline,
     imageKey,
   });
-  const responseText = await sendWebhook(env.FEISHU_BOT_WEBHOOK, payload);
+  const delivery = env.FEISHU_CHAT_ID
+    ? await sendFeishuBotMessage({
+        tenantAccessToken,
+        chatId: env.FEISHU_CHAT_ID,
+        card,
+      })
+    : await sendWebhook(env.FEISHU_BOT_WEBHOOK, await buildWebhookPayload(env, card));
 
   log("brief_image_pushed", {
     requestId,
     date,
     detailUrl,
+    deliveryMode: delivery.mode,
     imageKey,
     screenshotBytes: screenshot.byteLength,
   });
@@ -228,9 +238,11 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
     detailUrl,
     archiveUrl,
     headline: pageMeta.headline,
+    deliveryMode: delivery.mode,
+    messageId: delivery.messageId,
     imageKey,
     screenshotBytes: screenshot.byteLength,
-    responseText,
+    responseText: delivery.responseText,
   };
 }
 
@@ -362,62 +374,97 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
   return data.data.image_key;
 }
 
-async function buildWebhookPayload(env, { archiveUrl, detailUrl, date, headline, imageKey }) {
+function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
+  return {
+    config: {
+      wide_screen_mode: true,
+      enable_forward: true,
+    },
+    header: {
+      template: "blue",
+      title: {
+        tag: "plain_text",
+        content: `每日 AI 行业简报 · ${date}`,
+      },
+      subtitle: {
+        tag: "plain_text",
+        content: "星期一研究室",
+      },
+    },
+    elements: [
+      {
+        tag: "markdown",
+        content: `**${escapeForMarkdown(headline)}**`,
+      },
+      {
+        tag: "img",
+        img_key: imageKey,
+        alt: {
+          tag: "plain_text",
+          content: `The AI Industry Brief ${date}`,
+        },
+      },
+      {
+        tag: "action",
+        actions: [
+          {
+            tag: "button",
+            text: {
+              tag: "plain_text",
+              content: "查看当日详情",
+            },
+            type: "primary",
+            url: detailUrl,
+          },
+          {
+            tag: "button",
+            text: {
+              tag: "plain_text",
+              content: "打开首页",
+            },
+            url: archiveUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+async function sendFeishuBotMessage({ tenantAccessToken, chatId, card }) {
+  const response = await fetch("https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${tenantAccessToken}`,
+      "content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      receive_id: chatId,
+      msg_type: "interactive",
+      content: JSON.stringify(card),
+    }),
+  });
+  const responseText = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`Feishu bot message failed with ${response.status}: ${responseText}`);
+  }
+
+  const data = parseJsonResponse(responseText);
+  if (data.code !== 0 || !data.data?.message_id) {
+    throw new Error(`Feishu bot message rejected: ${responseText}`);
+  }
+
+  return {
+    mode: "bot",
+    messageId: data.data.message_id,
+    responseText,
+  };
+}
+
+async function buildWebhookPayload(env, card) {
   const payload = {
     msg_type: "interactive",
-    card: {
-      config: {
-        wide_screen_mode: true,
-        enable_forward: true,
-      },
-      header: {
-        template: "green",
-        title: {
-          tag: "plain_text",
-          content: `每日 AI 行业简报 · ${date}`,
-        },
-        subtitle: {
-          tag: "plain_text",
-          content: "星期一研究室",
-        },
-      },
-      elements: [
-        {
-          tag: "markdown",
-          content: `**${escapeForMarkdown(headline)}**`,
-        },
-        {
-          tag: "img",
-          img_key: imageKey,
-          alt: {
-            tag: "plain_text",
-            content: `The AI Industry Brief ${date}`,
-          },
-        },
-        {
-          tag: "action",
-          actions: [
-            {
-              tag: "button",
-              text: {
-                tag: "plain_text",
-                content: "查看当日详情",
-              },
-              type: "primary",
-              url: detailUrl,
-            },
-            {
-              tag: "button",
-              text: {
-                tag: "plain_text",
-                content: "打开首页",
-              },
-              url: archiveUrl,
-            },
-          ],
-        },
-      ],
-    },
+    card,
   };
 
   if (!env.FEISHU_BOT_SECRET) {
@@ -449,7 +496,10 @@ async function sendWebhook(webhook, payload) {
 
   assertFeishuWebhookAccepted(responseText);
 
-  return responseText;
+  return {
+    mode: "webhook",
+    responseText,
+  };
 }
 
 function assertFeishuWebhookAccepted(responseText) {
@@ -459,7 +509,7 @@ function assertFeishuWebhookAccepted(responseText) {
 
   let data;
   try {
-    data = JSON.parse(responseText);
+    data = parseJsonResponse(responseText);
   } catch {
     return;
   }
@@ -467,6 +517,14 @@ function assertFeishuWebhookAccepted(responseText) {
   const statusCode = data.StatusCode ?? data.code;
   if (statusCode !== undefined && statusCode !== 0) {
     throw new Error(`Feishu webhook rejected message: ${responseText}`);
+  }
+}
+
+function parseJsonResponse(value) {
+  try {
+    return JSON.parse(value);
+  } catch {
+    throw new Error(`Expected JSON response, got: ${value}`);
   }
 }
 
