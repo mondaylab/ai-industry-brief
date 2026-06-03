@@ -50,6 +50,40 @@ export default {
       }
     }
 
+    if (url.pathname === "/send-link") {
+      if (!isManualTriggerAuthorized(request, env)) {
+        return jsonResponse(401, {
+          ok: false,
+          error: "Unauthorized manual trigger.",
+        });
+      }
+
+      const requestedDate = url.searchParams.get("date");
+      const force = url.searchParams.get("force") === "1";
+
+      try {
+        const result = await pushBriefLink({
+          env,
+          requestedDate,
+          force,
+          requestId: crypto.randomUUID(),
+        });
+        return jsonResponse(200, {
+          ok: true,
+          ...result,
+        });
+      } catch (error) {
+        log("manual_link_push_failed", {
+          error: error instanceof Error ? error.message : String(error),
+          requestedDate,
+        });
+        return jsonResponse(500, {
+          ok: false,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    }
+
     if (url.pathname === "/send-report") {
       if (!isManualTriggerAuthorized(request, env)) {
         return jsonResponse(401, {
@@ -234,6 +268,81 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     }
     throw error;
   }
+}
+
+async function pushBriefLink({ env, requestedDate, force = false, requestId }) {
+  const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
+  const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
+  const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
+  const archiveUrl = `${siteBaseUrl}/`;
+  const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
+
+  assertRequiredSecret(env, "FEISHU_APP_ID");
+  assertRequiredSecret(env, "FEISHU_APP_SECRET");
+  assertRequiredSecret(env, "FEISHU_CHAT_ID");
+
+  const state = getPushStateStore(env);
+  const stateKey = `brief-link-push:${date}`;
+  const existing = state ? await readPushState(state, stateKey) : null;
+  if (!force && existing?.status === "sent") {
+    log("brief_link_push_skipped", {
+      requestId,
+      date,
+      detailUrl,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    });
+    return {
+      date,
+      detailUrl,
+      archiveUrl,
+      skipped: true,
+      reason: "already_sent",
+      sentAt: existing.sentAt,
+    };
+  }
+
+  const pageMeta = await fetchPageMeta(detailUrl);
+  const tenantAccessToken = await getTenantAccessToken(env);
+  const card = buildBriefLinkCard({
+    archiveUrl,
+    detailUrl,
+    date,
+    headline: pageMeta.headline,
+  });
+  const delivery = await sendFeishuBotMessage({
+    tenantAccessToken,
+    chatId: env.FEISHU_CHAT_ID,
+    card,
+  });
+
+  if (state) {
+    await writePushState(state, stateKey, {
+      status: "sent",
+      date,
+      detailUrl,
+      sentAt: new Date().toISOString(),
+      headline: pageMeta.headline,
+      deliveryMode: delivery.mode,
+    });
+  }
+
+  log("brief_link_pushed", {
+    requestId,
+    date,
+    detailUrl,
+    deliveryMode: delivery.mode,
+  });
+
+  return {
+    date,
+    detailUrl,
+    archiveUrl,
+    headline: pageMeta.headline,
+    deliveryMode: delivery.mode,
+    messageId: delivery.messageId,
+    responseText: delivery.responseText,
+  };
 }
 
 async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
@@ -593,6 +702,54 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
           tag: "plain_text",
           content: `The AI Industry Brief ${date}`,
         },
+      },
+      {
+        tag: "action",
+        actions: [
+          {
+            tag: "button",
+            text: {
+              tag: "plain_text",
+              content: "查看当日详情",
+            },
+            type: "primary",
+            url: detailUrl,
+          },
+          {
+            tag: "button",
+            text: {
+              tag: "plain_text",
+              content: "打开首页",
+            },
+            url: archiveUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline }) {
+  return {
+    config: {
+      wide_screen_mode: true,
+      enable_forward: true,
+    },
+    header: {
+      template: "blue",
+      title: {
+        tag: "plain_text",
+        content: `每日 AI 行业简报 · ${date}`,
+      },
+      subtitle: {
+        tag: "plain_text",
+        content: "星期一研究室",
+      },
+    },
+    elements: [
+      {
+        tag: "markdown",
+        content: `**${escapeForMarkdown(headline)}**\n\n今日简报补发，点击按钮查看详情。`,
       },
       {
         tag: "action",

@@ -18,6 +18,7 @@
 - `scheduled`：按 `wrangler.jsonc` 里的 Cron 定时执行。
 - `GET /healthz`：健康检查。
 - `GET /send?date=YYYY-MM-DD`：手动触发某一天的截图推送。
+- `GET /send-link?date=YYYY-MM-DD`：手动补发某一天的链接卡片；不截图，适合截图服务不可用时补发。
 - `GET /send-report?url=<REPORT_URL>`：手动触发某个已发布周报/专题页的截图推送。
 - `POST /send-report`：用 JSON 触发周报/专题页截图推送，适合生成脚本或 Skill 调用。
 
