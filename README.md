@@ -14,7 +14,7 @@
 
 更多好文欢迎关注公众号「星期一研究室」👇🏻
 
-<img width="600" height="600" alt="7c71066c-b11d-4b84-99ee-6cea297de8ef" src="https://github.com/user-attachments/assets/90ffbb0c-d02f-4242-b60e-fd081f1bda3e" />
+<img width="480" height="480" alt="7c71066c-b11d-4b84-99ee-6cea297de8ef" src="https://github.com/user-attachments/assets/90ffbb0c-d02f-4242-b60e-fd081f1bda3e" />
 
 
 
