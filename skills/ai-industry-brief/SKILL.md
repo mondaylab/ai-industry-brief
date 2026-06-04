@@ -1,67 +1,100 @@
 ---
 name: ai-industry-brief
-description: Create and maintain The AI Industry Brief as a sourced daily AI industry briefing and static HTML archive. Use when Codex is asked to research daily AI updates, generate or update brief pages, extend the clickable archive, publish the brief through GitHub Pages, or reuse the briefing workflow in an automation, CLI, or skill.
+description: 创建、初始化并维护可追溯来源的每日行业简报和静态 HTML 归档。当用户要求安装或使用 ai-industry-brief 工作流，初始化 AI、跨境电商、出海印尼、外贸、教育、制造业等行业简报，调研每日动态，生成 brief-data JSON，渲染简报页面，更新归档首页，通过 GitHub Pages 发布，或把这套流程复用到自动化、CLI、Skill 中时使用。
 ---
 
 # The AI Industry Brief
 
-Produce a concise, source-grounded daily industry brief and maintain its publishable HTML archive.
+生成一份简洁、有来源依据的每日行业简报，并维护可发布的 HTML 归档站点。
 
-## Start
+## 安装触发
 
-1. Read [references/brief-spec.md](references/brief-spec.md).
-2. If updating an existing site, read its latest `briefs/YYYY-MM-DD.html` and `index.html`; preserve established layout and history.
-3. If starting a new site, copy the HTML bases in `assets/` and replace all sample content, dates, colors, and links.
-4. Create or update `brief-data/YYYY-MM-DD.json` (copy from `brief-data/_template.json`) as the source-of-truth config for the day.
+当用户要求从 GitHub 安装这个 Skill 时，优先使用标准 Skills 安装器：
 
-## Research
+```bash
+npx skills add mondaylab/ai-industry-brief -y -g
+```
 
-1. Use current web search and prefer official release notes, company blogs, developer posts, or primary documentation.
-2. Search the four sections: AI 工作台, AI 流水线, AI 大模型, AI 信息美学.
-3. Select three worthwhile items per section, prioritizing the last seven days.
-4. Record a real URL and publication date for every item. Label any item outside the preferred window as `邻近窗口` or `最近官方参考`; never imply it is new today.
-5. Before writing HTML, run dedup check and resolve any conflicts:
+安装后，如果宿主环境需要重新发现 Skill，提醒用户重启或开启新会话。随后继续完成用户要求的初始化或第一期简报生成。
+
+以下用户话术都应该触发本 Skill：
+
+- `请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并初始化一个行业简报项目。`
+- `请用 ai-industry-brief Skill 生成第一期跨境电商简报。`
+- `基于这个 Skill 搭一个出海印尼日报，不要让我手动配。`
+
+## 开始
+
+1. 读取 [references/brief-spec.md](references/brief-spec.md)。
+2. 如果用户要初始化非 AI 行业或全新的行业简报，同时读取 [references/industry-starter.md](references/industry-starter.md)。
+3. 如果是在更新已有站点，先读取最新的 `briefs/YYYY-MM-DD.html` 和 `index.html`，保留已有布局和历史归档。
+4. 如果是在新建站点，使用 `assets/` 里的 HTML 基础模板，并替换所有示例内容、日期、颜色和链接。
+5. 创建或更新 `brief-data/YYYY-MM-DD.json`。这个 JSON 是当天简报的唯一数据源，通常从 `brief-data/_template.json` 复制得到。
+
+## 零配置初始化
+
+当用户想做行业简报，但还没有配置项目时，替用户完成初始化，不要把配置清单丢回给用户。
+
+1. 尽量从用户话术中提取行业名称。如果没有说明，只问行业名称和目标读者这两个最小问题。
+2. 为该行业生成 4 个栏目、采集关键词、来源优先级和影响判断维度。常见行业默认值见 [references/industry-starter.md](references/industry-starter.md)。
+3. 如果项目结构不存在，创建 `brief-data/`、`briefs/`、`skills/ai-industry-brief/` 和 `index.html`。
+4. 将 `brief-data/_template.json` 复制为 `brief-data/YYYY-MM-DD.json`，并替换栏目名称、首页手机预览栏目和示例副标题。
+5. 先生成第一期简报，再让用户调整高级设置。
+6. 只有在第一期已经生成之后，才继续询问是否接入 GitHub Pages 发布、飞书群推送或定时任务。
+
+目标体验是“一句话到第一期”。除非外部账号、权限或部署选择阻塞流程，否则不要让用户自己照着清单操作。
+
+## 调研
+
+1. 使用当前网络搜索，优先选择官方发布、公司博客、开发者文章、产品文档或其他一手来源。
+2. 围绕 4 个已配置栏目检索。默认 AI 简报使用：AI 工作台、AI 流水线、AI 大模型、AI 信息美学。
+3. 每个栏目选择 3 条值得写入的动态，优先最近 7 天。
+4. 每条动态必须记录真实 URL 和发布日期。窗口外资料要标注 `邻近窗口` 或 `最近官方参考`，不要暗示它是今天的新消息。
+5. 写 HTML 前先运行去重检查，并解决所有冲突：
    - `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`
 
-## Write
+## 写作
 
-1. Write one decisive opening line under 50 Chinese characters.
-2. For each of 12 items, use `产品/工具名 | 核心动作短语`; keep the action phrase within 15 Chinese characters.
-3. Describe fact first and industry impact second in roughly 60-80 Chinese characters.
-4. Write a cross-section insight under 150 Chinese characters with a clear judgment.
+1. 写一句明确判断式开场，控制在 50 个中文字符以内。
+2. 12 条动态都使用 `产品/工具名 | 核心动作短语` 格式，动作短语控制在 15 个中文字符以内。
+3. 每条描述先写事实，再写行业影响，长度约 60-80 个中文字符。
+4. 写一段跨栏目洞察，控制在 150 个中文字符以内，必须有明确判断，避免模糊套话。
 
-## Build
+## 构建
 
-1. Generate `briefs/YYYY-MM-DD.html` from `brief-data/YYYY-MM-DD.json` using the weekday palette and fixed branding from the spec.
-2. Update `index.html` with the latest issue, the `往期` recommendation list, and the weekly palette entry; retain earlier issue links.
-3. Preserve linkable sources and source-date labels in each brief.
-4. Preserve the archive/homepage layout from the base template:
-   - keep the outer homepage shell neutral black/white/gray; do not tint the global page chrome with the weekday color.
-   - top navigation uses Chinese labels in this order: `今日`, `色板`, `往期`.
-   - hero action buttons use `阅读最新一期`, `查看七天色板`, `查看往期`; tab-switching buttons must not force the page to scroll back to the top.
-   - use a phone-shaped preview to express “one phone contains one daily paper”.
-   - weekly palette display uses swatch archive cards (`MON`-`SUN`, Chinese tone name, hex code), not plain pill/oval strips.
-   - `往期` replaces `历史归档` or `精彩推荐` as the visible archive/recommendation section name.
-5. Preserve the editorial two-column section layout from the base template:
-   - keep the desktop sheet closer to a landscape A3 editorial page than a tall long-image poster.
-   - top row: `01 AI 工作台`, `02 AI 信息美学`
-   - bottom row: `03 AI 流水线`, `04 AI 大模型`
-   - keep the low-contrast route-map layer, paper grid, and waypoint-style section cards for an international editorial/map-poster feel.
-   - section number markers, shadows, and guide lines must derive from the day's `--primary` and `--primary-light` colors.
-   - item markers inside sections should use non-numeric symbols (`◆`, `◇`, `◈`) instead of `01/02/03`.
-   - keep the desktop dynamic row-height alignment script when generating or editing detail pages.
+1. 根据 `brief-data/YYYY-MM-DD.json` 生成 `briefs/YYYY-MM-DD.html`，使用规格文档中的星期色板和品牌规则。
+2. 更新 `index.html`，包含最新一期、`往期`推荐列表和七天色板入口；保留历史简报链接。
+3. 每期简报都必须保留可点击来源链接和来源日期标注。
+4. 保留基础模板里的归档页/首页布局：
+   - 首页外层保持黑、白、灰的中性色，不要用当天主题色污染全局页面框架。
+   - 顶部导航使用中文标签，顺序为：`今日`、`色板`、`往期`。
+   - Hero 按钮使用：`阅读最新一期`、`查看七天色板`、`查看往期`；切换 Tab 的按钮不要强制页面滚回顶部。
+   - 使用手机形状预览来表达“一个手机里装着一份每日小报”。
+   - 首页七天色板使用色卡归档卡片，包含 `MON`-`SUN`、中文色调名和 HEX 色值，不使用普通胶囊条。
+   - 可见的归档/推荐区名称使用 `往期`，不要写成 `历史归档` 或 `精彩推荐`。
+5. 保留基础模板里的详情页双栏编辑版式：
+   - 桌面端页面更接近横版 A3 编辑页，不要做成长图海报。
+   - 默认 AI 简报的栏目顺序是：上排 `01 AI 工作台`、`02 AI 信息美学`；下排 `03 AI 流水线`、`04 AI 大模型`。
+   - 保留低对比 route-map 图层、纸张网格和 waypoint 风格栏目卡片，形成国际化编辑地图报刊感。
+   - 栏目数字标记、阴影和引导线必须来自当天的 `--primary` 和 `--primary-light` 色彩。
+   - 栏目内部条目标记使用非数字符号（`◆`、`◇`、`◈`），不要使用 `01/02/03`。
+   - 生成或编辑详情页时，保留桌面端动态行高对齐脚本。
 
-## Check And Publish
+## 检查与发布
 
-1. Check for unresolved placeholders and confirm four sections, twelve items, and twelve source links.
-2. Re-run dedup check to ensure no overlap with historical items before release.
-3. Open the archive and new detail page in a browser; confirm card navigation, header, footer, wrapping, small-screen readability, horizontal section order, and Morandi-derived section marker colors.
-4. When publishing is requested or already configured, commit only relevant site and skill files, push to the configured GitHub repository, and verify the GitHub Pages URL after deployment.
-5. When a scheduled automation drives the workflow, keep its branding, footer, archive, worker parsers, and publish instructions synchronized with this skill.
+1. 检查是否还有未替换占位符，并确认包含 4 个栏目、12 条内容和 12 个来源链接。
+2. 发布前重新运行去重检查，确保与历史简报没有重复。
+3. 在浏览器打开归档页和新详情页，确认卡片导航、头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记都正常。
+4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
+5. GitHub Pages 当前详情页验证通过后，立即触发飞书图片推送，不要只等待 cron 巡逻：
+   - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
+   - 如果本地环境没有 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`，明确报告“站点已发布，但发布后飞书即时推送缺少 Worker 手动触发 token”，并说明定时 Worker 仍会按 cron 巡逻。
+6. 如果这个流程由定时任务驱动，保持品牌、页脚、归档页、Worker 解析逻辑和发布说明与本 Skill 同步。
 
-## Resources
+## 资源
 
-- Read [references/brief-spec.md](references/brief-spec.md) for content rules, colors, branding, file paths, and release checks.
-- Use [assets/brief-page-base.html](assets/brief-page-base.html) as the visual base for a new detail page.
-- Use [assets/archive-page-base.html](assets/archive-page-base.html) as the visual base for a new archive page.
-- Use `brief-data/_template.json` to create daily config and `scripts/check-brief-dedup.js` to prevent repeats.
+- 读取 [references/brief-spec.md](references/brief-spec.md)，获取内容规则、颜色、品牌、文件路径和发布检查要求。
+- 初始化或改造成新行业简报时，读取 [references/industry-starter.md](references/industry-starter.md)。
+- 使用 [assets/brief-page-base.html](assets/brief-page-base.html) 作为新详情页的视觉基础模板。
+- 使用 [assets/archive-page-base.html](assets/archive-page-base.html) 作为新归档页的视觉基础模板。
+- 使用 `brief-data/_template.json` 创建每日配置，用 `scripts/check-brief-dedup.js` 防止重复。

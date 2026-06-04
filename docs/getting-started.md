@@ -6,18 +6,39 @@
 - 一个行业简报静态站点模板
 - 一套可扩展到其他行业的日报工作流
 
-## 1. 安装到 Codex
+## 1. 一句话安装
 
-如果你已经克隆了这个仓库，可以直接把 Skill 目录复制到 Codex 的 skills 目录。
+最推荐的方式不是让用户读完教程，而是直接把下面这句话发给 Codex、Claude Code、Cursor 等 AI 编程助手：
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/ai-industry-brief ~/.codex/skills/
+```text
+请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并根据提示帮我初始化一个行业简报项目。
 ```
 
-安装后，重新打开 Codex 或开启新会话，让 Codex 重新发现本地 skills。
+如果你已经知道要做哪个行业，可以把行业也放进第一句话：
 
-你可以这样触发：
+```text
+请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并帮我生成第一期出海印尼日报。
+```
+
+AI Agent 应该自动执行：
+
+```bash
+npx skills add mondaylab/ai-industry-brief -y -g
+```
+
+如果你已经克隆了这个仓库，也可以从本地路径安装：
+
+```bash
+npx skills add . -y -g
+```
+
+安装后，重新打开 Codex 或开启新会话，让 Codex 重新发现本地 skills。然后你可以这样触发：
+
+```text
+使用 ai-industry-brief Skill，初始化一个跨境电商简报项目，并生成第一期简报。
+```
+
+如果你只想继续维护本仓库的 AI 行业简报，可以这样说：
 
 ```text
 使用 ai-industry-brief Skill，生成今天的 AI 行业简报，并更新静态站点。
@@ -53,6 +74,27 @@ skills/ai-industry-brief/
 
 ```text
 请阅读 SKILL.md 和 brief-spec.md，按其中的采集、写作、数据结构、版式、归档和发布规则，生成今天的行业简报。先创建 brief-data/YYYY-MM-DD.json，再生成 briefs/YYYY-MM-DD.html，并更新 index.html。
+```
+
+## 2.1 安装后的无脑初始化流程
+
+安装完成后，用户不需要自己改配置。只要说清楚行业，AI Agent 应该接管初始化：
+
+1. 询问或提取行业名称、目标读者和发布频率。
+2. 为该行业生成 4 个栏目、可信来源优先级和影响判断维度。
+3. 复制 `brief-data/_template.json` 为当天数据文件，并替换栏目名称。
+4. 使用 `skills/ai-industry-brief/assets/` 中的 HTML 模板生成第一期页面。
+5. 运行去重检查和页面检查。
+6. 询问是否继续接入 GitHub Pages、飞书群推送或定时任务。
+
+推荐触发语：
+
+```text
+请用 ai-industry-brief Skill，帮我搭一个教育行业日报。先生成第一期，不需要我手动配置。
+```
+
+```text
+请用 ai-industry-brief Skill，初始化一个制造业简报项目，并列出你需要我确认的最少问题。
 ```
 
 ## 3. 每日生成流程
@@ -129,7 +171,15 @@ index.html
 
 ## 5. 如何扩展成你的行业
 
-扩展时，不建议从零写一个新 Skill。更稳的方式是复制 `ai-industry-brief`，然后替换行业配置。
+扩展时，不建议从零写一个新 Skill。更稳的方式是让 AI Agent 基于 `ai-industry-brief` 初始化行业配置，然后替换行业相关字段。
+
+最短提示词：
+
+```text
+请用 ai-industry-brief Skill，把当前项目初始化成「跨境电商简报」。目标读者是跨境电商运营团队。请自动生成栏目、采集关键词、来源优先级、影响判断维度，并生成第一期简报。
+```
+
+如果你确实要维护一个独立 Skill，再复制目录：
 
 推荐步骤：
 

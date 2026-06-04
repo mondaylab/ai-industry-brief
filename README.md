@@ -18,7 +18,7 @@
 
 ## 这个 Skill 做了什么
 
-这个仓库不只是存放几篇 HTML 简报，而是沉淀了一套可持续复用的行业简报生产系统。
+这个仓库在存放每日行业简报的基础上，还沉淀了一套可持续复用的行业简报生产系统。
 
 1. **采集规范**
    优先使用官方发布、公司博客、开发者文档、权威媒体或可核验的一手来源。
@@ -66,14 +66,31 @@
 
 ## 快速使用
 
-如果你使用 Codex，可以把 `skills/ai-industry-brief/` 安装到本地 skills 目录：
+如果你使用 Codex 或支持 Skills 的 AI 编程助手，不需要手动复制文件。直接把下面这句话发给它即可。
 
-```bash
-mkdir -p ~/.codex/skills
-cp -R skills/ai-industry-brief ~/.codex/skills/
+```text
+请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并根据提示帮我初始化一个行业简报项目。
 ```
 
-然后在 Codex 里这样使用：
+如果已经知道要做哪个行业，也可以直接说：
+
+```text
+请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并帮我生成第一期跨境电商简报。
+```
+
+AI Agent 通常会执行：
+
+```bash
+npx skills add mondaylab/ai-industry-brief -y -g
+```
+
+如果你已经克隆了本仓库，也可以从本地路径安装：
+
+```bash
+npx skills add . -y -g
+```
+
+安装后，在 Codex 里这样使用：
 
 ```text
 使用 ai-industry-brief Skill，生成今天的 AI 行业简报，更新首页并发布到 GitHub Pages。
@@ -99,7 +116,7 @@ node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD
 
 ## 扩展到其他行业
 
-这个 Skill 的关键不是“AI 行业”，而是“行业简报的稳定框架”。扩展时通常只需要改四件事：
+这个 Skill 可以理解为是“行业简报的稳定框架”，不单用于 AI 行业，还可以扩展到任何其他行业。扩展时通常只需要改以下四件事：
 
 - **栏目**：把默认 4 个 AI 栏目换成你的行业分析维度。
 - **来源**：定义该行业最可信的信息源和优先级。

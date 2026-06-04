@@ -10,12 +10,16 @@
 
 ## Sections
 
+Default AI brief sections:
+
 | Section | Focus | Seed queries |
 | --- | --- | --- |
 | AI 工作台 | Product updates, knowledge/workspace shifts | Notion AI, YouMind, 飞书 AI, Obsidian AI |
 | AI 流水线 | CLI tools, agents, MCP, deployment | Claude Code, Gemini CLI, Codex CLI, MCP, Agent framework |
 | AI 大模型 | Model launches, evaluations, benchmarks | Claude, GPT, Gemini, DeepSeek, Kimi model update |
 | AI 信息美学 | Image/media generation and creator tools | GPT-Image, Gemini image, Flux, Ideogram, Adobe Firefly |
+
+For non-AI industries, keep the same 4 sections x 3 items shape, but replace section names, seed queries, source priorities, and impact criteria before research. See `industry-starter.md`.
 
 ## Archive Layout
 
@@ -83,6 +87,8 @@
 - Detail footer right: `The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学`
 - Archive title: `The AI Industry Brief`
 
+For a new industry, replace the public name and footer terms while preserving the template hierarchy. Suggested pattern: `The <Industry> Brief` plus a Chinese subtitle such as `每日跨境电商简报`.
+
 ## Palette
 
 | Day | Primary | Tone |
@@ -113,3 +119,4 @@ Keep the weekly palette balanced around purple, blue, green, and pink families; 
 4. The archive contains a clickable card for the new page and preserves earlier links.
 5. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
 6. If the site is published, verify the deployed archive and current detail page after Pages builds.
+7. After Pages verification succeeds, immediately trigger the Feishu image push with `npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`; do not rely only on the scheduled patrol. This command requires `MANUAL_TRIGGER_TOKEN` or `FEISHU_PUSH_TOKEN`.
