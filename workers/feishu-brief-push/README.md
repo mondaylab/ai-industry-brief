@@ -128,6 +128,15 @@ curl -H "Authorization: Bearer <MANUAL_TRIGGER_TOKEN>" \
   "http://127.0.0.1:8787/send?date=2026-05-29"
 ```
 
+GitHub Pages 发布成功后立即推送当天图片卡：
+
+```bash
+MANUAL_TRIGGER_TOKEN=<MANUAL_TRIGGER_TOKEN> \
+  npm --prefix workers/feishu-brief-push run post-publish-send -- --date 2026-05-29
+```
+
+这个脚本会先等待 GitHub Pages 首页和详情页可访问，然后调用生产 Worker 的 `/send` 触发截图推送。如果 Worker 截图链路失败，脚本会用本机 Chrome 截取详情页，提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。
+
 周报生成后触发：
 
 ```bash

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "wrangler dev --test-scheduled",
     "deploy": "wrangler deploy",
-    "check": "wrangler deploy --dry-run"
+    "check": "wrangler deploy --dry-run",
+    "post-publish-send": "node scripts/post-publish-send.js"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
