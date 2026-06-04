@@ -11,6 +11,13 @@
 
 你也可以把它扩展成其他行业简报，比如出海印尼日报、跨境电商简报、外贸行业简报、制造业简报。
 
+
+更多好文欢迎关注公众号「星期一研究室」👇🏻
+
+<img width="600" height="600" alt="7c71066c-b11d-4b84-99ee-6cea297de8ef" src="https://github.com/user-attachments/assets/90ffbb0c-d02f-4242-b60e-fd081f1bda3e" />
+
+
+
 ## 在线预览
 
 - 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
