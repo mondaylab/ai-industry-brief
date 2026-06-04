@@ -14,6 +14,8 @@
 
 更多好文欢迎关注公众号「星期一研究室」👇🏻
 
+交流群请加作者微信：mondaylab712，备注「报刊」。
+
 <img width="300" height="300" alt="7c71066c-b11d-4b84-99ee-6cea297de8ef" src="https://github.com/user-attachments/assets/90ffbb0c-d02f-4242-b60e-fd081f1bda3e" />
 
 
