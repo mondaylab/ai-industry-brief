@@ -5,6 +5,7 @@
 - Detail file: `briefs/YYYY-MM-DD.html`
 - Archive file: `index.html`
 - Data config file: `brief-data/YYYY-MM-DD.json`
+- Share image file: `share-images/YYYY-MM-DD.png`
 - Detail structure: opening line, 4 sections x 3 items, closing insight, sourcing note, footer
 - Archive structure: latest card first; every existing brief remains clickable
 
@@ -118,5 +119,6 @@ Keep the weekly palette balanced around purple, blue, green, and pink families; 
 3. Dedup check passes: `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`.
 4. The archive contains a clickable card for the new page and preserves earlier links.
 5. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
-6. If the site is published, verify the deployed archive and current detail page after Pages builds.
-7. After Pages verification succeeds, immediately trigger the Feishu image push with `npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`; do not rely only on the scheduled patrol. This command requires `MANUAL_TRIGGER_TOKEN` or `FEISHU_PUSH_TOKEN`.
+6. The share image `share-images/YYYY-MM-DD.png` exists, is a PNG screenshot of the detail page, and is published with the same issue.
+7. If the site is published, verify the deployed archive, current detail page, and current share image after Pages builds.
+8. After Pages verification succeeds, immediately trigger the Feishu image push with `npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`, or call `/send-image-url` with the published PNG when the Worker screenshot path is unavailable. Do not rely only on the scheduled patrol. Manual trigger commands require `MANUAL_TRIGGER_TOKEN` or `FEISHU_PUSH_TOKEN`.

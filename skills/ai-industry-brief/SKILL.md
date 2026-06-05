@@ -64,15 +64,16 @@ npx skills add mondaylab/ai-industry-brief -y -g
 
 1. 根据 `brief-data/YYYY-MM-DD.json` 生成 `briefs/YYYY-MM-DD.html`，使用规格文档中的星期色板和品牌规则。
 2. 更新 `index.html`，包含最新一期、`往期`推荐列表和七天色板入口；保留历史简报链接。
-3. 每期简报都必须保留可点击来源链接和来源日期标注。
-4. 保留基础模板里的归档页/首页布局：
+3. 生成 `share-images/YYYY-MM-DD.png` 并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
+4. 每期简报都必须保留可点击来源链接和来源日期标注。
+5. 保留基础模板里的归档页/首页布局：
    - 首页外层保持黑、白、灰的中性色，不要用当天主题色污染全局页面框架。
    - 顶部导航使用中文标签，顺序为：`今日`、`色板`、`往期`。
    - Hero 按钮使用：`阅读最新一期`、`查看七天色板`、`查看往期`；切换 Tab 的按钮不要强制页面滚回顶部。
    - 使用手机形状预览来表达“一个手机里装着一份每日小报”。
    - 首页七天色板使用色卡归档卡片，包含 `MON`-`SUN`、中文色调名和 HEX 色值，不使用普通胶囊条。
    - 可见的归档/推荐区名称使用 `往期`，不要写成 `历史归档` 或 `精彩推荐`。
-5. 保留基础模板里的详情页双栏编辑版式：
+6. 保留基础模板里的详情页双栏编辑版式：
    - 桌面端页面更接近横版 A3 编辑页，不要做成长图海报。
    - 默认 AI 简报的栏目顺序是：上排 `01 AI 工作台`、`02 AI 信息美学`；下排 `03 AI 流水线`、`04 AI 大模型`。
    - 保留低对比 route-map 图层、纸张网格和 waypoint 风格栏目卡片，形成国际化编辑地图报刊感。
@@ -86,9 +87,10 @@ npx skills add mondaylab/ai-industry-brief -y -g
 2. 发布前重新运行去重检查，确保与历史简报没有重复。
 3. 在浏览器打开归档页和新详情页，确认卡片导航、头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记都正常。
 4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
-5. GitHub Pages 当前详情页验证通过后，立即触发飞书图片推送，不要只等待 cron 巡逻：
+5. GitHub Pages 当前详情页和 `share-images/YYYY-MM-DD.png` 验证通过后，立即触发飞书图片推送，不要只等待 cron 巡逻：
    - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
-   - 如果本地环境没有 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`，明确报告“站点已发布，但发布后飞书即时推送缺少 Worker 手动触发 token”，并说明定时 Worker 仍会按 cron 巡逻。
+   - 如果本地环境没有 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`，但当前 Wrangler 已登录且能管理 Worker secrets，可以临时轮换 `MANUAL_TRIGGER_TOKEN`，用新 token 调用 `/send-image-url?date=YYYY-MM-DD&image_url=<published_png_url>`，成功后删除本地临时 token 文件，不要在输出或记忆中记录 token 明文。
+   - 如果无法取得或轮换触发 token，明确报告“站点已发布，但发布后飞书即时推送缺少 Worker 手动触发 token”，并说明定时 Worker 仍会按 cron 巡逻；此时因为 `share-images/YYYY-MM-DD.png` 已发布，Worker 截图失败时也应优先发送该图片而不是链接卡。
 6. 如果这个流程由定时任务驱动，保持品牌、页脚、归档页、Worker 解析逻辑和发布说明与本 Skill 同步。
 
 ## 资源

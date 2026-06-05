@@ -146,33 +146,36 @@ export default {
       const archiveUrl = `${siteBaseUrl}/`;
       const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
       const pageMeta = await fetchPageMeta(detailUrl);
-      const imageBytes = await fetchImageBytes(imageUrl);
-      const tenantAccessToken = await getTenantAccessToken(env);
-      const imageKey = await uploadFeishuImage({
-        tenantAccessToken,
-        filename: `ai-industry-brief-${date}.png`,
-        imageBytes,
-      });
-      const card = buildFeishuCard({
+      const result = await pushBriefImageFromUrl({
+        env,
         archiveUrl,
         detailUrl,
         date,
-        headline: pageMeta.headline,
-        imageKey,
+        pageMeta,
+        imageUrl,
+        requestId: crypto.randomUUID(),
+        deliveryMode: "manual_image",
       });
-      const delivery = await sendFeishuBotMessage({
-        tenantAccessToken,
-        chatId: env.FEISHU_CHAT_ID,
-        card,
-      });
+
+      const state = getPushStateStore(env);
+      if (state) {
+        await writePushState(state, `brief-push:${date}`, {
+          status: "sent",
+          date,
+          detailUrl,
+          source: "manual",
+          sentAt: new Date().toISOString(),
+          headline: result.headline,
+          deliveryMode: result.deliveryMode,
+          imageUrl,
+          imageKey: result.imageKey,
+          messageId: result.messageId,
+        });
+      }
 
       return jsonResponse(200, {
         ok: true,
-        date,
-        detailUrl,
-        imageUrl,
-        imageKey,
-        messageId: delivery.messageId,
+        ...result,
       });
     }
 
@@ -308,6 +311,61 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     return result;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
+    const publishedImageUrl = `${siteBaseUrl}/share-images/${date}.png`;
+    try {
+      log("brief_image_push_fallback_to_published_image", {
+        requestId,
+        date,
+        detailUrl,
+        imageUrl: publishedImageUrl,
+        source,
+        cron,
+        error: errorMessage,
+      });
+      const fallbackImage = await pushBriefImageFromUrl({
+        env,
+        date,
+        archiveUrl,
+        detailUrl,
+        pageMeta: pageMeta.value,
+        imageUrl: publishedImageUrl,
+        requestId,
+        deliveryMode: "published_image_fallback",
+      });
+      if (state) {
+        await writePushState(state, stateKey, {
+          status: "sent",
+          date,
+          detailUrl,
+          source,
+          cron,
+          sentAt: new Date().toISOString(),
+          headline: fallbackImage.headline,
+          deliveryMode: fallbackImage.deliveryMode,
+          fallbackFrom: "screenshot",
+          imageUrl: publishedImageUrl,
+          imageKey: fallbackImage.imageKey,
+          messageId: fallbackImage.messageId,
+          error: errorMessage,
+        });
+      }
+      return {
+        ...fallbackImage,
+        fallbackFrom: "screenshot",
+        fallbackError: errorMessage,
+      };
+    } catch (publishedImageError) {
+      log("brief_published_image_fallback_failed", {
+        requestId,
+        date,
+        detailUrl,
+        imageUrl: publishedImageUrl,
+        source,
+        cron,
+        error: publishedImageError instanceof Error ? publishedImageError.message : String(publishedImageError),
+      });
+    }
+
     if (source === "scheduled") {
       log("brief_image_push_fallback_to_link", {
         requestId,
@@ -476,6 +534,60 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
     messageId: delivery.messageId,
     imageKey,
     screenshotBytes: screenshot.byteLength,
+    responseText: delivery.responseText,
+  };
+}
+
+async function pushBriefImageFromUrl({
+  env,
+  date,
+  archiveUrl,
+  detailUrl,
+  pageMeta,
+  imageUrl,
+  requestId,
+  deliveryMode,
+}) {
+  const imageBytes = await fetchImageBytes(imageUrl);
+  const tenantAccessToken = await getTenantAccessToken(env);
+  const imageKey = await uploadFeishuImage({
+    tenantAccessToken,
+    filename: `ai-industry-brief-${date}.png`,
+    imageBytes,
+  });
+  const card = buildFeishuCard({
+    archiveUrl,
+    detailUrl,
+    date,
+    headline: pageMeta.headline,
+    imageKey,
+  });
+  const delivery = await sendFeishuBotMessage({
+    tenantAccessToken,
+    chatId: env.FEISHU_CHAT_ID,
+    card,
+  });
+
+  log("brief_image_url_pushed", {
+    requestId,
+    date,
+    detailUrl,
+    imageUrl,
+    deliveryMode,
+    imageKey,
+    imageBytes: imageBytes.byteLength,
+  });
+
+  return {
+    date,
+    detailUrl,
+    archiveUrl,
+    headline: pageMeta.headline,
+    deliveryMode,
+    messageId: delivery.messageId,
+    imageUrl,
+    imageKey,
+    imageBytes: imageBytes.byteLength,
     responseText: delivery.responseText,
   };
 }
