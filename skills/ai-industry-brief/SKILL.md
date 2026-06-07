@@ -87,8 +87,9 @@ npx skills add mondaylab/ai-industry-brief -y -g
 2. 发布前重新运行去重检查，确保与历史简报没有重复。
 3. 在浏览器打开归档页和新详情页，确认卡片导航、头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记都正常。
 4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
-5. GitHub Pages 当前详情页和 `share-images/YYYY-MM-DD.png` 验证通过后，立即触发飞书图片推送，不要只等待 cron 巡逻：
+5. GitHub Pages 当前部署完全生效后，立即触发飞书图片推送，不要只等待 cron 巡逻。部署完成门槛是：归档首页已包含当天详情页链接、详情页日期/页脚正确、`share-images/YYYY-MM-DD.png` 已在公开站点返回 PNG：
    - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
+   - 该脚本会等待上述部署门槛通过后再触发 Worker，避免 Pages 仍为旧版本或 PNG 尚未生效时发送链接卡。
    - 如果本地环境没有 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`，但当前 Wrangler 已登录且能管理 Worker secrets，可以临时轮换 `MANUAL_TRIGGER_TOKEN`，用新 token 调用 `/send-image-url?date=YYYY-MM-DD&image_url=<published_png_url>`，成功后删除本地临时 token 文件，不要在输出或记忆中记录 token 明文。
    - 如果无法取得或轮换触发 token，明确报告“站点已发布，但发布后飞书即时推送缺少 Worker 手动触发 token”，并说明定时 Worker 仍会按 cron 巡逻；此时因为 `share-images/YYYY-MM-DD.png` 已发布，Worker 截图失败时也应优先发送该图片而不是链接卡。
 6. 如果这个流程由定时任务驱动，保持品牌、页脚、归档页、Worker 解析逻辑和发布说明与本 Skill 同步。

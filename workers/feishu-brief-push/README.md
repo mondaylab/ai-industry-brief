@@ -135,7 +135,7 @@ MANUAL_TRIGGER_TOKEN=<MANUAL_TRIGGER_TOKEN> \
   npm --prefix workers/feishu-brief-push run post-publish-send -- --date 2026-05-29
 ```
 
-这个脚本会先等待 GitHub Pages 首页和详情页可访问，然后调用生产 Worker 的 `/send` 触发截图推送。如果 Worker 截图链路失败，脚本会用本机 Chrome 截取详情页，提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。
+这个脚本会先等待 GitHub Pages 部署完成再触发飞书：当本地已有 `share-images/YYYY-MM-DD.png` 时，会确认首页包含当天详情链接、详情页日期正确、公开 PNG 已返回 `image/png` 后才调用生产 Worker 的 `/send`。如果本地还没有 PNG，则先等首页和详情页就绪；当 Worker 截图链路失败时，再用本机 Chrome 截取详情页、提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。
 
 周报生成后触发：
 

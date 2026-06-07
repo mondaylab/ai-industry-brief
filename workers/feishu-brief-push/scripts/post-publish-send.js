@@ -98,30 +98,146 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = DEFAULT_REQUEST_T
   }
 }
 
-async function waitForPublishedPage({ detailUrl, archiveUrl }) {
-  for (let attempt = 1; attempt <= DEFAULT_WAIT_ATTEMPTS; attempt += 1) {
-    const cacheBust = `post_publish=${Date.now()}`;
-    const [detail, archive] = await Promise.all([
-      fetchWithTimeout(`${detailUrl}?${cacheBust}`, {
-        headers: { "cache-control": "no-cache" },
-      }, 20000).catch((error) => ({ ok: false, status: error.message })),
-      fetchWithTimeout(`${archiveUrl}?${cacheBust}`, {
-        headers: { "cache-control": "no-cache" },
-      }, 20000).catch((error) => ({ ok: false, status: error.message })),
-    ]);
+function formatDateLabel(date) {
+  return `${date.slice(5, 7)}/${date.slice(8, 10)}`;
+}
 
-    if (detail.ok && archive.ok) {
-      console.log(`Pages ready: ${detailUrl}`);
+function describeReadyState({ archive, detail, image }) {
+  return [
+    `archive=${archive.status}${archive.hasCurrentLink === false ? ":missing-current-link" : ""}`,
+    `detail=${detail.status}${detail.hasCurrentDate === false ? ":missing-current-date" : ""}`,
+    `image=${image.status}${image.isPng === false ? ":not-png" : ""}${image.hasBytes === false ? ":too-small" : ""}`,
+  ].join(" ");
+}
+
+async function checkPublishedIssue({ detailUrl, archiveUrl, imageUrl, date }) {
+  const cacheBust = `post_publish=${Date.now()}`;
+  const [archiveResponse, detailResponse, imageResponse] = await Promise.all([
+    fetchWithTimeout(`${archiveUrl}?${cacheBust}`, {
+      headers: { "cache-control": "no-cache" },
+    }, 20000).catch((error) => ({ ok: false, status: error.message })),
+    fetchWithTimeout(`${detailUrl}?${cacheBust}`, {
+      headers: { "cache-control": "no-cache" },
+    }, 20000).catch((error) => ({ ok: false, status: error.message })),
+    fetchWithTimeout(`${imageUrl}?${cacheBust}`, {
+      headers: { "cache-control": "no-cache" },
+    }, 20000).catch((error) => ({ ok: false, status: error.message, headers: new Map() })),
+  ]);
+
+  const archiveText = archiveResponse.ok ? await archiveResponse.text() : "";
+  const detailText = detailResponse.ok ? await detailResponse.text() : "";
+  const imageContentType = imageResponse.ok ? imageResponse.headers.get("content-type") || "" : "";
+  const imageContentLength = imageResponse.ok ? Number(imageResponse.headers.get("content-length") || 0) : 0;
+  const imageBytesOk = imageContentLength === 0 || imageContentLength > 10000;
+  const dateLabel = formatDateLabel(date);
+
+  return {
+    archive: {
+      ok: archiveResponse.ok,
+      status: archiveResponse.status,
+      hasCurrentLink: archiveResponse.ok ? archiveText.includes(`briefs/${date}.html`) : null,
+    },
+    detail: {
+      ok: detailResponse.ok,
+      status: detailResponse.status,
+      hasCurrentDate: detailResponse.ok ? detailText.includes(dateLabel) && detailText.includes("星期一研究室出品") : null,
+    },
+    image: {
+      ok: imageResponse.ok,
+      status: imageResponse.status,
+      isPng: imageResponse.ok ? imageContentType.includes("image/png") : null,
+      hasBytes: imageResponse.ok ? imageBytesOk : null,
+      contentLength: imageContentLength || null,
+    },
+  };
+}
+
+async function checkPublishedPage({ detailUrl, archiveUrl, date }) {
+  const cacheBust = `post_publish=${Date.now()}`;
+  const [archiveResponse, detailResponse] = await Promise.all([
+    fetchWithTimeout(`${archiveUrl}?${cacheBust}`, {
+      headers: { "cache-control": "no-cache" },
+    }, 20000).catch((error) => ({ ok: false, status: error.message })),
+    fetchWithTimeout(`${detailUrl}?${cacheBust}`, {
+      headers: { "cache-control": "no-cache" },
+    }, 20000).catch((error) => ({ ok: false, status: error.message })),
+  ]);
+
+  const archiveText = archiveResponse.ok ? await archiveResponse.text() : "";
+  const detailText = detailResponse.ok ? await detailResponse.text() : "";
+  const dateLabel = formatDateLabel(date);
+
+  return {
+    archive: {
+      ok: archiveResponse.ok,
+      status: archiveResponse.status,
+      hasCurrentLink: archiveResponse.ok ? archiveText.includes(`briefs/${date}.html`) : null,
+    },
+    detail: {
+      ok: detailResponse.ok,
+      status: detailResponse.status,
+      hasCurrentDate: detailResponse.ok ? detailText.includes(dateLabel) && detailText.includes("星期一研究室出品") : null,
+    },
+  };
+}
+
+function isPublishedIssueReady(state) {
+  return (
+    state.archive.ok &&
+    state.archive.hasCurrentLink &&
+    state.detail.ok &&
+    state.detail.hasCurrentDate &&
+    state.image.ok &&
+    state.image.isPng &&
+    state.image.hasBytes
+  );
+}
+
+function isPublishedPageReady(state) {
+  return (
+    state.archive.ok &&
+    state.archive.hasCurrentLink &&
+    state.detail.ok &&
+    state.detail.hasCurrentDate
+  );
+}
+
+async function waitForPublishedPage({ detailUrl, archiveUrl, date }) {
+  for (let attempt = 1; attempt <= DEFAULT_WAIT_ATTEMPTS; attempt += 1) {
+    const state = await checkPublishedPage({ detailUrl, archiveUrl, date });
+
+    if (isPublishedPageReady(state)) {
+      console.log(`Pages detail ready: ${detailUrl}`);
       return;
     }
 
     console.log(
-      `Waiting for Pages (${attempt}/${DEFAULT_WAIT_ATTEMPTS}): detail=${detail.status} archive=${archive.status}`,
+      `Waiting for Pages detail (${attempt}/${DEFAULT_WAIT_ATTEMPTS}): ` +
+        `archive=${state.archive.status}${state.archive.hasCurrentLink === false ? ":missing-current-link" : ""} ` +
+        `detail=${state.detail.status}${state.detail.hasCurrentDate === false ? ":missing-current-date" : ""}`,
     );
     await sleep(DEFAULT_WAIT_INTERVAL_MS);
   }
 
   throw new Error(`Timed out waiting for GitHub Pages detail page: ${detailUrl}`);
+}
+
+async function waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date }) {
+  for (let attempt = 1; attempt <= DEFAULT_WAIT_ATTEMPTS; attempt += 1) {
+    const state = await checkPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });
+
+    if (isPublishedIssueReady(state)) {
+      console.log(`Pages deployment ready: ${detailUrl} and ${imageUrl}`);
+      return;
+    }
+
+    console.log(
+      `Waiting for Pages deployment (${attempt}/${DEFAULT_WAIT_ATTEMPTS}): ${describeReadyState(state)}`,
+    );
+    await sleep(DEFAULT_WAIT_INTERVAL_MS);
+  }
+
+  throw new Error(`Timed out waiting for GitHub Pages deployment: ${detailUrl} and ${imageUrl}`);
 }
 
 async function triggerWorkerSend({ workerUrl, token, date, mode, imageUrl }) {
@@ -255,8 +371,14 @@ async function main() {
   const workerUrl = normalizeBaseUrl(process.env.FEISHU_PUSH_WORKER_URL || DEFAULT_WORKER_URL);
   const archiveUrl = `${siteBaseUrl}/`;
   const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
+  const imageUrl = `${siteBaseUrl}/share-images/${date}.png`;
+  const imagePath = path.join(repoRoot, "share-images", `${date}.png`);
 
-  await waitForPublishedPage({ detailUrl, archiveUrl });
+  if (fs.existsSync(imagePath)) {
+    await waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });
+  } else {
+    await waitForPublishedPage({ detailUrl, archiveUrl, date });
+  }
 
   try {
     const result = await triggerWorkerSend({
@@ -274,11 +396,9 @@ async function main() {
     console.warn(`Worker screenshot push failed; using local PNG fallback. ${error.message}`);
   }
 
-  const imagePath = path.join(repoRoot, "share-images", `${date}.png`);
-  const imageUrl = `${siteBaseUrl}/share-images/${date}.png`;
   await captureScreenshot({ date, detailUrl, imagePath });
   await commitAndPushImage({ date, imagePath });
-  await waitForPublishedPage({ detailUrl: imageUrl, archiveUrl });
+  await waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });
 
   const fallbackResult = await triggerWorkerSend({
     workerUrl,
