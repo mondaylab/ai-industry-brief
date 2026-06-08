@@ -212,8 +212,6 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   assertRequiredSecret(env, "FEISHU_APP_ID");
   assertRequiredSecret(env, "FEISHU_APP_SECRET");
   assertRequiredSecret(env, "FEISHU_CHAT_ID");
-  assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
-  assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
 
   const state = getPushStateStore(env);
   const isPatrol = source === "scheduled" && cron !== PRIMARY_CRON;
@@ -285,6 +283,47 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     };
   }
 
+  const publishedImageUrl = `${siteBaseUrl}/share-images/${date}.png`;
+  try {
+    const publishedImage = await pushBriefImageFromUrl({
+      env,
+      date,
+      archiveUrl,
+      detailUrl,
+      pageMeta: pageMeta.value,
+      imageUrl: publishedImageUrl,
+      requestId,
+      deliveryMode: "published_image",
+    });
+    if (state) {
+      await writePushState(state, stateKey, {
+        status: "sent",
+        date,
+        detailUrl,
+        source,
+        cron,
+        sentAt: new Date().toISOString(),
+        headline: publishedImage.headline,
+        deliveryMode: publishedImage.deliveryMode,
+        imageUrl: publishedImageUrl,
+        imageKey: publishedImage.imageKey,
+        imageBytes: publishedImage.imageBytes,
+      });
+    }
+    return publishedImage;
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    log("brief_published_image_push_failed", {
+      requestId,
+      date,
+      detailUrl,
+      imageUrl: publishedImageUrl,
+      source,
+      cron,
+      error: errorMessage,
+    });
+  }
+
   try {
     const result = await pushBriefImage({
       env,
@@ -311,7 +350,6 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     return result;
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    const publishedImageUrl = `${siteBaseUrl}/share-images/${date}.png`;
     try {
       log("brief_image_push_fallback_to_published_image", {
         requestId,
@@ -691,6 +729,9 @@ async function pushReportImage({ env, reportUrl, title, label, reportId, force, 
 }
 
 async function capturePageScreenshot({ env, url }) {
+  assertRequiredSecret(env, "CLOUDFLARE_ACCOUNT_ID");
+  assertRequiredSecret(env, "CLOUDFLARE_API_TOKEN");
+
   const endpoint = `https://api.cloudflare.com/client/v4/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/browser-rendering/screenshot`;
   const response = await fetch(endpoint, {
     method: "POST",
