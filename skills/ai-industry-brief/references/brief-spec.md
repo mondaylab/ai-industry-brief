@@ -72,6 +72,13 @@ For non-AI industries, keep the same 4 sections x 3 items shape, but replace sec
 
 - Prefer sources published in the seven days up to the brief date.
 - Use official/primary URLs wherever available.
+- Keep source freshness hierarchical:
+  - Tier 1: sources from the seven days up to the brief date.
+  - Tier 2: sources from the last 30 days, marked `邻近窗口` when outside the seven-day window.
+  - Tier 3: if the last 30 days of mainstream candidates are exhausted by historical dedup, expand outward to adjacent tools, competing platforms, infrastructure layers, creator utilities, governance/security tooling, or ecosystem releases that affect the same workflow.
+  - Tier 4: sources older than 30 days are exceptional background references only. Do not use them to fill quota when a relevant adjacent or peripheral source from the last 30 days exists.
+- When a section lacks enough fresh primary items, broaden the search radius before broadening the time window. Examples: for `AI 工作台`, also check browser/workspace/search/knowledge-base tools; for `AI 流水线`, check CI, sandbox, observability, MCP/security, deployment, and agent runtime tools; for `AI 大模型`, check model gateways, inference platforms, evals, safety releases, and open deployment ecosystems; for `AI 信息美学`, check video, image, design-system, asset-management, font/brand, and creator workflow tools.
+- If an item is older than 30 days, document why it is still necessary in the daily `methodNote`, not only in the source date label.
 - Add visible dates to source links. Mark items outside the preferred window as `邻近窗口` or `最近官方参考`.
 - Daily draft data must be prepared in `brief-data/YYYY-MM-DD.json` before HTML generation.
 - New daily items must not duplicate historical entries by source URL or item title.
