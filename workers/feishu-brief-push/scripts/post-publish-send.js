@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { execFile } from "node:child_process";
+import { execFile, spawn } from "node:child_process";
+import crypto from "node:crypto";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -17,6 +18,8 @@ const DEFAULT_WAIT_INTERVAL_MS = 10000;
 const DEFAULT_REQUEST_TIMEOUT_MS = 120000;
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
 const DEFAULT_SCREENSHOT_HEIGHT = 2600;
+const GITHUB_WORKFLOW_FILE = "feishu-brief-push.yml";
+const GITHUB_SECRET_NAME = "WORKER_MANUAL_TRIGGER_TOKEN";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, "../../..");
@@ -29,10 +32,12 @@ Environment:
   FEISHU_PUSH_WORKER_URL                      Optional Worker URL.
   SITE_BASE_URL                               Optional GitHub Pages site base URL.
   CHROME_BIN                                  Optional Chrome executable for local fallback screenshot.
+  FEISHU_PUSH_DISABLE_GITHUB_FALLBACK=1       Disable GitHub Actions fallback.
 
 Options:
   --date YYYY-MM-DD       Brief date. Defaults to today in Asia/Shanghai.
   --no-local-fallback     Do not create/push local PNG fallback if Worker screenshot fails.
+  --no-github-fallback    Do not trigger GitHub Actions if workers.dev is unreachable locally.
   --help                  Show this message.
 `);
 }
@@ -41,6 +46,7 @@ function parseArgs(argv) {
   const args = {
     date: null,
     localFallback: true,
+    githubFallback: process.env.FEISHU_PUSH_DISABLE_GITHUB_FALLBACK !== "1",
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -53,6 +59,8 @@ function parseArgs(argv) {
       args.date = arg.slice("--date=".length);
     } else if (arg === "--no-local-fallback") {
       args.localFallback = false;
+    } else if (arg === "--no-github-fallback") {
+      args.githubFallback = false;
     } else {
       throw new Error(`Unknown argument: ${arg}`);
     }
@@ -96,6 +104,20 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = DEFAULT_REQUEST_T
   } finally {
     clearTimeout(timer);
   }
+}
+
+function describeFetchError(error, url) {
+  if (!(error instanceof Error)) return `Request to ${url} failed: ${String(error)}`;
+  const cause = error.cause;
+  const causeParts = [];
+  if (cause && typeof cause === "object") {
+    if ("code" in cause && cause.code) causeParts.push(`code=${cause.code}`);
+    if ("address" in cause && cause.address) causeParts.push(`address=${cause.address}`);
+    if ("port" in cause && cause.port) causeParts.push(`port=${cause.port}`);
+    if ("message" in cause && cause.message) causeParts.push(`cause=${cause.message}`);
+  }
+  const suffix = causeParts.length ? ` (${causeParts.join(" ")})` : "";
+  return `Request to ${url} failed: ${error.message}${suffix}`;
 }
 
 function formatDateLabel(date) {
@@ -248,16 +270,21 @@ async function triggerWorkerSend({ workerUrl, token, date, mode, imageUrl }) {
     url.searchParams.set("image_url", imageUrl);
   }
 
-  const response = await fetchWithTimeout(
-    url,
-    {
-      headers: {
-        authorization: `Bearer ${token}`,
-        "cache-control": "no-cache",
+  let response;
+  try {
+    response = await fetchWithTimeout(
+      url,
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "cache-control": "no-cache",
+        },
       },
-    },
-    DEFAULT_REQUEST_TIMEOUT_MS,
-  );
+      DEFAULT_REQUEST_TIMEOUT_MS,
+    );
+  } catch (error) {
+    throw new Error(describeFetchError(error, url.toString()));
+  }
   const text = await response.text();
   let data;
   try {
@@ -271,6 +298,140 @@ async function triggerWorkerSend({ workerUrl, token, date, mode, imageUrl }) {
   }
 
   return data;
+}
+
+function execFileWithInput(file, args, input, options = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(file, args, {
+      cwd: repoRoot,
+      stdio: ["pipe", "pipe", "pipe"],
+      ...options,
+    });
+    let stdout = "";
+    let stderr = "";
+    child.stdout.on("data", (chunk) => {
+      stdout += chunk;
+    });
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk;
+    });
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve({ stdout, stderr });
+      } else {
+        const error = new Error(`${file} ${args.join(" ")} failed with exit code ${code}: ${stderr || stdout}`);
+        error.stdout = stdout;
+        error.stderr = stderr;
+        reject(error);
+      }
+    });
+    child.stdin.end(input);
+  });
+}
+
+async function commandExists(command) {
+  try {
+    await execFileAsync("which", [command]);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function ensureTriggerToken({ existingToken }) {
+  if (existingToken) return existingToken;
+  if (!(await commandExists("npx")) || !(await commandExists("gh"))) {
+    throw new Error(
+      "Missing MANUAL_TRIGGER_TOKEN or FEISHU_PUSH_TOKEN, and cannot auto-create one without both npx and gh.",
+    );
+  }
+
+  const token = crypto.randomBytes(32).toString("hex");
+  await execFileWithInput("npx", ["wrangler", "secret", "put", "MANUAL_TRIGGER_TOKEN"], token, {
+    cwd: path.join(repoRoot, "workers/feishu-brief-push"),
+  });
+  await execFileWithInput("gh", ["secret", "set", GITHUB_SECRET_NAME], token);
+  console.log(`Created fresh Worker manual trigger token and synced GitHub secret ${GITHUB_SECRET_NAME}.`);
+  return token;
+}
+
+async function syncGitHubTriggerSecret(token) {
+  if (!(await commandExists("gh"))) return false;
+  await execFileWithInput("gh", ["secret", "set", GITHUB_SECRET_NAME], token);
+  return true;
+}
+
+async function triggerGitHubFallback({ token, date, imageUrl, workerUrl }) {
+  if (!(await commandExists("gh"))) {
+    throw new Error("GitHub Actions fallback requires gh CLI.");
+  }
+  const workflowPath = path.join(repoRoot, ".github/workflows", GITHUB_WORKFLOW_FILE);
+  if (!fs.existsSync(workflowPath)) {
+    throw new Error(`GitHub Actions fallback workflow is missing: ${workflowPath}`);
+  }
+
+  await syncGitHubTriggerSecret(token);
+
+  const ref = (await git(["branch", "--show-current"])) || "main";
+  const startedAt = new Date(Date.now() - 5000).toISOString();
+  const runOutput = await execFileAsync(
+    "gh",
+    [
+      "workflow",
+      "run",
+      GITHUB_WORKFLOW_FILE,
+      "--ref",
+      ref,
+      "-f",
+      `date=${date}`,
+      "-f",
+      `image_url=${imageUrl}`,
+      "-f",
+      `worker_url=${workerUrl}`,
+    ],
+    { cwd: repoRoot, maxBuffer: 1024 * 1024 },
+  );
+  if (runOutput.stdout.trim()) console.log(runOutput.stdout.trim());
+
+  const run = await waitForGitHubWorkflowRun({ startedAt });
+  console.log(`GitHub Actions Feishu push completed: ${run.url}`);
+  return run;
+}
+
+async function waitForGitHubWorkflowRun({ startedAt }) {
+  for (let attempt = 1; attempt <= 36; attempt += 1) {
+    await sleep(5000);
+    const { stdout } = await execFileAsync(
+      "gh",
+      [
+        "run",
+        "list",
+        "--workflow",
+        GITHUB_WORKFLOW_FILE,
+        "--json",
+        "databaseId,status,conclusion,createdAt,url",
+        "--limit",
+        "5",
+      ],
+      { cwd: repoRoot, maxBuffer: 1024 * 1024 },
+    );
+    const runs = JSON.parse(stdout);
+    const run = runs
+      .filter((candidate) => new Date(candidate.createdAt) >= new Date(startedAt))
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+    if (!run) {
+      console.log(`Waiting for GitHub Actions fallback run (${attempt}/36): not visible yet`);
+      continue;
+    }
+    if (run.status === "completed") {
+      if (run.conclusion === "success") return run;
+      throw new Error(`GitHub Actions fallback failed with conclusion=${run.conclusion}: ${run.url}`);
+    }
+    console.log(`Waiting for GitHub Actions fallback run (${attempt}/36): ${run.status}`);
+  }
+
+  throw new Error("Timed out waiting for GitHub Actions fallback run.");
 }
 
 function chromeCandidates() {
@@ -361,10 +522,9 @@ async function main() {
     return;
   }
 
-  const token = process.env.FEISHU_PUSH_TOKEN || process.env.MANUAL_TRIGGER_TOKEN;
-  if (!token) {
-    throw new Error("Missing MANUAL_TRIGGER_TOKEN or FEISHU_PUSH_TOKEN for Worker manual trigger.");
-  }
+  const token = await ensureTriggerToken({
+    existingToken: process.env.FEISHU_PUSH_TOKEN || process.env.MANUAL_TRIGGER_TOKEN,
+  });
 
   const date = ensureDate(args.date || formatDateInTimeZone(new Date(), DEFAULT_TIME_ZONE));
   const siteBaseUrl = normalizeBaseUrl(process.env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
@@ -400,14 +560,28 @@ async function main() {
   await commitAndPushImage({ date, imagePath });
   await waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });
 
-  const fallbackResult = await triggerWorkerSend({
-    workerUrl,
-    token,
-    date,
-    mode: "image-url",
-    imageUrl,
-  });
-  console.log(`Feishu fallback image push sent: ${fallbackResult.messageId || "ok"}`);
+  try {
+    const fallbackResult = await triggerWorkerSend({
+      workerUrl,
+      token,
+      date,
+      mode: "image-url",
+      imageUrl,
+    });
+    console.log(`Feishu fallback image push sent: ${fallbackResult.messageId || "ok"}`);
+  } catch (error) {
+    if (!args.githubFallback) {
+      throw error;
+    }
+    console.warn(`Worker fallback image push failed locally. ${error.message}`);
+    console.warn(`Triggering GitHub Actions fallback because local workers.dev access failed.`);
+    await triggerGitHubFallback({
+      token,
+      date,
+      imageUrl,
+      workerUrl,
+    });
+  }
 }
 
 main().catch((error) => {

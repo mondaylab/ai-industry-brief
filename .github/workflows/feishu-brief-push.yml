@@ -1,0 +1,75 @@
+name: Feishu brief push
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Brief date in YYYY-MM-DD format
+        required: true
+        type: string
+      image_url:
+        description: Published PNG fallback URL
+        required: true
+        type: string
+      worker_url:
+        description: Worker base URL
+        required: false
+        default: https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev
+        type: string
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Worker push
+        env:
+          WORKER_MANUAL_TRIGGER_TOKEN: ${{ secrets.WORKER_MANUAL_TRIGGER_TOKEN }}
+          BRIEF_DATE: ${{ inputs.date }}
+          IMAGE_URL: ${{ inputs.image_url }}
+          WORKER_URL: ${{ inputs.worker_url }}
+        run: |
+          node <<'NODE'
+          const token = process.env.WORKER_MANUAL_TRIGGER_TOKEN;
+          if (!token) throw new Error("Missing WORKER_MANUAL_TRIGGER_TOKEN repository secret.");
+
+          const workerUrl = process.env.WORKER_URL.replace(/\/+$/, "");
+          const date = process.env.BRIEF_DATE;
+          const imageUrl = process.env.IMAGE_URL;
+
+          async function trigger(path, extra = {}) {
+            const url = new URL(path, workerUrl);
+            url.searchParams.set("date", date);
+            url.searchParams.set("force", "1");
+            for (const [key, value] of Object.entries(extra)) {
+              url.searchParams.set(key, value);
+            }
+
+            const response = await fetch(url, {
+              headers: {
+                authorization: `Bearer ${token}`,
+                "cache-control": "no-cache",
+              },
+            });
+            const text = await response.text();
+            let data;
+            try {
+              data = JSON.parse(text);
+            } catch {
+              data = { raw: text };
+            }
+            if (!response.ok || data.ok === false) {
+              throw new Error(`${path} failed with ${response.status}: ${JSON.stringify(data)}`);
+            }
+            return data;
+          }
+
+          try {
+            const result = await trigger("/send");
+            console.log(`Feishu screenshot push sent: ${result.messageId || result.deliveryMode || "ok"}`);
+          } catch (error) {
+            console.warn(`Worker screenshot push failed; using published PNG fallback. ${error.message}`);
+            const result = await trigger("/send-image-url", { image_url: imageUrl });
+            console.log(`Feishu fallback image push sent: ${result.messageId || result.deliveryMode || "ok"}`);
+          }
+          NODE
