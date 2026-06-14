@@ -1,0 +1,139 @@
+{
+  "date": "2026-06-15",
+  "weekday": "星期一",
+  "opening": "AI 产品正在把能力折叠进可管理的工作流。",
+  "insight": "今天的主线是“可管理的生产力”：工作台把记忆、Slackbot 和原型协作做成团队界面，流水线把代理配置、会话和算力接入终端，模型层则在长上下文、扩散生成和端侧部署之间分层。AI 竞争继续从单点能力转向谁能被组织稳定编排、审计和复用。",
+  "methodNote": "采集窗口优先覆盖 2026-06-09 至 2026-06-15；因 2026-06-15 当天官方发布较少，本期选用 OpenAI、GitHub、Google、OpenRouter、Krea、Runway、Ideogram、Slack、Miro 等官方博客、帮助中心和 changelog。Krea 2 Turbo、Ideogram 4.0、Gemma 4 12B 与 Colab CLI 为邻近窗口参考，用于补足近两周视觉模型、端侧模型和代理算力趋势；所有条目已用去重脚本排除历史简报重复 URL 和标题。",
+  "homepage": {
+    "headline": "AI 进入可管理工作流",
+    "summary": "记忆控制、代理会话、端侧模型和视觉开源都在转向可复用治理。",
+    "mobileSections": [
+      {
+        "name": "AI 工作台",
+        "summary": "OpenAI、Slack 与 Miro 把记忆、协作上下文和原型工作流变成组织界面。"
+      },
+      {
+        "name": "AI 信息美学",
+        "summary": "Krea、Ideogram 与 Runway 继续把速度、开源权重和影视资产协作推向生产系统。"
+      },
+      {
+        "name": "AI 流水线",
+        "summary": "Copilot 与 Colab 把代理配置、会话追踪、安全审查和远程算力接进终端。"
+      },
+      {
+        "name": "AI 大模型",
+        "summary": "OpenRouter、Gemma 与 DiffusionGemma 展示模型组合、端侧多模态和扩散式文本生成分层。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 工作台",
+      "subtitle": "ChatGPT Google Apps · Slackbot · Miro Prototypes",
+      "items": [
+        {
+          "title": "ChatGPT Google Apps | 动作范围扩大",
+          "description": "OpenAI 说明 6 月 15 日新增 Drive、BigQuery 和 Meet 相关 Google app 动作。工作台连接器正从读取走向执行。",
+          "sourceName": "help.openai.com",
+          "sourceUrl": "https://help.openai.com/en/articles/10408842-google-app-for-chatgpt-data-controls-faq",
+          "sourceDateLabel": "2026-06-15"
+        },
+        {
+          "title": "Slackbot | 原生代理重建",
+          "description": "Slack 说明新 Slackbot 由 Claude 驱动，可理解对话、canvas 和 lists。协作入口正在从通知器升级为团队代理。",
+          "sourceName": "slack.com",
+          "sourceUrl": "https://slack.com/blog/productivity/how-we-rebuilt-slackbot",
+          "sourceDateLabel": "最近官方参考"
+        },
+        {
+          "title": "Miro Prototypes | 上下文交给代理",
+          "description": "Miro 与 Microsoft 集成叙述强调原型可生成变体、套用品牌并把上下文交给编码代理。白板正变成产品工作台。",
+          "sourceName": "miro.com",
+          "sourceUrl": "https://miro.com/blog/miro-and-microsoft-ai-integrations/",
+          "sourceDateLabel": "2026-06-11"
+        }
+      ]
+    },
+    {
+      "name": "AI 信息美学",
+      "subtitle": "Krea Turbo · Ideogram Open · Runway Lionsgate",
+      "items": [
+        {
+          "title": "Krea 2 Turbo | 两秒出图",
+          "description": "Krea 发布 2 Turbo，保留风格参考、moodboard 和 LoRA 兼容。视觉生成速度正在服务早期创意方向。",
+          "sourceName": "krea.ai",
+          "sourceUrl": "https://www.krea.ai/index/krea-2-turbo",
+          "sourceDateLabel": "邻近窗口 · 2026-06-03"
+        },
+        {
+          "title": "Ideogram 4.0 | 设计模型开源",
+          "description": "Ideogram 4.0 作为 9.3B 开源权重设计模型发布，支持结构化 JSON prompt。视觉基础模型开始争夺可部署性。",
+          "sourceName": "ideogram.ai",
+          "sourceUrl": "https://ideogram.ai/blog/ideogram-4.0/",
+          "sourceDateLabel": "邻近窗口 · 2026-06-03"
+        },
+        {
+          "title": "Runway Lionsgate | 内容链加深",
+          "description": "Runway 与 Lionsgate 扩大战略合作，将生成模型接入营销和电视制作。影视 AI 继续从试验片段走向资产流程。",
+          "sourceName": "runwayml.com",
+          "sourceUrl": "https://runwayml.com/news/runway-and-lionsgate-expand-partnership",
+          "sourceDateLabel": "2026-06-11"
+        }
+      ]
+    },
+    {
+      "name": "AI 流水线",
+      "subtitle": "Copilot CLI · Agent Sessions · Colab CLI",
+      "items": [
+        {
+          "title": "Copilot CLI | 设置集中管理",
+          "description": "GitHub Copilot CLI 新增 /settings，把主题、实验项和结构化配置集中到一个界面。代理终端开始补齐可配置性。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-11-copilot-cli-configure-everything-from-one-place-with-settings/",
+          "sourceDateLabel": "2026-06-11"
+        },
+        {
+          "title": "Copilot Chat | 会话日志可问",
+          "description": "Copilot Chat 可读取云代理会话日志并搜索历史任务。工程流水线的关键资产从代码扩展到代理执行轨迹。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-10-copilot-chat-now-sees-your-agent-sessions/",
+          "sourceDateLabel": "2026-06-10"
+        },
+        {
+          "title": "Colab CLI | 算力接入代理",
+          "description": "Google Colab CLI 可让本地终端和 AI 代理调用远程 GPU/TPU、执行脚本并取回日志。实验流水线更易被代理编排。",
+          "sourceName": "developers.googleblog.com",
+          "sourceUrl": "https://developers.googleblog.com/en/introducing-the-google-colab-cli/",
+          "sourceDateLabel": "邻近窗口 · 2026-06-05"
+        }
+      ]
+    },
+    {
+      "name": "AI 大模型",
+      "subtitle": "OpenRouter Fusion · DiffusionGemma · Gemma 4",
+      "items": [
+        {
+          "title": "OpenRouter Fusion | 模型组合评测",
+          "description": "OpenRouter 博客列出 Fusion 在复杂研究任务上超过单一前沿模型。模型层竞争正在转向组合与路由。",
+          "sourceName": "openrouter.ai",
+          "sourceUrl": "https://openrouter.ai/blog",
+          "sourceDateLabel": "2026-06-12"
+        },
+        {
+          "title": "DiffusionGemma | 文本扩散生成",
+          "description": "Google 发布 DiffusionGemma 开发者指南，用并行去噪替代逐 token 生成。文本模型正在探索新推理形态。",
+          "sourceName": "developers.googleblog.com",
+          "sourceUrl": "https://developers.googleblog.com/en/diffusiongemma-the-developer-guide/",
+          "sourceDateLabel": "2026-06-10"
+        },
+        {
+          "title": "Gemma 4 12B | 端侧多模态",
+          "description": "Google 介绍 Gemma 4 12B，面向本地多模态执行并减少外部编码器依赖。小模型继续向端侧代理场景扩展。",
+          "sourceName": "developers.googleblog.com",
+          "sourceUrl": "https://developers.googleblog.com/en/gemma-4-12b-the-developer-guide/",
+          "sourceDateLabel": "邻近窗口 · 2026-06-03"
+        }
+      ]
+    }
+  ]
+}
