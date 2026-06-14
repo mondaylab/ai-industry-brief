@@ -1,0 +1,139 @@
+{
+  "date": "2026-06-14",
+  "weekday": "星期日",
+  "opening": "AI 的新焦点转向可控分发和组织治理。",
+  "insight": "今天的主线是“把能力放进制度”：工作台开始拆分座席、计费和连接器，创意工具把风格控制做成参数化界面，流水线把代理任务接入 Actions、安全扫描和组织账单，模型层则用开源小模型、拒答回退和平台准入约束扩散。AI 产品竞争正从发布能力，转向谁能让能力被团队放心地买、接、审、用。",
+  "methodNote": "采集窗口优先覆盖 2026-06-08 至 2026-06-14；因 2026-06-14 为周日，主流官方发布较少，本期优先选用 OpenAI、GitHub、Anthropic、Cohere、Krea、Runway、Notion 等官方博客、帮助中心和 changelog。MAI-Code-1 Flash 为 2026-06-02 的邻近窗口参考，用于补足代码模型分发趋势；所有条目已用去重脚本排除历史简报重复 URL 和标题。",
+  "homepage": {
+    "headline": "AI 转向可控分发",
+    "summary": "座席、风格参数、代理流水线和模型准入都在进入组织治理层。",
+    "mobileSections": [
+      {
+        "name": "AI 工作台",
+        "summary": "OpenAI 与 Notion 把座席、工作区代理和外部会议上下文接入企业管理。"
+      },
+      {
+        "name": "AI 信息美学",
+        "summary": "Krea 与 Runway 把风格参数、参考图和影视资产协作做成可复用系统。"
+      },
+      {
+        "name": "AI 流水线",
+        "summary": "GitHub 把代理工作流、组织账单和第三方代码安全检查推入工程底座。"
+      },
+      {
+        "name": "AI 大模型",
+        "summary": "Cohere、Anthropic 与 GitHub 展示代码模型、拒答回退和模型准入治理。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 工作台",
+      "subtitle": "ChatGPT Enterprise · Codex Labs · Notion Teams",
+      "items": [
+        {
+          "title": "ChatGPT Business | Codex 座席拆分",
+          "description": "OpenAI Business 发布说明新增 Codex-only seat 与灵活计费入口。AI 工作台开始从统一账号转向按任务计费。",
+          "sourceName": "help.openai.com",
+          "sourceUrl": "https://help.openai.com/en/articles/12004726-chatgpt-business-release-notes",
+          "sourceDateLabel": "2026-06-13"
+        },
+        {
+          "title": "Codex Labs | 企业推广成体系",
+          "description": "OpenAI 推出 Codex Labs，并联合服务伙伴规模化落地企业编码代理。代理 adoption 正从个人试用进入组织部署。",
+          "sourceName": "openai.com",
+          "sourceUrl": "https://openai.com/index/scaling-codex-to-enterprises-worldwide/",
+          "sourceDateLabel": "2026-06-11"
+        },
+        {
+          "title": "Notion Teams | 会议上下文入库",
+          "description": "Notion 的 Microsoft Teams AI Connector 可把团队讨论、项目更新和会议摘要纳入问答。知识工作台继续扩外部记忆源。",
+          "sourceName": "notion.com",
+          "sourceUrl": "https://www.notion.com/help/notion-ai-connector-for-microsoft-teams",
+          "sourceDateLabel": "最近官方参考"
+        }
+      ]
+    },
+    {
+      "name": "AI 信息美学",
+      "subtitle": "Krea Sliders · Krea Style Reference · Runway Lionsgate",
+      "items": [
+        {
+          "title": "Krea Sliders | 风格参数可调",
+          "description": "Krea 2 新增生成滑杆，可调强度、复杂度、运动感和创造性。图像生成正在把审美判断转成可复用参数。",
+          "sourceName": "krea.ai",
+          "sourceUrl": "https://www.krea.ai/index/generative-sliders",
+          "sourceDateLabel": "2026-06-11"
+        },
+        {
+          "title": "Krea Style | 参考图显性化",
+          "description": "Krea 说明如何用风格参考驱动 Krea 2 Large，并在提示栏保留参考缩略图。创作控制从暗示变成可检查输入。",
+          "sourceName": "krea.ai",
+          "sourceUrl": "https://www.krea.ai/index/how-to-generate-images-with-style-references-in-krea",
+          "sourceDateLabel": "2026-06-08"
+        },
+        {
+          "title": "Runway Lionsgate | 影视资产协作",
+          "description": "Runway 与 Lionsgate 扩大合作，将生成视频用于营销和电视制作流程。AI 视觉工具正嵌进大型内容公司资产链。",
+          "sourceName": "runwayml.com",
+          "sourceUrl": "https://runwayml.com/news/runway-lionsgate-expand-partnership",
+          "sourceDateLabel": "2026-06-11"
+        }
+      ]
+    },
+    {
+      "name": "AI 流水线",
+      "subtitle": "GitHub Agentic Workflows · Org Billing · Agent Security",
+      "items": [
+        {
+          "title": "Agentic Workflows | Markdown 编排公测",
+          "description": "GitHub Agentic Workflows 进入 public preview，可把自然语言任务编译为 Actions。代理自动化正在并入 CI/CD 约束。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/",
+          "sourceDateLabel": "2026-06-11"
+        },
+        {
+          "title": "Agentic Billing | PAT 风险移除",
+          "description": "GitHub 支持 agentic workflows 直接用组织账单，不再依赖长期 PAT。企业代理流水线开始补齐成本和凭证治理。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-11-agentic-workflows-no-longer-need-a-personal-access-token",
+          "sourceDateLabel": "2026-06-11"
+        },
+        {
+          "title": "Agent Security | 第三方代码受检",
+          "description": "GitHub 将自动安全验证扩展到 Claude、Codex 等第三方编码代理。代理产出正被纳入同一套仓库安全闸门。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-09-security-validation-for-third-party-coding-agents/",
+          "sourceDateLabel": "2026-06-09"
+        }
+      ]
+    },
+    {
+      "name": "AI 大模型",
+      "subtitle": "North Mini Code · Claude API · MAI-Code-1 Flash",
+      "items": [
+        {
+          "title": "North Mini Code | 代码模型开源",
+          "description": "Cohere 发布 30B MoE 的 North Mini Code，主打低活跃参数和代理编码。主权部署正在进入开发者模型层。",
+          "sourceName": "cohere.com",
+          "sourceUrl": "https://cohere.com/blog/north-mini-code",
+          "sourceDateLabel": "2026-06-10"
+        },
+        {
+          "title": "Claude API | 拒答可回退",
+          "description": "Anthropic 在 Claude API 更新中加入 Fable 5 拒答、fallbacks 和托管代理改进。模型能力正绑定安全分类器和运行策略。",
+          "sourceName": "docs.anthropic.com",
+          "sourceUrl": "https://docs.anthropic.com/en/release-notes/api",
+          "sourceDateLabel": "2026-06-12"
+        },
+        {
+          "title": "MAI-Code-1 Flash | 小模型进 Copilot",
+          "description": "GitHub 将 Microsoft 小型代码模型引入 Copilot，面向轻量编码场景。代码模型竞争继续分层到速度、成本和场景。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-02-mai-code-1-flash-is-now-available-for-github-copilot/",
+          "sourceDateLabel": "邻近窗口 · 2026-06-02"
+        }
+      ]
+    }
+  ]
+}
