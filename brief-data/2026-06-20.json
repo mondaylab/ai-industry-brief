@@ -1,0 +1,139 @@
+{
+  "date": "2026-06-20",
+  "weekday": "星期六",
+  "opening": "AI 正在从生成能力转向可审计协作。",
+  "insight": "今天的共同信号是“协作基础设施化”：用量进入指标 API，代理开始按标准发现工具，部署和流式执行有了临时账号与保活边界，创意与模型侧也在补足可控、可验证、可追溯的工作流。",
+  "methodNote": "采集窗口优先覆盖 2026-06-14 至 2026-06-20；本期使用 GitHub、Cloudflare、Google Developers、Figma、Adobe、Midjourney、Atlassian、Artificial Analysis 与 Hugging Face 上的模型方来源。Midjourney V8.1、Nemotron 3.5 与 Cosmos 3 为 30 天内邻近窗口来源，用于补足视觉生成、模型治理和开放模型信号；所有条目已避开历史简报标题和来源 URL。",
+  "homepage": {
+    "headline": "AI 协作进入基础设施层",
+        "summary": "指标、发现、部署、模型治理与创意控制正在一起补齐。",
+    "mobileSections": [
+      {
+        "name": "AI 工作台",
+        "summary": "Copilot 和 Rovo 把代理执行、信用用量和长任务追踪放进可复盘工作台。"
+      },
+      {
+        "name": "AI 信息美学",
+        "summary": "Figma Weave、Firefly 与 Midjourney 把视频、资产检索和图像默认模型推向可控流程。"
+      },
+      {
+        "name": "AI 流水线",
+        "summary": "Cloudflare 与 Google ARD 让代理部署、流式执行和能力发现更接近标准设施。"
+      },
+      {
+        "name": "AI 大模型",
+        "summary": "GLM-5.2、Nemotron 3.5 和 Cosmos 3 显示模型正按开放、安全和物理场景分层。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 工作台",
+      "subtitle": "Copilot App · Usage Metrics · Rovo Long Horizon",
+      "items": [
+        {
+          "title": "Copilot App | 桌面代理上线",
+          "description": "GitHub Copilot app 已在 macOS、Windows 和 Linux GA。代理开发从编辑器插件扩展为可开分支、跑终端、看浏览器的桌面工作台。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/",
+          "sourceDateLabel": "2026-06-17"
+        },
+        {
+          "title": "Copilot Metrics | 信用到人",
+          "description": "GitHub Copilot usage metrics API 新增用户级 ai_credits_used 字段。企业开始把代理消耗、采用率和预算判断放到同一报表。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-19-ai-credits-consumed-per-user-now-in-the-copilot-usage-metrics-api/",
+          "sourceDateLabel": "2026-06-19"
+        },
+        {
+          "title": "Rovo Long Horizon | 长任务可追踪",
+          "description": "Atlassian 介绍 Rovo Long Horizon，用单一推理循环和结构化 LLM tracing 处理百轮工具调用。工作台开始适配长程代理复盘。",
+          "sourceName": "atlassian.com",
+          "sourceUrl": "https://www.atlassian.com/blog/how-we-build/rovo-long-horizon-reasoning-engine",
+          "sourceDateLabel": "2026-06-18"
+        }
+      ]
+    },
+    {
+      "name": "AI 信息美学",
+      "subtitle": "Figma Weave · Firefly Workspace · Midjourney V8",
+      "items": [
+        {
+          "title": "Figma Weave | 视频逐帧可控",
+          "description": "Figma Weave 接入 Runway Aleph 2.0，支持最长 30 秒视频、参考图和关键帧编辑。创意生产开始从提示词转向逐帧导演。",
+          "sourceName": "figma.com",
+          "sourceUrl": "https://www.figma.com/blog/direct-every-frame-with-runway-aleph-2/",
+          "sourceDateLabel": "2026-06-18"
+        },
+        {
+          "title": "Adobe Firefly | 资产语义检索",
+          "description": "Adobe Firefly 六月更新加入生成历史语义搜索、新工作区和跨应用历史访问。创意资产库开始具备可检索的记忆层。",
+          "sourceName": "helpx.adobe.com",
+          "sourceUrl": "https://helpx.adobe.com/firefly/web/whats-new/new-features/whats-new.html",
+          "sourceDateLabel": "2026-06-18"
+        },
+        {
+          "title": "Midjourney V8.1 | 高清成默认",
+          "description": "Midjourney 文档显示 V8.1 已在 6 月 10 日成为默认版本，并提升速度与细节保持。创作者的默认视觉基线继续上移。",
+          "sourceName": "docs.midjourney.com",
+          "sourceUrl": "https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version",
+          "sourceDateLabel": "2026-06-10 · 邻近窗口"
+        }
+      ]
+    },
+    {
+      "name": "AI 流水线",
+      "subtitle": "Temporary Deploy · Durable Streams · ARD",
+      "items": [
+        {
+          "title": "Cloudflare Agents | 临时账号部署",
+          "description": "Cloudflare 允许 AI 代理通过 wrangler deploy --temporary 部署到临时预览账号。代理原型交付少了一道注册和令牌门槛。",
+          "sourceName": "developers.cloudflare.com",
+          "sourceUrl": "https://developers.cloudflare.com/changelog/post/2026-06-19-temporary-accounts-for-agents/",
+          "sourceDateLabel": "2026-06-19"
+        },
+        {
+          "title": "Durable Objects | 流式连接保活",
+          "description": "Cloudflare Durable Objects 现在会因出站 TCP 或 WebSocket 连接保持存活。长任务代理和 LLM 流式响应更不容易中途被回收。",
+          "sourceName": "developers.cloudflare.com",
+          "sourceUrl": "https://developers.cloudflare.com/changelog/post/2026-06-19-outbound-connections-keep-dos-alive/",
+          "sourceDateLabel": "2026-06-19"
+        },
+        {
+          "title": "Google ARD | 能力发现标准化",
+          "description": "Google 发布 Agentic Resource Discovery 规格，用 catalog 和 registry 发现工具、技能与代理。跨组织代理协作需要统一索引层。",
+          "sourceName": "developers.googleblog.com",
+          "sourceUrl": "https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/",
+          "sourceDateLabel": "2026-06-17"
+        }
+      ]
+    },
+    {
+      "name": "AI 大模型",
+      "subtitle": "GLM-5.2 · Nemotron Safety · Cosmos 3",
+      "items": [
+        {
+          "title": "GLM-5.2 | 开放权重登顶",
+          "description": "Artificial Analysis 报告 GLM-5.2 成为其开放权重指数领先模型。开放模型竞争正在从单项分数转向代理工作负载。",
+          "sourceName": "artificialanalysis.ai",
+          "sourceUrl": "https://artificialanalysis.ai/articles/glm-5-2-is-the-new-leading-open-weights-model-on-the-artificial-analysis-intelligence-index",
+          "sourceDateLabel": "2026-06-17"
+        },
+        {
+          "title": "Nemotron 3.5 | 安全模型可定制",
+          "description": "NVIDIA 在 Hugging Face 发布 Nemotron 3.5 Content Safety 文章，强调多模态和可定制安全策略。模型层开始内置治理组件。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety",
+          "sourceDateLabel": "2026-06-04 · 邻近窗口"
+        },
+        {
+          "title": "NVIDIA Cosmos 3 | 物理模型开源",
+          "description": "NVIDIA 在 Hugging Face 介绍 Cosmos 3 开放全能模型，面向物理 AI 的推理与行动。开放模型战场正进入机器人与仿真层。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai",
+          "sourceDateLabel": "2026-06-01 · 邻近窗口"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Industry Brief | 06/20 · 星期六 | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #8A93B7;
+  --primary-light: #F0F1F8;
+  --paper: #FCFBF9;
+  --ground: #EEECE8;
+  --text: #151515;
+  --body: #2E2E2E;
+  --rule: #D9D2CE;
+  --headline-rule: color-mix(in srgb, var(--primary) 78%, #151515);
+  --section-ink: var(--primary);
+  --section-ink-soft: var(--primary-light);
+  --section-guide: color-mix(in srgb, var(--primary) 42%, transparent);
+}
+body {
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 26%),
+    radial-gradient(circle at 88% 78%, rgba(127, 166, 201, 0.12), transparent 24%),
+    var(--ground);
+  display: flex;
+  justify-content: center;
+  padding: 36px clamp(32px, 4vw, 72px);
+}
+.card {
+  position: relative;
+  overflow: visible;
+  background: var(--paper);
+  max-width: 1480px;
+  width: 100%;
+  min-height: min(1046px, calc((100vw - 28px) / 1.414));
+  height: auto;
+  padding: 36px clamp(52px, 4.6vw, 72px);
+  border: 1px solid #D8D1CB;
+  box-shadow: 0 6px 30px rgba(17, 17, 17, 0.05);
+  font-family: 'Source Serif 4', 'Noto Serif SC', serif;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  background-image:
+    linear-gradient(rgba(21, 21, 21, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+}
+.card::after {
+  content: "THE AI INDUSTRY BRIEF / GLOBAL SIGNALS";
+  position: absolute;
+  right: 28px;
+  top: 112px;
+  color: rgba(21, 21, 21, 0.18);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  border-bottom: 2px solid var(--text);
+  border-top: 6px solid var(--headline-rule);
+  padding-top: 24px;
+  margin-bottom: 34px;
+}
+.header-left .brand {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+  line-height: 1;
+}
+.header-right { text-align: right; }
+.header-right .lab {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5A5A5A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.header-right .date { font-size: 11px; color: #777; letter-spacing: 0.08em; }
+.quote-card {
+  position: relative;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--primary-light) 72%, transparent), transparent 42%),
+    #F8F6F2;
+  border-top: 1px solid rgba(21, 21, 21, 0.18);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.18);
+  border-left: 0;
+  border-radius: 0;
+  padding: 18px 22px 18px 0;
+  margin-bottom: 46px;
+  font-size: 22px;
+  line-height: 1.42;
+  color: var(--body);
+  font-weight: 500;
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) 230px;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: "LEAD";
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(21, 21, 21, 0.18);
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.quote-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero-illustration {
+  position: relative;
+  width: 230px;
+  height: 128px;
+  z-index: 1;
+  justify-self: end;
+  pointer-events: none;
+  opacity: 0.74;
+}
+.hero-line {
+  fill: none;
+  stroke: var(--section-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero-soft {
+  fill: var(--section-ink-soft);
+  stroke: color-mix(in srgb, var(--section-ink) 28%, transparent);
+  stroke-width: 1;
+}
+.hero-ink {
+  fill: color-mix(in srgb, var(--section-ink) 72%, #151515);
+}
+.hero-label {
+  fill: rgba(21, 21, 21, 0.28);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.quote-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--section-ink) 64%, #151515);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.insight-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section { padding: 14px 0 16px; border-bottom: 0; }
+.sections-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 46px;
+  row-gap: 78px;
+  align-items: stretch;
+  overflow: visible;
+  padding: 8px 10px 4px;
+}
+.sections-layout::before {
+  content: "AI INDUSTRY MAP";
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 0 12px;
+  background: var(--paper);
+  color: rgba(21, 21, 21, 0.34);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+.sections-layout > .section {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 18px 18px 14px;
+  background: color-mix(in srgb, var(--paper) 86%, var(--section-ink-soft));
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  box-shadow: 14px 16px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.sections-layout > .section::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 42px;
+  height: 14px;
+  background: var(--section-ink-soft);
+  border: 1px solid rgba(21, 21, 21, 0.09);
+  transform: skewX(-18deg);
+}
+.sections-layout > .section::after {
+  content: "SIGNAL NODE";
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  color: rgba(21, 21, 21, 0.17);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.sections-layout > .section:nth-of-type(odd) {
+  padding-right: 18px;
+}
+.sections-layout > .section:nth-of-type(even) {
+  padding-left: 18px;
+}
+.sections-layout > .section:nth-of-type(n + 3) {
+  padding-top: 18px;
+}
+.section-header {
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 46px;
+}
+.section-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Inter', 'Noto Serif SC', serif;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 0;
+  border-bottom: 0;
+}
+.section-tag::before {
+  content: attr(data-num);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 36px;
+  background: var(--section-ink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  transform: skewX(-12deg);
+  box-shadow: 8px 8px 0 var(--section-ink-soft);
+}
+.section-tag::after {
+  content: "";
+  position: absolute;
+  left: 64px;
+  right: -96px;
+  top: 50%;
+  z-index: -1;
+  border-top: 1px dashed var(--section-guide);
+  transform: translateY(-50%) rotate(-3deg);
+}
+.section-tag svg { display: none; }
+.section-sub {
+  font-size: 10px;
+  color: #787878;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  margin-left: 66px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1 1 auto;
+}
+.item + .item {
+  margin-top: 0;
+}
+.item {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  background: rgba(252, 251, 249, 0.66);
+  border: 1px solid rgba(21, 21, 21, 0.07);
+  border-radius: 2px;
+  padding: 22px 30px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.item-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.32;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.item-tool { color: #1C1C1C; font-weight: 700; }
+.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-copy { flex: 1; }
+.item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0;
+  font-weight: 700;
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  color: var(--section-ink);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.item-num::before {
+  content: attr(data-mark);
+  font-size: 17px;
+  color: var(--section-ink);
+  line-height: 1;
+}
+.item-desc {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.72;
+  margin-bottom: 0;
+  font-weight: 400;
+  flex: 0 0 auto;
+}
+.item-source {
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.item-source:hover { opacity: 1; text-decoration: underline; }
+.source-date {
+  font-size: 11px;
+  color: #7C7C7C;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.insight-card {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.12);
+  border-left: 0;
+  border-radius: 0;
+  padding: 20px 4px 18px;
+  margin-top: 64px;
+  margin-bottom: 38px;
+  display: grid;
+  grid-template-columns: 188px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: center;
+}
+.insight-label {
+  position: relative;
+  justify-self: center;
+  width: max-content;
+  transform: translateY(12px);
+  margin-bottom: 0;
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.insight-label::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-top: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid color-mix(in srgb, var(--section-ink) 72%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, var(--section-ink) 0 4px, transparent 5px),
+    linear-gradient(45deg, transparent 58%, color-mix(in srgb, var(--section-ink) 72%, transparent) 59% 64%, transparent 65%);
+  box-shadow: 14px 14px 0 var(--section-ink-soft);
+  opacity: 0.9;
+}
+.insight-text {
+  font-size: 18px;
+  color: #242424;
+  line-height: 1.72;
+  font-weight: 500;
+}
+.method-note {
+  grid-column: 2;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #7A7A7A;
+  line-height: 1.6;
+}
+.footer {
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid var(--text);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
+@media (max-width: 560px) {
+  body { padding: 0; }
+  .card { padding: 32px 22px; aspect-ratio: auto; }
+  .card::before, .card::after, .sections-layout::before { display: none; }
+  .header-left .brand { font-size: 34px; }
+  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
+  .quote-card::before { display: none; }
+  .hero-illustration { display: none; }
+  .sections-layout > .section:nth-of-type(odd),
+  .sections-layout > .section:nth-of-type(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .sections-layout > .section::before,
+  .sections-layout > .section::after { display: none; }
+  .sections-layout > .section:nth-of-type(n + 3) { padding-top: 14px; }
+  .section-header { min-height: 40px; }
+  .section-tag { font-size: 18px; gap: 10px; }
+  .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
+  .section-tag::after { right: -48px; left: 56px; }
+  .section-sub { margin-left: 56px; }
+  .section-items { gap: 10px; }
+  .item { flex: 0 1 auto; min-height: auto; }
+  .item + .item { margin-top: 0; }
+  .section + .section { margin-top: 10px; padding-top: 14px; }
+  .item-num { min-width: 22px; padding: 0 6px; }
+  .item-title { font-size: 16px; gap: 8px; }
+  .item-desc { font-size: 15px; }
+  .insight-card { display: block; padding: 18px 0; }
+  .insight-label { margin-bottom: 10px; transform: none; }
+  .insight-label::after { display: none; }
+  .insight-text { font-size: 16px; }
+  .method-note { margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="header-left"><div class="brand">The AI Industry Brief</div></div>
+    <div class="header-right">
+      <div class="lab">星期一研究室</div>
+      <div class="date">06/20 · 星期六</div>
+    </div>
+  </header>
+
+  <div class="quote-card">
+    <div class="quote-copy">
+    <div class="quote-label">今日一句话</div>
+    AI 正在从生成能力转向可审计协作。
+  </div>
+  <svg class="hero-illustration" viewBox="0 0 230 154" aria-hidden="true" focusable="false">
+      <path class="hero-soft" d="M25 118 C44 82, 72 77, 94 98 S142 126, 174 91 C190 73, 207 72, 219 82 L219 142 L25 142 Z" />
+      <circle class="hero-soft" cx="175" cy="44" r="26" />
+      <path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M175 18C185 31,185 57,175 70 M153 35H197 M153 53H197" />
+      <path class="hero-line" d="M46 108 L66 72 L86 108 M55 92H77" />
+      <circle class="hero-ink" cx="70" cy="43" r="10" />
+      <path class="hero-soft" d="M47 132 C48 97, 56 63, 70 63 C84 63, 92 97, 93 132 Z" />
+      <path class="hero-line" d="M59 78 C42 83, 33 94, 27 109 M82 78 C100 83, 113 94, 121 109" />
+      <circle class="hero-line" cx="31" cy="102" r="10" />
+      <path class="hero-line" d="M38 109 L49 120" />
+      <path class="hero-line" d="M129 67 H147 M138 58 V76 M125 92 H154 M132 103 H149" />
+      <text class="hero-label" x="118" y="132">GLOBAL SIGNALS</text>
+    </svg>
+  </div>
+
+  <div class="sections-layout">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="01">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+        AI 工作台
+      </span>
+    </div>
+    <div class="section-sub">Copilot App · Usage Metrics · Rovo Long Horizon</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Copilot App</span><span class="item-divider"> | </span><span class="item-heading">桌面代理上线</span></span></div>
+      <p class="item-desc">GitHub Copilot app 已在 macOS、Windows 和 Linux GA。代理开发从编辑器插件扩展为可开分支、跑终端、看浏览器的桌面工作台。</p>
+      <a class="item-source" href="https://github.blog/changelog/2026-06-17-github-copilot-app-generally-available/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-17</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Copilot Metrics</span><span class="item-divider"> | </span><span class="item-heading">信用到人</span></span></div>
+      <p class="item-desc">GitHub Copilot usage metrics API 新增用户级 ai_credits_used 字段。企业开始把代理消耗、采用率和预算判断放到同一报表。</p>
+      <a class="item-source" href="https://github.blog/changelog/2026-06-19-ai-credits-consumed-per-user-now-in-the-copilot-usage-metrics-api/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-19</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Rovo Long Horizon</span><span class="item-divider"> | </span><span class="item-heading">长任务可追踪</span></span></div>
+      <p class="item-desc">Atlassian 介绍 Rovo Long Horizon，用单一推理循环和结构化 LLM tracing 处理百轮工具调用。工作台开始适配长程代理复盘。</p>
+      <a class="item-source" href="https://www.atlassian.com/blog/how-we-build/rovo-long-horizon-reasoning-engine" target="_blank" rel="noopener noreferrer">→ atlassian.com</a><span class="source-date">2026-06-18</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="02">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+        AI 信息美学
+      </span>
+    </div>
+    <div class="section-sub">Figma Weave · Firefly Workspace · Midjourney V8</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Figma Weave</span><span class="item-divider"> | </span><span class="item-heading">视频逐帧可控</span></span></div>
+      <p class="item-desc">Figma Weave 接入 Runway Aleph 2.0，支持最长 30 秒视频、参考图和关键帧编辑。创意生产开始从提示词转向逐帧导演。</p>
+      <a class="item-source" href="https://www.figma.com/blog/direct-every-frame-with-runway-aleph-2/" target="_blank" rel="noopener noreferrer">→ figma.com</a><span class="source-date">2026-06-18</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Adobe Firefly</span><span class="item-divider"> | </span><span class="item-heading">资产语义检索</span></span></div>
+      <p class="item-desc">Adobe Firefly 六月更新加入生成历史语义搜索、新工作区和跨应用历史访问。创意资产库开始具备可检索的记忆层。</p>
+      <a class="item-source" href="https://helpx.adobe.com/firefly/web/whats-new/new-features/whats-new.html" target="_blank" rel="noopener noreferrer">→ helpx.adobe.com</a><span class="source-date">2026-06-18</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Midjourney V8.1</span><span class="item-divider"> | </span><span class="item-heading">高清成默认</span></span></div>
+      <p class="item-desc">Midjourney 文档显示 V8.1 已在 6 月 10 日成为默认版本，并提升速度与细节保持。创作者的默认视觉基线继续上移。</p>
+      <a class="item-source" href="https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version" target="_blank" rel="noopener noreferrer">→ docs.midjourney.com</a><span class="source-date">2026-06-10 · 邻近窗口</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="03">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+        AI 流水线
+      </span>
+    </div>
+    <div class="section-sub">Temporary Deploy · Durable Streams · ARD</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Cloudflare Agents</span><span class="item-divider"> | </span><span class="item-heading">临时账号部署</span></span></div>
+      <p class="item-desc">Cloudflare 允许 AI 代理通过 wrangler deploy --temporary 部署到临时预览账号。代理原型交付少了一道注册和令牌门槛。</p>
+      <a class="item-source" href="https://developers.cloudflare.com/changelog/post/2026-06-19-temporary-accounts-for-agents/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-06-19</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Durable Objects</span><span class="item-divider"> | </span><span class="item-heading">流式连接保活</span></span></div>
+      <p class="item-desc">Cloudflare Durable Objects 现在会因出站 TCP 或 WebSocket 连接保持存活。长任务代理和 LLM 流式响应更不容易中途被回收。</p>
+      <a class="item-source" href="https://developers.cloudflare.com/changelog/post/2026-06-19-outbound-connections-keep-dos-alive/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-06-19</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Google ARD</span><span class="item-divider"> | </span><span class="item-heading">能力发现标准化</span></span></div>
+      <p class="item-desc">Google 发布 Agentic Resource Discovery 规格，用 catalog 和 registry 发现工具、技能与代理。跨组织代理协作需要统一索引层。</p>
+      <a class="item-source" href="https://developers.googleblog.com/announcing-the-agentic-resource-discovery-specification/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-06-17</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="04">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 大模型
+      </span>
+    </div>
+    <div class="section-sub">GLM-5.2 · Nemotron Safety · Cosmos 3</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">GLM-5.2</span><span class="item-divider"> | </span><span class="item-heading">开放权重登顶</span></span></div>
+      <p class="item-desc">Artificial Analysis 报告 GLM-5.2 成为其开放权重指数领先模型。开放模型竞争正在从单项分数转向代理工作负载。</p>
+      <a class="item-source" href="https://artificialanalysis.ai/articles/glm-5-2-is-the-new-leading-open-weights-model-on-the-artificial-analysis-intelligence-index" target="_blank" rel="noopener noreferrer">→ artificialanalysis.ai</a><span class="source-date">2026-06-17</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Nemotron 3.5</span><span class="item-divider"> | </span><span class="item-heading">安全模型可定制</span></span></div>
+      <p class="item-desc">NVIDIA 在 Hugging Face 发布 Nemotron 3.5 Content Safety 文章，强调多模态和可定制安全策略。模型层开始内置治理组件。</p>
+      <a class="item-source" href="https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety" target="_blank" rel="noopener noreferrer">→ huggingface.co</a><span class="source-date">2026-06-04 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">NVIDIA Cosmos 3</span><span class="item-divider"> | </span><span class="item-heading">物理模型开源</span></span></div>
+      <p class="item-desc">NVIDIA 在 Hugging Face 介绍 Cosmos 3 开放全能模型，面向物理 AI 的推理与行动。开放模型战场正进入机器人与仿真层。</p>
+      <a class="item-source" href="https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai" target="_blank" rel="noopener noreferrer">→ huggingface.co</a><span class="source-date">2026-06-01 · 邻近窗口</span>
+    </article>
+    </div>
+  </section>
+  </div>
+
+  <aside class="insight-card">
+    <div class="insight-label">今日洞察</div>
+    <p class="insight-text">今天的共同信号是“协作基础设施化”：用量进入指标 API，代理开始按标准发现工具，部署和流式执行有了临时账号与保活边界，创意与模型侧也在补足可控、可验证、可追溯的工作流。</p>
+    <p class="method-note">采集窗口优先覆盖 2026-06-14 至 2026-06-20；本期使用 GitHub、Cloudflare、Google Developers、Figma、Adobe、Midjourney、Atlassian、Artificial Analysis 与 Hugging Face 上的模型方来源。Midjourney V8.1、Nemotron 3.5 与 Cosmos 3 为 30 天内邻近窗口来源，用于补足视觉生成、模型治理和开放模型信号；所有条目已避开历史简报标题和来源 URL。</p>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-lab">星期一研究室出品</div>
+    <div class="footer-sub">The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</div>
+  </footer>
+</main>
+</body>
+</html>
