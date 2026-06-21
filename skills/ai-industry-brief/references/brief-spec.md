@@ -1,105 +1,109 @@
-# Brief Specification
+# 简报规格
 
-## Output
+## 输出文件
 
-- Detail file: `briefs/YYYY-MM-DD.html`
-- Archive file: `index.html`
-- Data config file: `brief-data/YYYY-MM-DD.json`
-- Share image file: `share-images/YYYY-MM-DD.png`
-- Detail structure: opening line, 4 sections x 3 items, closing insight, sourcing note, footer
-- Archive structure: latest card first; every existing brief remains clickable
+- 详情页：`briefs/YYYY-MM-DD.html`
+- 聚合首页：`index.html`
+- 数据配置：`brief-data/YYYY-MM-DD.json`
+- 分享图片：`share-images/YYYY-MM-DD.png`
+- 详情页结构：今日一句话、4 个栏目 x 每栏 3 条动态、今日洞察、采集说明、页脚
+- 聚合首页结构：最新一期卡片置顶；所有历史简报都保留可点击入口
 
-## Sections
+## 栏目结构
 
-Default AI brief sections:
+默认 AI 简报栏目：
 
-| Section | Focus | Seed queries |
+| 栏目 | 关注范围 | 采集关键词 |
 | --- | --- | --- |
-| AI 工作台 | Product updates, knowledge/workspace shifts | Notion AI, YouMind, 飞书 AI, Obsidian AI |
-| AI 流水线 | CLI tools, agents, MCP, deployment | Claude Code, Gemini CLI, Codex CLI, MCP, Agent framework |
-| AI 大模型 | Model launches, evaluations, benchmarks | Claude, GPT, Gemini, DeepSeek, Kimi model update |
-| AI 信息美学 | Image/media generation and creator tools | GPT-Image, Gemini image, Flux, Ideogram, Adobe Firefly |
+| AI 产品前线 | 面向用户的 AI 产品、功能、入口和体验变化 | ChatGPT、Claude、Gemini、Perplexity、Notion AI、Canva AI、浏览器 AI、办公套件 AI |
+| AI 行业现场 | AI 在具体行业、岗位和业务流程里的采用情况 | AI 医疗、AI 教育、法律 AI、客服 AI、销售 AI、营销 AI、企业 AI 案例 |
+| AI 资本与牌局 | 融资、IPO、并购、二级市场变化、战略合作和监管冲击 | AI 融资、AI IPO、AI 并购、AI 股票、NVIDIA、Microsoft OpenAI、Anthropic Amazon、AI 监管 |
+| AI 能力底座 | 模型、Agent、芯片、算力、API、开发工具、评测、安全和成本变化 | Claude、GPT、Gemini、DeepSeek、Kimi、MCP、Agent framework、AI 芯片、推理成本、模型评测 |
 
-For non-AI industries, keep the same 4 sections x 3 items shape, but replace section names, seed queries, source priorities, and impact criteria before research. See `industry-starter.md`.
+如果复用到非 AI 行业，保持「4 个栏目 x 每栏 3 条」的结构，但在采集前替换栏目名、关键词、来源优先级和影响判断维度。参考 `industry-starter.md`。
 
-## Archive Layout
+## 首页布局
 
-- Archive/homepage uses a neutral black/white/gray shell even when the detail pages use weekday Morandi colors.
-- Top visible brand text is Chinese-first: `每日 AI 行业简报`; upper right remains `星期一研究室`.
-- Top navigation labels are Chinese and ordered: `今日`, `色板`, `往期`.
-- The hero section keeps the English publication masthead `The AI Industry Brief`, a phone-shaped daily-paper preview, and three action buttons:
-  - `阅读最新一期` links to the latest detail page.
-  - `查看七天色板` switches to the palette panel without forcing scroll-to-top.
-  - `查看往期` switches to the previous-issues panel without forcing scroll-to-top.
-- The archive/recommendation panel is visibly named `往期`; do not use `历史归档` or `精彩推荐` as the section heading.
-- Weekly palette on the homepage uses individual swatch archive cards with weekday shorthand, Chinese tone name, and hex code. Avoid plain oval/pill strips.
-- Keep `color-palette-demo.html` as a broader design-system preview page with comfortable left/right margins and a tabbed seven-day preview.
-- If homepage card markup changes, update the Feishu push worker archive parser so scheduled pushes can still locate the latest issue headline and summary.
+- 聚合首页使用黑、白、灰为主的中性外壳，即使详情页使用当天莫兰迪主题色，也不要污染首页全局框架。
+- 顶部可见品牌文字以中文优先：`每日 AI 行业简报`；右上角保持 `星期一研究室`。
+- 顶部导航使用中文标签，并保持顺序：`今日`、`色板`、`往期`。
+- Hero 区保留英文刊名 `The AI Industry Brief`、手机形状的每日小报预览，以及三个操作按钮：
+  - `阅读最新一期` 链接到最新详情页。
+  - `查看七天色板` 切换到色板面板，不强制滚回页面顶部。
+  - `查看往期` 切换到往期面板，不强制滚回页面顶部。
+- 归档/推荐区的可见标题使用 `往期`；不要写成 `历史归档` 或 `精彩推荐`。
+- 首页七天色板使用独立色卡归档卡片，包含星期缩写、中文色调名和 HEX 色值；不要做成普通胶囊条。
+- `color-palette-demo.html` 保留为更完整的设计系统预览页，左右留白舒适，并使用七天预览 Tab。
+- 如果首页卡片 DOM 结构发生变化，必须同步更新飞书推送 Worker 的首页解析逻辑，确保定时推送仍能定位最新一期标题和摘要。
 
-## Detail Layout
+## 详情页布局
 
-- Detail pages use a two-column editorial layout.
-- Detail pages should feel like a landscape A3 editorial sheet, not a tall poster:
-  - use a wide page frame around `1480px`
-  - use the A3 landscape ratio as a minimum paper-height reference, not as a fixed crop box
-  - allow vertical overflow to scroll naturally; never crop lower sections, insight, or footer
-  - use generous left/right page margins and clear row spacing between section pairs
-  - keep generous vertical breathing room around the opening line and closing insight so major editorial blocks do not touch
-  - style the opening line as an international editorial pull quote: thin top/bottom rules, a non-numeric `LEAD` rail, strong serif text, and a right-side illustration panel; avoid rounded AI-card styling.
-  - style the closing insight as an editorial note: top/bottom rules, a left label with a small theme-colored signal icon, and larger serif body text; avoid office-report card styling.
-- The visual language should lean toward an international editorial atlas:
-  - use a faint paper grid inside the page frame
-  - place international editorial illustration inside the opening-line card as a right-side visual panel on desktop, not between section cards or near the footer
-  - prefer original inline SVG figures, globe grids, magnifiers, source-ledger tags, model-atlas marks, or archive labels
-  - avoid barely visible route paths and repeated paper-plane marks
-  - use English micro-labels that fit the publication theme, such as `AI INDUSTRY MAP`, `GLOBAL SIGNALS`, `SOURCE LEDGER`, and `MODEL ATLAS`; avoid vague placeholder phrases.
-  - keep section cards clean; decorative illustration should not cross over article text
-  - hide heavy illustration ornaments on mobile
-- Section order is horizontal:
-  - top row: `01 AI 工作台`, `02 AI 信息美学`
-  - bottom row: `03 AI 流水线`, `04 AI 大模型`
-- Each section header uses a skewed numbered marker and a subtle dashed guide line.
-- Item markers inside each section use non-numeric symbols (`◆`, `◇`, `◈`) so they do not compete with section numbers.
-- The section marker color must be derived from the day's `--primary` Morandi color:
+- 详情页使用双栏编辑版式。
+- 详情页应接近横版 A3 编辑页，而不是长图海报：
+  - 页面框架宽度约为 `1480px`。
+  - 使用横版 A3 比例作为最小纸张高度参考，不做固定裁切盒。
+  - 允许纵向自然滚动；不要裁掉下方栏目、洞察或页脚。
+  - 左右页边距要充足；上下两组栏目之间保持清晰行距。
+  - 今日一句话和今日洞察周围保留足够呼吸感，避免主要编辑模块互相贴住。
+  - 今日一句话采用国际编辑部式 pull quote：细上/下分隔线、非数字 `LEAD` 侧栏、强衬线正文、桌面端右侧插画面板；避免圆角 AI 卡片风。
+  - 今日洞察采用 editorial note 风格：上/下分隔线、左侧标签、主题色小信号图标和较大的衬线正文；避免办公室报告卡片风。
+- 视觉语言偏向国际化编辑地图：
+  - 页面框架内保留淡纸张网格。
+  - 桌面端把国际编辑风插画放在今日一句话卡片右侧，不要放在栏目卡片之间或页脚附近。
+  - 优先使用原创内联 SVG 图形、地球网格、放大镜、source-ledger 标签、model-atlas 标记或 archive 标签。
+  - 避免几乎看不见的路线图和重复纸飞机装饰。
+  - 英文微标签要贴合刊物气质，例如 `AI INDUSTRY MAP`、`GLOBAL SIGNALS`、`SOURCE LEDGER`、`MODEL ATLAS`；避免空泛占位词。
+  - 栏目卡片保持干净；装饰图形不要压到正文。
+  - 移动端隐藏过重的插画装饰。
+- 栏目横向顺序固定：
+  - 上排：`01 AI 产品前线`、`02 AI 行业现场`
+  - 下排：`03 AI 资本与牌局`、`04 AI 能力底座`
+- 每个栏目标题使用倾斜数字标记和轻量虚线引导。
+- 栏目内部条目标记使用非数字符号（`◆`、`◇`、`◈`），避免和栏目数字竞争。
+- 栏目编号色彩必须来自当天 `--primary` 莫兰迪主题色：
   - `--section-ink: var(--primary)`
   - `--section-ink-soft: var(--primary-light)`
   - `--section-guide: color-mix(in srgb, var(--primary) 42%, transparent)`
-- The top masthead rule should also derive from the day's `--primary`, using a slightly darker mix for newspaper weight.
-- Do not hard-code an unrelated blue or accent color for section markers.
-- Item rows should dynamically align left/right corresponding items by measured content height on desktop; mobile stays natural single-column.
+- 顶部 masthead 分隔线也应来自当天 `--primary`，可以混入更深颜色来获得报刊重量感。
+- 不要为栏目标记硬编码无关蓝色或其他外部强调色。
+- 桌面端左右对应条目使用脚本动态对齐行高；移动端保持自然单栏流式排版。
 
-## Editorial Rules
+## 编辑规则
 
-- Prefer sources published in the seven days up to the brief date.
-- Use official/primary URLs wherever available.
-- Keep source freshness hierarchical:
-  - Tier 1: sources from the seven days up to the brief date.
-  - Tier 2: sources from the last 30 days, marked `邻近窗口` when outside the seven-day window.
-  - Tier 3: if the last 30 days of mainstream candidates are exhausted by historical dedup, expand outward to adjacent tools, competing platforms, infrastructure layers, creator utilities, governance/security tooling, or ecosystem releases that affect the same workflow.
-  - Tier 4: sources older than 30 days are exceptional background references only. Do not use them to fill quota when a relevant adjacent or peripheral source from the last 30 days exists.
-- When a section lacks enough fresh primary items, broaden the search radius before broadening the time window. Examples: for `AI 工作台`, also check browser/workspace/search/knowledge-base tools; for `AI 流水线`, check CI, sandbox, observability, MCP/security, deployment, and agent runtime tools; for `AI 大模型`, check model gateways, inference platforms, evals, safety releases, and open deployment ecosystems; for `AI 信息美学`, check video, image, design-system, asset-management, font/brand, and creator workflow tools.
-- If an item is older than 30 days, document why it is still necessary in the daily `methodNote`, not only in the source date label.
-- Add visible dates to source links. Mark items outside the preferred window as `邻近窗口` or `最近官方参考`.
-- Daily draft data must be prepared in `brief-data/YYYY-MM-DD.json` before HTML generation.
-- New daily items must not duplicate historical entries by source URL or item title.
-- Title form: `产品/工具名 | 核心动作短语`; action phrase no longer than 15 Chinese characters.
-- Description form: fact, then meaning or impact; target 60-80 Chinese characters.
-- Opening line: one judgment, maximum 50 Chinese characters.
-- Closing insight: synthesize multiple sections, maximum 150 Chinese characters; avoid tentative filler.
+- 优先使用简报日期前 7 天内发布的来源。
+- 尽量使用官方发布、一手博客、产品文档、开发者文档、监管公告、财报、交易所文件等一手 URL。
+- 来源新鲜度按层级处理：
+  - 第一层：简报日期前 7 天内的来源。
+  - 第二层：近 30 天来源；如果超出 7 天窗口，标注 `邻近窗口`。
+  - 第三层：如果主流候选源在历史去重中已经用尽，向相邻工具、竞品平台、行业应用、资本市场、治理安全、云与芯片生态等外围信号扩展。
+  - 第四层：30 天以前的来源只能作为例外背景参考。只要近 30 天内存在相关外围来源，就不要用旧资料凑数。
+- 某个栏目缺少新鲜一手来源时，先扩大采集半径，再扩大时间窗口：
+  - `AI 产品前线`：补查浏览器、办公套件、搜索、移动端、创作者工具、生产力工具和消费级 AI 产品。
+  - `AI 行业现场`：补查医疗、教育、法律、金融、制造、销售、客服、营销、政务和企业内部流程。
+  - `AI 资本与牌局`：补查融资、并购、IPO、上市公司财报、战略合作、政策监管压力、云厂商和芯片厂商动作。
+  - `AI 能力底座`：补查模型、Agent、MCP、开发工具、芯片、推理平台、评测、安全发布和开放部署生态。
+- 如果某条动态使用 30 天以前的资料，必须在当天 `methodNote` 中说明为什么它仍然必要，不能只在来源日期上标注。
+- 每条来源链接显示可见日期；超出首选窗口的资料标注 `邻近窗口` 或 `最近官方参考`。
+- 写 HTML 之前，必须先准备 `brief-data/YYYY-MM-DD.json`。
+- 新一期动态不得与历史条目的来源 URL 或标题重复。
+- 标题格式：`产品/工具名 | 核心动作短语`；动作短语不超过 15 个中文字符。
+- 描述格式：先写事实，再写意义或影响；目标长度 60-80 个中文字符。
+- 今日一句话：一句明确判断，不超过 50 个中文字符。
+- 今日洞察：综合多个栏目，不超过 150 个中文字符；避免“持续关注”“值得期待”这类虚浮收尾。
 
-## Brand
+## 品牌规则
 
-- Public name: `The AI Industry Brief`
-- Producer attribution in upper right: `星期一研究室`
-- Detail footer left: `星期一研究室出品`
-- Detail footer right: `The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学`
-- Archive title: `The AI Industry Brief`
+- 公开刊名：`The AI Industry Brief`
+- 详情页右上角署名：`星期一研究室`
+- 详情页页脚左侧：`星期一研究室出品`
+- 详情页页脚右侧：`The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学`
+- 聚合首页标题：`The AI Industry Brief`
 
-For a new industry, replace the public name and footer terms while preserving the template hierarchy. Suggested pattern: `The <Industry> Brief` plus a Chinese subtitle such as `每日跨境电商简报`.
+如果新建其他行业简报，可以替换公开刊名和页脚行业词，但保留模板层级。建议格式：`The <Industry> Brief`，并搭配中文副标题，例如 `每日跨境电商简报`。
 
-## Palette
+## 色板
 
-| Day | Primary | Tone |
+| 星期 | 主色 | 色调 |
 | --- | --- | --- |
 | 星期一 | `#927BBE` | 莫兰迪紫 |
 | 星期二 | `#6F97A8` | 雾蓝 |
@@ -109,23 +113,23 @@ For a new industry, replace the public name and footer terms while preserving th
 | 星期六 | `#8A93B7` | 紫蓝 |
 | 星期日 | `#EC9BC8` | 柔粉 |
 
-Use an approximately 10%-tinted pale background derived from the day's primary color for callouts and counters.
-Use the same day's primary color family for section number markers, marker shadows, and guide lines.
-Keep the weekly palette balanced around purple, blue, green, and pink families; do not use brown, orange, or honey-gold weekday accents.
+用于 callout 和计数器的浅色背景应从当天主色派生，约为 10% tint。
+栏目编号、编号阴影和引导线使用当天主色家族。
+七天色板整体保持紫、蓝、绿、粉的均衡；不要引入棕色、橙色或蜂蜜金作为 weekday accent。
 
-## Existing Site
+## 现有站点
 
-- Repository: `mondaylab/ai-industry-brief`
-- Public archive: `https://mondaylab.github.io/ai-industry-brief/`
-- Publish from `main` through GitHub Pages.
+- 仓库：`mondaylab/ai-industry-brief`
+- 公开首页：`https://mondaylab.github.io/ai-industry-brief/`
+- 发布方式：从 `main` 分支通过 GitHub Pages 发布。
 
-## Release Gate
+## 发布门槛
 
-1. No template placeholders remain.
-2. The new page contains exactly 4 section containers, 12 content items, and 12 source anchors.
-3. Dedup check passes: `node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`.
-4. The archive contains a clickable card for the new page and preserves earlier links.
-5. Browser inspection shows clean header/footer, no obvious clipping, and functioning navigation.
-6. The share image `share-images/YYYY-MM-DD.png` exists, is a PNG screenshot of the detail page, and is published with the same issue.
-7. If the site is published, verify the deployed archive, current detail page, and current share image after Pages builds. Deployment is complete only when the archive contains `briefs/YYYY-MM-DD.html`, the detail page shows the correct date/footer, and `share-images/YYYY-MM-DD.png` returns `image/png`.
-8. After Pages deployment verification succeeds, immediately trigger the Feishu image push with `npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`, or call `/send-image-url` with the published PNG when the Worker screenshot path is unavailable. Do not rely only on the scheduled patrol. Manual trigger commands require `MANUAL_TRIGGER_TOKEN` or `FEISHU_PUSH_TOKEN`.
+1. 页面中没有模板占位符。
+2. 新详情页必须包含 4 个栏目容器、12 条内容和 12 个来源链接。
+3. 去重检查通过：`node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`。
+4. 聚合首页包含新详情页的可点击卡片，并保留早期链接。
+5. 浏览器检查确认头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记正常，没有明显裁切。
+6. `share-images/YYYY-MM-DD.png` 存在，是详情页 PNG 截图，并和当期简报一起发布。
+7. 如果已经发布站点，等待 GitHub Pages 生效后验证聚合首页、当期详情页和当期分享图。部署完成标准是：首页包含 `briefs/YYYY-MM-DD.html`，详情页显示正确日期和页脚，`share-images/YYYY-MM-DD.png` 返回 `image/png`。
+8. Pages 部署验证通过后，立即触发飞书图片推送：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。如果 Worker 截图路径不可用，可以用已发布 PNG 调用 `/send-image-url`。不要只依赖定时巡逻。手动触发需要 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`。

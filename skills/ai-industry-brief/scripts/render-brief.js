@@ -18,17 +18,17 @@ const PALETTES = {
 };
 
 const SECTION_ICONS = {
-  "AI 工作台": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>',
-  "AI 信息美学": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>',
-  "AI 流水线": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>',
-  "AI 大模型": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>',
+  "AI 产品前线": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>',
+  "AI 行业现场": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="4" cy="5" r="2.2" fill="white"/><circle cx="13" cy="5" r="2.2" fill="white"/><circle cx="8.5" cy="13" r="2.2" fill="white"/><path d="M5.8 6.4L7.3 11M11.2 6.4L9.7 11M6.1 13H3.2M14 13h-2.9" stroke="white" stroke-width="1.35" stroke-linecap="round"/></svg>',
+  "AI 资本与牌局": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M4 14.5V8.5M9 14.5V3.5M14 14.5V6.5" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M3 15H15.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="4" cy="7" r="1.4" fill="white"/><circle cx="9" cy="2.5" r="1.4" fill="white"/><circle cx="14" cy="5" r="1.4" fill="white"/></svg>',
+  "AI 能力底座": '<svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>',
 };
 
 const SECTION_NUMBERS = {
-  "AI 工作台": "01",
-  "AI 信息美学": "02",
-  "AI 流水线": "03",
-  "AI 大模型": "04",
+  "AI 产品前线": "01",
+  "AI 行业现场": "02",
+  "AI 资本与牌局": "03",
+  "AI 能力底座": "04",
 };
 
 const ITEM_MARKS = ["◆", "◇", "◈"];
