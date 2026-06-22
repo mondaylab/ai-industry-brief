@@ -158,7 +158,7 @@ ${sectionsHtml}
   html = replaceOne(
     html,
     /<div class="footer-sub">[\s\S]*?<\/div>/,
-    '<div class="footer-sub">The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学</div>',
+    '<div class="footer-sub">The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</div>',
     "detail footer right"
   );
 

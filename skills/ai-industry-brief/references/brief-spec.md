@@ -96,7 +96,7 @@
 - 公开刊名：`The AI Industry Brief`
 - 详情页右上角署名：`星期一研究室`
 - 详情页页脚左侧：`星期一研究室出品`
-- 详情页页脚右侧：`The AI Industry Brief · 每日行业简报 · 项目管理 · 信息美学`
+- 详情页页脚右侧：`The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design`
 - 聚合首页标题：`The AI Industry Brief`
 
 如果新建其他行业简报，可以替换公开刊名和页脚行业词，但保留模板层级。建议格式：`The <Industry> Brief`，并搭配中文副标题，例如 `每日跨境电商简报`。
