@@ -1066,7 +1066,7 @@ function buildBriefIntroMarkdown({ headline, corePoint }) {
   if (corePoint) {
     lines.push(`核心观点：${escapeForMarkdown(corePoint)}`);
   }
-  return lines.join("\n\n");
+  return lines.join("\n");
 }
 
 function buildReportCard({ reportUrl, title, label, imageKey }) {
