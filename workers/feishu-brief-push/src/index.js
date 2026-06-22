@@ -494,6 +494,7 @@ async function pushBriefLink({ env, requestedDate, force = false, requestId }) {
     detailUrl,
     date,
     headline: pageMeta.headline,
+    corePoint: pageMeta.corePoint,
   });
   const delivery = await sendFeishuBotMessage({
     tenantAccessToken,
@@ -546,6 +547,7 @@ async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requ
     detailUrl,
     date,
     headline: pageMeta.headline,
+    corePoint: pageMeta.corePoint,
     imageKey,
   });
   const delivery = await sendFeishuBotMessage({
@@ -598,6 +600,7 @@ async function pushBriefImageFromUrl({
     detailUrl,
     date,
     headline: pageMeta.headline,
+    corePoint: pageMeta.corePoint,
     imageKey,
   });
   const delivery = await sendFeishuBotMessage({
@@ -873,9 +876,11 @@ async function fetchPageMeta(url) {
     matchText(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i) ||
     matchText(html, /<title[^>]*>([\s\S]*?)<\/title>/i) ||
     "The AI Industry Brief";
+  const corePoint = extractCorePoint(html);
 
   return {
     headline,
+    corePoint,
   };
 }
 
@@ -952,7 +957,7 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
   return data.data.image_key;
 }
 
-function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
+function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, imageKey }) {
   return {
     config: {
       wide_screen_mode: true,
@@ -972,7 +977,7 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
     elements: [
       {
         tag: "markdown",
-        content: `**${escapeForMarkdown(headline)}**`,
+        content: buildBriefIntroMarkdown({ headline, corePoint }),
       },
       {
         tag: "img",
@@ -1008,7 +1013,7 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, imageKey }) {
   };
 }
 
-function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline }) {
+function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline, corePoint }) {
   return {
     config: {
       wide_screen_mode: true,
@@ -1028,7 +1033,7 @@ function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline }) {
     elements: [
       {
         tag: "markdown",
-        content: `**${escapeForMarkdown(headline)}**\n\n今日简报补发，点击按钮查看详情。`,
+        content: `${buildBriefIntroMarkdown({ headline, corePoint })}\n\n今日简报补发，点击按钮查看详情。`,
       },
       {
         tag: "action",
@@ -1054,6 +1059,14 @@ function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline }) {
       },
     ],
   };
+}
+
+function buildBriefIntroMarkdown({ headline, corePoint }) {
+  const lines = [`**${escapeForMarkdown(headline)}**`];
+  if (corePoint) {
+    lines.push(`核心观点：${escapeForMarkdown(corePoint)}`);
+  }
+  return lines.join("\n\n");
 }
 
 function buildReportCard({ reportUrl, title, label, imageKey }) {
@@ -1247,6 +1260,16 @@ function matchText(value, pattern) {
   const match = value.match(pattern);
   if (!match) return "";
   return decodeHtml(stripTags(match[1])).trim();
+}
+
+function extractCorePoint(html) {
+  const quoteCopy = html.match(/<div class="quote-copy">([\s\S]*?)<\/div>\s*<svg class="hero-illustration"/i)?.[1] || "";
+  const corePoint = matchText(quoteCopy, /<div class="quote-label">[\s\S]*?<\/div>([\s\S]*)/i);
+  return normalizeWhitespace(corePoint);
+}
+
+function normalizeWhitespace(value) {
+  return value.replace(/\s+/g, " ").trim();
 }
 
 function stripTags(value) {
