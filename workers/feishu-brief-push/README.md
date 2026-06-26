@@ -51,7 +51,7 @@ Authorization: Bearer <MANUAL_TRIGGER_TOKEN>
 
 - 站点基址：`https://mondaylab.github.io/ai-industry-brief`
 - 时区：`Asia/Shanghai`
-- 截图宽高：`1600 x 2200`
+- 截图宽度：`1600`；截图使用整页模式，`SCREENSHOT_HEIGHT` 仅作为初始视口高度
 - 默认 Cron：`40 22 * * *`，并在失败后每 30 分钟巡逻一次
 
 `40 22 * * *` 对应北京时间每天 `06:40`。Cloudflare Cron 使用 UTC，因此这里已经完成时区换算。后续 `10,40 23,0,1 * * *` 对应北京时间 `07:10`、`07:40`、`08:10`、`08:40`、`09:10`、`09:40` 的巡逻触发，并合并为单个 Cron trigger 以避开 Cloudflare trigger 数量限制。
@@ -135,7 +135,7 @@ MANUAL_TRIGGER_TOKEN=<MANUAL_TRIGGER_TOKEN> \
   npm --prefix workers/feishu-brief-push run post-publish-send -- --date 2026-05-29
 ```
 
-这个脚本会先等待 GitHub Pages 部署完成再触发飞书：当本地已有 `share-images/YYYY-MM-DD.png` 时，会确认首页包含当天详情链接、详情页日期正确、公开 PNG 已返回 `image/png` 后才调用生产 Worker 的 `/send`。如果本地还没有 PNG，则先等首页和详情页就绪；当 Worker 截图链路失败时，再用本机 Chrome 截取详情页、提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。
+这个脚本会先等待 GitHub Pages 部署完成再触发飞书：当本地已有 `share-images/YYYY-MM-DD.png` 时，会确认首页包含当天详情链接、详情页日期正确、公开 PNG 已返回 `image/png` 后才调用生产 Worker 的 `/send`。如果本地还没有 PNG，则先等首页和详情页就绪；当 Worker 截图链路失败时，优先用 Playwright 整页截图生成详情页 PNG，提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。飞书图片卡使用 `fit_horizontal` 展示模式，避免长图在卡片中被裁切。
 
 周报生成后触发：
 

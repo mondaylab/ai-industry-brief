@@ -751,6 +751,7 @@ async function capturePageScreenshot({ env, url }) {
       },
       screenshotOptions: {
         type: "png",
+        fullPage: true,
       },
       gotoOptions: {
         waitUntil: "load",
@@ -982,6 +983,7 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, ima
       {
         tag: "img",
         img_key: imageKey,
+        mode: "fit_horizontal",
         alt: {
           tag: "plain_text",
           content: `The AI Industry Brief ${date}`,
@@ -1094,6 +1096,7 @@ function buildReportCard({ reportUrl, title, label, imageKey }) {
       {
         tag: "img",
         img_key: imageKey,
+        mode: "fit_horizontal",
         alt: {
           tag: "plain_text",
           content: title,

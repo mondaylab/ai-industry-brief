@@ -464,24 +464,43 @@ async function findChrome() {
 }
 
 async function captureScreenshot({ date, detailUrl, imagePath }) {
-  const chrome = await findChrome();
   fs.mkdirSync(path.dirname(imagePath), { recursive: true });
 
-  await execFileAsync(
-    chrome,
-    [
-      "--headless=new",
-      "--disable-gpu",
-      "--hide-scrollbars",
-      `--window-size=${DEFAULT_SCREENSHOT_WIDTH},${DEFAULT_SCREENSHOT_HEIGHT}`,
-      `--screenshot=${imagePath}`,
-      `${detailUrl}?post_publish_image=${Date.now()}`,
-    ],
-    {
-      cwd: repoRoot,
-      maxBuffer: 1024 * 1024 * 4,
-    },
-  );
+  if (await commandExists("npx")) {
+    await execFileAsync(
+      "npx",
+      [
+        "--yes",
+        "playwright@latest",
+        "screenshot",
+        "--full-page",
+        `--viewport-size=${DEFAULT_SCREENSHOT_WIDTH},${DEFAULT_SCREENSHOT_HEIGHT}`,
+        `${detailUrl}?post_publish_image=${Date.now()}`,
+        imagePath,
+      ],
+      {
+        cwd: repoRoot,
+        maxBuffer: 1024 * 1024 * 4,
+      },
+    );
+  } else {
+    const chrome = await findChrome();
+    await execFileAsync(
+      chrome,
+      [
+        "--headless=new",
+        "--disable-gpu",
+        "--hide-scrollbars",
+        `--window-size=${DEFAULT_SCREENSHOT_WIDTH},${DEFAULT_SCREENSHOT_HEIGHT}`,
+        `--screenshot=${imagePath}`,
+        `${detailUrl}?post_publish_image=${Date.now()}`,
+      ],
+      {
+        cwd: repoRoot,
+        maxBuffer: 1024 * 1024 * 4,
+      },
+    );
+  }
 
   const stat = fs.statSync(imagePath);
   if (stat.size < 10000) {
