@@ -21,6 +21,32 @@ function normalizeKeyFromTitle(title) {
   return normalizeTitle(title);
 }
 
+function normalizeMeta(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function sourceDomain(value) {
+  try {
+    return new URL(value).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+}
+
+function increment(map, key) {
+  if (!key) return;
+  map.set(key, (map.get(key) || 0) + 1);
+}
+
+function entriesOverLimit(map, limit) {
+  return [...map.entries()]
+    .filter(([, count]) => count > limit)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
 function unescapeHtml(s) {
   return String(s || "")
     .replace(/&amp;/g, "&")
@@ -43,6 +69,10 @@ function collectFromDataJson(data) {
         titleNorm: normalizeTitle(item.title),
         keyNorm: normalizeKeyFromTitle(item.title),
         sourceUrl: item.sourceUrl || "",
+        sourceDomain: sourceDomain(item.sourceUrl),
+        companyNorm: normalizeMeta(item.company),
+        topicClusterNorm: normalizeMeta(item.topicCluster),
+        sourceTierNorm: normalizeMeta(item.sourceTier),
       });
     }
   }
@@ -89,6 +119,45 @@ function ensureCandidateShape(candidate) {
   if (itemCount !== 12) {
     fail(`candidate JSON must contain exactly 12 items, got ${itemCount}`);
   }
+}
+
+function checkSemanticConcentration(candidateItems) {
+  const warnings = [];
+  const domainCounts = new Map();
+  const companyCounts = new Map();
+  const topicCounts = new Map();
+  let itemsWithSemanticMeta = 0;
+
+  for (const item of candidateItems) {
+    increment(domainCounts, item.sourceDomain);
+    increment(companyCounts, item.companyNorm);
+    increment(topicCounts, item.topicClusterNorm);
+    if (item.companyNorm || item.topicClusterNorm || item.sourceTierNorm) {
+      itemsWithSemanticMeta += 1;
+    }
+  }
+
+  if (domainCounts.size < 6) {
+    warnings.push(`source diversity is low: ${domainCounts.size} unique domains; target at least 6`);
+  }
+
+  for (const [company, count] of entriesOverLimit(companyCounts, 2)) {
+    warnings.push(`company concentration: "${company}" appears ${count} times; target no more than 2 unless explained`);
+  }
+
+  for (const [topic, count] of entriesOverLimit(topicCounts, 3)) {
+    warnings.push(`topic concentration: "${topic}" appears ${count} times; target no more than 3 unless explained`);
+  }
+
+  if (itemsWithSemanticMeta > 0 && itemsWithSemanticMeta < candidateItems.length) {
+    warnings.push(`semantic metadata is partial: ${itemsWithSemanticMeta}/${candidateItems.length} items include company/topic/sourceTier`);
+  }
+
+  if (itemsWithSemanticMeta === 0) {
+    warnings.push("semantic metadata missing: add optional company, topicCluster, sourceTier, discoverySource fields to improve non-repetitive selection");
+  }
+
+  return warnings;
 }
 
 function main() {
@@ -158,6 +227,12 @@ function main() {
     console.error("Dedup check failed:");
     for (const i of issues) console.error(`- ${i}`);
     process.exit(2);
+  }
+
+  const warnings = checkSemanticConcentration(candidateItems);
+  if (warnings.length > 0) {
+    console.warn("Semantic diversity warnings:");
+    for (const warning of warnings) console.warn(`- ${warning}`);
   }
 
   console.log(`Dedup check passed for ${candidateArg} (12 items, no historical overlap).`);

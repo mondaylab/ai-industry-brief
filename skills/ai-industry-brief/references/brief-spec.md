@@ -72,6 +72,13 @@
 
 - 优先使用简报日期前 7 天内发布的来源。
 - 尽量使用官方发布、一手博客、产品文档、开发者文档、监管公告、财报、交易所文件等一手 URL。
+- 采集分成三层，不要只盯官方 changelog：
+  - `证据层`：最终写入 `sourceUrl` 的链接，优先官方公告、产品文档、论文、GitHub repo、Hugging Face、监管/交易所文件、财报、公司博客和主流媒体原文。
+  - `发现层`：用于发现候选和判断热度，包括 X/Twitter、Hacker News、Reddit、Product Hunt、GitHub Trending、Hugging Face trending、arXiv、Papers with Code、开发者 Discord/论坛、VC/研究员/创始人公开帖。
+  - `解释层`：用于行业判断，包括 The Information、Bloomberg、FT、CNBC、TechCrunch、Semafor、晚点、Founder Park、机器之心、量子位、日经、韩媒和区域科技媒体。
+- X/Twitter、Reddit、HN 等社区来源通常不要直接作为最终 `sourceUrl`；除非发帖者是发布主体或一手当事人，否则只作为发现线索，并回溯到官方页、论文、repo、产品页或可信媒体原文。
+- 每期至少尝试覆盖 6 个以上来源域名；同一家公司或产品线原则上不超过 2 条，同一主题簇原则上不超过 3 条。若当天重大事件必须突破，需要在 `methodNote` 中说明。
+- 写 `brief-data/YYYY-MM-DD.json` 时，建议为每条动态补充可选字段：`company`、`topicCluster`、`sourceTier`、`discoverySource`。这些字段不渲染到页面，但用于未来 CLI/Skill 复用和语义去重。
 - 来源新鲜度按层级处理：
   - 第一层：简报日期前 7 天内的来源。
   - 第二层：近 30 天来源；如果超出 7 天窗口，标注 `邻近窗口`。
@@ -86,6 +93,7 @@
 - 每条来源链接显示可见日期；超出首选窗口的资料标注 `邻近窗口` 或 `最近官方参考`。
 - 写 HTML 之前，必须先准备 `brief-data/YYYY-MM-DD.json`。
 - 新一期动态不得与历史条目的来源 URL 或标题重复。
+- 新一期还要做语义重复检查：避免连续多条只是同一公司、同一产品线、同一主题簇的轻微变体。去重脚本出现 `WARN` 时，应优先替换候选；只有当该集中度本身就是当天判断，才保留并写入 `methodNote`。
 - 标题格式：`产品/工具名 | 核心动作短语`；动作短语不超过 15 个中文字符。
 - 描述格式：先写事实，再写意义或影响；目标长度 60-80 个中文字符。
 - 今日一句话：一句明确判断，不超过 50 个中文字符。
