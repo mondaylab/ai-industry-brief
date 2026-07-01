@@ -1,0 +1,187 @@
+{
+  "date": "2026-07-01",
+  "weekday": "星期三",
+  "opening": "AI 正从能力炫技转向可信工作系统。",
+  "insight": "今天的共同线索不是谁又刷高了分数，而是谁能把模型放进真实岗位：科研、护理、企业 IT、建筑和推理芯片都在要求可审计、可控成本、可复现结果。下一轮竞争会由模型参数转向工作系统的治理密度。",
+  "methodNote": "采集窗口覆盖 2026-06-24 至 2026-07-01，优先使用 Anthropic、Google Blog、GitHub、OpenAI、Epic、PR Newswire、Etched/TMC、TechCrunch、Hugging Face 等可追溯来源。GitHub JetBrains Copilot 集成、Every Eval Ever 与 ScarfBench 属于当天或邻近窗口新发布信号，用于补足开发者工作流、评测发布链路和企业迁移评测三条底座线索；未继续复用昨日 Figma、Canva、Notion、Salesforce、JustAI 等主题。",
+  "homepage": {
+    "headline": "可信工作系统成主线",
+    "summary": "模型发布、行业落地和资本押注都转向可审计的工作流。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "Claude、Gemini 和 Copilot 把代理能力推进到默认模型、视频创作和 IDE 工作流。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "科研、护理和企业 IT 开始用 AI 工作台替代孤立试点。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资金继续流向建筑、AI 硬件和会议记录等高频刚需场景。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "生命科学评测、推理芯片和资源发现标准正在补齐可信代理基础设施。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Claude Sonnet 5 · Gemini Omni · Copilot Agent",
+      "items": [
+        {
+          "title": "Claude Sonnet 5 | 成为默认模型",
+          "description": "Anthropic 发布 Sonnet 5，并设为 Claude Free 与 Pro 默认模型。低成本代理执行正在进入主流用户入口。",
+          "sourceName": "anthropic.com",
+          "sourceUrl": "https://www.anthropic.com/news/claude-sonnet-5",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Anthropic",
+          "topicCluster": "agentic-default-model",
+          "sourceTier": "evidence",
+          "discoverySource": "Anthropic Newsroom"
+        },
+        {
+          "title": "Gemini Omni Flash | 视频编辑进预览",
+          "description": "Google 在 Gemini API 公开预览 Omni Flash，支持 3-10 秒视频生成和对话式编辑。多模态创作正变得更实时。",
+          "sourceName": "ai.google.dev",
+          "sourceUrl": "https://blog.google/innovation-and-ai/products/nano-banana-pro/",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Google",
+          "topicCluster": "multimodal-video-generation",
+          "sourceTier": "evidence",
+          "discoverySource": "Google Blog"
+        },
+        {
+          "title": "Copilot Agent | 接入JetBrains",
+          "description": "GitHub 与 JetBrains 宣布 Copilot Agent 进入 JetBrains AI Assistant。开发者代理正在跨 IDE 复用同一执行入口。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-06-30-copilot-agent-is-now-available-in-jetbrains-ai-assistant/",
+          "sourceDateLabel": "2026-06-30",
+          "company": "GitHub",
+          "topicCluster": "developer-agent-ide-integration",
+          "sourceTier": "evidence",
+          "discoverySource": "GitHub Changelog"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Claude Science · HP Frontier · Epic Art",
+      "items": [
+        {
+          "title": "Claude Science | 科研工作台开放",
+          "description": "Anthropic 推出 Claude Science beta，整合 60 多个科研技能、连接器和审计记录。科研 AI 正从聊天转向可复现实验环境。",
+          "sourceName": "anthropic.com",
+          "sourceUrl": "https://www.anthropic.com/news/claude-science-ai-workbench",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Anthropic",
+          "topicCluster": "scientific-ai-workbench",
+          "sourceTier": "evidence",
+          "discoverySource": "Anthropic Newsroom"
+        },
+        {
+          "title": "HP Frontier | 企业试点扩容",
+          "description": "OpenAI 披露 HP 将扩展 Frontier 合作，把客服、设备遥测、安全和 Codex 工作流纳入治理层。企业 AI 进入运营编排期。",
+          "sourceName": "openai.com",
+          "sourceUrl": "https://openai.com/index/hp-frontier-partnership/",
+          "sourceDateLabel": "2026-06-28",
+          "company": "HP",
+          "topicCluster": "enterprise-ai-operating-model",
+          "sourceTier": "evidence",
+          "discoverySource": "OpenAI News"
+        },
+        {
+          "title": "Epic Art | 护理文档提速",
+          "description": "Epic 介绍 UNC Health、Riverside Health 与 WakeMed 护士使用 Art 减少文档时间。医疗 AI 的价值开始落到班次负担。",
+          "sourceName": "epic.com",
+          "sourceUrl": "https://www.epic.com/epic/post/nurses-save-time-and-keep-families-connected-using-ai/",
+          "sourceDateLabel": "2026-06-29",
+          "company": "Epic",
+          "topicCluster": "clinical-nursing-documentation-ai",
+          "sourceTier": "evidence",
+          "discoverySource": "Epic Newsroom"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Higharc · Etched · Pocket",
+      "items": [
+        {
+          "title": "Higharc | 9500万扩建筑AI",
+          "description": "Higharc 宣布 9500 万美元 C 轮，用于扩展住宅建设 AI 和材料估算。资本继续押注垂直行业的全流程数据闭环。",
+          "sourceName": "prnewswire.com",
+          "sourceUrl": "https://www.prnewswire.com/news-releases/higharc-raises-95m-series-c-to-scale-ai-for-homebuilding-302814598.html",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Higharc",
+          "topicCluster": "construction-ai-funding",
+          "sourceTier": "evidence",
+          "discoverySource": "PR Newswire"
+        },
+        {
+          "title": "Etched | 芯片订单过10亿",
+          "description": "Etched 出隐身并称已融资 8 亿美元、签下逾 10 亿美元客户合同。推理芯片新玩家开始用订单挑战英伟达叙事。",
+          "sourceName": "tmcnet.com",
+          "sourceUrl": "https://www.tmcnet.com/usubmit/-etched-emerges-from-stealth-with-working-chip-800m-/2026/06/30/10408143.htm",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Etched",
+          "topicCluster": "ai-inference-chip-financing",
+          "sourceTier": "analysis",
+          "discoverySource": "Globe Newswire via TMC"
+        },
+        {
+          "title": "Pocket | 1100万押硬件笔记",
+          "description": "TechCrunch 报道 Pocket 获 1100 万美元融资，面向线下会议记录硬件。AI 记事从软件订阅扩展到低价设备入口。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/06/29/pocket-raises-11m-in-bet-on-rising-demand-for-ai-note-taking-devices/",
+          "sourceDateLabel": "2026-06-29",
+          "company": "Pocket",
+          "topicCluster": "ai-notetaker-hardware-funding",
+          "sourceTier": "analysis",
+          "discoverySource": "TechCrunch"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "GeneBench-Pro · Every Eval Ever · ScarfBench",
+      "items": [
+        {
+          "title": "GeneBench-Pro | 生物评测升级",
+          "description": "OpenAI 发布 GeneBench-Pro，用 129 个计算生物学任务评估模型判断力。科研代理评测从答题走向方法选择。",
+          "sourceName": "openai.com",
+          "sourceUrl": "https://openai.com/index/introducing-genebench-pro/",
+          "sourceDateLabel": "2026-06-30",
+          "company": "OpenAI",
+          "topicCluster": "scientific-agent-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "OpenAI News"
+        },
+        {
+          "title": "Every Eval Ever | 评测结果上模型页",
+          "description": "Hugging Face 推出 Every Eval Ever，把社区评测结果显示到模型页面。模型选择正在从宣传榜单转向可追溯证据。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/blog/eee-community-evals",
+          "sourceDateLabel": "2026-06-30",
+          "company": "Hugging Face",
+          "topicCluster": "model-evaluation-transparency",
+          "sourceTier": "evidence",
+          "discoverySource": "Hugging Face Blog"
+        },
+        {
+          "title": "ScarfBench | 评测Java迁移",
+          "description": "IBM Research 在 Hugging Face 发布 ScarfBench，用企业 Java 框架迁移评估代理。评测正贴近真实遗留系统改造。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/blog/ibm-research/scarfbench",
+          "sourceDateLabel": "2026-06-30",
+          "company": "IBM Research",
+          "topicCluster": "enterprise-code-migration-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "Hugging Face Blog"
+        }
+      ]
+    }
+  ]
+}
