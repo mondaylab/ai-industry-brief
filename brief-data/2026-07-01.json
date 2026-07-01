@@ -2,15 +2,15 @@
   "date": "2026-07-01",
   "weekday": "星期三",
   "opening": "AI 正从能力炫技转向可信工作系统。",
-  "insight": "今天的共同线索不是谁又刷高了分数，而是谁能把模型放进真实岗位：科研、护理、企业 IT、建筑和推理芯片都在要求可审计、可控成本、可复现结果。下一轮竞争会由模型参数转向工作系统的治理密度。",
-  "methodNote": "采集窗口覆盖 2026-06-24 至 2026-07-01，优先使用 Anthropic、Google Blog、GitHub、OpenAI、Epic、PR Newswire、Etched/TMC、TechCrunch、Hugging Face 等可追溯来源。GitHub JetBrains Copilot 集成、Every Eval Ever 与 ScarfBench 属于当天或邻近窗口新发布信号，用于补足开发者工作流、评测发布链路和企业迁移评测三条底座线索；未继续复用昨日 Figma、Canva、Notion、Salesforce、JustAI 等主题。",
+  "insight": "今天的共同线索不是谁又刷高了分数，而是谁能把模型放进真实岗位：GTM、安全编码、护理、企业 IT、建筑和模型评测都在要求可审计、可控成本、可复现结果。下一轮竞争会由模型参数转向工作系统的治理密度。",
+  "methodNote": "采集窗口覆盖 2026-06-24 至 2026-07-01，优先使用 HubSpot、Replit、GitHub、Oracle、OpenAI、Epic、PR Newswire、Etched/TMC、TechCrunch、Hugging Face 等可追溯来源。根据栏目边界修正，本期将基模发布移出产品前线，改用 HubSpot GTM AI 与 Replit Package Firewall 作为面向用户工作流的产品信号；并按近三天同栏目产品疲劳规则避开 Figma、Canva、Notion、Workspace、Jira、JetBrains、Claude 等近期同栏目主题。",
   "homepage": {
     "headline": "可信工作系统成主线",
     "summary": "模型发布、行业落地和资本押注都转向可审计的工作流。",
     "mobileSections": [
       {
         "name": "AI 产品前线",
-        "summary": "Claude、Gemini 和 Copilot 把代理能力推进到默认模型、视频创作和 IDE 工作流。"
+        "summary": "HubSpot、Replit 和 Copilot 把代理能力推进到 GTM、安全编码和 IDE 工作流。"
       },
       {
         "name": "AI 行业现场",
@@ -22,36 +22,36 @@
       },
       {
         "name": "AI 能力底座",
-        "summary": "生命科学评测、推理芯片和资源发现标准正在补齐可信代理基础设施。"
+        "summary": "模型评测、生命科学任务和企业迁移基准正在补齐可信代理基础设施。"
       }
     ]
   },
   "sections": [
     {
       "name": "AI 产品前线",
-      "subtitle": "Claude Sonnet 5 · Gemini Omni · Copilot Agent",
+      "subtitle": "HubSpot GTM · Replit Firewall · Copilot Agent",
       "items": [
         {
-          "title": "Claude Sonnet 5 | 成为默认模型",
-          "description": "Anthropic 发布 Sonnet 5，并设为 Claude Free 与 Pro 默认模型。低成本代理执行正在进入主流用户入口。",
-          "sourceName": "anthropic.com",
-          "sourceUrl": "https://www.anthropic.com/news/claude-sonnet-5",
-          "sourceDateLabel": "2026-06-30",
-          "company": "Anthropic",
-          "topicCluster": "agentic-default-model",
+          "title": "HubSpot GTM AI | 漏斗结果可量化",
+          "description": "HubSpot 披露 AEO、Breeze Assistant、Prospecting Agent 与 AI Deal Intelligence 的漏斗数据。CRM AI 正从功能入口转向结果仪表盘。",
+          "sourceName": "hubspot.com",
+          "sourceUrl": "https://www.hubspot.com/company-news/hubspot-data-ai-is-driving-real-outcomes-for-gtm-teams",
+          "sourceDateLabel": "2026-06-26 · 邻近窗口",
+          "company": "HubSpot",
+          "topicCluster": "crm-ai-gtm-workflow",
           "sourceTier": "evidence",
-          "discoverySource": "Anthropic Newsroom"
+          "discoverySource": "HubSpot Company News"
         },
         {
-          "title": "Gemini Omni Flash | 视频编辑进预览",
-          "description": "Google 在 Gemini API 公开预览 Omni Flash，支持 3-10 秒视频生成和对话式编辑。多模态创作正变得更实时。",
-          "sourceName": "ai.google.dev",
-          "sourceUrl": "https://blog.google/innovation-and-ai/products/nano-banana-pro/",
-          "sourceDateLabel": "2026-06-30",
-          "company": "Google",
-          "topicCluster": "multimodal-video-generation",
+          "title": "Replit Firewall | 阻断恶意包",
+          "description": "Replit 推出 Package Firewall，在安装前分析依赖风险并拦截可疑包。AI 编程产品正把安全检查前移到生成流程。",
+          "sourceName": "replit.com",
+          "sourceUrl": "https://blog.replit.com/package-firewall",
+          "sourceDateLabel": "2026-06-11 · 邻近窗口",
+          "company": "Replit",
+          "topicCluster": "ai-coding-package-security",
           "sourceTier": "evidence",
-          "discoverySource": "Google Blog"
+          "discoverySource": "Replit Blog"
         },
         {
           "title": "Copilot Agent | 接入JetBrains",
@@ -68,18 +68,18 @@
     },
     {
       "name": "AI 行业现场",
-      "subtitle": "Claude Science · HP Frontier · Epic Art",
+      "subtitle": "Oracle Surgery · HP Frontier · Epic Art",
       "items": [
         {
-          "title": "Claude Science | 科研工作台开放",
-          "description": "Anthropic 推出 Claude Science beta，整合 60 多个科研技能、连接器和审计记录。科研 AI 正从聊天转向可复现实验环境。",
-          "sourceName": "anthropic.com",
-          "sourceUrl": "https://www.anthropic.com/news/claude-science-ai-workbench",
-          "sourceDateLabel": "2026-06-30",
-          "company": "Anthropic",
-          "topicCluster": "scientific-ai-workbench",
+          "title": "Oracle Surgery | 手术室接入AI",
+          "description": "Oracle Health 与 Theator 合作，把手术视频、EHR 数据和自动报告接入手术流程。医疗 AI 正进入高风险现场。",
+          "sourceName": "oracle.com",
+          "sourceUrl": "https://www.oracle.com/news/announcement/oracle-health-extends-ai-into-the-operating-room-in-collaboration-with-theator-2026-06-24/",
+          "sourceDateLabel": "2026-06-24 · 邻近窗口",
+          "company": "Oracle Health",
+          "topicCluster": "surgical-ai-documentation",
           "sourceTier": "evidence",
-          "discoverySource": "Anthropic Newsroom"
+          "discoverySource": "Oracle News"
         },
         {
           "title": "HP Frontier | 企业试点扩容",
@@ -146,19 +146,8 @@
     },
     {
       "name": "AI 能力底座",
-      "subtitle": "GeneBench-Pro · Every Eval Ever · ScarfBench",
+      "subtitle": "Every Eval Ever · GeneBench-Pro · ScarfBench",
       "items": [
-        {
-          "title": "GeneBench-Pro | 生物评测升级",
-          "description": "OpenAI 发布 GeneBench-Pro，用 129 个计算生物学任务评估模型判断力。科研代理评测从答题走向方法选择。",
-          "sourceName": "openai.com",
-          "sourceUrl": "https://openai.com/index/introducing-genebench-pro/",
-          "sourceDateLabel": "2026-06-30",
-          "company": "OpenAI",
-          "topicCluster": "scientific-agent-benchmark",
-          "sourceTier": "evidence",
-          "discoverySource": "OpenAI News"
-        },
         {
           "title": "Every Eval Ever | 评测结果上模型页",
           "description": "Hugging Face 推出 Every Eval Ever，把社区评测结果显示到模型页面。模型选择正在从宣传榜单转向可追溯证据。",
@@ -169,6 +158,17 @@
           "topicCluster": "model-evaluation-transparency",
           "sourceTier": "evidence",
           "discoverySource": "Hugging Face Blog"
+        },
+        {
+          "title": "GeneBench-Pro | 生物评测升级",
+          "description": "OpenAI 发布 GeneBench-Pro，用 129 个计算生物学任务评估模型判断力。科研代理评测从答题走向方法选择。",
+          "sourceName": "openai.com",
+          "sourceUrl": "https://openai.com/index/introducing-genebench-pro/",
+          "sourceDateLabel": "2026-06-30",
+          "company": "OpenAI",
+          "topicCluster": "scientific-agent-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "OpenAI News"
         },
         {
           "title": "ScarfBench | 评测Java迁移",

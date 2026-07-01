@@ -28,6 +28,31 @@ function normalizeMeta(value) {
     .trim();
 }
 
+function productFamilyFromTitle(title, company) {
+  const text = `${title || ""} ${company || ""}`.toLowerCase();
+  const families = [
+    ["chatgpt", /\bchatgpt\b|\bgpt[- ]?\d/i],
+    ["claude", /\bclaude\b|\banthropic\b/i],
+    ["gemini", /\bgemini\b|\bgoogle workspace\b|\bworkspace drops\b/i],
+    ["copilot", /\bcopilot\b/i],
+    ["perplexity", /\bperplexity\b/i],
+    ["notion", /\bnotion\b/i],
+    ["canva", /\bcanva\b/i],
+    ["figma", /\bfigma\b/i],
+    ["cursor", /\bcursor\b/i],
+    ["runway", /\brunway\b/i],
+    ["jetbrains", /\bjetbrains\b|\bjunie\b/i],
+    ["jira", /\bjira\b|\batlassian\b/i],
+    ["zoom", /\bzoom\b|\bzoommate\b/i],
+    ["hubspot", /\bhubspot\b|\bbreeze\b/i],
+  ];
+  for (const [family, pattern] of families) {
+    if (pattern.test(text)) return family;
+  }
+  const tool = String(title || "").split("|")[0]?.trim().toLowerCase();
+  return tool || normalizeMeta(company);
+}
+
 function sourceDomain(value) {
   try {
     return new URL(value).hostname.replace(/^www\./, "");
@@ -73,6 +98,8 @@ function collectFromDataJson(data) {
         companyNorm: normalizeMeta(item.company),
         topicClusterNorm: normalizeMeta(item.topicCluster),
         sourceTierNorm: normalizeMeta(item.sourceTier),
+        productFamilyNorm: normalizeMeta(item.productFamily || productFamilyFromTitle(item.title, item.company)),
+        sectionName: section.name || "",
       });
     }
   }
@@ -94,6 +121,7 @@ function collectFromHtml(html) {
       titleNorm: normalizeTitle(title),
       keyNorm: normalizeKeyFromTitle(title),
       sourceUrl: (urlMatch && urlMatch[1]) || "",
+      productFamilyNorm: normalizeMeta(productFamilyFromTitle(title, "")),
     });
   }
   return out;
@@ -155,6 +183,53 @@ function checkSemanticConcentration(candidateItems) {
 
   if (itemsWithSemanticMeta === 0) {
     warnings.push("semantic metadata missing: add optional company, topicCluster, sourceTier, discoverySource fields to improve non-repetitive selection");
+  }
+
+  return warnings;
+}
+
+function checkRecentSectionFatigue(root, candidate, candidatePath) {
+  const warnings = [];
+  const candidateDate = String(candidate.date || "").trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(candidateDate)) return warnings;
+
+  const dataDir = path.resolve(root, "brief-data");
+  if (!fs.existsSync(dataDir)) return warnings;
+
+  const recentDates = fs.readdirSync(dataDir)
+    .filter((name) => /^\d{4}-\d{2}-\d{2}\.json$/.test(name))
+    .map((name) => name.slice(0, 10))
+    .filter((date) => date < candidateDate)
+    .sort()
+    .reverse()
+    .slice(0, 3);
+
+  const recentBySection = new Map();
+  for (const date of recentDates) {
+    const fp = path.join(dataDir, `${date}.json`);
+    if (path.resolve(fp) === candidatePath) continue;
+    const data = readJson(fp);
+    for (const section of data.sections || []) {
+      for (const item of section.items || []) {
+        const family = normalizeMeta(item.productFamily || productFamilyFromTitle(item.title, item.company));
+        if (!family) continue;
+        const key = `${section.name || ""}::${family}`;
+        if (!recentBySection.has(key)) recentBySection.set(key, []);
+        recentBySection.get(key).push(`${date} "${item.title || family}"`);
+      }
+    }
+  }
+
+  for (const section of candidate.sections || []) {
+    for (const item of section.items || []) {
+      const family = normalizeMeta(item.productFamily || productFamilyFromTitle(item.title, item.company));
+      if (!family) continue;
+      const key = `${section.name || ""}::${family}`;
+      const recent = recentBySection.get(key) || [];
+      if (recent.length) {
+        warnings.push(`recent same-section product fatigue: "${family}" in "${section.name}" also appeared in ${recent.join(", ")}`);
+      }
+    }
   }
 
   return warnings;
@@ -229,7 +304,10 @@ function main() {
     process.exit(2);
   }
 
-  const warnings = checkSemanticConcentration(candidateItems);
+  const warnings = [
+    ...checkSemanticConcentration(candidateItems),
+    ...checkRecentSectionFatigue(root, candidate, candidatePath),
+  ];
   if (warnings.length > 0) {
     console.warn("Semantic diversity warnings:");
     for (const warning of warnings) console.warn(`- ${warning}`);
