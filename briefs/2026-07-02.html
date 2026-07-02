@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Industry Brief | 07/02 · 星期四 | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #7FA68B;
+  --primary-light: #EFF5F0;
+  --paper: #FCFBF9;
+  --ground: #EEECE8;
+  --text: #151515;
+  --body: #2E2E2E;
+  --rule: #D9D2CE;
+  --headline-rule: color-mix(in srgb, var(--primary) 78%, #151515);
+  --section-ink: var(--primary);
+  --section-ink-soft: var(--primary-light);
+  --section-guide: color-mix(in srgb, var(--primary) 42%, transparent);
+}
+body {
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 26%),
+    radial-gradient(circle at 88% 78%, rgba(127, 166, 201, 0.12), transparent 24%),
+    var(--ground);
+  display: flex;
+  justify-content: center;
+  padding: 36px clamp(32px, 4vw, 72px);
+}
+.card {
+  position: relative;
+  overflow: visible;
+  background: var(--paper);
+  max-width: 1480px;
+  width: 100%;
+  min-height: min(1046px, calc((100vw - 28px) / 1.414));
+  height: auto;
+  padding: 36px clamp(52px, 4.6vw, 72px);
+  border: 1px solid #D8D1CB;
+  box-shadow: 0 6px 30px rgba(17, 17, 17, 0.05);
+  font-family: 'Source Serif 4', 'Noto Serif SC', serif;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  background-image:
+    linear-gradient(rgba(21, 21, 21, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+}
+.card::after {
+  content: "THE AI INDUSTRY BRIEF / GLOBAL SIGNALS";
+  position: absolute;
+  right: 28px;
+  top: 112px;
+  color: rgba(21, 21, 21, 0.18);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  border-bottom: 2px solid var(--text);
+  border-top: 6px solid var(--headline-rule);
+  padding-top: 24px;
+  margin-bottom: 34px;
+}
+.header-left .brand {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+  line-height: 1;
+}
+.header-right { text-align: right; }
+.header-right .lab {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5A5A5A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.header-right .date { font-size: 11px; color: #777; letter-spacing: 0.08em; }
+.quote-card {
+  position: relative;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--primary-light) 72%, transparent), transparent 42%),
+    #F8F6F2;
+  border-top: 1px solid rgba(21, 21, 21, 0.18);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.18);
+  border-left: 0;
+  border-radius: 0;
+  padding: 18px 22px 18px 0;
+  margin-bottom: 46px;
+  font-size: 22px;
+  line-height: 1.42;
+  color: var(--body);
+  font-weight: 500;
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) 230px;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: "LEAD";
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(21, 21, 21, 0.18);
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.quote-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero-illustration {
+  position: relative;
+  width: 230px;
+  height: 128px;
+  z-index: 1;
+  justify-self: end;
+  pointer-events: none;
+  opacity: 0.74;
+}
+.hero-line {
+  fill: none;
+  stroke: var(--section-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero-soft {
+  fill: var(--section-ink-soft);
+  stroke: color-mix(in srgb, var(--section-ink) 28%, transparent);
+  stroke-width: 1;
+}
+.hero-ink {
+  fill: color-mix(in srgb, var(--section-ink) 72%, #151515);
+}
+.hero-label {
+  fill: rgba(21, 21, 21, 0.28);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.quote-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--section-ink) 64%, #151515);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.insight-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section { padding: 14px 0 16px; border-bottom: 0; }
+.sections-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 46px;
+  row-gap: 78px;
+  align-items: stretch;
+  overflow: visible;
+  padding: 8px 10px 4px;
+}
+.sections-layout::before {
+  content: "AI INDUSTRY MAP";
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 0 12px;
+  background: var(--paper);
+  color: rgba(21, 21, 21, 0.34);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+.sections-layout > .section {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 18px 18px 14px;
+  background: color-mix(in srgb, var(--paper) 86%, var(--section-ink-soft));
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  box-shadow: 14px 16px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.sections-layout > .section::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 42px;
+  height: 14px;
+  background: var(--section-ink-soft);
+  border: 1px solid rgba(21, 21, 21, 0.09);
+  transform: skewX(-18deg);
+}
+.sections-layout > .section::after {
+  content: "SIGNAL NODE";
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  color: rgba(21, 21, 21, 0.17);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.sections-layout > .section:nth-of-type(odd) {
+  padding-right: 18px;
+}
+.sections-layout > .section:nth-of-type(even) {
+  padding-left: 18px;
+}
+.sections-layout > .section:nth-of-type(n + 3) {
+  padding-top: 18px;
+}
+.section-header {
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 46px;
+}
+.section-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Inter', 'Noto Serif SC', serif;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 0;
+  border-bottom: 0;
+}
+.section-tag::before {
+  content: attr(data-num);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 36px;
+  background: var(--section-ink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  transform: skewX(-12deg);
+  box-shadow: 8px 8px 0 var(--section-ink-soft);
+}
+.section-tag::after {
+  content: "";
+  position: absolute;
+  left: 64px;
+  right: -96px;
+  top: 50%;
+  z-index: -1;
+  border-top: 1px dashed var(--section-guide);
+  transform: translateY(-50%) rotate(-3deg);
+}
+.section-tag svg { display: none; }
+.section-sub {
+  font-size: 10px;
+  color: #787878;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  margin-left: 66px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1 1 auto;
+}
+.item + .item {
+  margin-top: 0;
+}
+.item {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  background: rgba(252, 251, 249, 0.66);
+  border: 1px solid rgba(21, 21, 21, 0.07);
+  border-radius: 2px;
+  padding: 22px 30px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.item-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.32;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.item-tool { color: #1C1C1C; font-weight: 700; }
+.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-copy { flex: 1; }
+.item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0;
+  font-weight: 700;
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  color: var(--section-ink);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.item-num::before {
+  content: attr(data-mark);
+  font-size: 17px;
+  color: var(--section-ink);
+  line-height: 1;
+}
+.item-desc {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.72;
+  margin-bottom: 0;
+  font-weight: 400;
+  flex: 0 0 auto;
+}
+.item-source {
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.item-source:hover { opacity: 1; text-decoration: underline; }
+.source-date {
+  font-size: 11px;
+  color: #7C7C7C;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.insight-card {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.12);
+  border-left: 0;
+  border-radius: 0;
+  padding: 20px 4px 18px;
+  margin-top: 64px;
+  margin-bottom: 38px;
+  display: grid;
+  grid-template-columns: 188px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: center;
+}
+.insight-label {
+  position: relative;
+  justify-self: center;
+  width: max-content;
+  transform: translateY(12px);
+  margin-bottom: 0;
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.insight-label::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-top: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid color-mix(in srgb, var(--section-ink) 72%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, var(--section-ink) 0 4px, transparent 5px),
+    linear-gradient(45deg, transparent 58%, color-mix(in srgb, var(--section-ink) 72%, transparent) 59% 64%, transparent 65%);
+  box-shadow: 14px 14px 0 var(--section-ink-soft);
+  opacity: 0.9;
+}
+.insight-text {
+  font-size: 18px;
+  color: #242424;
+  line-height: 1.72;
+  font-weight: 500;
+}
+.method-note {
+  grid-column: 2;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #7A7A7A;
+  line-height: 1.6;
+}
+.footer {
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid var(--text);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
+@media (max-width: 560px) {
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
+  .card::before, .card::after, .sections-layout::before { display: none; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
+  .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
+  .quote-card::before { display: none; }
+  .hero-illustration { display: none; }
+  .sections-layout > .section:nth-of-type(odd),
+  .sections-layout > .section:nth-of-type(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .sections-layout > .section::before,
+  .sections-layout > .section::after { display: none; }
+  .sections-layout > .section:nth-of-type(n + 3) { padding-top: 14px; }
+  .section-header { min-height: 40px; }
+  .section-tag { font-size: 18px; gap: 10px; }
+  .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
+  .section-items { gap: 10px; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
+  .item + .item { margin-top: 0; }
+  .section + .section { margin-top: 10px; padding-top: 14px; }
+  .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
+  .item-title { font-size: 16px; gap: 8px; }
+  .item-desc { font-size: 15px; }
+  .insight-card { display: block; padding: 18px 0; }
+  .insight-label { margin-bottom: 10px; transform: none; }
+  .insight-label::after { display: none; }
+  .insight-text { font-size: 16px; }
+  .method-note { margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="header-left"><div class="brand">The AI Industry Brief</div></div>
+    <div class="header-right">
+      <div class="lab">星期一研究室</div>
+      <div class="date">07/02 · 星期四</div>
+    </div>
+  </header>
+
+  <div class="quote-card">
+    <div class="quote-copy">
+    <div class="quote-label">今日一句话</div>
+    AI 竞争开始围绕可交付系统重排。
+  </div>
+  <svg class="hero-illustration" viewBox="0 0 230 154" aria-hidden="true" focusable="false">
+      <path class="hero-soft" d="M25 118 C44 82, 72 77, 94 98 S142 126, 174 91 C190 73, 207 72, 219 82 L219 142 L25 142 Z" />
+      <circle class="hero-soft" cx="175" cy="44" r="26" />
+      <path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M175 18C185 31,185 57,175 70 M153 35H197 M153 53H197" />
+      <path class="hero-line" d="M46 108 L66 72 L86 108 M55 92H77" />
+      <circle class="hero-ink" cx="70" cy="43" r="10" />
+      <path class="hero-soft" d="M47 132 C48 97, 56 63, 70 63 C84 63, 92 97, 93 132 Z" />
+      <path class="hero-line" d="M59 78 C42 83, 33 94, 27 109 M82 78 C100 83, 113 94, 121 109" />
+      <circle class="hero-line" cx="31" cy="102" r="10" />
+      <path class="hero-line" d="M38 109 L49 120" />
+      <path class="hero-line" d="M129 67 H147 M138 58 V76 M125 92 H154 M132 103 H149" />
+      <text class="hero-label" x="118" y="132">GLOBAL SIGNALS</text>
+    </svg>
+  </div>
+
+  <div class="sections-layout">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="01">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+        AI 产品前线
+      </span>
+    </div>
+    <div class="section-sub">Dropbox Connectors · NTT Agent · Outreach</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Dropbox Connectors</span><span class="item-divider"> | </span><span class="item-heading">文件接入Claude</span></span></div>
+      <p class="item-desc">Dropbox 发布面向 Claude 的 Connector 与插件，把团队文件带入对话、代码和协作流程。内容库正成为代理工作入口。</p>
+      <a class="item-source" href="https://blog.dropbox.com/topics/news/work-seamlessly-with-dropbox-in-claude" target="_blank" rel="noopener noreferrer">→ blog.dropbox.com</a><span class="source-date">2026-06-25 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">NTT Agent</span><span class="item-divider"> | </span><span class="item-heading">商品企划提速</span></span></div>
+      <p class="item-desc">NTT DATA 发布面向消费品早期企划的 AI agent 服务。垂直代理正在进入研发、市场和品类协作前端。</p>
+      <a class="item-source" href="https://www.nttdata.com/global/en/news/press-release/2026/june/062200" target="_blank" rel="noopener noreferrer">→ nttdata.com</a><span class="source-date">2026-06-22 · 邻近窗口</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Outreach Agent</span><span class="item-divider"> | </span><span class="item-heading">报告直达</span></span></div>
+      <p class="item-desc">Outreach 在 6 月发布说明中为 Revenue Agent 增加序列表现报告入口。销售 AI 正把代理行为接回收入衡量。</p>
+      <a class="item-source" href="https://support.outreach.io/support/solutions/articles/159000432165-outreach-product-release-notes-june-2026" target="_blank" rel="noopener noreferrer">→ support.outreach.io</a><span class="source-date">2026-06-25 · 邻近窗口</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="02">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="4" cy="5" r="2.2" fill="white"/><circle cx="13" cy="5" r="2.2" fill="white"/><circle cx="8.5" cy="13" r="2.2" fill="white"/><path d="M5.8 6.4L7.3 11M11.2 6.4L9.7 11M6.1 13H3.2M14 13h-2.9" stroke="white" stroke-width="1.35" stroke-linecap="round"/></svg>
+        AI 行业现场
+      </span>
+    </div>
+    <div class="section-sub">Stripe Commerce · OpenAI Jobs · Cloudflare AI Crawl</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Stripe Commerce</span><span class="item-divider"> | </span><span class="item-heading">代理支付落地</span></span></div>
+      <p class="item-desc">Stripe 在 Berlin Tour 发布面向代理商务的支付与风控能力。AI 交易从“推荐商品”推进到可结算闭环。</p>
+      <a class="item-source" href="https://stripe.com/newsroom/news/stripe-tour-berlin-2026" target="_blank" rel="noopener noreferrer">→ stripe.com</a><span class="source-date">2026-06-30</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">OpenAI Jobs</span><span class="item-divider"> | </span><span class="item-heading">量化岗位冲击</span></span></div>
+      <p class="item-desc">OpenAI 发布研究报告，按任务曝光度衡量 AI 对职业的影响。企业部署 AI 将更依赖岗位级重构而非工具采购。</p>
+      <a class="item-source" href="https://openai.com/index/ai-and-jobs/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-27</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Cloudflare Crawl</span><span class="item-divider"> | </span><span class="item-heading">内容访问收费</span></span></div>
+      <p class="item-desc">Cloudflare 推出 AI 爬虫控制与按次付费访问机制。媒体和 SaaS 内容资产开始为 AI 分发重建商业边界。</p>
+      <a class="item-source" href="https://blog.cloudflare.com/making-ai-search-smarter/" target="_blank" rel="noopener noreferrer">→ blog.cloudflare.com</a><span class="source-date">2026-07-01</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="03">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M4 14.5V8.5M9 14.5V3.5M14 14.5V6.5" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M3 15H15.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="4" cy="7" r="1.4" fill="white"/><circle cx="9" cy="2.5" r="1.4" fill="white"/><circle cx="14" cy="5" r="1.4" fill="white"/></svg>
+        AI 资本与牌局
+      </span>
+    </div>
+    <div class="section-sub">Together AI · OXMIQ · Jet.AI</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Together AI</span><span class="item-divider"> | </span><span class="item-heading">估值升至83亿</span></span></div>
+      <p class="item-desc">Together AI 宣布 8 亿美元融资，估值达到 83 亿美元。独立推理云继续成为大模型生态的资本稀缺层。</p>
+      <a class="item-source" href="https://www.businesswire.com/news/home/20260701243402/en/Together-AI-Raises-%24800-Million-at-%248.3-Billion-Valuation-to-Make-Frontier-AI-Accessible-to-All" target="_blank" rel="noopener noreferrer">→ businesswire.com</a><span class="source-date">2026-07-01</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">OXMIQ Labs</span><span class="item-divider"> | </span><span class="item-heading">押注AI PC芯片</span></span></div>
+      <p class="item-desc">OXMIQ Labs 宣布完成 2000 万美元融资，用于 AI PC 加速芯片。端侧算力赛道开始从概念进入供应链卡位。</p>
+      <a class="item-source" href="https://www.globenewswire.com/news-release/2026/07/01/3106416/0/en/OXMIQ-Labs-Closes-20M-Funding-Round-to-Accelerate-AI-PC-Chip-Production.html" target="_blank" rel="noopener noreferrer">→ globenewswire.com</a><span class="source-date">2026-07-01</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Jet.AI</span><span class="item-divider"> | </span><span class="item-heading">合并表决推进</span></span></div>
+      <p class="item-desc">Jet.AI 披露与 flyExclusive 交易已越过多数股东表决门槛。AI 基础设施公司正通过交易重组争夺资本市场入口。</p>
+      <a class="item-source" href="https://www.globenewswire.com/news-release/2026/07/01/3321033/0/en/jet-ai-stockholder-votes-exceed-majority-threshold-for-flyexclusive-transaction.html" target="_blank" rel="noopener noreferrer">→ globenewswire.com</a><span class="source-date">2026-07-01</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="04">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 能力底座
+      </span>
+    </div>
+    <div class="section-sub">Claude Sonnet 5 · Kimi K2.7 · AWS Data Mesh</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Claude Sonnet 5</span><span class="item-divider"> | </span><span class="item-heading">默认模型升级</span></span></div>
+      <p class="item-desc">Anthropic 发布 Claude Sonnet 5，强调代码、代理与长任务能力提升。模型竞争继续向稳定执行和工具调用倾斜。</p>
+      <a class="item-source" href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-06-30</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Kimi K2.7 Code</span><span class="item-divider"> | </span><span class="item-heading">进入Copilot</span></span></div>
+      <p class="item-desc">GitHub 将 Kimi K2.7 Code 加入 Copilot 模型选择。代码代理平台正从单模型体验转为多模型路由市场。</p>
+      <a class="item-source" href="https://github.blog/changelog/2026-07-01-kimi-k2-7-is-now-available-in-github-copilot/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-07-01</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">AWS Data Mesh</span><span class="item-divider"> | </span><span class="item-heading">支撑代理应用</span></span></div>
+      <p class="item-desc">AWS 详解用现代数据网格支撑代理式 AI 应用。企业级代理的瓶颈正从模型转向权限、目录和数据产品化。</p>
+      <a class="item-source" href="https://aws.amazon.com/blogs/machine-learning/building-agentic-ai-applications-with-a-modern-data-mesh-strategy-on-aws/" target="_blank" rel="noopener noreferrer">→ aws.amazon.com</a><span class="source-date">2026-06-25 · 邻近窗口</span>
+    </article>
+    </div>
+  </section>
+  </div>
+
+  <aside class="insight-card">
+    <div class="insight-label">今日洞察</div>
+    <p class="insight-text">今天的主线是交付：产品侧把代理嵌进课堂、客服和办公套件，行业侧把 AI 放进支付、合规和就业结构，资本与底座则继续押注算力、模型和云中介层。AI 公司正在从卖能力转向卖可计量的工作结果。</p>
+    <p class="method-note">采集窗口覆盖 2026-06-25 至 2026-07-02，优先使用 Dropbox、NTT DATA、Outreach、Stripe、OpenAI、Cloudflare、BusinessWire、GlobeNewswire、Anthropic、GitHub、AWS 等可追溯来源。为避开近三天同栏目产品疲劳，本期产品前线未继续使用 Figma、Canva、Notion、Gemini、Salesforce、Microsoft、OpenAI Codex、JetBrains、HubSpot、Replit 等近期主题；个别 6 月下旬官方资料以“邻近窗口”标注。</p>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-lab">星期一研究室出品</div>
+    <div class="footer-sub">The AI Industry Brief</div>
+  </footer>
+</main>
+</body>
+</html>
