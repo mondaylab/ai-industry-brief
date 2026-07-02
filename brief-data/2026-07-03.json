@@ -1,0 +1,199 @@
+{
+  "date": "2026-07-03",
+  "weekday": "星期五",
+  "opening": "AI 的主战场转向治理、计费与交付。",
+  "insight": "今天的信号不是模型参数继续堆高，而是企业把 AI 接入工程、内容、支付、审计和行业交付的账本。谁能解释成本、责任和收入归属，谁就更接近下一阶段的 AI 基础设施入口。",
+  "methodNote": "采集窗口覆盖 2026-06-29 至 2026-07-03，优先使用 GitHub Changelog、Microsoft 官方博客、AWS ML Blog、Cloudflare Blog 等一手来源；资本与牌局部分补充 TechCrunch 解释层报道，用于记录 Microsoft、Anthropic、OpenAI 与 IPO 叙事的外部变化。为呈现当天集中信号，本期保留 2 条 GitHub Copilot 治理相关动态，但分别对应 CI 凭证与 AI 信用池两个不同工作流。",
+  "homepage": {
+    "headline": "AI 进入治理与计费回合",
+    "summary": "工作流、内容、资本和底层能力都开始围绕可审计、可收费、可交付重排。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "消费体验和开发流程都在把 AI 代理变成可直接使用的入口。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "企业交付、安全和内容行业开始围绕 AI 重建运营账本。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资本叙事从融资额转向国家、芯片和公开市场的利益分配。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "成本池、可训练技能和 x402 计费协议补齐代理运行底座。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Meta Pocket · Copilot CLI · TR Library",
+      "items": [
+        {
+          "title": "Meta Pocket | 文生小游戏",
+          "description": "Meta 被曝上线实验性 Pocket 应用，让用户用文本生成并分享互动小游戏。消费级 AI 正从内容生成转向轻量应用生成。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/02/meta-quietly-launches-vibe-coded-gaming-app-pocket/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "Meta",
+          "topicCluster": "consumer-ai-mini-game-generation",
+          "sourceTier": "interpretation",
+          "discoverySource": "TechCrunch AI Feed",
+          "productFamily": "meta-pocket"
+        },
+        {
+          "title": "Copilot CLI | Actions免PAT",
+          "description": "GitHub Copilot CLI 现在可在 Actions 中使用内置 GITHUB_TOKEN。AI 自动化开始减少长效凭证暴露和运维负担。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-07-02-copilot-cli-no-longer-needs-a-personal-access-token-in-github-actions/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "GitHub",
+          "topicCluster": "copilot-cli-ci-authentication",
+          "sourceTier": "evidence",
+          "discoverySource": "GitHub Changelog",
+          "productFamily": "copilot-cli"
+        },
+        {
+          "title": "TR Library | AI重现史料",
+          "description": "Microsoft 报道西奥多·罗斯福总统图书馆上线 AI 互动体验。教育与文化场馆正在把档案转为可对话产品。",
+          "sourceName": "news.microsoft.com",
+          "sourceUrl": "https://news.microsoft.com/signal/articles/ai-theodore-roosevelt-presidential-library/",
+          "sourceDateLabel": "2026-07-01",
+          "company": "Theodore Roosevelt Presidential Library",
+          "topicCluster": "ai-cultural-heritage-product",
+          "sourceTier": "evidence",
+          "discoverySource": "Microsoft Source Feed",
+          "productFamily": "tr-library"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Microsoft Frontier · AWS Bedrock · Cloudflare Report",
+      "items": [
+        {
+          "title": "Microsoft Frontier | 投25亿交付",
+          "description": "Microsoft 成立 Frontier Company，并承诺 25 亿美元投入与 6000 名专家。企业 AI 正从试点采购转向结果交付组织。",
+          "sourceName": "blogs.microsoft.com",
+          "sourceUrl": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "Microsoft",
+          "topicCluster": "enterprise-ai-deployment-services",
+          "sourceTier": "evidence",
+          "discoverySource": "Microsoft Official Blog",
+          "productFamily": "microsoft-frontier"
+        },
+        {
+          "title": "AWS Bedrock | 捕捉AI钓鱼",
+          "description": "AWS 详解用 Bedrock 与 Guardrails 建立邮件钓鱼分析流水线。安全行业开始用模型识别生成式攻击的行为模式。",
+          "sourceName": "aws.amazon.com",
+          "sourceUrl": "https://aws.amazon.com/blogs/machine-learning/how-amazon-bedrock-catches-ai-generated-phishing/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "AWS",
+          "topicCluster": "ai-generated-phishing-defense",
+          "sourceTier": "evidence",
+          "discoverySource": "AWS Machine Learning Blog",
+          "productFamily": "bedrock"
+        },
+        {
+          "title": "Cloudflare Report | 内容账本重估",
+          "description": "Cloudflare 发布代理互联网报告，称 AI 训练爬虫占比快速上升。内容行业的核心问题转向访问控制和价值回流。",
+          "sourceName": "blog.cloudflare.com",
+          "sourceUrl": "https://blog.cloudflare.com/agentic-internet-bot-report/",
+          "sourceDateLabel": "2026-07-01",
+          "company": "Cloudflare",
+          "topicCluster": "ai-crawler-content-economy",
+          "sourceTier": "evidence",
+          "discoverySource": "Cloudflare Blog",
+          "productFamily": "cloudflare-ai-bots"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Anthropic Samsung · OpenAI Equity · IPO AI Hype",
+      "items": [
+        {
+          "title": "Anthropic Samsung | 芯片谈判",
+          "description": "TechCrunch 报道 Anthropic 正与 Samsung 洽谈定制芯片。前沿模型公司继续把议价权延伸到半导体供应链。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "Anthropic",
+          "topicCluster": "frontier-ai-custom-chip-strategy",
+          "sourceTier": "interpretation",
+          "discoverySource": "TechCrunch AI Feed",
+          "productFamily": "anthropic-chip"
+        },
+        {
+          "title": "OpenAI Equity | 公共分配试探",
+          "description": "TechCrunch 报道 OpenAI 曾提议向美国主权财富基金捐出 5% 股权。AI 超额收益正在进入公共利益分配讨论。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/02/openai-proposed-donating-5-of-its-equity-to-a-us-sovereign-wealth-fund/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "OpenAI",
+          "topicCluster": "ai-equity-sovereign-wealth-fund",
+          "sourceTier": "interpretation",
+          "discoverySource": "TechCrunch AI Feed",
+          "productFamily": "openai-governance"
+        },
+        {
+          "title": "Jersey Mike's IPO | AI叙事泛化",
+          "description": "TechCrunch 借 Jersey Mike's IPO 文件观察 AI 表述泛滥。公开市场正在奖励也审视几乎所有公司套用 AI 叙事。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/02/jersey-mikes-ipo-illustrates-how-bad-the-ai-hype-has-become/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "Jersey Mike's",
+          "topicCluster": "public-market-ai-narrative-risk",
+          "sourceTier": "interpretation",
+          "discoverySource": "TechCrunch AI Feed",
+          "productFamily": "ipo-ai-risk"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Cloudflare x402 · Microsoft SkillOpt · GitHub Credit Pools",
+      "items": [
+        {
+          "title": "Cloudflare x402 | 资源按次收费",
+          "description": "Cloudflare 开放 Monetization Gateway 等候名单，计划让网页、API 和 MCP 工具通过 x402 按请求收费。代理经济有了 HTTP 计费入口。",
+          "sourceName": "blog.cloudflare.com",
+          "sourceUrl": "https://blog.cloudflare.com/monetization-gateway/",
+          "sourceDateLabel": "2026-07-01",
+          "company": "Cloudflare",
+          "topicCluster": "agentic-internet-http-payment",
+          "sourceTier": "evidence",
+          "discoverySource": "Cloudflare Blog",
+          "productFamily": "cloudflare-monetization-gateway"
+        },
+        {
+          "title": "Microsoft SkillOpt | 技能可训练",
+          "description": "Microsoft Research 介绍 SkillOpt，把 agent skills 作为可训练参数。代理系统的优化对象正从提示词扩展到技能层。",
+          "sourceName": "microsoft.com",
+          "sourceUrl": "https://www.microsoft.com/en-us/research/blog/skillopt-agent-skills-as-trainable-parameters/",
+          "sourceDateLabel": "2026-07-01",
+          "company": "Microsoft Research",
+          "topicCluster": "agent-skills-trainable-parameters",
+          "sourceTier": "evidence",
+          "discoverySource": "Microsoft Source Feed",
+          "productFamily": "skillopt"
+        },
+        {
+          "title": "GitHub Credit Pools | AI成本分池",
+          "description": "GitHub 成本中心开始支持 AI credit pools，限制团队消耗共享额度。企业级 AI 使用正在进入 FinOps 和 chargeback 阶段。",
+          "sourceName": "github.blog",
+          "sourceUrl": "https://github.blog/changelog/2026-07-02-cost-centers-now-support-included-usage-caps/",
+          "sourceDateLabel": "2026-07-02",
+          "company": "GitHub",
+          "topicCluster": "enterprise-ai-cost-governance",
+          "sourceTier": "evidence",
+          "discoverySource": "GitHub Changelog",
+          "productFamily": "github-cost-centers"
+        }
+      ]
+    }
+  ]
+}
