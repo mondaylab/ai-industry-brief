@@ -51,6 +51,7 @@ Accent pool:
 - The column card is an editorial pick board, not a clean dashboard.
 - Use 8 cards per column.
 - Select by weekly value and representativeness.
+- Final publishing runs should use an explicit weekly picks JSON file. The script fallback is only for previews.
 - Render cards as white blocks with accent shadows.
 - Avoid overlapping text. Overlap shapes if needed, but preserve title legibility.
 - Use section tags such as `产品前线`, `行业现场`, `资本与牌局`, `能力底座` or shortened variants.

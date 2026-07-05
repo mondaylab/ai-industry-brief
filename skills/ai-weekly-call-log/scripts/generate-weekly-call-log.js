@@ -63,49 +63,6 @@ const COLUMNS = [
   },
 ];
 
-const FEATURED_TITLES_BY_SECTION = {
-  产品: [
-    "Notion Platform | 代理接入工作区",
-    "Figma Config | 画布接入新工具",
-    "HubSpot GTM AI | 漏斗结果可量化",
-    "Dropbox Connectors | 文件接入Claude",
-    "Google Meet | AI记会议",
-    "Claude Science | 科研工作台",
-    "Copilot Vision | 图片进代码流",
-    "Home Assistant | 自动化会说话",
-  ],
-  行业: [
-    "Harvey Legal | 律所全面部署",
-    "Agentforce Help | 按结果计费",
-    "Stripe Commerce | 代理支付落地",
-    "Cloudflare Crawl | 内容访问收费",
-    "Microsoft Frontier | 投25亿交付",
-    "AWS FDE | 千名专家进场",
-    "Cloudflare Rules | AI爬取设闸",
-    "GSA Rules | 政府采购设闸",
-  ],
-  资本: [
-    "General Intuition | 3.2亿造空间智能",
-    "Etched | 芯片订单过10亿",
-    "Together AI | 估值升至83亿",
-    "Anthropic Samsung | 芯片谈判",
-    "NVIDIA Neocloud | 收入分成融资",
-    "OpenAI Jalapeno | 自研芯片",
-    "Baseten | 估值到130亿",
-    "Crusoe | 冲击300亿估值",
-  ],
-  底座: [
-    "Secure MCP | 私有工具打通",
-    "Every Eval Ever | 评测结果上模型页",
-    "AWS Data Mesh | 支撑代理应用",
-    "Cloudflare x402 | 资源按次收费",
-    "GitHub Credit Pools | AI成本分池",
-    "Claude Enterprise | 成本可控",
-    "Copilot Agent | 会话流可见",
-    "Sourcegraph MCP | 小模型胜大模",
-  ],
-};
-
 function usage() {
   console.log(`Usage:
   node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js --start YYYY-MM-DD [--out DIR] [--render]
@@ -113,6 +70,7 @@ function usage() {
 Options:
   --start YYYY-MM-DD   First day of the 7-day week.
   --out DIR            Output directory. Default: output/weekly-call-log-YYYY-MM-DD
+  --picks FILE         Optional weekly picks JSON. If omitted, each column uses the first 8 weekly items.
   --color-seed VALUE   Seed for choosing 4 colors from the 7-color pool. Default: --start. Use "random" for a fresh draw.
   --render             Render PNGs with npx playwright screenshot.
   --help               Show this help.`);
@@ -126,6 +84,7 @@ function parseArgs(argv) {
     else if (arg === "--render") args.render = true;
     else if (arg === "--start") args.start = argv[++i];
     else if (arg === "--out") args.out = argv[++i];
+    else if (arg === "--picks") args.picks = argv[++i];
     else if (arg === "--color-seed") args.colorSeed = argv[++i];
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -282,10 +241,51 @@ function shortDate(date) {
   return date.slice(5).replace("-", ".");
 }
 
-function selectedColumnItems(briefs, column) {
+function normalizePickKey(value) {
+  return displayCopy(compactTitle(value)).toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+function loadWeeklyPicks(file) {
+  if (!file) return null;
+  const resolved = path.resolve(ROOT, file);
+  if (!fs.existsSync(resolved)) throw new Error(`Missing weekly picks file: ${resolved}`);
+  const data = JSON.parse(fs.readFileSync(resolved, "utf8"));
+  const columns = data.columns || data;
+  if (!columns || typeof columns !== "object" || Array.isArray(columns)) {
+    throw new Error(`Invalid weekly picks file: ${resolved}. Expected an object or { "columns": { ... } }.`);
+  }
+  return { file: resolved, columns };
+}
+
+function columnPickTitles(weeklyPicks, column) {
+  if (!weeklyPicks) return [];
+  const values = weeklyPicks.columns[column.section] || weeklyPicks.columns[column.title] || weeklyPicks.columns[column.file] || [];
+  if (!Array.isArray(values)) {
+    throw new Error(`Invalid picks for ${column.title} in ${weeklyPicks.file}. Expected an array of titles.`);
+  }
+  return values;
+}
+
+function selectedColumnItems(briefs, column, weeklyPicks) {
   const allItems = briefs.flatMap((brief) => brief.items).filter((item) => item.section === column.section);
-  const featured = FEATURED_TITLES_BY_SECTION[column.section] || [];
-  const picked = featured.map((title) => allItems.find((item) => item.originalTitle === title)).filter(Boolean);
+  const index = new Map();
+  for (const item of allItems) {
+    for (const value of [item.originalTitle, item.title, displayCopy(item.originalTitle), displayCopy(item.title)]) {
+      index.set(normalizePickKey(value), item);
+    }
+  }
+  const wanted = columnPickTitles(weeklyPicks, column);
+  const missing = [];
+  const picked = wanted
+    .map((title) => {
+      const item = index.get(normalizePickKey(title));
+      if (!item) missing.push(title);
+      return item;
+    })
+    .filter(Boolean);
+  if (missing.length > 0) {
+    throw new Error(`Picks not found for ${column.title}: ${missing.join(" / ")}`);
+  }
   const pickedTitles = new Set(picked.map((item) => item.originalTitle));
   return [...picked, ...allItems.filter((item) => !pickedTitles.has(item.originalTitle))].slice(0, 8);
 }
@@ -482,10 +482,10 @@ function baseStyle(accent) {
     }`;
 }
 
-function columnPage(briefs, column, index) {
+function columnPage(briefs, column, index, weeklyPicks) {
   const start = shortDate(briefs[0].date);
   const end = shortDate(briefs[briefs.length - 1].date);
-  const items = selectedColumnItems(briefs, column);
+  const items = selectedColumnItems(briefs, column, weeklyPicks);
   const cards = items
     .map(
       (item, i) => `<article class="pick p${i + 1}">
@@ -581,6 +581,7 @@ function main() {
   if (args.help) return usage();
   const dates = Array.from({ length: 7 }, (_, i) => addDays(args.start, i));
   const briefs = dates.map(readBrief);
+  const weeklyPicks = loadWeeklyPicks(args.picks);
   const columns = assignColumnColors(COLUMNS, args.colorSeed);
   const outDir = path.resolve(ROOT, args.out);
   fs.mkdirSync(outDir, { recursive: true });
@@ -588,13 +589,14 @@ function main() {
   const files = [
     write(path.join(outDir, "00-cover.html"), coverPage(briefs)),
     ...columns.map((column, i) =>
-      write(path.join(outDir, `${String(i + 1).padStart(2, "0")}-${column.file}.html`), columnPage(briefs, column, i))
+      write(path.join(outDir, `${String(i + 1).padStart(2, "0")}-${column.file}.html`), columnPage(briefs, column, i, weeklyPicks))
     ),
     write(path.join(outDir, "05-recap.html"), recapPage(briefs, columns)),
   ];
 
   if (args.render) files.forEach(renderPng);
   console.log(`Generated ${files.length} HTML files${args.render ? " and PNGs" : ""} in ${outDir}`);
+  console.log(`Weekly picks: ${weeklyPicks ? weeklyPicks.file : "fallback first 8 items per column"}`);
   console.log(`Column colors: ${columns.map((column) => `${column.title}=${column.accent}(${column.colorName})`).join(", ")}`);
 }
 

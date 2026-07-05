@@ -22,18 +22,21 @@ Keep this skill scoped to this repository. Do not install it globally unless the
 ```bash
 node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
   --start YYYY-MM-DD \
+  --picks brief-data/weekly-picks-YYYY-MM-DD.json \
   --out output/weekly-call-log-YYYY-MM-DD \
   --render
 ```
 
 4. Inspect at least the cover, one column content card, and the recap PNG. Fix layout collisions before showing results.
-5. Preserve generated HTML next to PNG output so the design can be patched without regenerating data.
-6. For the full operating procedure, follow [../../docs/weekly-call-log-sop.md](../../docs/weekly-call-log-sop.md).
+5. If no weekly picks file exists, create one before final rendering. Use fallback selection only for previews.
+6. Preserve generated HTML next to PNG output so the design can be patched without regenerating data.
+7. For the full operating procedure, follow [../../docs/weekly-call-log-sop.md](../../docs/weekly-call-log-sop.md).
 
 ## Data Rules
 
 - Use `brief-data/YYYY-MM-DD.json` as the only content source.
 - Each of the four column cards displays 8 selected items from that column across the week.
+- Final outputs should use `brief-data/weekly-picks-YYYY-MM-DD.json` for that week’s editorial selection.
 - Select for weekly value and representativeness, not just chronological order. If explicit priority metadata is added later, prefer that.
 - Preserve English model/product names such as `Claude Sonnet`, `GitHub Copilot`, `AWS Data Mesh`, and `Kimi K2.7 Code`.
 - Use `AI Agent` or `Agent` for AI Agent concepts; do not render them as `AI 代理`.
@@ -56,9 +59,11 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 Use `scripts/generate-weekly-call-log.js` for deterministic output. It:
 
 - reads seven daily JSON files
+- optionally reads `--picks brief-data/weekly-picks-YYYY-MM-DD.json` for weekly editorial selection
 - uses `assets/phone-receiver-v1.png` and `assets/rotary-phone-v1.png` for realistic signal-object visuals
 - writes `00-cover.html`, `01-products.html`, `02-industry.html`, `03-capital.html`, `04-infrastructure.html`, and `05-recap.html`
 - selects 4 accents from the 7-color pool. Default color seed is `--start`; use `--color-seed random` or another seed for alternate palettes
+- falls back to the first 8 weekly items per column only when no `--picks` file is provided
 - optionally renders each HTML file to PNG with Playwright via `npx playwright screenshot`
 
 Run `node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js --help` for options.

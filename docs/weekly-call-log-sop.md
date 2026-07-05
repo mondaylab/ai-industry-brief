@@ -30,6 +30,7 @@ brief-data/YYYY-MM-DD.json
 ```bash
 node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
   --start YYYY-MM-DD \
+  --picks brief-data/weekly-picks-YYYY-MM-DD.json \
   --out output/yi-zhou-lai-xin-YYYY-MM-DD \
   --render
 ```
@@ -39,9 +40,39 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 ```bash
 node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
   --start 2026-06-29 \
+  --picks brief-data/weekly-picks-2026-06-29.json \
   --out output/yi-zhou-lai-xin-2026-06-29-to-2026-07-05-4col \
   --render
 ```
+
+## 当周精选文件
+
+中间 4 张栏目页的 8 条内容应根据当周新闻单独选择，不要写死在生成脚本里。
+
+建议每周创建：
+
+```text
+brief-data/weekly-picks-YYYY-MM-DD.json
+```
+
+格式：
+
+```json
+{
+  "weekStart": "YYYY-MM-DD",
+  "weekEnd": "YYYY-MM-DD",
+  "columns": {
+    "产品": ["源数据里的标题 1", "源数据里的标题 2"],
+    "行业": ["源数据里的标题 1", "源数据里的标题 2"],
+    "资本": ["源数据里的标题 1", "源数据里的标题 2"],
+    "底座": ["源数据里的标题 1", "源数据里的标题 2"]
+  }
+}
+```
+
+每个栏目建议写满 8 条。脚本会按标题匹配 `brief-data` 中的当周条目；如果 picks 文件里的标题找不到，会直接报错，避免静默漏选。
+
+没有传 `--picks` 时，脚本会 fallback 到每个栏目按日期顺序取前 8 条，只适合临时预览，不适合作为最终发布版。
 
 ## 颜色规则
 
@@ -64,6 +95,7 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 ```bash
 node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
   --start 2026-06-29 \
+  --picks brief-data/weekly-picks-2026-06-29.json \
   --out output/yi-zhou-lai-xin-2026-06-29-to-2026-07-05-4col-alt \
   --color-seed random \
   --render
@@ -102,4 +134,3 @@ find output/yi-zhou-lai-xin-YYYY-MM-DD -maxdepth 1 \( -name '*.png' -o -name '*.
 file output/yi-zhou-lai-xin-YYYY-MM-DD/*.png
 rg -n "代理|不是|而是|不只是|不再是|不只" output/yi-zhou-lai-xin-YYYY-MM-DD/*.html
 ```
-
