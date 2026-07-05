@@ -64,12 +64,6 @@ jobs:
             return data;
           }
 
-          try {
-            const result = await trigger("/send");
-            console.log(`Feishu screenshot push sent: ${result.messageId || result.deliveryMode || "ok"}`);
-          } catch (error) {
-            console.warn(`Worker screenshot push failed; using published PNG fallback. ${error.message}`);
-            const result = await trigger("/send-image-url", { image_url: imageUrl });
-            console.log(`Feishu fallback image push sent: ${result.messageId || result.deliveryMode || "ok"}`);
-          }
+          const result = await trigger("/send-image-url", { image_url: imageUrl });
+          console.log(`Feishu published PNG push sent: ${result.messageId || result.deliveryMode || "ok"}`);
           NODE
