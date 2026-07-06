@@ -575,8 +575,12 @@ async function main() {
     console.warn(`Worker screenshot push failed; using local PNG fallback. ${error.message}`);
   }
 
-  await captureScreenshot({ date, detailUrl, imagePath });
-  await commitAndPushImage({ date, imagePath });
+  if (fs.existsSync(imagePath)) {
+    console.log(`Using existing published fallback image asset: ${path.relative(repoRoot, imagePath)}`);
+  } else {
+    await captureScreenshot({ date, detailUrl, imagePath });
+    await commitAndPushImage({ date, imagePath });
+  }
   await waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });
 
   try {
