@@ -87,6 +87,12 @@ function splitTitle(title) {
   };
 }
 
+function buildDisplayTitle(title) {
+  const { tool, heading } = splitTitle(title);
+  if (!heading) return `<span class="item-tool">${escapeHtml(tool)}</span>`;
+  return `<span class="item-tool">${escapeHtml(tool)}</span> <span class="item-heading">${escapeHtml(heading)}</span>`;
+}
+
 function buildSectionsHtml(data) {
   return data.sections
     .map((section) => {
@@ -94,9 +100,8 @@ function buildSectionsHtml(data) {
       const icon = SECTION_ICONS[section.name] || "";
       const items = section.items
         .map((item, index) => {
-          const { tool, heading } = splitTitle(item.title);
           return `    <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="${ITEM_MARKS[index]}" aria-label="${String(index + 1).padStart(2, "0")}">${String(index + 1).padStart(2, "0")}</span><span class="item-copy"><span class="item-tool">${escapeHtml(tool)}</span><span class="item-divider"> | </span><span class="item-heading">${escapeHtml(heading)}</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="${ITEM_MARKS[index]}" aria-label="${String(index + 1).padStart(2, "0")}">${String(index + 1).padStart(2, "0")}</span><span class="item-copy">${buildDisplayTitle(item.title)}</span></div>
       <p class="item-desc">${escapeHtml(item.description)}</p>
       <a class="item-source" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">→ ${escapeHtml(item.sourceName)}</a><span class="source-date">${escapeHtml(item.sourceDateLabel)}</span>
     </article>`;
@@ -130,6 +135,10 @@ function renderBriefPage(data) {
   html = replaceOne(html, /<title>[\s\S]*?<\/title>/, `<title>${title}</title>`, "detail title");
   html = replaceOne(html, /--primary:\s*#[0-9A-Fa-f]{6};/, `--primary: ${palette.primary};`, "detail primary");
   html = replaceOne(html, /--primary-light:\s*#[0-9A-Fa-f]{6};/, `--primary-light: ${palette.light};`, "detail primary light");
+  html = html.replace(
+    /\.item-divider,\s*\.item-heading\s*\{\s*color:\s*var\(--text\);\s*font-weight:\s*700;\s*\}/,
+    ".item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }"
+  );
   html = replaceOne(html, /<div class="lab">星期一研究室<\/div>/, '<div class="lab">星期一研究室</div>', "detail lab");
   html = replaceOne(html, /<div class="date">[\s\S]*?<\/div>/, `<div class="date">${dateLabel}</div>`, "detail header date");
   html = replaceOne(
