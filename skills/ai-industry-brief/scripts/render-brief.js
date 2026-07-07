@@ -87,10 +87,18 @@ function splitTitle(title) {
   };
 }
 
-function buildDisplayTitle(title) {
+function buildDisplayTitle(item) {
+  const title = String(item.title || "").trim();
   const { tool, heading } = splitTitle(title);
-  if (!heading) return `<span class="item-tool">${escapeHtml(tool)}</span>`;
-  return `<span class="item-tool">${escapeHtml(tool)}</span> <span class="item-heading">${escapeHtml(heading)}</span>`;
+  if (heading) return `<span class="item-tool">${escapeHtml(tool)}</span> <span class="item-heading">${escapeHtml(heading)}</span>`;
+
+  const company = String(item.company || "").trim();
+  if (company && title.startsWith(`${company} `)) {
+    const rest = title.slice(company.length).trim();
+    return `<span class="item-tool">${escapeHtml(company)}</span> <span class="item-heading">${escapeHtml(rest)}</span>`;
+  }
+
+  return `<span class="item-heading">${escapeHtml(title)}</span>`;
 }
 
 function buildSectionsHtml(data) {
@@ -101,7 +109,7 @@ function buildSectionsHtml(data) {
       const items = section.items
         .map((item, index) => {
           return `    <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="${ITEM_MARKS[index]}" aria-label="${String(index + 1).padStart(2, "0")}">${String(index + 1).padStart(2, "0")}</span><span class="item-copy">${buildDisplayTitle(item.title)}</span></div>
+      <div class="item-title"><span class="item-num" data-mark="${ITEM_MARKS[index]}" aria-label="${String(index + 1).padStart(2, "0")}">${String(index + 1).padStart(2, "0")}</span><span class="item-copy">${buildDisplayTitle(item)}</span></div>
       <p class="item-desc">${escapeHtml(item.description)}</p>
       <a class="item-source" href="${escapeHtml(item.sourceUrl)}" target="_blank" rel="noopener noreferrer">→ ${escapeHtml(item.sourceName)}</a><span class="source-date">${escapeHtml(item.sourceDateLabel)}</span>
     </article>`;
