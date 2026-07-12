@@ -156,6 +156,8 @@ function compactTitle(title) {
 
 function displayCopy(value) {
   return String(value ?? "")
+    .replace(/语音 Agent/g, "Voice Agent")
+    .replace(/语音代理/g, "Voice Agent")
     .replace(/AI 代理/g, "AI Agent")
     .replace(/代理式 AI/g, "Agentic AI")
     .replace(/代理 AI/g, "Agentic AI")
@@ -169,8 +171,15 @@ function displayCopy(value) {
     .replace(/企业级代理/g, "企业级 Agent")
     .replace(/企业代理/g, "企业 Agent")
     .replace(/开发者代理/g, "开发者 Agent")
-    .replace(/外部代理/g, "外部 Agent")
-    .replace(/自主代理/g, "自主 Agent")
+    .replace(/外部 AI 代理/g, "第三方 Agent")
+    .replace(/外部 Agent/g, "第三方 Agent")
+    .replace(/外部代理/g, "第三方 Agent")
+    .replace(/自主 Agent/g, "自主型 Agent")
+    .replace(/自主代理/g, "自主型 Agent")
+    .replace(/多 Agent 投资系统/g, "Multi-Agent 投资系统")
+    .replace(/多 Agent/g, "Multi-Agent 系统")
+    .replace(/多代理系统/g, "Multi-Agent 系统")
+    .replace(/多代理/g, "Multi-Agent 系统")
     .replace(/代理互联网/g, "Agent 互联网")
     .replace(/代理商务/g, "Agent 商务")
     .replace(/代理支付/g, "Agent 支付")
@@ -204,6 +213,14 @@ function displayCopy(value) {
     .replace(/\s{2,}/g, " ");
 }
 
+function hasAgentConcept(value) {
+  return /AI\s*Agent|Agentforce|Agentic|\bagents?\b|代理|agentic/i.test(String(value ?? ""));
+}
+
+function hasVisibleAgentTerm(value) {
+  return /AI\s*Agent|Agentforce|Agentic|\bAgent\b/i.test(String(value ?? ""));
+}
+
 function sectionLabel(name) {
   return String(name)
     .replace(/^AI\s*/, "")
@@ -225,6 +242,8 @@ function readBrief(date) {
       title: compactTitle(item.title),
       originalTitle: item.title,
       description: item.description,
+      topicCluster: item.topicCluster,
+      productFamily: item.productFamily,
       sourceName: item.sourceName,
       sourceDateLabel: item.sourceDateLabel,
     }))
@@ -263,7 +282,11 @@ function columnPickTitles(weeklyPicks, column) {
   if (!Array.isArray(values)) {
     throw new Error(`Invalid picks for ${column.title} in ${weeklyPicks.file}. Expected an array of titles.`);
   }
-  return values;
+  return values.map((value) =>
+    typeof value === "string"
+      ? { sourceTitle: value }
+      : { sourceTitle: value.sourceTitle }
+  );
 }
 
 function selectedColumnItems(briefs, column, weeklyPicks) {
@@ -277,9 +300,9 @@ function selectedColumnItems(briefs, column, weeklyPicks) {
   const wanted = columnPickTitles(weeklyPicks, column);
   const missing = [];
   const picked = wanted
-    .map((title) => {
-      const item = index.get(normalizePickKey(title));
-      if (!item) missing.push(title);
+    .map(({ sourceTitle }) => {
+      const item = index.get(normalizePickKey(sourceTitle));
+      if (!item) missing.push(sourceTitle);
       return item;
     })
     .filter(Boolean);
@@ -300,6 +323,24 @@ function assertCopyQuality(label, html) {
   const text = html.replace(/<[^>]+>/g, " ");
   const hit = banned.map((pattern) => text.match(pattern)?.[0]).find(Boolean);
   if (hit) throw new Error(`Banned copy pattern in ${label}: ${hit}`);
+}
+
+function assertAgentTerminology(label, item, renderedTitle, renderedDescription) {
+  const sourceText = [
+    item.originalTitle,
+    item.title,
+    item.description,
+    item.topicCluster,
+    item.productFamily,
+  ].join(" ");
+  if (!hasAgentConcept(sourceText)) return;
+
+  const renderedText = `${renderedTitle} ${renderedDescription}`;
+  if (!hasVisibleAgentTerm(renderedText)) {
+    throw new Error(
+      `Agent terminology lost in ${label}: "${item.originalTitle}". Keep AI Agent / Agent / Agentic visible instead of abstracting it as governance/control copy.`,
+    );
+  }
 }
 
 function baseStyle(accent) {
@@ -487,16 +528,19 @@ function columnPage(briefs, column, index, weeklyPicks) {
   const end = shortDate(briefs[briefs.length - 1].date);
   const items = selectedColumnItems(briefs, column, weeklyPicks);
   const cards = items
-    .map(
-      (item, i) => `<article class="pick p${i + 1}">
+    .map((item, i) => {
+      const renderedTitle = displayCopy(item.title);
+      const renderedDescription = displayCopy(item.description);
+      assertAgentTerminology(column.title, item, renderedTitle, renderedDescription);
+      return `<article class="pick p${i + 1}">
         <div class="meta"><b>${shortDate(item.date)}</b><span>${esc(item.sourceName || item.weekday)}</span></div>
-        <h2>${esc(displayCopy(item.title))}</h2>
-        <p>${esc(displayCopy(item.description))}</p>
-      </article>`
-    )
+        <h2>${esc(renderedTitle)}</h2>
+        <p>${esc(renderedDescription)}</p>
+      </article>`;
+    })
     .join("\n");
 
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一周来信 ${esc(column.title)}</title><style>
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 ${esc(column.title)}</title><style>
     ${baseStyle(column.accent)}
     .column-title{position:absolute;left:56px;top:150px;width:770px;margin:0;font-size:78px;font-weight:950;line-height:.92;letter-spacing:0;z-index:3}
     .column-title em{display:inline-block;margin-top:16px;padding:0 18px 9px;background:var(--accent);border:2px solid var(--ink);font-style:normal;transform:rotate(-1.6deg)}
@@ -512,7 +556,7 @@ function columnPage(briefs, column, index, weeklyPicks) {
     .column-footer{position:absolute;left:56px;right:56px;bottom:42px;display:flex;align-items:flex-end;justify-content:space-between;color:#68707c;font-size:17px;font-weight:850;z-index:3}
     .column-footer b{color:#111;font-size:20px}
   </style></head><body><main class="poster">
-    <div class="brand">一周来信<span>AI Industry Brief · weekly picks</span></div>
+    <div class="brand">强弱信号<span>AI Industry Brief · weekly picks</span></div>
     <div class="date">${String(index + 1).padStart(2, "0")}<small>${start} · ${end}</small></div>
     <h1 class="column-title">${esc(column.title)}<br><em>${esc(displayCopy(column.headline))}</em></h1>
     <p class="deck">${esc(displayCopy(column.deck))}</p>
@@ -524,7 +568,7 @@ function columnPage(briefs, column, index, weeklyPicks) {
 function coverPage(briefs) {
   const start = briefs[0].date.slice(5).replace("-", ".");
   const end = briefs[6].date.slice(5).replace("-", ".");
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一周来信 Cover</title><style>
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 Cover</title><style>
     ${baseStyle(BRAND_LAVENDER)}
     .cover-title{position:absolute;left:56px;top:190px;width:780px;font-size:112px;font-weight:950;line-height:.9;letter-spacing:0}
     .cover-title span{display:inline-block;margin-top:18px;padding:0 20px 10px;background:var(--accent);border:2px solid var(--ink);transform:rotate(-2deg)}
@@ -533,9 +577,9 @@ function coverPage(briefs) {
     .incoming{position:absolute;left:56px;bottom:64px;width:390px;font-size:34px;font-weight:950;line-height:1.05;z-index:3}
     .incoming small{display:block;margin-top:10px;color:#6e7480;font-size:18px;font-weight:800;line-height:1.18}
   </style></head><body><main class="poster">
-    <div class="brand">一周来信<span>AI Industry Brief · weekly signal letters</span></div>
+    <div class="brand">强弱信号<span>AI Industry Brief · weekly signal scan</span></div>
     <div class="date">${start}<small>${end} · 2026</small></div>
-    <div class="cover-title">一周<br><span>来信</span></div>
+    <div class="cover-title">强弱<br><span>信号</span></div>
     <div class="range">4 个栏目 · 32 条精选</div>
     <img class="phone-asset" src="${RECEIVER_ASSET_URL}" alt="">
     <div class="incoming">6 张图看完一周<small>${esc(displayCopy(dailyHeadline(briefs[0])))} → ${esc(displayCopy(dailyHeadline(briefs[6])))}</small></div>
@@ -545,7 +589,7 @@ function coverPage(briefs) {
 function recapPage(briefs, columns) {
   const lines = columns.map((column) => `<div><b>${esc(column.title)}</b>${esc(displayCopy(column.headline))}</div>`).join("");
   const end = briefs[6].date.slice(5).replace("-", ".");
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>一周来信 Recap</title><style>
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 Recap</title><style>
     ${baseStyle(BRAND_LAVENDER)}
     .end-title{position:absolute;left:56px;top:160px;width:760px;font-size:88px;font-weight:950;line-height:.9}
     .end-title span{display:inline-block;margin-top:18px;padding:0 18px 8px;background:var(--accent);border:2px solid var(--ink);transform:rotate(-1.5deg)}
@@ -554,9 +598,9 @@ function recapPage(briefs, columns) {
     .log b{display:block;margin-bottom:6px;color:color-mix(in srgb,var(--accent) 74%,#111);font-size:17px}
     .main-signal{position:absolute;left:56px;right:56px;bottom:42px;padding:16px 18px;background:var(--accent);border:1.8px solid var(--ink);font-size:24px;font-weight:950;line-height:1.12;box-shadow:8px 8px 0 #111}
   </style></head><body><main class="poster">
-    <div class="brand">一周来信<span>end note · weekly synthesis</span></div>
+    <div class="brand">强弱信号<span>weekly signal scan · synthesis</span></div>
     <div class="date">${end}<small>WEEK CLOSED</small></div>
-    <div class="end-title">本周<br><span>留言</span></div>
+    <div class="end-title">本周<br><span>信号</span></div>
     <img class="phone-asset" src="${ROTARY_ASSET_URL}" alt="">
     <section class="log">${lines}</section>
     <div class="main-signal">本周主信号：AI 正在进入真实工作的入口、账本、权限和责任里。</div>

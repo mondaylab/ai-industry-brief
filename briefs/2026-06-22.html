@@ -344,7 +344,7 @@ body {
   gap: 12px;
 }
 .item-tool { color: #1C1C1C; font-weight: 700; }
-.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }
 .item-copy { flex: 1; }
 .item-num {
   display: inline-flex;
@@ -462,12 +462,14 @@ body {
 .footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
 .footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
 @media (max-width: 560px) {
-  body { padding: 0; }
-  .card { padding: 32px 22px; aspect-ratio: auto; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
   .card::before, .card::after, .sections-layout::before { display: none; }
-  .header-left .brand { font-size: 34px; }
-  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
-  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
   .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
   .quote-card::before { display: none; }
   .hero-illustration { display: none; }
@@ -486,13 +488,15 @@ body {
   .section-header { min-height: 40px; }
   .section-tag { font-size: 18px; gap: 10px; }
   .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
-  .section-tag::after { right: -48px; left: 56px; }
-  .section-sub { margin-left: 56px; }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
   .section-items { gap: 10px; }
-  .item { flex: 0 1 auto; min-height: auto; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
   .item + .item { margin-top: 0; }
   .section + .section { margin-top: 10px; padding-top: 14px; }
   .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
   .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
   .insight-card { display: block; padding: 18px 0; }
@@ -544,18 +548,18 @@ body {
     <div class="section-sub">Canva Gemini · Gemini Admin · ElevenAgents</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Canva Gemini</span><span class="item-divider"> | </span><span class="item-heading">设计入对话</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Canva Gemini</span> <span class="item-heading">设计入对话</span></span></div>
       <p class="item-desc">Canva 让 Gemini 可通过 MCP Server 调用设计生成、搜索、摘要和编辑。创意产品正从独立工具迁入 AI 助手工作流。</p>
       <a class="item-source" href="https://www.canva.com/newsroom/news/google-gemini/" target="_blank" rel="noopener noreferrer">→ canva.com</a><span class="source-date">2026-06 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini Admin</span><span class="item-divider"> | </span><span class="item-heading">临时聊天受控</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini Admin</span> <span class="item-heading">临时聊天受控</span></span></div>
       <p class="item-desc">Google Workspace 新增 Gemini App 管理控制，允许管理员配置临时聊天和用户删除会话历史。企业 AI 体验正把隐私开关前移。</p>
       <a class="item-source" href="https://workspaceupdates.googleblog.com/2026/06/weekly-recap-06-19-2026.html" target="_blank" rel="noopener noreferrer">→ workspaceupdates.googleblog.com</a><span class="source-date">2026-06-19</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenAgents</span><span class="item-divider"> | </span><span class="item-heading">多模态输入</span></span></div>
-      <p class="item-desc">ElevenLabs 说明 ElevenAgents 可处理图片和文档输入，并在会话中携带上下文。语音代理开始补齐文件型业务入口。</p>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenAgents</span> <span class="item-heading">多模态输入</span></span></div>
+      <p class="item-desc">ElevenLabs 说明 ElevenAgents 可处理图片和文档输入，并在会话中携带上下文。Voice Agent 开始补齐文件型业务入口。</p>
       <a class="item-source" href="https://elevenlabs.io/blog/processing-images-and-documents-in-elevenagents" target="_blank" rel="noopener noreferrer">→ elevenlabs.io</a><span class="source-date">2026-06-16</span>
     </article>
     </div>
@@ -571,17 +575,17 @@ body {
     <div class="section-sub">Samsung · LSEG · Korea AI Ecosystem</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Samsung</span><span class="item-divider"> | </span><span class="item-heading">Codex 进制造</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Samsung</span> <span class="item-heading">Codex 进制造</span></span></div>
       <p class="item-desc">OpenAI 宣布 Samsung Electronics 向韩国全员和全球 DX 员工开放 ChatGPT Enterprise 与 Codex。制造巨头把 AI 纳入研发、生产和职能协作。</p>
       <a class="item-source" href="https://openai.com/index/samsung-electronics-chatgpt-codex-deployment/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-21</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">LSEG</span><span class="item-divider"> | </span><span class="item-heading">金融交付提速</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">LSEG</span> <span class="item-heading">金融交付提速</span></span></div>
       <p class="item-desc">OpenAI 案例称 LSEG 用 ChatGPT 与 API 将产品发布周期压到约两周。金融数据企业正在把 AI 从研究助手推进到交付系统。</p>
       <a class="item-source" href="https://openai.com/index/lseg/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-10 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Claude Korea</span><span class="item-divider"> | </span><span class="item-heading">生态本地化</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Claude Korea</span> <span class="item-heading">生态本地化</span></span></div>
       <p class="item-desc">Anthropic 开设首尔办公室，并披露 NAVER、Nexon、LG CNS 等组织采用 Claude。区域 AI 落地开始同时绑定安全、开发和数据驻留。</p>
       <a class="item-source" href="https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-06-17</span>
     </article>
@@ -598,17 +602,17 @@ body {
     <div class="section-sub">OpenAI S-1 · TCS Claude · Runway London</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">OpenAI S-1</span><span class="item-divider"> | </span><span class="item-heading">上市选项打开</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">OpenAI S-1</span> <span class="item-heading">上市选项打开</span></span></div>
       <p class="item-desc">OpenAI 公告已提交保密 S-1，强调尚未决定上市时点。前沿模型公司的资本路径进入可选状态，也会影响算力和治理谈判。</p>
       <a class="item-source" href="https://openai.com/index/openai-submits-confidential-s-1/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-08 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">TCS Claude</span><span class="item-divider"> | </span><span class="item-heading">集成商加码</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">TCS Claude</span> <span class="item-heading">集成商加码</span></span></div>
       <p class="item-desc">Anthropic 与 TCS 合作，后者将为 5 万名员工部署 Claude，并面向金融、医疗和公共服务打包行业方案。AI 渠道战转向系统集成商。</p>
       <a class="item-source" href="https://www.anthropic.com/news/tcs-anthropic-partnership" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-06-12 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Runway London</span><span class="item-divider"> | </span><span class="item-heading">世界模型设点</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Runway London</span> <span class="item-heading">世界模型设点</span></span></div>
       <p class="item-desc">Runway 宣布伦敦成为欧洲总部和世界模型研究中心，计划 18 个月内投入 1 亿美元。视频模型竞争正在转化为区域人才与研发布局。</p>
       <a class="item-source" href="https://runwayml.com/news/runway-opens-london-hq" target="_blank" rel="noopener noreferrer">→ runwayml.com</a><span class="source-date">2026-06-01 · 邻近窗口</span>
     </article>
@@ -625,17 +629,17 @@ body {
     <div class="section-sub">Workers Tracing · A2A · A2UI · Durable Objects</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Workers Tracing</span><span class="item-divider"> | </span><span class="item-heading">自定义跨度</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Workers Tracing</span> <span class="item-heading">自定义跨度</span></span></div>
       <p class="item-desc">Cloudflare Workers tracing 支持开发者创建自定义 spans，并接入 OpenTelemetry 导出。代理运行底座开始需要细粒度可观测性。</p>
       <a class="item-source" href="https://developers.cloudflare.com/changelog/post/2026-06-16-custom-spans/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-06-16</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Google A2A</span><span class="item-divider"> | </span><span class="item-heading">代理互操作</span></span></div>
-      <p class="item-desc">Google Developers 回顾 A2A 协议一周年，强调代理可安全协作和交接任务。多代理系统正在从单厂接口走向跨平台协议层。</p>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Google A2A</span> <span class="item-heading">代理互操作</span></span></div>
+      <p class="item-desc">Google Developers 回顾 A2A 协议一周年，强调代理可安全协作和交接任务。Multi-Agent 系统正在从单厂接口走向跨平台协议层。</p>
       <a class="item-source" href="https://developers.googleblog.com/how-a2a-is-building-a-world-of-collaborative-agents/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-06-18</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">A2UI MCP</span><span class="item-divider"> | </span><span class="item-heading">界面协议并轨</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">A2UI MCP</span> <span class="item-heading">界面协议并轨</span></span></div>
       <p class="item-desc">Google Developers 提出 A2UI 与 MCP Apps 的三种组合模式，让代理既能声明式渲染也能嵌入自定义界面。Agent UI 正在标准化。</p>
       <a class="item-source" href="https://developers.googleblog.com/a2ui-and-mcp-apps/" target="_blank" rel="noopener noreferrer">→ developers.googleblog.com</a><span class="source-date">2026-06-17</span>
     </article>
@@ -651,7 +655,7 @@ body {
 
   <footer class="footer">
     <div class="footer-lab">星期一研究室出品</div>
-    <div class="footer-sub">The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</div>
+    <div class="footer-sub">The AI Industry Brief</div>
   </footer>
 </main>
 </body>

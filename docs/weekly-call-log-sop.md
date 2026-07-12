@@ -1,4 +1,4 @@
-# 一周来信做图 SOP
+# 强弱信号做图 SOP
 
 这套流程用于把连续 7 天的 `brief-data/YYYY-MM-DD.json` 生成一组适合公众号/小红书发布的 3:4 竖版图片。
 
@@ -6,7 +6,7 @@
 
 默认输出 6 张图：
 
-1. `00-cover`：封面，一周来信主视觉
+1. `00-cover`：封面，强弱信号主视觉
 2. `01-products`：产品前线，8 条精选
 3. `02-industry`：行业现场，8 条精选
 4. `03-capital`：资本与牌局，8 条精选
@@ -109,9 +109,11 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 
 ## 文案口径
 
-- 专栏名固定为“一周来信”。
+- 专栏名固定为“强弱信号”。
 - 面向大众读者，标题要直白，避免技术黑话堆叠。
 - 确实指 AI Agent 时，直接写 `AI Agent` 或 `Agent`，不要写“AI 代理”。
+- 不要把 AI Agent 概念改写成“AI 治理”“AI 管控”“AI 可控”“治理能力”等抽象词。只有来源本身讲权限、审计、成本、安全、采购规则、合规或认证时，才使用“治理/管控/可控”。
+- 如果条目讲的是 Agent 接活、分派、执行、调用工具、进入工作流、被评测或上岗，标题或正文里必须保留 `AI Agent` / `Agent` / `Agentic` / `Agentforce` 等可见 Agent 术语。
 - 禁用“不是……而是……”“不只是……也……”这类讲稿腔句式；脚本会在写文件前检查并报错。
 - 每个栏目页只展示 8 条精选，优先选择最能代表本周变化的动态。
 
@@ -125,6 +127,7 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 - 中间 4 张每张都有 8 条卡片。
 - 颜色不刺眼，单张栏目页只使用一个强调色。
 - HTML 中没有中文“代理”残留。
+- Agent 条目没有被抽象成“AI 治理/AI 管控/AI 可控”，可见文案里仍有 `Agent` 或 `Agentic`。
 - HTML 中没有禁用句式。
 
 常用检查命令：
@@ -132,5 +135,5 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 ```bash
 find output/yi-zhou-lai-xin-YYYY-MM-DD -maxdepth 1 \( -name '*.png' -o -name '*.html' \) | wc -l
 file output/yi-zhou-lai-xin-YYYY-MM-DD/*.png
-rg -n "代理|不是|而是|不只是|不再是|不只" output/yi-zhou-lai-xin-YYYY-MM-DD/*.html
+rg -n "代理|AI 治理|AI治理|AI 管控|AI管控|AI 可控|AI可控|不是|而是|不只是|不再是|不只" output/yi-zhou-lai-xin-YYYY-MM-DD/*.html
 ```

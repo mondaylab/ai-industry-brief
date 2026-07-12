@@ -1,9 +1,9 @@
 ---
 name: ai-weekly-call-log
-description: Generate and maintain “一周来信”, The AI Industry Brief weekly 3:4 sticker series from seven daily brief-data JSON files. Use when creating the weekly WeChat/公众号 image carousel, 6-card weekly column posters, realistic signal-object opener/recap cards, lavender brand-anchor cards, or reusable scripts/templates for this repository's weekly visual system.
+description: Generate and maintain “强弱信号”, The AI Industry Brief weekly 3:4 sticker series from seven daily brief-data JSON files. Use when creating the weekly WeChat/公众号 image carousel, 6-card weekly column posters, realistic signal-object opener/recap cards, lavender brand-anchor cards, or reusable scripts/templates for this repository's weekly visual system.
 ---
 
-# 一周来信
+# 强弱信号
 
 Create a 6-card weekly sticker carousel for The AI Industry Brief:
 
@@ -40,7 +40,11 @@ node skills/ai-weekly-call-log/scripts/generate-weekly-call-log.js \
 - Select for weekly value and representativeness, not just chronological order. If explicit priority metadata is added later, prefer that.
 - Preserve English model/product names such as `Claude Sonnet`, `GitHub Copilot`, `AWS Data Mesh`, and `Kimi K2.7 Code`.
 - Use `AI Agent` or `Agent` for AI Agent concepts; do not render them as `AI 代理`.
+- Normalize specific Agent terms as follows: `语音 Agent` → `Voice Agent`, `外部 Agent` → `第三方 Agent`, `自主 Agent` → `自主型 Agent`, and `多 Agent` → `Multi-Agent 系统`. When a noun already supplies `系统`, use forms such as `Multi-Agent 投资系统` and avoid duplicated wording such as `Multi-Agent 系统投资系统`.
+- Do not translate or paraphrase AI Agent concepts as `AI 治理`, `AI 管控`, `AI 可控`, `治理能力`, or other abstract governance wording. Governance/control words may appear only when the source is actually about policy, access control, audit, budget, security, or certification. If an item is about an agent, the visible title or description must still show `AI Agent`, `Agent`, `Agentic`, or the product name containing Agent such as `Agentforce`.
 - Shorten only for visual fit; do not invent facts.
+- Prefer the source daily item's `description` as the single editorial copy source. Write it in a two-sentence editor voice: concrete fact first, plain-language significance second.
+- Do not duplicate rewritten descriptions in weekly picks. Weekly picks should select items; improvements to the copy belong in `brief-data/YYYY-MM-DD.json` so the daily brief, weekly images, and future CLI share the same wording.
 
 ## Visual Rules
 

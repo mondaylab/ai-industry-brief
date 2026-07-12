@@ -1,4 +1,4 @@
-# 一周来信视觉系统
+# 强弱信号视觉系统
 
 ## Job
 
@@ -60,6 +60,9 @@ Accent pool:
 
 - Preserve English product/model names.
 - Use `AI Agent` or `Agent` when the concept is AI Agent. Do not use `AI 代理` in rendered copy.
+- Use the approved visible mappings: `Voice Agent`, `第三方 Agent`, `自主型 Agent`, and `Multi-Agent 系统`. Avoid duplicated compounds; for example, write `Multi-Agent 投资系统`.
+- Never use `AI 治理`, `AI 管控`, `AI 可控`, or `治理能力` as a replacement for `AI Agent` / `Agent`. If the weekly signal is about agents being assigned work, taking actions, using tools, entering workflows, or being evaluated, the card must visibly keep `AI Agent`, `Agent`, `Agentic`, or a concrete Agent product name.
+- Use governance/control vocabulary only for real governance subjects: permissions, audit logs, model access, cost controls, safety, procurement rules, compliance, or certifications.
 - Keep Chinese title chunks short.
 - Strip the vertical bar in source item titles and use a natural compact title.
 - Cover copy should feel like the week’s letter has arrived, not explain.
@@ -76,3 +79,4 @@ Before showing output:
 - Check that no text is hidden behind visual props.
 - Check that a column card does not mix multiple accent colors.
 - Check that rendered HTML has no Chinese `代理` when it means AI Agent.
+- Check that Agent items were not abstracted into `AI 治理` / `AI 管控` / `AI 可控`; Agent terminology should remain visible.

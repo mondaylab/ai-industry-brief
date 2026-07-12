@@ -1,8 +1,8 @@
-# 小红书一周来信风格参考
+# 小红书强弱信号风格参考
 
 ## Positioning
 
-“一周来信”的小红书文案要做两件事：
+“强弱信号”的小红书文案要做两件事：
 
 1. 让非技术读者愿意点开。
 2. 让读者读完后觉得“这周 AI 行业大概发生了什么，我懂了”。
@@ -49,7 +49,7 @@ Example outline:
 ```text
 这周看 AI 新闻，有个感觉很明显：它开始像一个要被管理的员工了。
 
-Notion 让外部 Agent 进入工作区，GitHub 让 Copilot Agent 的执行过程可见，Sourcegraph 让 Agent 批量改代码。
+Notion 让第三方 Agent 进入工作区，GitHub 让 Copilot Agent 的执行过程可见，Sourcegraph 让 Agent 批量改代码。
 
 这说明大家关心的重点变了：能不能回答已经不够了，能不能被分派、被检查、被追责，才是公司真正会买单的部分。
 
@@ -71,7 +71,7 @@ Notion 让外部 Agent 进入工作区，GitHub 让 Copilot Agent 的执行过�
 Default tags:
 
 ```text
-#AI #AI工具 #AIAgent #AI行业 #AI周报 #一周来信 #星期一研究室
+#AI #AI工具 #AIAgent #AI行业 #AI周报 #强弱信号 #星期一研究室
 ```
 
 Add context tags only when relevant:

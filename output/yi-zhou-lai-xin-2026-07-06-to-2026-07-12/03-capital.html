@@ -1,0 +1,238 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 资本与牌局</title><style>
+
+    :root {
+      --ink: #08090b;
+      --paper: #fbfbf7;
+      --muted: #858b97;
+      --accent: #79B7D8;
+      --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
+      --grid: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #e7e7e0;
+      color: var(--ink);
+      font-family: Inter, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .poster {
+      position: relative;
+      width: 900px;
+      height: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 72%, transparent) 0 76px, transparent 77px),
+        radial-gradient(circle at 86% 89%, color-mix(in srgb, var(--accent) 62%, transparent) 0 110px, transparent 111px),
+        var(--paper);
+      background-size: 46px 46px, 46px 46px, auto, auto, auto;
+    }
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 82%, transparent) 0 4px, transparent 5px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent) 0 3px, transparent 4px);
+      background-size: 170px 170px, 250px 250px;
+      background-position: 70px 94px, 38px 188px;
+      pointer-events: none;
+    }
+    .brand {
+      position: absolute;
+      top: 48px;
+      left: 56px;
+      width: 340px;
+      font-size: 18px;
+      font-weight: 950;
+      text-transform: uppercase;
+      line-height: 0.98;
+    }
+    .brand span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      text-transform: none;
+    }
+    .date {
+      position: absolute;
+      top: 42px;
+      right: 52px;
+      text-align: right;
+      font-size: 76px;
+      font-weight: 950;
+      line-height: 0.86;
+    }
+    .date small {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .hook {
+      position: absolute;
+      top: 218px;
+      left: 54px;
+      width: 760px;
+      margin: 0;
+      font-size: 66px;
+      font-weight: 950;
+      line-height: 0.98;
+    }
+    .hook em {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 0 18px 5px;
+      font-style: normal;
+      background: var(--accent-soft);
+      box-shadow: inset 0 -16px 0 color-mix(in srgb, var(--accent) 82%, transparent);
+    }
+    .signal {
+      position: absolute;
+      z-index: 2;
+      width: 330px;
+      min-height: 58px;
+      padding: 12px 14px 12px 15px;
+      border: 1.5px solid #101010;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 7px 7px 0 var(--accent);
+      transform: rotate(var(--r));
+    }
+    .signal .tag {
+      display: inline-block;
+      margin-right: 8px;
+      color: color-mix(in srgb, var(--accent) 70%, #111);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .signal .title {
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.06;
+    }
+    .signal.hot {
+      z-index: 4;
+      width: 510px;
+      padding: 15px 18px 16px;
+      background: var(--accent);
+      box-shadow: 8px 8px 0 #101010;
+    }
+    .signal.hot .tag { color: #111; }
+    .signal.hot .title { font-size: 30px; }
+    .s1 { left: 70px; top: 420px; --r: -2.8deg; }
+    .s2 { left: 382px; top: 476px; width: 500px; --r: 3.2deg; }
+    .s3 { left: 132px; top: 558px; --r: 2.4deg; }
+    .s4 { left: 354px; top: 640px; width: 520px; --r: -2.8deg; }
+    .s5 { left: 62px; top: 690px; --r: -4deg; }
+    .s6 { left: 530px; top: 748px; --r: 2.2deg; }
+    .s7 { left: 126px; top: 810px; --r: 2.9deg; }
+    .s8 { left: 470px; top: 828px; --r: -2.4deg; }
+    .s9 { left: 74px; top: 960px; --r: -1.4deg; }
+    .s10 { left: 390px; top: 952px; --r: 2.8deg; }
+    .s11 { left: 590px; top: 300px; --r: -5deg; }
+    .s12 { left: 562px; top: 1042px; --r: -2deg; }
+    .wire {
+      position: absolute;
+      z-index: 1;
+      left: -50px;
+      bottom: 90px;
+      width: 1040px;
+      height: 74px;
+      border-top: 8px solid #050505;
+      filter: drop-shadow(0 7px 0 var(--accent));
+      transform: rotate(-3deg);
+    }
+    .wire::before {
+      content: "";
+      position: absolute;
+      inset: -28px 0 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, #050505 18px 25px, transparent 25px 43px);
+      clip-path: polygon(0 50%, 100% 12%, 100% 52%, 0 90%);
+      opacity: 0.9;
+    }
+    .footer {
+      position: absolute;
+      z-index: 3;
+      left: 56px;
+      right: 56px;
+      bottom: 42px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 850;
+    }
+    .footer .note {
+      width: 340px;
+      color: #68707c;
+      font-size: 16px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .column-title{position:absolute;left:56px;top:150px;width:770px;margin:0;font-size:78px;font-weight:950;line-height:.92;letter-spacing:0;z-index:3}
+    .column-title em{display:inline-block;margin-top:16px;padding:0 18px 9px;background:var(--accent);border:2px solid var(--ink);font-style:normal;transform:rotate(-1.6deg)}
+    .deck{position:absolute;left:60px;top:330px;width:720px;margin:0;color:#626a76;font-size:22px;font-weight:820;line-height:1.35;z-index:3}
+    .pick-list{position:absolute;left:56px;right:56px;top:450px;display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;z-index:3}
+    .pick{min-height:154px;padding:14px 15px 13px;border:1.6px solid #101010;background:rgba(255,255,255,.9);box-shadow:7px 7px 0 var(--accent);transform:rotate(var(--r))}
+    .pick:nth-child(1){--r:-1.4deg}.pick:nth-child(2){--r:1.2deg}.pick:nth-child(3){--r:1.1deg}.pick:nth-child(4){--r:-1deg}
+    .pick:nth-child(5){--r:-.8deg}.pick:nth-child(6){--r:1.4deg}.pick:nth-child(7){--r:1deg}.pick:nth-child(8){--r:-1.2deg}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;color:color-mix(in srgb,var(--accent) 66%,#111);font-size:15px;font-weight:950;line-height:1}
+    .meta span{min-width:0;color:#7a808a;font-size:12px;font-weight:780;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pick h2{margin:0 0 7px;font-size:22px;font-weight:950;line-height:1.08;letter-spacing:0}
+    .pick p{margin:0;color:#4f5662;font-size:14px;font-weight:720;line-height:1.28}
+    .column-footer{position:absolute;left:56px;right:56px;bottom:42px;display:flex;align-items:flex-end;justify-content:space-between;color:#68707c;font-size:17px;font-weight:850;z-index:3}
+    .column-footer b{color:#111;font-size:20px}
+  </style></head><body><main class="poster">
+    <div class="brand">强弱信号<span>AI Industry Brief · weekly picks</span></div>
+    <div class="date">03<small>07.06 · 07.12</small></div>
+    <h1 class="column-title">资本与牌局<br><em>钱流向算力和交付</em></h1>
+    <p class="deck">融资故事正在从“模型更强”转向推理平台、芯片、数据中心和能真正接管流程的垂直 Agent。</p>
+    <section class="pick-list"><article class="pick p1">
+        <div class="meta"><b>07.07</b><span>businesswire.com</span></div>
+        <h2>Bespoke Labs 融资建设 Agent 训练环境</h2>
+        <p>Bespoke Labs 获得 4000 万美元融资，用于建设可重复、可验证的 AI Agent 训练环境。资本的关注点正从应用成品前移到 Agent 训练基础设施。</p>
+      </article>
+<article class="pick p2">
+        <div class="meta"><b>07.08</b><span>norm.ai</span></div>
+        <h2>Norm Ai 融资 1.2 亿$扩展 Agentic Law</h2>
+        <p>Norm Ai 融资 1.2 亿美元，用于扩展法律合规 Agent 和审计能力。高额融资说明法律 AI 的竞争已经进入企业交付和可信执行阶段。</p>
+      </article>
+<article class="pick p3">
+        <div class="meta"><b>07.09</b><span>prnewswire.com</span></div>
+        <h2>Pearl Health 融资 1.1 亿$扩展医疗 AI</h2>
+        <p>Pearl Health 融资 1.1 亿美元，将扩大 Medicare AI 平台和风险管理产品。医疗 AI 的价值开始直接用支付和成本结果衡量。</p>
+      </article>
+<article class="pick p4">
+        <div class="meta"><b>07.09</b><span>prnewswire.com</span></div>
+        <h2>Oxipital AI 完成 A 轮扩展制造视觉平台</h2>
+        <p>Oxipital AI 完成 A 轮融资，将扩大 V-CORTX 视觉平台在食品制造产线的部署。工业视觉 AI 正从试点项目走向规模化生产工具。</p>
+      </article>
+<article class="pick p5">
+        <div class="meta"><b>07.10</b><span>prnewswire.com</span></div>
+        <h2>Databento 融资 9700 万$扩展金融数据平台</h2>
+        <p>Databento 融资 9700 万美元，继续建设统一金融市场数据 API。模型能力越来越容易获得后，稳定、实时的数据入口反而成为金融 AI 的稀缺底座。</p>
+      </article>
+<article class="pick p6">
+        <div class="meta"><b>07.12</b><span>techcrunch.com</span></div>
+        <h2>Ollama 融资 6500 万$扩展本地模型工具</h2>
+        <p>Ollama 融资 6500 万美元，其开发者用户已接近 900 万。本地模型不再只是技术爱好者的选择，正在形成独立的开发者平台市场。</p>
+      </article>
+<article class="pick p7">
+        <div class="meta"><b>07.12</b><span>finance.yahoo.com</span></div>
+        <h2>GIM 融资 2000 万$扩展 Agentic Investing</h2>
+        <p>GIM 融资 2000 万美元，将 Multi-Agent 投资系统推进到实盘执行。金融 Agent 开始从提供建议走向真实下单，也因此更需要审计和责任边界。</p>
+      </article>
+<article class="pick p8">
+        <div class="meta"><b>07.12</b><span>businesswire.com</span></div>
+        <h2>Arcade 融资 6000 万$建设 Agent 动作层</h2>
+        <p>Arcade 融资 6000 万美元，建设连接权限控制与真实系统的 Agent 安全动作层。当 Agent 开始替人执行操作，谁能约束它如何行动就会成为新的基础设施。</p>
+      </article></section>
+    <div class="column-footer"><b>8 条精选</b><span>COLUMN 03 / 04</span></div>
+  </main></body></html>

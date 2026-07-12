@@ -1,0 +1,238 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 行业现场</title><style>
+
+    :root {
+      --ink: #08090b;
+      --paper: #fbfbf7;
+      --muted: #858b97;
+      --accent: #E8A66D;
+      --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
+      --grid: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #e7e7e0;
+      color: var(--ink);
+      font-family: Inter, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .poster {
+      position: relative;
+      width: 900px;
+      height: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 72%, transparent) 0 76px, transparent 77px),
+        radial-gradient(circle at 86% 89%, color-mix(in srgb, var(--accent) 62%, transparent) 0 110px, transparent 111px),
+        var(--paper);
+      background-size: 46px 46px, 46px 46px, auto, auto, auto;
+    }
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 82%, transparent) 0 4px, transparent 5px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent) 0 3px, transparent 4px);
+      background-size: 170px 170px, 250px 250px;
+      background-position: 70px 94px, 38px 188px;
+      pointer-events: none;
+    }
+    .brand {
+      position: absolute;
+      top: 48px;
+      left: 56px;
+      width: 340px;
+      font-size: 18px;
+      font-weight: 950;
+      text-transform: uppercase;
+      line-height: 0.98;
+    }
+    .brand span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      text-transform: none;
+    }
+    .date {
+      position: absolute;
+      top: 42px;
+      right: 52px;
+      text-align: right;
+      font-size: 76px;
+      font-weight: 950;
+      line-height: 0.86;
+    }
+    .date small {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .hook {
+      position: absolute;
+      top: 218px;
+      left: 54px;
+      width: 760px;
+      margin: 0;
+      font-size: 66px;
+      font-weight: 950;
+      line-height: 0.98;
+    }
+    .hook em {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 0 18px 5px;
+      font-style: normal;
+      background: var(--accent-soft);
+      box-shadow: inset 0 -16px 0 color-mix(in srgb, var(--accent) 82%, transparent);
+    }
+    .signal {
+      position: absolute;
+      z-index: 2;
+      width: 330px;
+      min-height: 58px;
+      padding: 12px 14px 12px 15px;
+      border: 1.5px solid #101010;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 7px 7px 0 var(--accent);
+      transform: rotate(var(--r));
+    }
+    .signal .tag {
+      display: inline-block;
+      margin-right: 8px;
+      color: color-mix(in srgb, var(--accent) 70%, #111);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .signal .title {
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.06;
+    }
+    .signal.hot {
+      z-index: 4;
+      width: 510px;
+      padding: 15px 18px 16px;
+      background: var(--accent);
+      box-shadow: 8px 8px 0 #101010;
+    }
+    .signal.hot .tag { color: #111; }
+    .signal.hot .title { font-size: 30px; }
+    .s1 { left: 70px; top: 420px; --r: -2.8deg; }
+    .s2 { left: 382px; top: 476px; width: 500px; --r: 3.2deg; }
+    .s3 { left: 132px; top: 558px; --r: 2.4deg; }
+    .s4 { left: 354px; top: 640px; width: 520px; --r: -2.8deg; }
+    .s5 { left: 62px; top: 690px; --r: -4deg; }
+    .s6 { left: 530px; top: 748px; --r: 2.2deg; }
+    .s7 { left: 126px; top: 810px; --r: 2.9deg; }
+    .s8 { left: 470px; top: 828px; --r: -2.4deg; }
+    .s9 { left: 74px; top: 960px; --r: -1.4deg; }
+    .s10 { left: 390px; top: 952px; --r: 2.8deg; }
+    .s11 { left: 590px; top: 300px; --r: -5deg; }
+    .s12 { left: 562px; top: 1042px; --r: -2deg; }
+    .wire {
+      position: absolute;
+      z-index: 1;
+      left: -50px;
+      bottom: 90px;
+      width: 1040px;
+      height: 74px;
+      border-top: 8px solid #050505;
+      filter: drop-shadow(0 7px 0 var(--accent));
+      transform: rotate(-3deg);
+    }
+    .wire::before {
+      content: "";
+      position: absolute;
+      inset: -28px 0 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, #050505 18px 25px, transparent 25px 43px);
+      clip-path: polygon(0 50%, 100% 12%, 100% 52%, 0 90%);
+      opacity: 0.9;
+    }
+    .footer {
+      position: absolute;
+      z-index: 3;
+      left: 56px;
+      right: 56px;
+      bottom: 42px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 850;
+    }
+    .footer .note {
+      width: 340px;
+      color: #68707c;
+      font-size: 16px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .column-title{position:absolute;left:56px;top:150px;width:770px;margin:0;font-size:78px;font-weight:950;line-height:.92;letter-spacing:0;z-index:3}
+    .column-title em{display:inline-block;margin-top:16px;padding:0 18px 9px;background:var(--accent);border:2px solid var(--ink);font-style:normal;transform:rotate(-1.6deg)}
+    .deck{position:absolute;left:60px;top:330px;width:720px;margin:0;color:#626a76;font-size:22px;font-weight:820;line-height:1.35;z-index:3}
+    .pick-list{position:absolute;left:56px;right:56px;top:450px;display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;z-index:3}
+    .pick{min-height:154px;padding:14px 15px 13px;border:1.6px solid #101010;background:rgba(255,255,255,.9);box-shadow:7px 7px 0 var(--accent);transform:rotate(var(--r))}
+    .pick:nth-child(1){--r:-1.4deg}.pick:nth-child(2){--r:1.2deg}.pick:nth-child(3){--r:1.1deg}.pick:nth-child(4){--r:-1deg}
+    .pick:nth-child(5){--r:-.8deg}.pick:nth-child(6){--r:1.4deg}.pick:nth-child(7){--r:1deg}.pick:nth-child(8){--r:-1.2deg}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;color:color-mix(in srgb,var(--accent) 66%,#111);font-size:15px;font-weight:950;line-height:1}
+    .meta span{min-width:0;color:#7a808a;font-size:12px;font-weight:780;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pick h2{margin:0 0 7px;font-size:22px;font-weight:950;line-height:1.08;letter-spacing:0}
+    .pick p{margin:0;color:#4f5662;font-size:14px;font-weight:720;line-height:1.28}
+    .column-footer{position:absolute;left:56px;right:56px;bottom:42px;display:flex;align-items:flex-end;justify-content:space-between;color:#68707c;font-size:17px;font-weight:850;z-index:3}
+    .column-footer b{color:#111;font-size:20px}
+  </style></head><body><main class="poster">
+    <div class="brand">强弱信号<span>AI Industry Brief · weekly picks</span></div>
+    <div class="date">02<small>07.06 · 07.12</small></div>
+    <h1 class="column-title">行业现场<br><em>AI 开始接真实工作</em></h1>
+    <p class="deck">法律、医疗、客服、政府采购和内容分发都在把 AI 从试点带进流程，行业开始关心交付、责任和收费边界。</p>
+    <section class="pick-list"><article class="pick p1">
+        <div class="meta"><b>07.07</b><span>prnewswire.com</span></div>
+        <h2>Albania AI 建设主权 AI 系统</h2>
+        <p>Albania AI 将为阿尔巴尼亚部署本国语言模型和公共服务应用，并把数据留在本地管理。主权 AI 正从政策口号变成政府能够实际运行的数字基础设施。</p>
+      </article>
+<article class="pick p2">
+        <div class="meta"><b>07.08</b><span>aws.amazon.com</span></div>
+        <h2>Inscribe 用 Bedrock 检测文档欺诈</h2>
+        <p>Inscribe 用 Amazon Bedrock 构建 Agentic AI，可在 90 秒内检查多类金融文档并识别欺诈风险。金融 AI 的竞争点正落到具体指标上：能替代多少人工审核，又能多快给出结果。</p>
+      </article>
+<article class="pick p3">
+        <div class="meta"><b>07.08</b><span>prnewswire.com</span></div>
+        <h2>RadiantGraph 证明 Voice Agent 可促成复诊</h2>
+        <p>RadiantGraph 用 Voice Agent 主动联系患者并安排复诊，研究中预约率提升了 86%。医疗 Agent 开始用真实患者行为证明价值，而不再只展示对话能力。</p>
+      </article>
+<article class="pick p4">
+        <div class="meta"><b>07.09</b><span>businesswire.com</span></div>
+        <h2>Abrigo 发布银行 Agentic 平台 APX</h2>
+        <p>Abrigo 发布 APX，用 Agentic AI 处理银行获客、风险识别和运营任务。社区银行对 AI 的需求正在从零散工具转向统一的 Agent 工作平台。</p>
+      </article>
+<article class="pick p5">
+        <div class="meta"><b>07.10</b><span>bigbear.ai</span></div>
+        <h2>BigBear.ai 获荷兰机场安检 AI 批准</h2>
+        <p>荷兰批准机场使用 BigBear.ai 的 AI 系统识别行李 CT 扫描中的威胁物品。AI 进入机场安检，意味着它开始参与高风险、强监管的现场判断。</p>
+      </article>
+<article class="pick p6">
+        <div class="meta"><b>07.12</b><span>openai.com</span></div>
+        <h2>Deutsche Telekom 用 OpenAI 改造电信运营</h2>
+        <p>Deutsche Telekom 将 ChatGPT 和 OpenAI API 用于员工流程、客服与网络运营。大型企业采用 AI 的重心，正在从个人提效转向改造核心运营环节。</p>
+      </article>
+<article class="pick p7">
+        <div class="meta"><b>07.12</b><span>prnewswire.com</span></div>
+        <h2>OpenEvidence 发布 EvidenceGrade 评估医学证据</h2>
+        <p>OpenEvidence 发布 EvidenceGrade，为 AI 回答引用的医学证据实时评级。医疗 AI 要获得医生信任，证据透明度和回答速度同样重要。</p>
+      </article>
+<article class="pick p8">
+        <div class="meta"><b>07.12</b><span>prnewswire.com</span></div>
+        <h2>Cresta 发布客服 Agent 培训模拟器</h2>
+        <p>Cresta 推出培训模拟器，用 AI Agent 扮演客户并训练人工客服。客服 Agent 没有只走向替代人工，也开始成为培训和质检工具。</p>
+      </article></section>
+    <div class="column-footer"><b>8 条精选</b><span>COLUMN 02 / 04</span></div>
+  </main></body></html>

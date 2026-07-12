@@ -344,7 +344,7 @@ body {
   gap: 12px;
 }
 .item-tool { color: #1C1C1C; font-weight: 700; }
-.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }
 .item-copy { flex: 1; }
 .item-num {
   display: inline-flex;
@@ -462,12 +462,14 @@ body {
 .footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
 .footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
 @media (max-width: 560px) {
-  body { padding: 0; }
-  .card { padding: 32px 22px; aspect-ratio: auto; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
   .card::before, .card::after, .sections-layout::before { display: none; }
-  .header-left .brand { font-size: 34px; }
-  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
-  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
   .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
   .quote-card::before { display: none; }
   .hero-illustration { display: none; }
@@ -486,13 +488,15 @@ body {
   .section-header { min-height: 40px; }
   .section-tag { font-size: 18px; gap: 10px; }
   .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
-  .section-tag::after { right: -48px; left: 56px; }
-  .section-sub { margin-left: 56px; }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
   .section-items { gap: 10px; }
-  .item { flex: 0 1 auto; min-height: auto; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
   .item + .item { margin-top: 0; }
   .section + .section { margin-top: 10px; padding-top: 14px; }
   .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
   .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
   .insight-card { display: block; padding: 18px 0; }
@@ -536,25 +540,25 @@ body {
   <div class="sections-layout">
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="01">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 工作台
       </span>
     </div>
     <div class="section-sub">Asana AI Teammates · Microsoft Work IQ · GitHub Copilot App</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Asana AI Teammates</span><span class="item-divider"> | </span><span class="item-heading">人机团队成套</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Asana AI Teammates</span> <span class="item-heading">人机团队成套</span></span></div>
       <p class="item-desc">Asana 发布面向 human-agent teams 的工作操作系统，把代理放进同一计划、上下文和治理框架。协作工作台正在从任务列表，升级为人机共管层。</p>
       <a class="item-source" href="https://investors.asana.com/news-releases/news-release-details/asana-unveils-operating-system-human-agent-teams" target="_blank" rel="noopener noreferrer">→ investors.asana.com</a><span class="source-date">2026-06-04</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Microsoft Work IQ</span><span class="item-divider"> | </span><span class="item-heading">上下文 API 开放</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Microsoft Work IQ</span> <span class="item-heading">上下文 API 开放</span></span></div>
       <p class="item-desc">Microsoft 宣布 Work IQ APIs 将在 6 月 16 日 GA，并以消费模式向代理开放组织上下文。办公入口的护城河正在变成可编程的企业记忆。</p>
       <a class="item-source" href="https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/announcing-the-new-work-iq-apis/" target="_blank" rel="noopener noreferrer">→ microsoft.com</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Copilot App</span><span class="item-divider"> | </span><span class="item-heading">桌面代理成形</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Copilot App</span> <span class="item-heading">桌面代理成形</span></span></div>
       <p class="item-desc">GitHub 在 Build 期间扩展 Copilot App，把代理会话、差异审阅和任务轨迹放进桌面端。开发工作台开始围绕管理多个代理产出而重组。</p>
       <a class="item-source" href="https://github.blog/news-insights/product-news/github-copilot-app-the-agent-native-desktop-experience/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-02</span>
     </article>
@@ -563,25 +567,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="02">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 信息美学
       </span>
     </div>
     <div class="section-sub">Runway Aleph · Runway MCP · ElevenLabs</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Runway Aleph 2.0</span><span class="item-divider"> | </span><span class="item-heading">精修视频延长</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Runway Aleph 2.0</span> <span class="item-heading">精修视频延长</span></span></div>
       <p class="item-desc">Runway Aleph 2.0 支持 30 秒 1080p 视频、定点修改和跨镜头编辑。视频生成的价值正在从一次生成，转向可控修改和广告级交付。</p>
       <a class="item-source" href="https://runwayml.com/product/aleph-2" target="_blank" rel="noopener noreferrer">→ runwayml.com</a><span class="source-date">2026-05-21 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Runway MCP</span><span class="item-divider"> | </span><span class="item-heading">创意节点外接</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Runway MCP</span> <span class="item-heading">创意节点外接</span></span></div>
       <p class="item-desc">Runway MCP 让 Claude、ChatGPT、Cursor 等代理直接调用图像和视频生成模型。创意能力正在变成工作流节点，而不是独立创作站点。</p>
       <a class="item-source" href="https://runwayml.com/mcp" target="_blank" rel="noopener noreferrer">→ runwayml.com</a><span class="source-date">2026-05-27 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenLabs SDK</span><span class="item-divider"> | </span><span class="item-heading">语音代理细化</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenLabs SDK</span> <span class="item-heading">Voice Agent 细化</span></span></div>
       <p class="item-desc">ElevenLabs 6 月 changelog 加入 Exotel 电话集成、工作流节点转接和代理重复测试。语音审美竞争正转向可路由、可验证的服务体验。</p>
       <a class="item-source" href="https://elevenlabs.io/docs/changelog" target="_blank" rel="noopener noreferrer">→ elevenlabs.io</a><span class="source-date">2026-06-01</span>
     </article>
@@ -590,25 +594,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="03">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 流水线
       </span>
     </div>
     <div class="section-sub">VS Code Agents · Cloudflare Browser Run · Foundry Agents</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">VS Code Agents</span><span class="item-divider"> | </span><span class="item-heading">会话窗口稳定</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">VS Code Agents</span> <span class="item-heading">会话窗口稳定</span></span></div>
       <p class="item-desc">GitHub Copilot in VS Code 的五月更新把 Agents window 带到 Stable 预览，并加强长程会话远程控制。开发流水线开始为代理并行运行设计主界面。</p>
       <a class="item-source" href="https://github.blog/changelog/2026-06-03-github-copilot-in-visual-studio-code-may-releases/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-03</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Browser Run</span><span class="item-divider"> | </span><span class="item-heading">浏览器托管代理</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Browser Run</span> <span class="item-heading">浏览器托管代理</span></span></div>
       <p class="item-desc">Cloudflare Browser Run 将边缘 Headless Chrome、CDP 和 MCP 客户端放到同一产品中。网页自动化从本机脚本，转向云端可托管的代理基础设施。</p>
       <a class="item-source" href="https://developers.cloudflare.com/browser-rendering/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-04-21 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Foundry Agents</span><span class="item-divider"> | </span><span class="item-heading">托管后端换代</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Foundry Agents</span> <span class="item-heading">托管后端换代</span></span></div>
       <p class="item-desc">Microsoft Foundry 要求旧版 hosted agents 迁移到 refreshed preview，改用会话沙箱和新管理 API。代理流水线正在把生命周期治理前置。</p>
       <a class="item-source" href="https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/migrate-hosted-agent-preview" target="_blank" rel="noopener noreferrer">→ learn.microsoft.com</a><span class="source-date">2026-05-22 · 最近官方参考</span>
     </article>
@@ -617,25 +621,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="04">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 大模型
       </span>
     </div>
     <div class="section-sub">NVIDIA Nemotron · Gemini 3.5 Flash · GPT-5.5 Instant</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Nemotron 3 Ultra</span><span class="item-divider"> | </span><span class="item-heading">长程代理降本</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Nemotron 3 Ultra</span> <span class="item-heading">长程代理降本</span></span></div>
       <p class="item-desc">NVIDIA 发布 Nemotron 3 Ultra，称其面向长程代理可提升推理速度并降低复杂任务成本。开放模型竞争正在直接瞄准企业代理吞吐。</p>
       <a class="item-source" href="https://investor.nvidia.com/news/press-release-details/2026/Enterprise-Software-Leaders-Build-AI-Agents-With-NVIDIA/default.aspx" target="_blank" rel="noopener noreferrer">→ investor.nvidia.com</a><span class="source-date">2026-06-01</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini 3.5 Flash</span><span class="item-divider"> | </span><span class="item-heading">代理评测前置</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Gemini 3.5 Flash</span> <span class="item-heading">代理评测前置</span></span></div>
       <p class="item-desc">Google DeepMind 的 Gemini 3.5 Flash 模型卡把编码、MCP 多步工作流和工具使用列为核心评测。模型发布正在围绕代理任务定义可比性。</p>
       <a class="item-source" href="https://deepmind.google/models/model-cards/gemini-3-5-flash/" target="_blank" rel="noopener noreferrer">→ deepmind.google</a><span class="source-date">2026-05-19 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">GPT-5.5 Instant</span><span class="item-divider"> | </span><span class="item-heading">默认模型加护栏</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">GPT-5.5 Instant</span> <span class="item-heading">默认模型加护栏</span></span></div>
       <p class="item-desc">OpenAI 的 GPT-5.5 Instant 系统卡把网络安全和生化准备列为高能力风险域。默认模型升级的核心，正在从更聪明扩展到更可控。</p>
       <a class="item-source" href="https://openai.com/index/gpt-5-5-instant-system-card/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-05-05 · 最近官方参考</span>
     </article>
@@ -651,7 +655,7 @@ body {
 
   <footer class="footer">
     <div class="footer-lab">星期一研究室出品</div>
-    <div class="footer-sub">The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</div>
+    <div class="footer-sub">The AI Industry Brief</div>
   </footer>
 </main>
 </body>

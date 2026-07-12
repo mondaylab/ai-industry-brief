@@ -344,7 +344,7 @@ body {
   gap: 12px;
 }
 .item-tool { color: #1C1C1C; font-weight: 700; }
-.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }
 .item-copy { flex: 1; }
 .item-num {
   display: inline-flex;
@@ -462,12 +462,14 @@ body {
 .footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
 .footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
 @media (max-width: 560px) {
-  body { padding: 0; }
-  .card { padding: 32px 22px; aspect-ratio: auto; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
   .card::before, .card::after, .sections-layout::before { display: none; }
-  .header-left .brand { font-size: 34px; }
-  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
-  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
   .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
   .quote-card::before { display: none; }
   .hero-illustration { display: none; }
@@ -486,13 +488,15 @@ body {
   .section-header { min-height: 40px; }
   .section-tag { font-size: 18px; gap: 10px; }
   .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
-  .section-tag::after { right: -48px; left: 56px; }
-  .section-sub { margin-left: 56px; }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
   .section-items { gap: 10px; }
-  .item { flex: 0 1 auto; min-height: auto; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
   .item + .item { margin-top: 0; }
   .section + .section { margin-top: 10px; padding-top: 14px; }
   .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
   .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
   .insight-card { display: block; padding: 18px 0; }
@@ -536,25 +540,25 @@ body {
   <div class="sections-layout">
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="01">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 工作台
       </span>
     </div>
     <div class="section-sub">Microsoft Scout · Mistral Vibe · OpenAI Codex</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Microsoft Scout</span><span class="item-divider"> | </span><span class="item-heading">常驻代理上线</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Microsoft Scout</span> <span class="item-heading">常驻代理上线</span></span></div>
       <p class="item-desc">Microsoft 发布 Scout，强调由 Work IQ 持续学习用户关心的事项和下一步行动。个人工作台正从被动问答，转向常驻上下文与主动提醒。</p>
       <a class="item-source" href="https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/introducing-microsoft-scout-your-always-on-personal-agent/" target="_blank" rel="noopener noreferrer">→ microsoft.com</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Mistral Vibe</span><span class="item-divider"> | </span><span class="item-heading">工作代码合并</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Mistral Vibe</span> <span class="item-heading">工作代码合并</span></span></div>
       <p class="item-desc">Mistral 将 Le Chat 升级为 Vibe，统一 Work Mode、Code Mode、VS Code 扩展和远程编码代理。工作台入口开始覆盖代码交付。</p>
       <a class="item-source" href="https://mistral.ai/fr/news/vibe-agent/" target="_blank" rel="noopener noreferrer">→ mistral.ai</a><span class="source-date">2026-05-28</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">OpenAI Codex</span><span class="item-divider"> | </span><span class="item-heading">知识工作扩张</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">OpenAI Codex</span> <span class="item-heading">知识工作扩张</span></span></div>
       <p class="item-desc">OpenAI 发布 Codex 知识工作报告，称非开发用户正在用它产出报告、表格和轻量工具。工作台竞争开始从专业软件，扩展到全员代理入口。</p>
       <a class="item-source" href="https://openai.com/index/codex-for-knowledge-work/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-02</span>
     </article>
@@ -563,26 +567,26 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="02">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 信息美学
       </span>
     </div>
     <div class="section-sub">Adobe Firefly · Canva Claude Design · ElevenAgents</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Firefly AI Assistant</span><span class="item-divider"> | </span><span class="item-heading">对话编排创作</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Firefly AI Assistant</span> <span class="item-heading">对话编排创作</span></span></div>
       <p class="item-desc">Adobe Firefly AI Assistant 以对话方式设置并执行多步创意流程，整合 Firefly 与创意工具。设计软件正在变成可委托的创作代理。</p>
       <a class="item-source" href="https://helpx.adobe.com/uk/firefly/web/firefly-ai-assistant/firefly-ai-assistant-overview.html" target="_blank" rel="noopener noreferrer">→ helpx.adobe.com</a><span class="source-date">2026-04-28 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Canva Claude Design</span><span class="item-divider"> | </span><span class="item-heading">设计层外接</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Canva Claude Design</span> <span class="item-heading">设计层外接</span></span></div>
       <p class="item-desc">Canva 接入 Claude Design，让 AI 草稿可转成可编辑、可协作的品牌设计。生成内容的下一步，不是更多图片，而是进入可交付的设计层。</p>
       <a class="item-source" href="https://www.canva.com/newsroom/news/canva-claude-design/" target="_blank" rel="noopener noreferrer">→ canva.com</a><span class="source-date">2026-05-21 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenAgents</span><span class="item-divider"> | </span><span class="item-heading">语音流程细化</span></span></div>
-      <p class="item-desc">ElevenLabs 更新 ElevenAgents，加入 Exotel 电话集成、工作流节点转接和重复测试。语音代理的审美竞争，正转向可测、可路由的服务体验。</p>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenAgents</span> <span class="item-heading">语音流程细化</span></span></div>
+      <p class="item-desc">ElevenLabs 更新 ElevenAgents，加入 Exotel 电话集成、工作流节点转接和重复测试。Voice Agent 的审美竞争，正转向可测、可路由的服务体验。</p>
       <a class="item-source" href="https://elevenlabs.io/docs/changelog/2026/6/1" target="_blank" rel="noopener noreferrer">→ elevenlabs.io</a><span class="source-date">2026-06-01</span>
     </article>
     </div>
@@ -590,25 +594,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="03">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 流水线
       </span>
     </div>
     <div class="section-sub">Copilot CLI · Agent Memory · OpenAI on AWS</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Copilot CLI</span><span class="item-divider"> | </span><span class="item-heading">终端代理扩展</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Copilot CLI</span> <span class="item-heading">终端代理扩展</span></span></div>
       <p class="item-desc">GitHub Copilot CLI 在 Build 2026 刷新 UI，并加入 rubber duck、提示调度和语音输入。开发流水线正在把排程合到终端。</p>
       <a class="item-source" href="https://github.blog/changelog/2026-06-02-copilot-cli-improved-ui-rubber-duck-prompt-scheduling-and-voice-input/" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Agent Memory</span><span class="item-divider"> | </span><span class="item-heading">长期记忆托管</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Agent Memory</span> <span class="item-heading">长期记忆托管</span></span></div>
       <p class="item-desc">Cloudflare 发布 Agent Memory 文档，提供跨会话召回、批量摄取和命名空间配置。代理流水线正在把记忆从应用逻辑，下沉为平台绑定。</p>
       <a class="item-source" href="https://developers.cloudflare.com/agent-memory/get-started/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">OpenAI on AWS</span><span class="item-divider"> | </span><span class="item-heading">模型供给扩渠</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">OpenAI on AWS</span> <span class="item-heading">模型供给扩渠</span></span></div>
       <p class="item-desc">OpenAI 宣布前沿模型与 Codex 已在 AWS 上一般可用。企业代理流水线的采购逻辑，正在从单一 API 转向云平台承诺与既有账单体系。</p>
       <a class="item-source" href="https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-01</span>
     </article>
@@ -617,25 +621,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="04">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 大模型
       </span>
     </div>
     <div class="section-sub">Mistral AI Now · Physics AI · Anthropic Series H</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Mistral AI Now</span><span class="item-divider"> | </span><span class="item-heading">工业模型成栈</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Mistral AI Now</span> <span class="item-heading">工业模型成栈</span></span></div>
       <p class="item-desc">Mistral AI Now Summit 发布工业工程、Vibe 代理和自有推理数据中心进展。大模型公司正把模型、行业知识和算力控制打包出售。</p>
       <a class="item-source" href="https://mistral.ai/news/ai-now-summit-2026" target="_blank" rel="noopener noreferrer">→ mistral.ai</a><span class="source-date">2026-05-28</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Physics AI</span><span class="item-divider"> | </span><span class="item-heading">工程模型专用化</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Physics AI</span> <span class="item-heading">工程模型专用化</span></span></div>
       <p class="item-desc">Mistral 介绍 Physics AI，面向仿真、设计空间探索和工业工程部署。基础模型竞争正在分化出物理、工程等高价值垂直推理底座。</p>
       <a class="item-source" href="https://mistral.ai/news/introducing-physics-ai-at-mistral" target="_blank" rel="noopener noreferrer">→ mistral.ai</a><span class="source-date">2026-05-27 · 邻近窗口</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Anthropic Series H</span><span class="item-divider"> | </span><span class="item-heading">资本绑定算力</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Anthropic Series H</span> <span class="item-heading">资本绑定算力</span></span></div>
       <p class="item-desc">Anthropic 宣布 650 亿美元 Series H 融资，称 Claude、Claude Code 与 Cowork 进入更多核心业务。模型公司仍在用资本放大算力。</p>
       <a class="item-source" href="https://www.anthropic.com/news/series-h" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-05-28</span>
     </article>
@@ -651,7 +655,7 @@ body {
 
   <footer class="footer">
     <div class="footer-lab">星期一研究室出品</div>
-    <div class="footer-sub">The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</div>
+    <div class="footer-sub">The AI Industry Brief</div>
   </footer>
 </main>
 </body>

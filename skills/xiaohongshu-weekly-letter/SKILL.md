@@ -1,11 +1,11 @@
 ---
 name: xiaohongshu-weekly-letter
-description: Generate Xiaohongshu titles, post body copy, hooks, and hashtags for “一周来信” based on a week of The AI Industry Brief data. Use when drafting 小红书/社媒 copy for weekly AI industry dynamics, especially when the user asks for 网感标题, 小红书标题, 正文, caption, hashtags, or a publish-ready post from brief-data and weekly-picks.
+description: Generate Xiaohongshu titles, post body copy, hooks, and hashtags for “强弱信号” based on a week of The AI Industry Brief data. Use when drafting 小红书/社媒 copy for weekly AI industry dynamics, especially when the user asks for 网感标题, 小红书标题, 正文, caption, hashtags, or a publish-ready post from brief-data and weekly-picks.
 ---
 
-# 小红书一周来信文案
+# 小红书强弱信号文案
 
-Create Xiaohongshu-ready copy for the weekly column “一周来信”. The output should feel like a sharp creator post based on the week’s AI industry dynamics, not a generic AI summary.
+Create Xiaohongshu-ready copy for the weekly column “强弱信号”. The output should feel like a sharp creator post based on the week’s AI industry dynamics, not a generic AI summary.
 
 ## Inputs
 
@@ -61,7 +61,7 @@ For a normal request, return:
 ...
 
 话题：
-#AI #AI工具 #AIAgent #AI行业 #一周来信 #星期一研究室
+#AI #AI工具 #AIAgent #AI行业 #强弱信号 #星期一研究室
 ```
 
 If the user asks for multiple styles, provide concise variants:

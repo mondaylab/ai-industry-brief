@@ -1,0 +1,192 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 Recap</title><style>
+
+    :root {
+      --ink: #08090b;
+      --paper: #fbfbf7;
+      --muted: #858b97;
+      --accent: #B7A8E6;
+      --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
+      --grid: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #e7e7e0;
+      color: var(--ink);
+      font-family: Inter, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .poster {
+      position: relative;
+      width: 900px;
+      height: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 72%, transparent) 0 76px, transparent 77px),
+        radial-gradient(circle at 86% 89%, color-mix(in srgb, var(--accent) 62%, transparent) 0 110px, transparent 111px),
+        var(--paper);
+      background-size: 46px 46px, 46px 46px, auto, auto, auto;
+    }
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 82%, transparent) 0 4px, transparent 5px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent) 0 3px, transparent 4px);
+      background-size: 170px 170px, 250px 250px;
+      background-position: 70px 94px, 38px 188px;
+      pointer-events: none;
+    }
+    .brand {
+      position: absolute;
+      top: 48px;
+      left: 56px;
+      width: 340px;
+      font-size: 18px;
+      font-weight: 950;
+      text-transform: uppercase;
+      line-height: 0.98;
+    }
+    .brand span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      text-transform: none;
+    }
+    .date {
+      position: absolute;
+      top: 42px;
+      right: 52px;
+      text-align: right;
+      font-size: 76px;
+      font-weight: 950;
+      line-height: 0.86;
+    }
+    .date small {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .hook {
+      position: absolute;
+      top: 218px;
+      left: 54px;
+      width: 760px;
+      margin: 0;
+      font-size: 66px;
+      font-weight: 950;
+      line-height: 0.98;
+    }
+    .hook em {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 0 18px 5px;
+      font-style: normal;
+      background: var(--accent-soft);
+      box-shadow: inset 0 -16px 0 color-mix(in srgb, var(--accent) 82%, transparent);
+    }
+    .signal {
+      position: absolute;
+      z-index: 2;
+      width: 330px;
+      min-height: 58px;
+      padding: 12px 14px 12px 15px;
+      border: 1.5px solid #101010;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 7px 7px 0 var(--accent);
+      transform: rotate(var(--r));
+    }
+    .signal .tag {
+      display: inline-block;
+      margin-right: 8px;
+      color: color-mix(in srgb, var(--accent) 70%, #111);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .signal .title {
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.06;
+    }
+    .signal.hot {
+      z-index: 4;
+      width: 510px;
+      padding: 15px 18px 16px;
+      background: var(--accent);
+      box-shadow: 8px 8px 0 #101010;
+    }
+    .signal.hot .tag { color: #111; }
+    .signal.hot .title { font-size: 30px; }
+    .s1 { left: 70px; top: 420px; --r: -2.8deg; }
+    .s2 { left: 382px; top: 476px; width: 500px; --r: 3.2deg; }
+    .s3 { left: 132px; top: 558px; --r: 2.4deg; }
+    .s4 { left: 354px; top: 640px; width: 520px; --r: -2.8deg; }
+    .s5 { left: 62px; top: 690px; --r: -4deg; }
+    .s6 { left: 530px; top: 748px; --r: 2.2deg; }
+    .s7 { left: 126px; top: 810px; --r: 2.9deg; }
+    .s8 { left: 470px; top: 828px; --r: -2.4deg; }
+    .s9 { left: 74px; top: 960px; --r: -1.4deg; }
+    .s10 { left: 390px; top: 952px; --r: 2.8deg; }
+    .s11 { left: 590px; top: 300px; --r: -5deg; }
+    .s12 { left: 562px; top: 1042px; --r: -2deg; }
+    .wire {
+      position: absolute;
+      z-index: 1;
+      left: -50px;
+      bottom: 90px;
+      width: 1040px;
+      height: 74px;
+      border-top: 8px solid #050505;
+      filter: drop-shadow(0 7px 0 var(--accent));
+      transform: rotate(-3deg);
+    }
+    .wire::before {
+      content: "";
+      position: absolute;
+      inset: -28px 0 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, #050505 18px 25px, transparent 25px 43px);
+      clip-path: polygon(0 50%, 100% 12%, 100% 52%, 0 90%);
+      opacity: 0.9;
+    }
+    .footer {
+      position: absolute;
+      z-index: 3;
+      left: 56px;
+      right: 56px;
+      bottom: 42px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 850;
+    }
+    .footer .note {
+      width: 340px;
+      color: #68707c;
+      font-size: 16px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .end-title{position:absolute;left:56px;top:160px;width:760px;font-size:88px;font-weight:950;line-height:.9}
+    .end-title span{display:inline-block;margin-top:18px;padding:0 18px 8px;background:var(--accent);border:2px solid var(--ink);transform:rotate(-1.5deg)}
+    .phone-asset{position:absolute;left:218px;top:352px;width:480px;height:auto;filter:drop-shadow(13px 15px 0 var(--accent));z-index:2}
+    .log{position:absolute;left:56px;right:56px;bottom:170px;display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;font-size:25px;font-weight:950;line-height:1.08}
+    .log b{display:block;margin-bottom:6px;color:color-mix(in srgb,var(--accent) 74%,#111);font-size:17px}
+    .main-signal{position:absolute;left:56px;right:56px;bottom:42px;padding:16px 18px;background:var(--accent);border:1.8px solid var(--ink);font-size:24px;font-weight:950;line-height:1.12;box-shadow:8px 8px 0 #111}
+  </style></head><body><main class="poster">
+    <div class="brand">强弱信号<span>weekly signal scan · synthesis</span></div>
+    <div class="date">07.12<small>WEEK CLOSED</small></div>
+    <div class="end-title">本周<br><span>信号</span></div>
+    <img class="phone-asset" src="file:///Users/syllablecheng/Documents/Workspace/The%20AI%20Industry%20Brief/skills/ai-weekly-call-log/assets/rotary-phone-v1.png" alt="">
+    <section class="log"><div><b>产品前线</b>AI 正在进入常用软件</div><div><b>行业现场</b>AI 开始接真实工作</div><div><b>资本与牌局</b>钱流向算力和交付</div><div><b>能力底座</b>AI Agent 要先可控</div></section>
+    <div class="main-signal">本周主信号：AI 正在进入真实工作的入口、账本、权限和责任里。</div>
+  </main></body></html>

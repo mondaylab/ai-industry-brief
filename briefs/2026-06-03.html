@@ -344,7 +344,7 @@ body {
   gap: 12px;
 }
 .item-tool { color: #1C1C1C; font-weight: 700; }
-.item-divider, .item-heading { color: var(--text); font-weight: 700; }
+.item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }
 .item-copy { flex: 1; }
 .item-num {
   display: inline-flex;
@@ -462,12 +462,14 @@ body {
 .footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
 .footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
 @media (max-width: 560px) {
-  body { padding: 0; }
-  .card { padding: 32px 22px; aspect-ratio: auto; }
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
   .card::before, .card::after, .sections-layout::before { display: none; }
-  .header-left .brand { font-size: 34px; }
-  .header { align-items: flex-end; padding-top: 18px; padding-bottom: 18px; }
-  .sections-layout { grid-template-columns: 1fr; gap: 0; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
   .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
   .quote-card::before { display: none; }
   .hero-illustration { display: none; }
@@ -486,13 +488,15 @@ body {
   .section-header { min-height: 40px; }
   .section-tag { font-size: 18px; gap: 10px; }
   .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
-  .section-tag::after { right: -48px; left: 56px; }
-  .section-sub { margin-left: 56px; }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
   .section-items { gap: 10px; }
-  .item { flex: 0 1 auto; min-height: auto; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
   .item + .item { margin-top: 0; }
   .section + .section { margin-top: 10px; padding-top: 14px; }
   .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
   .item-title { font-size: 16px; gap: 8px; }
   .item-desc { font-size: 15px; }
   .insight-card { display: block; padding: 18px 0; }
@@ -536,26 +540,26 @@ body {
   <div class="sections-layout">
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="01">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 工作台
       </span>
     </div>
     <div class="section-sub">Notion Platform · Microsoft Copilot · Slack</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Notion Platform</span><span class="item-divider"> | </span><span class="item-heading">代理外接系统</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Notion Platform</span> <span class="item-heading">代理外接系统</span></span></div>
       <p class="item-desc">Notion 推出 Developer Platform，让 Custom Agents 通过 Workers、API 与外部数据扩展能力。协作知识库正在从页面容器，变成可编排的代理运行入口。</p>
       <a class="item-source" href="https://www.notion.com/en-gb/blog/introducing-developer-platform" target="_blank" rel="noopener noreferrer">→ notion.com</a><span class="source-date">2026-05-13 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Microsoft Cowork</span><span class="item-divider"> | </span><span class="item-heading">手机委托扩展</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Microsoft Cowork</span> <span class="item-heading">手机委托扩展</span></span></div>
       <p class="item-desc">Microsoft 称 Copilot Cowork 已登陆 iOS 与 Android，并通过连接器接入企业数据。工作台竞争不只在桌面，更在移动端把委托、续接和治理连成闭环。</p>
       <a class="item-source" href="https://www.microsoft.com/en-us/microsoft-365/blog/2026/05/05/microsoft-365-copilot-human-agency-and-the-opportunity-for-every-organization/" target="_blank" rel="noopener noreferrer">→ microsoft.com</a><span class="source-date">2026-05-05 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Slack Platform</span><span class="item-divider"> | </span><span class="item-heading">代理协作进频道</span></span></div>
-      <p class="item-desc">Slack Feature Drop 预告 Embedded AI Handoff 等能力，让 Slackbot、外部 AI 代理和人工坐席在同一会话中交接。协作工具正在成为多代理调度台。</p>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Slack Platform</span> <span class="item-heading">代理协作进频道</span></span></div>
+      <p class="item-desc">Slack Feature Drop 预告 Embedded AI Handoff 等能力，让 Slackbot、第三方 Agent 和人工坐席在同一会话中交接。协作工具正在成为 Multi-Agent 系统调度台。</p>
       <a class="item-source" href="https://slack.com/blog/news/slack-feature-drop-april2026" target="_blank" rel="noopener noreferrer">→ slack.com</a><span class="source-date">2026-04-22 · 最近官方参考</span>
     </article>
     </div>
@@ -563,25 +567,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="02">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.13 2 2 5.13 2 9C2 12.87 5.13 16 9 16C9.83 16 10.5 15.33 10.5 14.5C10.5 14.11 10.35 13.76 10.1 13.5C9.86 13.25 9.72 12.91 9.72 12.5C9.72 11.67 10.39 11 11.22 11H13C14.66 11 16 9.66 16 8C16 4.69 12.87 2 9 2Z" stroke="white" stroke-width="1.3"/><circle cx="6" cy="6.5" r="1" fill="white"/><circle cx="9" cy="5" r="1" fill="white"/><circle cx="12" cy="6.5" r="1" fill="white"/><circle cx="6" cy="10" r="1" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 信息美学
       </span>
     </div>
     <div class="section-sub">OpenAI Provenance · Stable Audio · ElevenLabs</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Codex Plugins</span><span class="item-divider"> | </span><span class="item-heading">创意工具入栈</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Codex Plugins</span> <span class="item-heading">创意工具入栈</span></span></div>
       <p class="item-desc">OpenAI 为 Codex 推出角色插件、Sites 与批注，覆盖 Figma、Canva、Shutterstock、Picsart 和 Fal 等创意工具。设计产出正进入可分享的代理工作流。</p>
       <a class="item-source" href="https://openai.com/index/codex-for-every-role-tool-workflow/" target="_blank" rel="noopener noreferrer">→ openai.com</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Stable Audio 3</span><span class="item-divider"> | </span><span class="item-heading">音频开权重</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Stable Audio 3</span> <span class="item-heading">音频开权重</span></span></div>
       <p class="item-desc">Stability AI 发布 Stable Audio 3 与 SAME，自带可变时长、音频修补和消费级运行权重。生成音乐正在同时追求开放、低成本和精细编辑。</p>
       <a class="item-source" href="https://stability.ai/research/stable-audio-3" target="_blank" rel="noopener noreferrer">→ stability.ai</a><span class="source-date">2026-05-20 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenLabs Dubbing v2</span><span class="item-divider"> | </span><span class="item-heading">情绪翻译保真</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">ElevenLabs Dubbing v2</span> <span class="item-heading">情绪翻译保真</span></span></div>
       <p class="item-desc">ElevenLabs 发布 Dubbing v2，直接条件化原始表演以保留语气、节奏和情绪。多语内容生产正从转写翻译，升级为品牌表达的跨语言复刻。</p>
       <a class="item-source" href="https://elevenlabs.io/blog/introducing-dubbing-v2" target="_blank" rel="noopener noreferrer">→ elevenlabs.io</a><span class="source-date">2026-05-28</span>
     </article>
@@ -590,25 +594,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="03">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="2.5" cy="9" r="2" fill="white"/><line x1="4.5" y1="9" x2="7.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="9" r="2" fill="white"/><line x1="11" y1="9" x2="13.5" y2="9" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="15.5" cy="9" r="2" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 流水线
       </span>
     </div>
     <div class="section-sub">GitHub Copilot · Copilot Metrics · Cloudflare Agents</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">GitHub Copilot</span><span class="item-divider"> | </span><span class="item-heading">用量计费生效</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">GitHub Copilot</span> <span class="item-heading">用量计费生效</span></span></div>
       <p class="item-desc">GitHub 宣布 Copilot 全计划启用基于 AI Credits 的用量计费，代码审查还会消耗 Actions 分钟。编码代理正从功能采购，进入预算、限额和跑道治理阶段。</p>
       <a class="item-source" href="https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-06-01</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Copilot Metrics API</span><span class="item-divider"> | </span><span class="item-heading">采用率可分群</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Copilot Metrics API</span> <span class="item-heading">采用率可分群</span></span></div>
       <p class="item-desc">GitHub 为 Copilot usage metrics API 增加 cohorts，企业可按团队和人群追踪 AI 采用。代理流水线的价值证明，正在从演示转向可审计的组织指标。</p>
       <a class="item-source" href="https://github.blog/changelog/2026-05-29-copilot-usage-metrics-api-adds-cohorts-for-ai-adoption" target="_blank" rel="noopener noreferrer">→ github.blog</a><span class="source-date">2026-05-29</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Cloudflare Agents</span><span class="item-divider"> | </span><span class="item-heading">技能调度上线</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Cloudflare Agents</span> <span class="item-heading">技能调度上线</span></span></div>
       <p class="item-desc">Cloudflare Agents SDK v0.14.0 增加 Agent Skills、消息平台、计划任务、Workflows 与聊天恢复。代理运行时正在补齐生产级调度和恢复能力。</p>
       <a class="item-source" href="https://developers.cloudflare.com/changelog/post/2026-06-02-agents-sdk-v0140/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-06-02</span>
     </article>
@@ -617,25 +621,25 @@ body {
 
   <section class="section">
     <div class="section-header">
-      <span class="section-tag" data-num="04">
-        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+      <span class="section-tag" data-num="00">
+
         AI 大模型
       </span>
     </div>
     <div class="section-sub">Claude Mythos · Kimi K2.6 · Anthropic S-1</div>
     <div class="section-items">
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Claude Mythos</span><span class="item-divider"> | </span><span class="item-heading">安全模型扩圈</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Claude Mythos</span> <span class="item-heading">安全模型扩圈</span></span></div>
       <p class="item-desc">Anthropic 扩大 Project Glasswing，让约 150 家新组织接入 Claude Mythos Preview 扫描关键代码漏洞。专用大模型开始以行业任务进入基础设施安全。</p>
       <a class="item-source" href="https://www.anthropic.com/news/expanding-project-glasswing" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-06-02</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Kimi K2.6</span><span class="item-divider"> | </span><span class="item-heading">Workers AI 迁移</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Kimi K2.6</span> <span class="item-heading">Workers AI 迁移</span></span></div>
       <p class="item-desc">Cloudflare Workers AI 将 Kimi K2.5 自动迁移到 K2.6，并提示价格与能力变化。开放模型服务正在把版本更新、成本和兼容性纳入平台治理。</p>
       <a class="item-source" href="https://developers.cloudflare.com/changelog/product-group/ai/" target="_blank" rel="noopener noreferrer">→ developers.cloudflare.com</a><span class="source-date">2026-05-08 · 最近官方参考</span>
     </article>
     <article class="item">
-      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Anthropic S-1</span><span class="item-divider"> | </span><span class="item-heading">模型资本化</span></span></div>
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Anthropic S-1</span> <span class="item-heading">模型资本化</span></span></div>
       <p class="item-desc">Anthropic 宣布已向 SEC confidentially submitted draft S-1。大模型公司正把算力、企业收入和资本市场预期绑定，行业进入更强财务纪律阶段。</p>
       <a class="item-source" href="https://www.anthropic.com/news/confidential-draft-s1-sec" target="_blank" rel="noopener noreferrer">→ anthropic.com</a><span class="source-date">2026-06-01</span>
     </article>
@@ -651,7 +655,7 @@ body {
 
   <footer class="footer">
     <div class="footer-lab">星期一研究室出品</div>
-    <div class="footer-sub">The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</div>
+    <div class="footer-sub">The AI Industry Brief</div>
   </footer>
 </main>
 </body>

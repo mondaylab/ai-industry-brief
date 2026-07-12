@@ -1,0 +1,238 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>强弱信号 产品前线</title><style>
+
+    :root {
+      --ink: #08090b;
+      --paper: #fbfbf7;
+      --muted: #858b97;
+      --accent: #D9767C;
+      --accent-soft: color-mix(in srgb, var(--accent) 28%, transparent);
+      --grid: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #e7e7e0;
+      color: var(--ink);
+      font-family: Inter, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .poster {
+      position: relative;
+      width: 900px;
+      height: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--accent) 72%, transparent) 0 76px, transparent 77px),
+        radial-gradient(circle at 86% 89%, color-mix(in srgb, var(--accent) 62%, transparent) 0 110px, transparent 111px),
+        var(--paper);
+      background-size: 46px 46px, 46px 46px, auto, auto, auto;
+    }
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 82%, transparent) 0 4px, transparent 5px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent) 0 3px, transparent 4px);
+      background-size: 170px 170px, 250px 250px;
+      background-position: 70px 94px, 38px 188px;
+      pointer-events: none;
+    }
+    .brand {
+      position: absolute;
+      top: 48px;
+      left: 56px;
+      width: 340px;
+      font-size: 18px;
+      font-weight: 950;
+      text-transform: uppercase;
+      line-height: 0.98;
+    }
+    .brand span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      text-transform: none;
+    }
+    .date {
+      position: absolute;
+      top: 42px;
+      right: 52px;
+      text-align: right;
+      font-size: 76px;
+      font-weight: 950;
+      line-height: 0.86;
+    }
+    .date small {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 21px;
+      font-weight: 850;
+    }
+    .hook {
+      position: absolute;
+      top: 218px;
+      left: 54px;
+      width: 760px;
+      margin: 0;
+      font-size: 66px;
+      font-weight: 950;
+      line-height: 0.98;
+    }
+    .hook em {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 0 18px 5px;
+      font-style: normal;
+      background: var(--accent-soft);
+      box-shadow: inset 0 -16px 0 color-mix(in srgb, var(--accent) 82%, transparent);
+    }
+    .signal {
+      position: absolute;
+      z-index: 2;
+      width: 330px;
+      min-height: 58px;
+      padding: 12px 14px 12px 15px;
+      border: 1.5px solid #101010;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 7px 7px 0 var(--accent);
+      transform: rotate(var(--r));
+    }
+    .signal .tag {
+      display: inline-block;
+      margin-right: 8px;
+      color: color-mix(in srgb, var(--accent) 70%, #111);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1;
+    }
+    .signal .title {
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.06;
+    }
+    .signal.hot {
+      z-index: 4;
+      width: 510px;
+      padding: 15px 18px 16px;
+      background: var(--accent);
+      box-shadow: 8px 8px 0 #101010;
+    }
+    .signal.hot .tag { color: #111; }
+    .signal.hot .title { font-size: 30px; }
+    .s1 { left: 70px; top: 420px; --r: -2.8deg; }
+    .s2 { left: 382px; top: 476px; width: 500px; --r: 3.2deg; }
+    .s3 { left: 132px; top: 558px; --r: 2.4deg; }
+    .s4 { left: 354px; top: 640px; width: 520px; --r: -2.8deg; }
+    .s5 { left: 62px; top: 690px; --r: -4deg; }
+    .s6 { left: 530px; top: 748px; --r: 2.2deg; }
+    .s7 { left: 126px; top: 810px; --r: 2.9deg; }
+    .s8 { left: 470px; top: 828px; --r: -2.4deg; }
+    .s9 { left: 74px; top: 960px; --r: -1.4deg; }
+    .s10 { left: 390px; top: 952px; --r: 2.8deg; }
+    .s11 { left: 590px; top: 300px; --r: -5deg; }
+    .s12 { left: 562px; top: 1042px; --r: -2deg; }
+    .wire {
+      position: absolute;
+      z-index: 1;
+      left: -50px;
+      bottom: 90px;
+      width: 1040px;
+      height: 74px;
+      border-top: 8px solid #050505;
+      filter: drop-shadow(0 7px 0 var(--accent));
+      transform: rotate(-3deg);
+    }
+    .wire::before {
+      content: "";
+      position: absolute;
+      inset: -28px 0 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, #050505 18px 25px, transparent 25px 43px);
+      clip-path: polygon(0 50%, 100% 12%, 100% 52%, 0 90%);
+      opacity: 0.9;
+    }
+    .footer {
+      position: absolute;
+      z-index: 3;
+      left: 56px;
+      right: 56px;
+      bottom: 42px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 850;
+    }
+    .footer .note {
+      width: 340px;
+      color: #68707c;
+      font-size: 16px;
+      font-weight: 720;
+      line-height: 1.25;
+    }
+    .column-title{position:absolute;left:56px;top:150px;width:770px;margin:0;font-size:78px;font-weight:950;line-height:.92;letter-spacing:0;z-index:3}
+    .column-title em{display:inline-block;margin-top:16px;padding:0 18px 9px;background:var(--accent);border:2px solid var(--ink);font-style:normal;transform:rotate(-1.6deg)}
+    .deck{position:absolute;left:60px;top:330px;width:720px;margin:0;color:#626a76;font-size:22px;font-weight:820;line-height:1.35;z-index:3}
+    .pick-list{position:absolute;left:56px;right:56px;top:450px;display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;z-index:3}
+    .pick{min-height:154px;padding:14px 15px 13px;border:1.6px solid #101010;background:rgba(255,255,255,.9);box-shadow:7px 7px 0 var(--accent);transform:rotate(var(--r))}
+    .pick:nth-child(1){--r:-1.4deg}.pick:nth-child(2){--r:1.2deg}.pick:nth-child(3){--r:1.1deg}.pick:nth-child(4){--r:-1deg}
+    .pick:nth-child(5){--r:-.8deg}.pick:nth-child(6){--r:1.4deg}.pick:nth-child(7){--r:1deg}.pick:nth-child(8){--r:-1.2deg}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;color:color-mix(in srgb,var(--accent) 66%,#111);font-size:15px;font-weight:950;line-height:1}
+    .meta span{min-width:0;color:#7a808a;font-size:12px;font-weight:780;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .pick h2{margin:0 0 7px;font-size:22px;font-weight:950;line-height:1.08;letter-spacing:0}
+    .pick p{margin:0;color:#4f5662;font-size:14px;font-weight:720;line-height:1.28}
+    .column-footer{position:absolute;left:56px;right:56px;bottom:42px;display:flex;align-items:flex-end;justify-content:space-between;color:#68707c;font-size:17px;font-weight:850;z-index:3}
+    .column-footer b{color:#111;font-size:20px}
+  </style></head><body><main class="poster">
+    <div class="brand">强弱信号<span>AI Industry Brief · weekly picks</span></div>
+    <div class="date">01<small>07.06 · 07.12</small></div>
+    <h1 class="column-title">产品前线<br><em>AI 正在进入常用软件</em></h1>
+    <p class="deck">这周最值得看的产品变化：AI 被放进会议、设计、代码、文件和家庭自动化这些日常入口。</p>
+    <section class="pick-list"><article class="pick p1">
+        <div class="meta"><b>07.06</b><span>cursor.com</span></div>
+        <h2>Cursor iOS 手机跑 Agent</h2>
+        <p>Cursor 把云端 Agent 搬到了 iPhone 上，用户可以用手机派发代码任务并合并 PR。代码 Agent 开始脱离 IDE，进入随时可调用的移动入口。</p>
+      </article>
+<article class="pick p2">
+        <div class="meta"><b>07.07</b><span>slack.com</span></div>
+        <h2>Slackbot 增加记忆和语音动作</h2>
+        <p>Slackbot 新增长期记忆、MCP 连接和语音操作，可以在对话里连续处理工作。Slack 正把聊天机器人升级成常驻协作空间的个人 AI Agent。</p>
+      </article>
+<article class="pick p3">
+        <div class="meta"><b>07.08</b><span>businesswire.com</span></div>
+        <h2>Sourcegraph 发布 Agentic Batch Changes 公测</h2>
+        <p>Sourcegraph 开放 Agentic Batch Changes 公测，让 Agent 批量修改大型代码库并保留审查流程。代码 Agent 的价值开始从写一个函数，扩展到执行跨仓库工程任务。</p>
+      </article>
+<article class="pick p4">
+        <div class="meta"><b>07.08</b><span>cloud.google.com</span></div>
+        <h2>Gemini Enterprise 细化 Agent 平台选型</h2>
+        <p>Google Cloud 梳理了 Gemini Enterprise 旗下四套 Agent 开发方案及其适用场景。企业采用 Agent 的难题，正转向如何选择合适的方式把它接进现有系统。</p>
+      </article>
+<article class="pick p5">
+        <div class="meta"><b>07.09</b><span>openai.com</span></div>
+        <h2>OpenAI 发布 GPT-Live 语音模型</h2>
+        <p>OpenAI 发布 GPT-Live，主打低延迟、可自然打断的实时语音对话。语音模型正从朗读答案，走向能接住真实交流节奏的对话入口。</p>
+      </article>
+<article class="pick p6">
+        <div class="meta"><b>07.12</b><span>businesswire.com</span></div>
+        <h2>Workato 发布 Headless API 和 Agent Guardrails</h2>
+        <p>Workato 为 Agent Studio 增加 Headless API 和运行护栏，让业务应用直接嵌入受约束的 Agent。企业对 Agent 的需求，正从聊天入口转向可嵌入、可约束的执行能力。</p>
+      </article>
+<article class="pick p7">
+        <div class="meta"><b>07.12</b><span>prnewswire.com</span></div>
+        <h2>Omneky 发布广告生成 API 和 MCP Server</h2>
+        <p>Omneky 开放广告生成 API 和 MCP Server，让平台与 AI Agent 直接调用创意引擎。广告生成正在从独立工具变成其他工作流可以随时调用的基础能力。</p>
+      </article>
+<article class="pick p8">
+        <div class="meta"><b>07.12</b><span>businesswire.com</span></div>
+        <h2>ZoomInfo 发布 GTM Bench 评测销售 AI</h2>
+        <p>ZoomInfo 发布 GTM Bench，用真实获客和销售任务评估 AI Agent。销售 AI 的评测标准，正在从对话表现转向真实任务完成度。</p>
+      </article></section>
+    <div class="column-footer"><b>8 条精选</b><span>COLUMN 01 / 04</span></div>
+  </main></body></html>
