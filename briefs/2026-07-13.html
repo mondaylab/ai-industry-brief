@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Industry Brief | 07/13 · 星期一 | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #927BBE;
+  --primary-light: #F4EFFA;
+  --paper: #FCFBF9;
+  --ground: #EEECE8;
+  --text: #151515;
+  --body: #2E2E2E;
+  --rule: #D9D2CE;
+  --headline-rule: color-mix(in srgb, var(--primary) 78%, #151515);
+  --section-ink: var(--primary);
+  --section-ink-soft: var(--primary-light);
+  --section-guide: color-mix(in srgb, var(--primary) 42%, transparent);
+}
+body {
+  background:
+    radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 26%),
+    radial-gradient(circle at 88% 78%, rgba(127, 166, 201, 0.12), transparent 24%),
+    var(--ground);
+  display: flex;
+  justify-content: center;
+  padding: 36px clamp(32px, 4vw, 72px);
+}
+.card {
+  position: relative;
+  overflow: visible;
+  background: var(--paper);
+  max-width: 1480px;
+  width: 100%;
+  min-height: min(1046px, calc((100vw - 28px) / 1.414));
+  height: auto;
+  padding: 36px clamp(52px, 4.6vw, 72px);
+  border: 1px solid #D8D1CB;
+  box-shadow: 0 6px 30px rgba(17, 17, 17, 0.05);
+  font-family: 'Source Serif 4', 'Noto Serif SC', serif;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  background-image:
+    linear-gradient(rgba(21, 21, 21, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 21, 21, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 82%, transparent);
+}
+.card::after {
+  content: "THE AI INDUSTRY BRIEF / GLOBAL SIGNALS";
+  position: absolute;
+  right: 28px;
+  top: 112px;
+  color: rgba(21, 21, 21, 0.18);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+}
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26px;
+  border-bottom: 2px solid var(--text);
+  border-top: 6px solid var(--headline-rule);
+  padding-top: 24px;
+  margin-bottom: 34px;
+}
+.header-left .brand {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0;
+  line-height: 1;
+}
+.header-right { text-align: right; }
+.header-right .lab {
+  font-size: 12px;
+  font-weight: 600;
+  color: #5A5A5A;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.header-right .date { font-size: 11px; color: #777; letter-spacing: 0.08em; }
+.quote-card {
+  position: relative;
+  z-index: 2;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--primary-light) 72%, transparent), transparent 42%),
+    #F8F6F2;
+  border-top: 1px solid rgba(21, 21, 21, 0.18);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.18);
+  border-left: 0;
+  border-radius: 0;
+  padding: 18px 22px 18px 0;
+  margin-bottom: 46px;
+  font-size: 22px;
+  line-height: 1.42;
+  color: var(--body);
+  font-weight: 500;
+  min-height: 132px;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) 230px;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: "LEAD";
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(21, 21, 21, 0.18);
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+.quote-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+.hero-illustration {
+  position: relative;
+  width: 230px;
+  height: 128px;
+  z-index: 1;
+  justify-self: end;
+  pointer-events: none;
+  opacity: 0.74;
+}
+.hero-line {
+  fill: none;
+  stroke: var(--section-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.hero-soft {
+  fill: var(--section-ink-soft);
+  stroke: color-mix(in srgb, var(--section-ink) 28%, transparent);
+  stroke-width: 1;
+}
+.hero-ink {
+  fill: color-mix(in srgb, var(--section-ink) 72%, #151515);
+}
+.hero-label {
+  fill: rgba(21, 21, 21, 0.28);
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.quote-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--section-ink) 64%, #151515);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.insight-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.section { padding: 14px 0 16px; border-bottom: 0; }
+.sections-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 46px;
+  row-gap: 78px;
+  align-items: stretch;
+  overflow: visible;
+  padding: 8px 10px 4px;
+}
+.sections-layout::before {
+  content: "AI INDUSTRY MAP";
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  transform: translateX(-50%);
+  z-index: 1;
+  padding: 0 12px;
+  background: var(--paper);
+  color: rgba(21, 21, 21, 0.34);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  white-space: nowrap;
+}
+.sections-layout > .section {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  padding: 18px 18px 14px;
+  background: color-mix(in srgb, var(--paper) 86%, var(--section-ink-soft));
+  border: 1px solid rgba(21, 21, 21, 0.08);
+  box-shadow: 14px 16px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.sections-layout > .section::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 42px;
+  height: 14px;
+  background: var(--section-ink-soft);
+  border: 1px solid rgba(21, 21, 21, 0.09);
+  transform: skewX(-18deg);
+}
+.sections-layout > .section::after {
+  content: "SIGNAL NODE";
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  color: rgba(21, 21, 21, 0.17);
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+.sections-layout > .section:nth-of-type(odd) {
+  padding-right: 18px;
+}
+.sections-layout > .section:nth-of-type(even) {
+  padding-left: 18px;
+}
+.sections-layout > .section:nth-of-type(n + 3) {
+  padding-top: 18px;
+}
+.section-header {
+  position: relative;
+  margin-bottom: 12px;
+  min-height: 46px;
+}
+.section-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Inter', 'Noto Serif SC', serif;
+  font-size: 21px;
+  font-weight: 700;
+  padding: 0;
+  border-radius: 0;
+  letter-spacing: 0;
+  border-bottom: 0;
+}
+.section-tag::before {
+  content: attr(data-num);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 36px;
+  background: var(--section-ink);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  transform: skewX(-12deg);
+  box-shadow: 8px 8px 0 var(--section-ink-soft);
+}
+.section-tag::after {
+  content: "";
+  position: absolute;
+  left: 64px;
+  right: -96px;
+  top: 50%;
+  z-index: -1;
+  border-top: 1px dashed var(--section-guide);
+  transform: translateY(-50%) rotate(-3deg);
+}
+.section-tag svg { display: none; }
+.section-sub {
+  font-size: 10px;
+  color: #787878;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  margin-left: 66px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.section-items {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1 1 auto;
+}
+.item + .item {
+  margin-top: 0;
+}
+.item {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+  background: rgba(252, 251, 249, 0.66);
+  border: 1px solid rgba(21, 21, 21, 0.07);
+  border-radius: 2px;
+  padding: 22px 30px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.item-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.32;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.item-tool { color: #1C1C1C; font-weight: 700; }
+.item-heading { color: var(--text); font-weight: 700; margin-left: 0.35em; }
+.item-copy { flex: 1; }
+.item-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 0;
+  background: transparent;
+  font-size: 0;
+  font-weight: 700;
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  color: var(--section-ink);
+  flex-shrink: 0;
+  line-height: 1;
+}
+.item-num::before {
+  content: attr(data-mark);
+  font-size: 17px;
+  color: var(--section-ink);
+  line-height: 1;
+}
+.item-desc {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.72;
+  margin-bottom: 0;
+  font-weight: 400;
+  flex: 0 0 auto;
+}
+.item-source {
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.item-source:hover { opacity: 1; text-decoration: underline; }
+.source-date {
+  font-size: 11px;
+  color: #7C7C7C;
+  margin-left: 8px;
+  font-weight: 500;
+}
+.insight-card {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border-top: 1px solid rgba(21, 21, 21, 0.2);
+  border-bottom: 1px solid rgba(21, 21, 21, 0.12);
+  border-left: 0;
+  border-radius: 0;
+  padding: 20px 4px 18px;
+  margin-top: 64px;
+  margin-bottom: 38px;
+  display: grid;
+  grid-template-columns: 188px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: center;
+}
+.insight-label {
+  position: relative;
+  justify-self: center;
+  width: max-content;
+  transform: translateY(12px);
+  margin-bottom: 0;
+  color: var(--section-ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.insight-label::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-top: 22px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid color-mix(in srgb, var(--section-ink) 72%, transparent);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, var(--section-ink) 0 4px, transparent 5px),
+    linear-gradient(45deg, transparent 58%, color-mix(in srgb, var(--section-ink) 72%, transparent) 59% 64%, transparent 65%);
+  box-shadow: 14px 14px 0 var(--section-ink-soft);
+  opacity: 0.9;
+}
+.insight-text {
+  font-size: 18px;
+  color: #242424;
+  line-height: 1.72;
+  font-weight: 500;
+}
+.method-note {
+  grid-column: 2;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #7A7A7A;
+  line-height: 1.6;
+}
+.footer {
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid var(--text);
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-lab { font-size: 12px; font-weight: 600; color: #303030; letter-spacing: 0.08em; text-transform: uppercase; }
+.footer-sub { font-size: 11px; color: #666; letter-spacing: 0.03em; }
+@media (max-width: 560px) {
+  html, body { width: 100%; overflow-x: hidden; }
+  body { padding: 0; display: block; }
+  .card { width: 100%; max-width: 100%; overflow: hidden; padding: 32px 22px; aspect-ratio: auto; border-left: 0; border-right: 0; }
+  .card::before, .card::after, .sections-layout::before { display: none; }
+  .header-left .brand { font-size: 32px; line-height: 1.05; overflow-wrap: anywhere; }
+  .header { display: block; padding-top: 18px; padding-bottom: 18px; }
+  .header-right { text-align: left; margin-top: 12px; }
+  .sections-layout { grid-template-columns: 1fr; gap: 0; padding: 0; width: 100%; }
+  .quote-card { display: block; min-height: auto; padding: 18px 20px; font-size: 18px; }
+  .quote-card::before { display: none; }
+  .hero-illustration { display: none; }
+  .sections-layout > .section:nth-of-type(odd),
+  .sections-layout > .section:nth-of-type(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .sections-layout > .section::before,
+  .sections-layout > .section::after { display: none; }
+  .sections-layout > .section:nth-of-type(n + 3) { padding-top: 14px; }
+  .section-header { min-height: 40px; }
+  .section-tag { font-size: 18px; gap: 10px; }
+  .section-tag::before { width: 46px; height: 32px; font-size: 14px; box-shadow: 6px 6px 0 var(--section-ink-soft); }
+  .section-tag::after { right: 0; left: 56px; }
+  .section-sub { margin-left: 56px; max-width: calc(100% - 56px); overflow-wrap: anywhere; word-break: break-word; letter-spacing: 0.04em; }
+  .section-items { gap: 10px; }
+  .item { flex: 0 1 auto; min-height: auto; padding: 18px 16px 20px; max-width: 100%; }
+  .item + .item { margin-top: 0; }
+  .section + .section { margin-top: 10px; padding-top: 14px; }
+  .item-num { min-width: 22px; padding: 0 6px; }
+  .item-copy, .item-desc, .item-source, .source-date { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+  .source-date { display: block; margin-left: 0; margin-top: 2px; }
+  .item-title { font-size: 16px; gap: 8px; }
+  .item-desc { font-size: 15px; }
+  .insight-card { display: block; padding: 18px 0; }
+  .insight-label { margin-bottom: 10px; transform: none; }
+  .insight-label::after { display: none; }
+  .insight-text { font-size: 16px; }
+  .method-note { margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+<main class="card">
+  <header class="header">
+    <div class="header-left"><div class="brand">The AI Industry Brief</div></div>
+    <div class="header-right">
+      <div class="lab">星期一研究室</div>
+      <div class="date">07/13 · 星期一</div>
+    </div>
+  </header>
+
+  <div class="quote-card">
+    <div class="quote-copy">
+    <div class="quote-label">今日一句话</div>
+    Agent 的竞争正在转向持续运行能力。
+  </div>
+  <svg class="hero-illustration" viewBox="0 0 230 154" aria-hidden="true" focusable="false">
+      <path class="hero-soft" d="M25 118 C44 82, 72 77, 94 98 S142 126, 174 91 C190 73, 207 72, 219 82 L219 142 L25 142 Z" />
+      <circle class="hero-soft" cx="175" cy="44" r="26" />
+      <path class="hero-line" d="M149 44H201 M175 18C165 31,165 57,175 70 M175 18C185 31,185 57,175 70 M153 35H197 M153 53H197" />
+      <path class="hero-line" d="M46 108 L66 72 L86 108 M55 92H77" />
+      <circle class="hero-ink" cx="70" cy="43" r="10" />
+      <path class="hero-soft" d="M47 132 C48 97, 56 63, 70 63 C84 63, 92 97, 93 132 Z" />
+      <path class="hero-line" d="M59 78 C42 83, 33 94, 27 109 M82 78 C100 83, 113 94, 121 109" />
+      <circle class="hero-line" cx="31" cy="102" r="10" />
+      <path class="hero-line" d="M38 109 L49 120" />
+      <path class="hero-line" d="M129 67 H147 M138 58 V76 M125 92 H154 M132 103 H149" />
+      <text class="hero-label" x="118" y="132">GLOBAL SIGNALS</text>
+    </svg>
+  </div>
+
+  <div class="sections-layout">
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="01">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="1" width="7" height="7" rx="1.5" fill="white"/><rect x="1" y="10" width="7" height="7" rx="1.5" fill="white"/><rect x="10" y="10" width="7" height="7" rx="1.5" fill="white"/></svg>
+        AI 产品前线
+      </span>
+    </div>
+    <div class="section-sub">EverMind · Puzzle AI Suite · Lucyd</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">EverMind</span> <span class="item-heading">发布 Agent 长期记忆管理方案</span></span></div>
+      <p class="item-desc">EverMind 解释如何通过分层存储、信息压缩和检索策略缓解 Agent 遗忘上下文的问题。Agent 想长期在线工作，记忆质量正在成为与模型能力同等重要的产品条件。</p>
+      <a class="item-source" href="https://evermind.ai/blogs/why-does-my-ai-agent-forget-things-how-to-fix-agent-amnesia-with-ai-memory-management" target="_blank" rel="noopener noreferrer">→ evermind.ai</a><span class="source-date">2026-07-10</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Puzzle</span> <span class="item-heading">推出面向会计师的 AI Suite</span></span></div>
+      <p class="item-desc">Puzzle 把 Chat、Cowork 和 Close 放进总账，让 Agent 执行对账、分类和月末结账，最终由会计师审批。财务 Agent 开始进入正式账本，同时把人工判断保留在关键节点。</p>
+      <a class="item-source" href="https://puzzle.io/ai-close" target="_blank" rel="noopener noreferrer">→ puzzle.io</a><span class="source-date">2026-07-09（产品公告）</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-heading">Lucyd 智能眼镜接入 Claude AI</span></span></div>
+      <p class="item-desc">Innovative Eyewear 为 Lucyd 智能眼镜加入 Claude AI，让用户通过语音在眼镜上获取分析和辅助。可穿戴 AI 的入口正从简单问答扩展到随身、免手持的上下文服务。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/innovative-eyewear-inc-announces-new-claude-ai-integration-for-all-lucyd-smart-eyewear-302822390.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-10</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="02">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><circle cx="4" cy="5" r="2.2" fill="white"/><circle cx="13" cy="5" r="2.2" fill="white"/><circle cx="8.5" cy="13" r="2.2" fill="white"/><path d="M5.8 6.4L7.3 11M11.2 6.4L9.7 11M6.1 13H3.2M14 13h-2.9" stroke="white" stroke-width="1.35" stroke-linecap="round"/></svg>
+        AI 行业现场
+      </span>
+    </div>
+    <div class="section-sub">Collectly · Piedmont Urgent Care · Leidos</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Collectly</span> <span class="item-heading">将账单 Agent 接入 Epic Showroom</span></span></div>
+      <p class="item-desc">Collectly 的患者账单 Agent Billie 已接入 Epic，可跨聊天、短信、邮件和语音处理账单问题与付款。医疗 Agent 正从外围客服进入医院核心记录系统。</p>
+      <a class="item-source" href="https://www.collectly.co/blog/collectly-ai-agent-for-patient-billing-and-rcm-platform-now-live-on-epic-showroom" target="_blank" rel="noopener noreferrer">→ collectly.co</a><span class="source-date">2026-07-09</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-heading">Piedmont Urgent Care 部署患者账单 AI Agent</span></span></div>
+      <p class="item-desc">Piedmont Urgent Care 使用 Hello Patient 的 AI Agent 处理账单来电，替代原有语音信箱。医疗机构开始把高频、规则明确的患者沟通交给全天候 Agent。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/piedmont-urgent-care-retires-billing-voicemail-with-an-ai-agent-built-by-hello-patient-302822079.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Leidos</span> <span class="item-heading">与 Rune 用 AI 预测军用后勤需求</span></span></div>
+      <p class="item-desc">Leidos 与 Rune 合作，用 AI 预测印太地区军事行动的物资需求、可用性和补给风险。AI 正进入需要跨地域、长周期决策的关键后勤系统。</p>
+      <a class="item-source" href="https://investors.leidos.com/news-events/news-releases" target="_blank" rel="noopener noreferrer">→ leidos.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="03">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M4 14.5V8.5M9 14.5V3.5M14 14.5V6.5" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M3 15H15.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="4" cy="7" r="1.4" fill="white"/><circle cx="9" cy="2.5" r="1.4" fill="white"/><circle cx="14" cy="5" r="1.4" fill="white"/></svg>
+        AI 资本与牌局
+      </span>
+    </div>
+    <div class="section-sub">Kapture CX · SambaNova · Velocity</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Kapture CX</span> <span class="item-heading">融资 1000 万美元扩展 Agentic 企业栈</span></span></div>
+      <p class="item-desc">Kapture CX 完成 1000 万美元 Pre-Series B 融资，将扩展面向客服和企业运营的 Agentic 产品。资本仍在寻找能把 Agent 直接嵌入业务流程的垂直平台。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/kapture-cx-secures-10-mn-pre-series-b-funding-led-by-bajaj-finserv-ventures-to-scale-agentic-enterprise-stack-302821761.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">SambaNova</span> <span class="item-heading">融资 10 亿美元扩展 AI 推理芯片</span></span></div>
+      <p class="item-desc">SambaNova 完成 10 亿美元 Series F 首次交割，投后估值达到 110 亿美元。推理需求增长正在把定制芯片重新推回超大额融资牌桌。</p>
+      <a class="item-source" href="https://sambanova.ai/press/sambanova-completes-first-close-of-1b-financing-at-11b-valuation?hs_amp=true" target="_blank" rel="noopener noreferrer">→ sambanova.ai</a><span class="source-date">2026-07-08</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-tool">Velocity</span> <span class="item-heading">融资 2700 万美元建设 AI 应用广告层</span></span></div>
+      <p class="item-desc">Velocity 完成 2700 万美元种子轮，计划为 AI 原生应用提供意图驱动广告和收入分发能力。AI 应用的竞争开始从增长用户转向证明可持续变现。</p>
+      <a class="item-source" href="https://www.calcalistech.com/ctechnews/article/rjbsaioxfl" target="_blank" rel="noopener noreferrer">→ calcalistech.com</a><span class="source-date">2026-07-08</span>
+    </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-tag" data-num="04">
+        <svg width="13" height="13" viewBox="0 0 18 18" fill="none"><path d="M10.5 2L4 10h5.5L7.5 16L14 8H8.5L10.5 2Z" fill="white"/></svg>
+        AI 能力底座
+      </span>
+    </div>
+    <div class="section-sub">Flex · Mindstream Jordan · MemryX</div>
+    <div class="section-items">
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◆" aria-label="01">01</span><span class="item-copy"><span class="item-tool">Flex</span> <span class="item-heading">扩大 Cerebras AI 超算美国制造</span></span></div>
+      <p class="item-desc">Flex 与 Cerebras 扩大合作，在美国提升 AI 超级计算机的制造与交付规模。AI 基础设施竞争正在从芯片设计延伸到整机供应链和交付速度。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/flex-and-cerebras-expand-partnership-to-scale-american-manufacturing-of-cerebras-ai-supercomputers-302821206.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◇" aria-label="02">02</span><span class="item-copy"><span class="item-tool">Mindstream Jordan</span> <span class="item-heading">规划 400MW 主权 AI 平台</span></span></div>
+      <p class="item-desc">Mindstream Jordan 计划建设 400MW 主权 AI 基础设施，为约旦及周边市场提供本地算力。主权 AI 正从模型与数据政策延伸到能源和数据中心资产。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/mindstream-energy-dba-mindstream-jordan-llc-targets-400-mw-sovereign-ai-infrastructure-platform-in-jordan-to-serve-growing-regional-compute-demand-302821924.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    <article class="item">
+      <div class="item-title"><span class="item-num" data-mark="◈" aria-label="03">03</span><span class="item-copy"><span class="item-heading">Ebttikar 与 MemryX 扩展沙特边缘视觉 AI</span></span></div>
+      <p class="item-desc">Ebttikar 与 MemryX 合作，把低功耗视觉推理部署到沙特本地的工业和公共场景。边缘 AI 的落地越来越依赖本地集成伙伴，而不只是单颗芯片性能。</p>
+      <a class="item-source" href="https://www.prnewswire.com/news-releases/ebttikar-and-memryx-form-strategic-partnership-to-accelerate-computer-vision-edge-ai-across-saudi-arabia-302822297.html" target="_blank" rel="noopener noreferrer">→ prnewswire.com</a><span class="source-date">2026-07-09</span>
+    </article>
+    </div>
+  </section>
+  </div>
+
+  <aside class="insight-card">
+    <div class="insight-label">今日洞察</div>
+    <p class="insight-text">今天的共同信号是“让 Agent 长期在线并承担结果”：产品补记忆与垂直工作流，医疗和军用后勤把 AI 接入核心系统，资本继续押注 Agent 企业栈与推理芯片，底座则扩展本土制造、主权算力和边缘视觉部署。</p>
+    <p class="method-note">采集窗口覆盖 2026-07-07 至 2026-07-13，优先采用公司官网、产品页和一手新闻稿。周末新增公告有限，因此本期集中选取 7 月 8 日至 10 日仍在首选窗口内、且未被历史简报使用的信号；来源覆盖 EverMind、Puzzle、PRNewswire、Collectly、Leidos、SambaNova 与 CTech。</p>
+  </aside>
+
+  <footer class="footer">
+    <div class="footer-lab">星期一研究室出品</div>
+    <div class="footer-sub">The AI Industry Brief</div>
+  </footer>
+</main>
+</body>
+</html>
