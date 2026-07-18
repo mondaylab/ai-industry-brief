@@ -7,7 +7,7 @@
 ## 工作流
 
 1. 计算当天日期，默认使用 `Asia/Shanghai`。
-2. 打开 `https://mondaylab.github.io/ai-industry-brief/?date=YYYY-MM-DD&capture=1`。
+2. 打开 `https://mondaylab.github.io/ai-industry-brief/reader.html?date=YYYY-MM-DD&capture=1`。
 3. 使用 Cloudflare Browser Rendering REST API 截取整页 PNG。
 4. 用飞书自建应用凭证获取 `tenant_access_token`。
 5. 上传截图到飞书图片接口，拿到 `image_key`。

@@ -68,14 +68,14 @@ npx skills add mondaylab/ai-industry-brief -y -g
 ## 构建
 
 1. 运行 `node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD`。脚本校验 JSON、生成日期清单、构建 React 站点，并写入旧详情链接的兼容跳转页。
-2. `index.html` 是同一个阅读器入口；用户通过日期导航或 `?date=YYYY-MM-DD` 在一个页面内切换所有历史简报。
-3. 生成 `share-images/YYYY-MM-DD.png` 时打开 `/?date=YYYY-MM-DD&capture=1`，并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
+2. `index.html` 保留品牌首页，最新一期和往期入口进入 `reader.html?date=YYYY-MM-DD`；阅读器在同一页面内切换所有结构化历史简报。
+3. 生成 `share-images/YYYY-MM-DD.png` 时打开 `reader.html?date=YYYY-MM-DD&capture=1`，并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
 4. 每期简报都必须保留可点击来源链接和来源日期标注。
 5. 保留 React 阅读器的国际化瑞士编辑版式：
    - 全站使用中性纸张底色、强网格、清晰字级和克制边框；默认点缀色为 `#D9C7FF`。
    - 七套主题是用户主动选择的阅读主题，不与星期绑定。选择写入浏览器本地存储，切换日期时保持不变。
    - 顶栏提供主题选择、源码入口与移动端日期抽屉；左侧归档按月份分组，正文在同页切换。
-   - 不增加营销 Hero、手机模型、装饰卡片或旧版首页 Tab。
+   - React 阅读器不增加营销 Hero、手机模型或装饰卡片；这些品牌表达只保留在 `index.html` 首页。
 6. 保留简报正文的双栏编辑版式：
    - 桌面端页面更接近横版 A3 编辑页，不要做成长图海报。
    - 默认 AI 简报的栏目顺序是：上排 `01 AI 产品前线`、`02 AI 行业现场`；下排 `03 AI 资本与牌局`、`04 AI 能力底座`。
@@ -88,7 +88,7 @@ npx skills add mondaylab/ai-industry-brief -y -g
 
 1. 检查是否还有未替换占位符，并确认包含 4 个栏目、12 条内容和 12 个来源链接。
 2. 发布前重新运行去重检查，确保与历史简报没有重复。
-3. 在浏览器打开 `/?date=YYYY-MM-DD`，确认日期切换、七套主题、头部、页脚、换行、小屏可读性和栏目横向顺序都正常；再打开 `&capture=1` 检查分享图完整性。
+3. 在浏览器打开 `index.html` 检查入口，再打开 `reader.html?date=YYYY-MM-DD`，确认日期切换、七套主题、头部、页脚、换行、小屏可读性和栏目横向顺序都正常；最后加上 `&capture=1` 检查分享图完整性。
 4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
 5. GitHub Pages 当前部署完全生效后，立即触发飞书图片推送，不要只等待 cron 巡逻。部署完成门槛是：归档首页已包含当天详情页链接、详情页日期/页脚正确、`share-images/YYYY-MM-DD.png` 已在公开站点返回 PNG：
    - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`

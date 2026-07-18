@@ -2,7 +2,8 @@
 
 ## 输出文件
 
-- 主阅读器：`index.html`，通过 `?date=YYYY-MM-DD` 切换日期
+- 品牌首页：`index.html`
+- 主阅读器：`reader.html`，通过 `?date=YYYY-MM-DD` 切换日期
 - 旧链接兼容页：`briefs/YYYY-MM-DD.html`，只负责跳转到主阅读器
 - 日期清单：`brief-data/manifest.json`
 - 数据配置：`brief-data/YYYY-MM-DD.json`
@@ -31,6 +32,7 @@
 
 ## 阅读器布局
 
+- 品牌首页保留原有 Hero、手机简报预览、今日简报、色板和往期布局，作为进入阅读器的第一层入口。
 - 阅读器使用黑、白、灰为主的中性外壳，以 `#D9C7FF` 作为默认点缀色。
 - 顶栏保持 `The AI Industry Brief` 品牌与 `星期一研究室` 署名；不要增加营销 Hero。
 - 桌面端左侧日期归档按月份分组，正文区域提供上一期、下一期与日期下拉选择；移动端使用日期抽屉。
@@ -146,6 +148,6 @@
 3. 去重检查通过：`node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`。
 4. `brief-data/manifest.json` 包含新日期，阅读器日期归档保留全部早期数据；`briefs/YYYY-MM-DD.html` 能跳转到该日期。
 5. 浏览器检查确认日期切换、主题持久化、头部、页脚、换行、小屏可读性和栏目横向顺序正常，没有明显裁切。
-6. `share-images/YYYY-MM-DD.png` 存在，是 `/?date=YYYY-MM-DD&capture=1` 的完整 PNG 截图，并和当期简报一起发布。
+6. `share-images/YYYY-MM-DD.png` 存在，是 `reader.html?date=YYYY-MM-DD&capture=1` 的完整 PNG 截图，并和当期简报一起发布。
 7. 如果已经发布站点，等待 GitHub Pages 生效后验证聚合首页、当期详情页和当期分享图。部署完成标准是：首页包含 `briefs/YYYY-MM-DD.html`，详情页显示正确日期和页脚，`share-images/YYYY-MM-DD.png` 返回 `image/png`。
 8. Pages 部署验证通过后，立即触发飞书图片推送：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。如果 Worker 截图路径不可用，可以用已发布 PNG 调用 `/send-image-url`。不要只依赖定时巡逻。手动触发需要 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`。

@@ -57,6 +57,7 @@
 ```text
 .
 ├── index.html
+├── reader.html
 ├── app.html
 ├── src/
 │   ├── main.jsx
@@ -135,7 +136,7 @@ npm install
 node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
 ```
 
-6. 打开 `/?date=YYYY-MM-DD` 和 `/?date=YYYY-MM-DD&capture=1` 检查页面与截图模式
+6. 打开首页、`reader.html?date=YYYY-MM-DD` 和 `reader.html?date=YYYY-MM-DD&capture=1` 检查入口、阅读器与截图模式
 7. 提交并推送到 GitHub Pages 仓库
 
 本地开发：

@@ -5,7 +5,7 @@ import path from "node:path";
 const root = process.cwd();
 const buildDir = path.join(root, ".site-build");
 const builtHtml = path.join(buildDir, "app.html");
-const targetHtml = path.join(root, "index.html");
+const targetHtml = path.join(root, "reader.html");
 const targetAssets = path.join(root, "assets", "app");
 const manifest = JSON.parse(fs.readFileSync(path.join(root, "brief-data", "manifest.json"), "utf8"));
 
@@ -26,4 +26,4 @@ fs.cpSync(path.join(buildDir, "assets", "app"), targetAssets, { recursive: true 
 fs.writeFileSync(targetHtml, html);
 fs.rmSync(buildDir, { recursive: true, force: true });
 
-console.log(`Built React site for ${manifest.latest}.`);
+console.log(`Built React reader for ${manifest.latest}.`);

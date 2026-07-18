@@ -41,7 +41,7 @@ function validateBrief(data, targetDate) {
 
 function buildCompatibilityPage(data) {
   const dateLabel = `${formatMd(data.date)} · ${data.weekday}`;
-  const target = `../?date=${encodeURIComponent(data.date)}`;
+  const target = `../reader.html?date=${encodeURIComponent(data.date)}`;
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -88,6 +88,7 @@ function main() {
   fs.mkdirSync(BRIEFS_DIR, { recursive: true });
   fs.writeFileSync(path.join(BRIEFS_DIR, `${targetDate}.html`), buildCompatibilityPage(data));
   runNode(path.join(ROOT, "scripts", "generate-manifest.mjs"));
+  runNode(path.join(ROOT, "scripts", "update-homepage.mjs"));
   runNode(path.join(ROOT, "scripts", "build-app.mjs"));
 
   console.log(`Rendered React brief site for ${targetDate}.`);

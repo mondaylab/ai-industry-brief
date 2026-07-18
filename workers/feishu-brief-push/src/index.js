@@ -534,7 +534,7 @@ async function pushBriefLink({ env, requestedDate, force = false, requestId }) {
 async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
   const screenshot = await capturePageScreenshot({
     env,
-    url: `${archiveUrl}?date=${encodeURIComponent(date)}&capture=1&image_push=1`,
+    url: `${archiveUrl}reader.html?date=${encodeURIComponent(date)}&capture=1&image_push=1`,
   });
   const tenantAccessToken = await getTenantAccessToken(env);
   const imageKey = await uploadFeishuImage({

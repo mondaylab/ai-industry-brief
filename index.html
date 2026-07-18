@@ -1,17 +1,937 @@
-<!doctype html>
-<html lang="zh-CN" data-theme="lilac">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:," />
-    <meta name="theme-color" content="#f6f6f3" />
-    <meta name="description" content="星期一研究室出品的每日 AI 行业简报。" />
-    <title>The AI Industry Brief | 星期一研究室</title>
-    <script type="module" crossorigin src="./assets/app/app-CHBHrOTJ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/app/app-BKiiQs6R.css">
-    <meta name="latest-brief" content="briefs/2026-07-18.html">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:,">
+<title>The AI Industry Brief | 星期一研究室</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Noto+Sans+SC:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary: #171717;
+  --primary-light: #F4F4F1;
+  --ink: #111111;
+  --muted: #6F6F6A;
+  --line: rgba(17, 17, 17, 0.12);
+  --paper: #FFFEFC;
+  --panel: rgba(255, 254, 252, 0.78);
+  --ground: #F1F0EC;
+}
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(17, 17, 17, 0.055), transparent 24%),
+    radial-gradient(circle at 82% 10%, rgba(17, 17, 17, 0.035), transparent 22%),
+    linear-gradient(135deg, #F7F6F2 0%, #ECEBE6 50%, #FAF9F4 100%);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', 'Inter', sans-serif;
+  padding: 24px;
+}
+a { color: inherit; text-decoration: none; }
+.page {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+}
+.shell {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100vh - 48px);
+  border: 1px solid rgba(34, 28, 43, 0.12);
+  border-radius: 34px;
+  background:
+    linear-gradient(90deg, rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+    rgba(255, 254, 252, 0.78);
+  background-size: 72px 72px;
+  box-shadow: 0 28px 80px rgba(17, 17, 17, 0.10);
+  backdrop-filter: blur(22px);
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 254, 252, 0.78);
+  backdrop-filter: blur(18px);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--primary-light);
+}
+.brand-mark::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 9px 0 0 rgba(17, 17, 17, 0.18), 0 9px 0 rgba(17, 17, 17, 0.10);
+}
+.nav-tabs {
+  display: inline-flex;
+  padding: 5px;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+}
+.tab-control { position: absolute; opacity: 0; pointer-events: none; }
+.nav-tabs label {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 9px 15px;
+  color: var(--muted);
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+#tab-today:checked ~ .shell label[for="tab-today"],
+#tab-archive:checked ~ .shell label[for="tab-archive"],
+#tab-palette:checked ~ .shell label[for="tab-palette"] {
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 0 8px 22px rgba(17, 17, 17, 0.12);
+}
+.lab {
+  position: relative;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+.github-link {
+  display: inline-grid;
+  place-items: center;
+  order: 2;
+  width: 18px;
+  height: 18px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+.github-link:hover,
+.github-link:focus-visible {
+  opacity: 0.68;
+}
+.github-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.lab-tooltip {
+  position: relative;
+  order: 1;
+  cursor: pointer;
+}
+.lab-tooltip-panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  z-index: 40;
+  width: 178px;
+  padding: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 254, 252, 0.96);
+  box-shadow: 0 18px 44px rgba(17, 17, 17, 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.lab-tooltip-panel::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 28px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
+  border-left: 1px solid rgba(17, 17, 17, 0.14);
+  background: rgba(255, 254, 252, 0.96);
+  transform: rotate(45deg);
+}
+.lab-tooltip:hover .lab-tooltip-panel,
+.lab-tooltip:focus-within .lab-tooltip-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.wechat-qr {
+  display: block;
+  width: 154px;
+  height: 154px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 0.75fr);
+  gap: 44px;
+  align-items: center;
+  padding: clamp(34px, 6vw, 76px);
+  padding-bottom: 34px;
+}
+.hero-copy { position: relative; z-index: 2; }
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.kicker::before {
+  content: "";
+  width: 46px;
+  height: 1px;
+  background: currentColor;
+}
+h1 {
+  max-width: 760px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: clamp(52px, 8vw, 112px);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+}
+.lead {
+  max-width: 620px;
+  margin-top: 26px;
+  color: #4F4F4A;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+.button:hover {
+  border-color: rgba(17, 17, 17, 0.32);
+  background: rgba(255, 255, 255, 0.92);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(17, 17, 17, 0.08);
+}
+.button.primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+}
+.button.primary:hover {
+  background: #2A2A27;
+  color: #fff;
+}
+.signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+  max-width: 690px;
+}
+.signal {
+  min-height: 112px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 254, 252, 0.58);
+}
+.signal strong {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.signal span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.phone-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 650px;
+}
+.route-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+}
+.route-lines path {
+  fill: none;
+  stroke: rgba(23, 19, 30, 0.16);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 8;
+}
+.route-lines circle { fill: var(--ink); opacity: 0.42; }
+.phone {
+  position: relative;
+  z-index: 2;
+  width: min(360px, 92vw);
+  min-height: 612px;
+  padding: 14px;
+  border: 1px solid rgba(23, 19, 30, 0.28);
+  border-radius: 44px;
+  background: linear-gradient(145deg, #111111, #3C3C38);
+  box-shadow: 0 28px 80px rgba(17, 17, 17, 0.22);
+  transform: rotate(2deg);
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 92px;
+  height: 22px;
+  border-radius: 999px;
+  background: #17131E;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+.phone-screen {
+  overflow: hidden;
+  min-height: 584px;
+  border-radius: 33px;
+  background: #FFFEFC;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+}
+.mobile-paper {
+  padding: 42px 22px 22px;
+}
+.mobile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.mobile-top strong {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 26px;
+  line-height: 0.95;
+}
+.mobile-date {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: right;
+}
+.mobile-headline {
+  padding: 20px 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+.mobile-headline h2 {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 28px;
+  line-height: 1.16;
+  letter-spacing: -0.04em;
+}
+.mobile-headline p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.mobile-sections {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+}
+.mobile-section {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
+  align-items: stretch;
+  min-height: 72px;
+}
+.mobile-num {
+  border-radius: 16px;
+  background: var(--primary-light);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+.mobile-section div:last-child {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.mobile-section b {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.mobile-section span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.orbit-note {
+  position: absolute;
+  right: 0;
+  bottom: 70px;
+  z-index: 3;
+  width: 168px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 254, 252, 0.84);
+  box-shadow: 0 14px 34px rgba(51, 40, 72, 0.12);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+.orbit-note span { color: var(--ink); }
+.content {
+  padding: 0 clamp(24px, 6vw, 76px) clamp(34px, 6vw, 76px);
+}
+.panel { display: none; }
+#tab-today:checked ~ .shell .panel.today,
+#tab-archive:checked ~ .shell .panel.archive,
+#tab-palette:checked ~ .shell .panel.palette { display: block; }
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+.eyebrow {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.panel-head h2 {
+  margin-top: 8px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1;
+}
+.panel-head p {
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.brief-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.brief-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--panel);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+.brief-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(17, 17, 17, 0.28);
+  box-shadow: 0 18px 46px rgba(17, 17, 17, 0.10);
+}
+.brief-card.featured {
+  grid-column: span 2;
+  background:
+    linear-gradient(135deg, rgba(17, 17, 17, 0.055), transparent 42%),
+    rgba(255, 254, 252, 0.78);
+}
+.date {
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.brief-card h3 {
+  margin-top: 24px;
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 25px;
+  line-height: 1.28;
+}
+.brief-card p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.72;
+}
+.read {
+  margin-top: auto;
+  padding-top: 20px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 800;
+}
+.archive-list {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 254, 252, 0.68);
+}
+.archive-item {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+.archive-item:last-child { border-bottom: 0; }
+.archive-item:hover { background: rgba(242, 238, 248, 0.55); }
+.archive-title {
+  font-family: 'Noto Serif SC', Georgia, serif;
+  font-size: 23px;
+  line-height: 1.25;
+}
+.archive-desc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.archive-arrow {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.palette-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+}
+.palette-card {
+  min-height: 270px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 254, 252, 0.72);
+}
+.palette-atlas {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(78px, 1fr));
+  gap: 10px;
+  margin-top: 26px;
+}
+.palette-swatch {
+  --swatch: #111;
+  position: relative;
+  overflow: hidden;
+  min-height: 156px;
+  padding: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 18px;
+  background: #FFFEFC;
+}
+.palette-swatch::before {
+  content: "";
+  position: absolute;
+  inset: 10px 10px auto;
+  height: 74px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 42%),
+    var(--swatch);
+}
+.palette-swatch::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -28px;
+  width: 84px;
+  height: 84px;
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--swatch) 22%, transparent);
+}
+.palette-swatch b,
+.palette-swatch span,
+.palette-swatch code {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+.palette-swatch b {
+  margin-top: 88px;
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.palette-swatch span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.palette-swatch code {
+  margin-top: 12px;
+  color: rgba(17, 17, 17, 0.46);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+}
+.palette-swatch:nth-child(even) { transform: translateY(16px); }
+.style-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 270px;
+  padding: 22px;
+  border-radius: 28px;
+  background: var(--ink);
+  color: #fff;
+}
+.style-note p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.footnote {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 34px;
+  color: rgba(23, 19, 30, 0.45);
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 980px) {
+  body { padding: 14px; }
+  .shell { border-radius: 26px; }
+  .topbar { align-items: flex-start; flex-direction: column; }
+  .topbar-actions { width: 100%; justify-content: space-between; }
+  .lab-tooltip-panel { left: 0; right: auto; }
+  .lab-tooltip-panel::before { left: 32px; right: auto; }
+  .hero { grid-template-columns: 1fr; padding: 34px 22px; }
+  .phone-stage { min-height: 560px; }
+  .brief-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .palette-board { grid-template-columns: 1fr; }
+  .palette-atlas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .nav-tabs { width: 100%; overflow-x: auto; }
+  .nav-tabs label { flex: 1; text-align: center; white-space: nowrap; }
+  h1 { font-size: 48px; letter-spacing: -0.045em; }
+  .signal-row, .brief-grid { grid-template-columns: 1fr; }
+  .brief-card.featured { grid-column: span 1; }
+  .archive-item { grid-template-columns: 1fr; gap: 10px; }
+  .archive-arrow { display: none; }
+  .phone { width: min(330px, 94vw); transform: none; }
+  .orbit-note { right: 8px; bottom: 28px; }
+  .panel-head { display: block; }
+  .panel-head p { margin-top: 12px; }
+  .footnote { display: block; line-height: 1.9; }
+  .palette-atlas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .palette-swatch:nth-child(even) { transform: none; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <input class="tab-control" type="radio" name="home-tab" id="tab-today" checked>
+  <input class="tab-control" type="radio" name="home-tab" id="tab-archive">
+  <input class="tab-control" type="radio" name="home-tab" id="tab-palette">
+
+  <section class="shell" aria-label="The AI Industry Brief 首页">
+    <nav class="topbar" aria-label="首页导航">
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>每日 AI 行业简报</span>
+      </a>
+      <div class="nav-tabs" role="tablist" aria-label="内容切换">
+        <label for="tab-today" role="tab">今日</label>
+        <label for="tab-palette" role="tab">色板</label>
+        <label for="tab-archive" role="tab">往期</label>
+      </div>
+      <div class="topbar-actions">
+        <a class="github-link" href="https://github.com/mondaylab" target="_blank" rel="noopener noreferrer" aria-label="打开 GitHub 首页">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.19-1.11-1.51-1.11-1.51-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.66.35-1.12.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.35 9.35 0 0 1 12 6.95c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.91 0 1.38-.01 2.49-.01 2.83 0 .27.18.59.69.49A10.13 10.13 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"/>
+          </svg>
+        </a>
+        <div class="lab-tooltip">
+          <button class="lab" type="button" aria-describedby="wechat-tooltip">星期一研究室</button>
+          <div class="lab-tooltip-panel" id="wechat-tooltip" role="tooltip">
+            <img class="wechat-qr" src="assets/wechat-qr.jpg" alt="星期一研究室公众号二维码">
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Daily intelligence for AI builders</div>
+        <h1>The AI Industry Brief</h1>
+        <p class="lead">把一天的 AI 行业动态压缩进一份可读、可归档、可复用的报刊。用更轻的界面，追踪工作台、流水线、大模型与信息美学的结构性变化。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="reader.html?date=2026-07-18">阅读最新一期</a>
+          <label class="button" for="tab-palette" data-preserve-scroll>查看七天色板</label>
+          <label class="button" for="tab-archive" data-preserve-scroll>查看往期</label>
+        </div>
+        <div class="signal-row" aria-label="简报栏目">
+          <div class="signal"><strong>04</strong><span>固定栏目：AI 工作台、AI 信息美学、AI 流水线、AI 大模型。</span></div>
+          <div class="signal"><strong>03</strong><span>每个栏目筛选三条高信号动态，避免信息噪音。</span></div>
+          <div class="signal"><strong>07</strong><span>七天主色系统，保持日更节奏里的视觉识别。</span></div>
+        </div>
+      </div>
+
+      <div class="phone-stage" aria-hidden="true">
+        <svg class="route-lines" viewBox="0 0 520 650">
+          <path d="M40 116 C150 52, 302 62, 438 132 S490 336, 376 380 S152 366, 112 482 S252 618, 468 540" />
+          <path d="M70 520 C132 420, 236 446, 296 320 S370 126, 478 88" />
+          <circle cx="40" cy="116" r="5" />
+          <circle cx="376" cy="380" r="5" />
+          <circle cx="468" cy="540" r="5" />
+        </svg>
+        <div class="phone">
+          <div class="phone-screen">
+            <article class="mobile-paper">
+              <div class="mobile-top">
+                <strong>AI<br>Brief</strong>
+                <div class="mobile-date">07/18<br>SATURDAY</div>
+              </div>
+              <div class="mobile-headline">
+                <h2>AI 开始按完成结果计价</h2>
+                <p>客服、营销、医疗和机器人都在把 AI 接到完整流程，成本衡量也从 Token 转向成功任务。</p>
+              </div>
+              <div class="mobile-sections">
+                <div class="mobile-section"><span class="mobile-num">01</span><div><b>AI 产品前线</b><span>AI 产品开始直接改造旧系统、营销执行和客户服务。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">02</span><div><b>AI 行业现场</b><span>医疗协作、脑控机器人和机器人租用进入现场流程。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">03</span><div><b>AI 资本与牌局</b><span>应用生成、医疗 Agent 和推理云获得新的规模资金。</span></div></div>
+                <div class="mobile-section"><span class="mobile-num">04</span><div><b>AI 能力底座</b><span>液冷机架、后训练系统和成功任务指标共同重算成本。</span></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="orbit-note">One phone.<br><span>One daily paper.</span><br>Readable intelligence.</div>
+      </div>
+    </section>
+
+    <section class="content">
+      <section class="panel today">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Latest Edition</div>
+            <h2>今日简报</h2>
+          </div>
+          <p>首页保留足够留白，把最新一期作为入口，同时把值得回看的内容整理成往期推荐。</p>
+        </div>
+        <div class="brief-grid">
+          <a class="brief-card featured" href="reader.html?date=2026-07-18">
+            <div class="date">07/18 · 星期六</div>
+            <h3>AI 开始按完成结果计价</h3>
+            <p>客服、营销、医疗和机器人都在把 AI 接到完整流程，成本衡量也从 Token 转向成功任务。</p>
+            <span class="read">进入新版阅读器 →</span>
+          </a>
+          <a class="brief-card" href="reader.html?date=2026-07-17">
+            <div class="date">07/17 · 星期五</div>
+            <h3>AI 开始进入有规则的专业工作流</h3>
+            <p>内容、投资、医疗和工程场景不再只接一个模型，而是在重做完整的执行方式。</p>
+            <span class="read">查看前一期 →</span>
+          </a>
+          <a class="brief-card" href="color-palette-demo.html">
+            <div class="date">Style System</div>
+            <h3>Weekly Palette Demo</h3>
+            <p>查看周一到周日的紫、蓝、绿、粉色系在简报组件里的实际效果。</p>
+            <span class="read">查看色板 →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="panel archive">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Previous Issues</div>
+            <h2>往期</h2>
+          </div>
+          <p>从过往简报中挑出值得回看的行业信号，适合快速补齐 AI 产品栈、模型能力和创意工具的连续变化。</p>
+        </div>
+        <div class="archive-list">
+          <a class="archive-item" href="reader.html?date=2026-07-18"><div class="date">07/18 · 星期六</div><div><div class="archive-title">AI 开始按完成结果计价</div><div class="archive-desc">客服、营销、医疗和机器人都在把 AI 接到完整流程，成本衡量也从 Token 转向成功任务。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-17"><div class="date">07/17 · 星期五</div><div><div class="archive-title">AI 开始进入有规则的专业工作流</div><div class="archive-desc">内容、投资、医疗和工程场景不再只接一个模型，而是在重做完整的执行方式。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-16"><div class="date">07/16 · 星期四</div><div><div class="archive-title">企业开始给 Agent 补运行规则</div><div class="archive-desc">私有知识、身份、行业数据和本地算力正在成为 Agent 进入生产环境的共同条件。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-15"><div class="date">07/15 · 星期三</div><div><div class="archive-title">Agent 开始直接完成业务动作</div><div class="archive-desc">交易、招聘、医疗与设备现场都在接入 Agent，治理和算力同步成为硬约束。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-13"><div class="date">07/13 · 星期一</div><div><div class="archive-title">Agent 开始长期在线接活</div><div class="archive-desc">记忆、行业系统、资本和算力都在为持续运行的 Agent 补齐条件。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-12"><div class="date">07/12 · 星期日</div><div><div class="archive-title">Agent 开始接入真实系统</div><div class="archive-desc">接口、行业流程、资本配置和安全底座都在围绕可治理行动展开。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-10"><div class="date">07/10 · 星期五</div><div><div class="archive-title">AI 进入受控执行层</div><div class="archive-desc">移动入口、行业流程、资本配置和工具底座同步转向可执行与可审计。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-09"><div class="date">07/09 · 星期四</div><div><div class="archive-title">AI 从对话走向行动控制</div><div class="archive-desc">语音、行业 Agent、资本配置和安全底座同步补齐企业运行条件。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-08"><div class="date">07/08 · 星期三</div><div><div class="archive-title">Agent 进入企业运行层</div><div class="archive-desc">产品入口、行业流程、资本配置和底座控制同步走向可治理。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-07"><div class="date">07/07 · 星期二</div><div><div class="archive-title">AI 进入可运营结构</div><div class="archive-desc">Agent 工作台、行业交付、训练环境和安全底座同步补位。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-06"><div class="date">07/06 · 星期一</div><div><div class="archive-title">AI 进入可治理执行层</div><div class="archive-desc">Agent 入口、行业落地、开放推理云和安全模型一起升温。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-05"><div class="date">07/05 · 星期日</div><div><div class="archive-title">AI 进入可交付系统</div><div class="archive-desc">产品、行业和底座都在补分发、治理与成本账本。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-04"><div class="date">07/04 · 星期六</div><div><div class="archive-title">AI 进入结算期</div><div class="archive-desc">产品、行业、资本和底座都在围绕交付、计费与风控重排。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-03"><div class="date">07/03 · 星期五</div><div><div class="archive-title">AI 进入治理与计费回合</div><div class="archive-desc">工作流、内容、资本和底层能力都开始围绕可审计、可收费、可交付重排。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-02"><div class="date">07/02 · 星期四</div><div><div class="archive-title">AI 转向可交付系统</div><div class="archive-desc">代理产品、行业落地、资本和底座都在围绕工作结果重排。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-07-01"><div class="date">07/01 · 星期三</div><div><div class="archive-title">可信工作系统成主线</div><div class="archive-desc">模型发布、行业落地和资本押注都转向可审计的工作流。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-30"><div class="date">06/30 · 星期二</div><div><div class="archive-title">代理转向运营系统</div><div class="archive-desc">AI 竞争从入口发布转向协作、治理和反馈闭环。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-29"><div class="date">06/29 · 星期一</div><div><div class="archive-title">代理进入可计量生产期</div><div class="archive-desc">AI 从功能发布转向预算、权限、流程和评测体系。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-28"><div class="date">06/28 · 星期日</div><div><div class="archive-title">AI 进入可控基础设施期</div><div class="archive-desc">代理、行业落地、资本和安全底座都在争夺控制权。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-27"><div class="date">06/27 · 星期六</div><div><div class="archive-title">AI 进入治理化生产</div><div class="archive-desc">产品、教育、资本和安全底座同时转向可控运营。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-26"><div class="date">06/26 · 星期五</div><div><div class="archive-title">代理工作流开始算账</div><div class="archive-desc">从创作、金融到安全和算力，AI 进入可运营周期。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-25"><div class="date">06/25 · 星期四</div><div><div class="archive-title">AI 进入可控成本周期</div><div class="archive-desc">协作入口、企业部署、芯片牌局和模型网关同步收紧。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-24"><div class="date">06/24 · 星期三</div><div><div class="archive-title">AI 协作层开始可治理</div><div class="archive-desc">代理入口、行业落地、治理边界和底座工具同时补齐。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-23"><div class="date">06/23 · 星期二</div><div><div class="archive-title">AI 入口开始并入工作流</div><div class="archive-desc">创作、表格、医疗、影视、算力和安全治理一起重排。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-22"><div class="date">06/22 · 星期一</div><div><div class="archive-title">AI 部署进入秩序化阶段</div><div class="archive-desc">企业落地、资本路径和代理接口开始一起收束。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-21"><div class="date">06/21 · 星期日</div><div><div class="archive-title">AI 上下文进入治理层</div><div class="archive-desc">工作台、代理链路、模型与创意工具都在争夺可控上下文。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-20"><div class="date">06/20 · 星期六</div><div><div class="archive-title">AI 协作进入基础设施层</div><div class="archive-desc">指标、发现、部署、模型治理与创意控制正在一起补齐。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-19"><div class="date">06/19 · 星期五</div><div><div class="archive-title">AI 代理进入企业管控层</div><div class="archive-desc">GitHub、OpenAI、Adobe、Vercel 与 Cloudflare 都在补齐署名、成本和权限。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-18"><div class="date">06/18 · 星期四</div><div><div class="archive-title">AI 代理进入可分派岗位</div><div class="archive-desc">Copilot、Figma、Claude Code 与视觉模型都在补齐目录、权限和端点。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-17"><div class="date">06/17 · 星期三</div><div><div class="archive-title">AI 转向可控工作系统</div><div class="archive-desc">工作台、流水线、模型和视觉工具都在补齐治理接口。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-16"><div class="date">06/16 · 星期二</div><div><div class="archive-title">AI 进入组织化交付</div><div class="archive-desc">工作上下文、代理流水线、模型治理和视觉工具都在补齐可控性。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-15"><div class="date">06/15 · 星期一</div><div><div class="archive-title">AI 进入可管理工作流</div><div class="archive-desc">记忆控制、代理会话、端侧模型和视觉开源都在转向可复用治理。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-14"><div class="date">06/14 · 星期日</div><div><div class="archive-title">AI 转向可控分发</div><div class="archive-desc">座席、风格参数、代理流水线和模型准入都在进入组织治理层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-13"><div class="date">06/13 · 星期六</div><div><div class="archive-title">AI 进入可审计工作流</div><div class="archive-desc">学习、创作、代理流水线和模型入口都在补齐控制与复用能力。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-12"><div class="date">06/12 · 星期五</div><div><div class="archive-title">AI 代理进入运营层</div><div class="archive-desc">上下文、品牌资产、沙箱和模型入口开始围绕可治理交付重组。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-11"><div class="date">06/11 · 星期四</div><div><div class="archive-title">AI 生成进入可操作层</div><div class="archive-desc">记忆、设计、评测与模型入口一起转向可编辑交付。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-10"><div class="date">06/10 · 星期三</div><div><div class="archive-title">AI 代理进入可控现场</div><div class="archive-desc">工作台、画布、CLI 与模型文档一起争夺可治理的默认入口。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-09"><div class="date">06/09 · 星期二</div><div><div class="archive-title">AI 工作进入编排审计期</div><div class="archive-desc">记忆、画布、技能目录和安全地图开始把代理工作变成可管理流程。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-08"><div class="date">06/08 · 星期一</div><div><div class="archive-title">持久代理进入治理期</div><div class="archive-desc">上下文、创意资产、沙箱和模型网关开始围绕长期运行重组。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-07"><div class="date">06/07 · 星期日</div><div><div class="archive-title">生产代理重画组织边界</div><div class="archive-desc">记忆、业务语境、设计代码和安全评测一起进入生产层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-06"><div class="date">06/06 · 星期六</div><div><div class="archive-title">代理系统进入治理工作流</div><div class="archive-desc">工作台、浏览器、创意工具和模型供给都在补齐上下文、成本与审计层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-05"><div class="date">06/05 · 星期五</div><div><div class="archive-title">代理平台化进入交付闭环</div><div class="archive-desc">工作入口、开发会话、创意节点与模型供给都在补齐治理和成本层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-04"><div class="date">06/04 · 星期四</div><div><div class="archive-title">常驻代理进入生产系统</div><div class="archive-desc">工作入口、开发流水线、模型能力与创意代理同步走向持续运行。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-03"><div class="date">06/03 · 星期三</div><div><div class="archive-title">AI 进入运营控制层</div><div class="archive-desc">入口、预算、连接器与创意代理同步走向可治理流程。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-02"><div class="date">06/02 · 星期二</div><div><div class="archive-title">AI 接管工作界面</div><div class="archive-desc">工作台、代理流水线、模型与创意系统同时进入治理层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-06-01"><div class="date">06/01 · 星期一</div><div><div class="archive-title">代理入口进入治理期</div><div class="archive-desc">工作入口、开发沙箱、模型底座和创意管线都在补上控制层。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-05-31"><div class="date">05/31 · 星期日</div><div><div class="archive-title">代理默认层继续下沉</div><div class="archive-desc">工作入口、执行链路、模型底座与创意资产都在被重排。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-05-30"><div class="date">05/30 · 星期六</div><div><div class="archive-title">代理面板开始吞并产品栈</div><div class="archive-desc">工作台、创意接口与模型评测都在朝持续执行靠拢。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="reader.html?date=2026-05-29"><div class="date">05/29 · 星期五</div><div><div class="archive-title">AI 产品栈正在一起向闭环执行收束。</div><div class="archive-desc">今天四个栏目指向同一件事：工作台提前接管注意力，流水线把代理挂进任务系统，模型往长任务稳定性靠拢，创意能力则被接口化。下一轮壁垒不再是单点智能，而是谁能把上下文、执行和生成连成闭环。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-28.html"><div class="date">05/28 · 星期四</div><div><div class="archive-title">上下文接口成为新分界</div><div class="archive-desc">工作台、代理编排、长任务模型与创意 MCP 同步靠拢。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-27.html"><div class="date">05/27 · 星期三</div><div><div class="archive-title">任务入口开始主动编排</div><div class="archive-desc">Daily Brief、Goal mode、Gemini 3.5 与 Aleph 2.0 指向持续执行链。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-26.html"><div class="date">05/26 · 星期二</div><div><div class="archive-title">入口之争转向工作现场</div><div class="archive-desc">Antigravity CLI、Managed Agents、Gemini Omni 与创意执行界面的演进。</div></div><span class="archive-arrow">→</span></a>
+          <a class="archive-item" href="briefs/2026-05-25.html"><div class="date">05/25 · 星期一</div><div><div class="archive-title">AI 正进入主动工作阶段</div><div class="archive-desc">Gemini 主动简报、Antigravity CLI、Gemini 3.5 与新的创意工作流。</div></div><span class="archive-arrow">→</span></a>
+        </div>
+      </section>
+
+      <section class="panel palette">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Visual System</div>
+            <h2>七天色板</h2>
+          </div>
+          <p>用紫、蓝、绿、粉色系建立轻量但稳定的日更识别，避免每期页面变成孤立视觉。</p>
+        </div>
+        <div class="palette-board">
+          <a class="palette-card" href="color-palette-demo.html">
+            <div class="date">Weekly Palette Demo</div>
+            <h3 class="archive-title">从周一到周日的主色预览</h3>
+            <div class="palette-atlas" aria-label="七天主色色票">
+              <div class="palette-swatch" style="--swatch:#927BBE"><b>MON</b><span>莫兰迪紫</span><code>#927BBE</code></div>
+              <div class="palette-swatch" style="--swatch:#6F97A8"><b>TUE</b><span>雾蓝</span><code>#6F97A8</code></div>
+              <div class="palette-swatch" style="--swatch:#7FA6C9"><b>WED</b><span>晴蓝</span><code>#7FA6C9</code></div>
+              <div class="palette-swatch" style="--swatch:#7FA68B"><b>THU</b><span>鼠尾草绿</span><code>#7FA68B</code></div>
+              <div class="palette-swatch" style="--swatch:#6F9F99"><b>FRI</b><span>青瓷绿</span><code>#6F9F99</code></div>
+              <div class="palette-swatch" style="--swatch:#8A93B7"><b>SAT</b><span>紫蓝</span><code>#8A93B7</code></div>
+              <div class="palette-swatch" style="--swatch:#EC9BC8"><b>SUN</b><span>柔粉</span><code>#EC9BC8</code></div>
+            </div>
+          </a>
+          <div class="style-note">
+            <div class="eyebrow">Design Note</div>
+            <p>首页保持黑白灰基调，把每日主色留给简报正文和色板样本，展示系统本身更克制。</p>
+            <a class="button" href="color-palette-demo.html">打开完整 Demo</a>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footnote">
+        <span>星期一研究室出品</span>
+        <span>The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design</span>
+      </footer>
+    </section>
+  </section>
+</main>
+<script>
+document.querySelectorAll('[data-preserve-scroll]').forEach((label) => {
+  label.addEventListener('click', (event) => {
+    const target = document.getElementById(label.getAttribute('for'));
+    if (!target) return;
+    event.preventDefault();
+    const x = window.scrollX;
+    const y = window.scrollY;
+    target.checked = true;
+    target.dispatchEvent(new Event('change', { bubbles: true }));
+    window.scrollTo(x, y);
+  });
+});
+</script>
+</body>
 </html>

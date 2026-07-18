@@ -122,7 +122,7 @@ npm install
 node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
 ```
 
-6. 运行 `npm run dev`，检查 `/?date=YYYY-MM-DD` 与 `/?date=YYYY-MM-DD&capture=1`
+6. 运行 `npm run dev`，检查首页、`reader.html?date=YYYY-MM-DD` 与 `reader.html?date=YYYY-MM-DD&capture=1`
 7. 提交并推送到 GitHub Pages 仓库
 
 ## 4. 数据格式
@@ -309,6 +309,7 @@ cp -R skills/ai-industry-brief skills/your-industry-brief
 
 ```text
 index.html
+reader.html
 assets/app/
 briefs/YYYY-MM-DD.html
 color-palette-demo.html
@@ -319,7 +320,7 @@ brief-data/manifest.json
 发布流程：
 
 ```bash
-git add index.html assets/app briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json brief-data/manifest.json
+git add index.html reader.html assets/app briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json brief-data/manifest.json
 git commit -m "Publish industry brief for YYYY-MM-DD"
 git push origin main
 ```

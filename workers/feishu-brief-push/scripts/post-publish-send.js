@@ -465,7 +465,7 @@ async function findChrome() {
 
 async function captureScreenshot({ date, archiveUrl, imagePath }) {
   fs.mkdirSync(path.dirname(imagePath), { recursive: true });
-  const captureUrl = `${archiveUrl}?date=${encodeURIComponent(date)}&capture=1&post_publish_image=${Date.now()}`;
+  const captureUrl = `${archiveUrl}reader.html?date=${encodeURIComponent(date)}&capture=1&post_publish_image=${Date.now()}`;
 
   if (await commandExists("npx")) {
     await execFileAsync(

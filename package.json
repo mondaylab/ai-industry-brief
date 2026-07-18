@@ -6,7 +6,8 @@
     "dev": "vite --host 0.0.0.0",
     "manifest": "node scripts/generate-manifest.mjs",
     "build:app": "node scripts/build-app.mjs",
-    "build": "npm run manifest && npm run build:app",
+    "homepage": "node scripts/update-homepage.mjs",
+    "build": "npm run manifest && npm run homepage && npm run build:app",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
