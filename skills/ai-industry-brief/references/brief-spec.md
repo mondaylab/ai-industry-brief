@@ -4,6 +4,8 @@
 
 - 品牌首页：`index.html`
 - 主阅读器：`reader.html`，通过 `?date=YYYY-MM-DD` 切换日期
+- 信号雷达：`radar.html`
+- Radar 快照：`radar-data/snapshot.json`
 - 旧链接兼容页：`briefs/YYYY-MM-DD.html`，只负责跳转到主阅读器
 - 日期清单：`brief-data/manifest.json`
 - 数据配置：`brief-data/YYYY-MM-DD.json`
@@ -40,6 +42,15 @@
 - 提供 7 套用户主题：Lilac、Cobalt、Glacier、Mint、Rose、Signal、Mono。主题是阅读偏好，不得根据星期自动切换。
 - 主题选择保存在 `localStorage`；截图模式 `capture=1` 固定使用默认 Lilac，确保每日分享图品牌一致。
 - 如果日期数据或路由结构变化，必须同步更新 `brief-data/manifest.json` 生成器、旧链接兼容页和飞书截图入口。
+
+## Signal Radar
+
+- Radar 是编辑工作台，不替代公开简报阅读器。
+- 第一版从最近 14 天的 `brief-data` 生成来源账本和信号快照，模式必须标记为 `brief-observed`。
+- 信号字段至少包含：标题、描述、公司、主题簇、栏目、来源、发布日期、收录日期、评分、评分因素和工作流状态。
+- 评分必须保留时效、证据、元数据、Agent 相关度、跨期共振和编辑价值等可解释因素。
+- 编辑动作包括：加入今日简报、持续追踪、忽略和恢复初始状态。公开静态站点只能写入浏览器本地存储，不得伪装成已经写回仓库。
+- Agent 流水线固定展示：发现、去重、分类、评分、核验。没有后端采集器时，核验保持人工确认。
 
 ## 详情页布局
 

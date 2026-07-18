@@ -7,7 +7,8 @@
     "manifest": "node scripts/generate-manifest.mjs",
     "build:app": "node scripts/build-app.mjs",
     "homepage": "node scripts/update-homepage.mjs",
-    "build": "npm run manifest && npm run homepage && npm run build:app",
+    "radar": "node scripts/generate-radar-snapshot.mjs",
+    "build": "npm run manifest && npm run radar && npm run homepage && npm run build:app",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {

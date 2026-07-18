@@ -115,14 +115,14 @@ cp brief-data/_template.json brief-data/YYYY-MM-DD.json
 node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json
 ```
 
-5. 构建日期清单、React 阅读器和旧链接兼容页
+5. 构建日期清单、Radar 快照、React 阅读器和旧链接兼容页
 
 ```bash
 npm install
 node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
 ```
 
-6. 运行 `npm run dev`，检查首页、`reader.html?date=YYYY-MM-DD` 与 `reader.html?date=YYYY-MM-DD&capture=1`
+6. 运行 `npm run dev`，检查首页、`reader.html?date=YYYY-MM-DD`、`radar.html` 与截图模式
 7. 提交并推送到 GitHub Pages 仓库
 
 ## 4. 数据格式
@@ -310,17 +310,19 @@ cp -R skills/ai-industry-brief skills/your-industry-brief
 ```text
 index.html
 reader.html
+radar.html
 assets/app/
 briefs/YYYY-MM-DD.html
 color-palette-demo.html
 brief-data/YYYY-MM-DD.json
 brief-data/manifest.json
+radar-data/snapshot.json
 ```
 
 发布流程：
 
 ```bash
-git add index.html reader.html assets/app briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json brief-data/manifest.json
+git add index.html reader.html radar.html assets/app briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json brief-data/manifest.json radar-data/snapshot.json
 git commit -m "Publish industry brief for YYYY-MM-DD"
 git push origin main
 ```

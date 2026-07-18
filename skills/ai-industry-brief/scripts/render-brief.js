@@ -88,6 +88,7 @@ function main() {
   fs.mkdirSync(BRIEFS_DIR, { recursive: true });
   fs.writeFileSync(path.join(BRIEFS_DIR, `${targetDate}.html`), buildCompatibilityPage(data));
   runNode(path.join(ROOT, "scripts", "generate-manifest.mjs"));
+  runNode(path.join(ROOT, "scripts", "generate-radar-snapshot.mjs"));
   runNode(path.join(ROOT, "scripts", "update-homepage.mjs"));
   runNode(path.join(ROOT, "scripts", "build-app.mjs"));
 

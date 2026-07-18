@@ -10,7 +10,10 @@ export default defineConfig({
     emptyOutDir: true,
     assetsDir: "assets/app",
     rollupOptions: {
-      input: path.resolve(process.cwd(), "app.html"),
+      input: {
+        reader: path.resolve(process.cwd(), "app.html"),
+        radar: path.resolve(process.cwd(), "radar-app.html"),
+      },
     },
   },
 });
