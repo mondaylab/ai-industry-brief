@@ -23,7 +23,7 @@
 ## 在线预览
 
 - 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
-- 七天色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
+- 七种色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
 - 强弱信号做图 SOP：[docs/weekly-call-log-sop.md](docs/weekly-call-log-sop.md)
 - 强弱信号小红书文案 Skill：`skills/xiaohongshu-weekly-letter/`
 

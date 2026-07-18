@@ -103,8 +103,8 @@ ${buildArchiveCard(latest, true, "进入新版阅读器 →")}
 ${buildArchiveCard(previous, false, "查看前一期 →")}
           <a class="brief-card" href="color-palette-demo.html">
             <div class="date">Style System</div>
-            <h3>Weekly Palette Demo</h3>
-            <p>查看周一到周日的紫、蓝、绿、粉色系在简报组件里的实际效果。</p>
+            <h3>Seven Theme Palette</h3>
+            <p>查看七种可主动切换的阅读主题，不再与星期绑定。</p>
             <span class="read">查看色板 →</span>
           </a>
         </div>
