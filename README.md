@@ -1,6 +1,6 @@
 # The AI Industry Brief
 
-一个可复用的**国际化报刊 Skill** 与静态站点模板，用来把“每天追踪行业动态”变成稳定流程：采集、去重、撰写、排版、归档、发布。
+一个可复用的**国际化报刊 Skill** 与 React 阅读器，用来把“每天追踪行业动态”变成稳定流程：采集、去重、撰写、排版、归档、发布。
 
 当前示例站点聚焦 AI 行业，覆盖四个方向：
 
@@ -46,22 +46,30 @@
 5. **写作规则**
    每条动态采用“事实 + 行业影响”的写法，避免只堆新闻摘要。
 
-6. **视觉模板**
-   详情页使用横版 A3 报刊感版式，包含 LEAD 引文、双栏栏目、主题色、editorial note 洞察区和页脚品牌。
+6. **视觉阅读器**
+   React 阅读器使用瑞士编辑版式，在同一页面切换日期，并提供以 `#D9C7FF` 为默认色的七套用户主题。
 
 7. **归档发布**
-   自动维护 `index.html` 的日期卡片，保留历史归档，并适配 GitHub Pages 发布。
+   自动维护日期 manifest 和旧链接兼容页，保留历史归档，并适配 GitHub Pages 发布。
 
 ## 文件结构
 
 ```text
 .
 ├── index.html
+├── app.html
+├── src/
+│   ├── main.jsx
+│   └── styles.css
+├── scripts/
+│   ├── build-app.mjs
+│   └── generate-manifest.mjs
 ├── color-palette-demo.html
 ├── briefs/
 │   └── YYYY-MM-DD.html
 ├── brief-data/
 │   ├── _template.json
+│   ├── manifest.json
 │   └── YYYY-MM-DD.json
 ├── skills/
 │   └── ai-industry-brief/
@@ -120,10 +128,21 @@ npx skills add . -y -g
 node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json
 ```
 
-5. 生成 `briefs/YYYY-MM-DD.html`
-6. 更新 `index.html`
-7. 检查页面与链接
-8. 提交并推送到 GitHub Pages 仓库
+5. 构建当天兼容页、日期清单与 React 阅读器
+
+```bash
+npm install
+node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
+```
+
+6. 打开 `/?date=YYYY-MM-DD` 和 `/?date=YYYY-MM-DD&capture=1` 检查页面与截图模式
+7. 提交并推送到 GitHub Pages 仓库
+
+本地开发：
+
+```bash
+npm run dev
+```
 
 ## 扩展到其他行业
 

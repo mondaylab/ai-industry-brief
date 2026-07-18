@@ -534,7 +534,7 @@ async function pushBriefLink({ env, requestedDate, force = false, requestId }) {
 async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
   const screenshot = await capturePageScreenshot({
     env,
-    url: `${detailUrl}?image_push=${encodeURIComponent(date)}`,
+    url: `${archiveUrl}?date=${encodeURIComponent(date)}&capture=1&image_push=1`,
   });
   const tenantAccessToken = await getTenantAccessToken(env);
   const imageKey = await uploadFeishuImage({
@@ -1268,7 +1268,10 @@ function matchText(value, pattern) {
 function extractCorePoint(html) {
   const quoteCopy = html.match(/<div class="quote-copy">([\s\S]*?)<\/div>\s*<svg class="hero-illustration"/i)?.[1] || "";
   const corePoint = matchText(quoteCopy, /<div class="quote-label">[\s\S]*?<\/div>([\s\S]*)/i);
-  return normalizeWhitespace(corePoint);
+  if (corePoint) return normalizeWhitespace(corePoint);
+  return normalizeWhitespace(
+    matchText(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["'][^>]*>/i),
+  );
 }
 
 function normalizeWhitespace(value) {

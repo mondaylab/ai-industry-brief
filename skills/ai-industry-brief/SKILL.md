@@ -1,11 +1,11 @@
 ---
 name: ai-industry-brief
-description: 创建、初始化并维护可追溯来源的每日行业简报和静态 HTML 归档。当用户要求安装或使用 ai-industry-brief 工作流，初始化 AI、跨境电商、出海印尼、外贸、教育、制造业等行业简报，调研每日动态，生成 brief-data JSON，渲染简报页面，更新归档首页，通过 GitHub Pages 发布，或把这套流程复用到自动化、CLI、Skill 中时使用。
+description: 创建、初始化并维护可追溯来源的每日行业简报和 React 归档站点。当用户要求安装或使用 ai-industry-brief 工作流，初始化 AI、跨境电商、出海印尼、外贸、教育、制造业等行业简报，调研每日动态，生成 brief-data JSON，构建简报阅读器，通过 GitHub Pages 发布，或把这套流程复用到自动化、CLI、Skill 中时使用。
 ---
 
 # The AI Industry Brief
 
-生成一份简洁、有来源依据的每日行业简报，并维护可发布的 HTML 归档站点。
+生成一份简洁、有来源依据的每日行业简报，并维护可发布的 React 归档站点。
 
 ## 安装触发
 
@@ -27,8 +27,8 @@ npx skills add mondaylab/ai-industry-brief -y -g
 
 1. 读取 [references/brief-spec.md](references/brief-spec.md)。
 2. 如果用户要初始化非 AI 行业或全新的行业简报，同时读取 [references/industry-starter.md](references/industry-starter.md)。
-3. 如果是在更新已有站点，先读取最新的 `briefs/YYYY-MM-DD.html` 和 `index.html`，保留已有布局和历史归档。
-4. 如果是在新建站点，使用 `assets/` 里的 HTML 基础模板，并替换所有示例内容、日期、颜色和链接。
+3. 如果是在更新已有站点，先读取 `brief-data/manifest.json`、最新的 `brief-data/YYYY-MM-DD.json` 和 `src/`，延续现有 React 阅读器与历史数据结构。
+4. 如果是在新建站点，使用仓库的 React/Vite 阅读器作为基础，不要恢复旧的独立详情页模板。
 5. 创建或更新 `brief-data/YYYY-MM-DD.json`。这个 JSON 是当天简报的唯一数据源，通常从 `brief-data/_template.json` 复制得到。
 
 ## 零配置初始化
@@ -61,36 +61,34 @@ npx skills add mondaylab/ai-industry-brief -y -g
 ## 写作
 
 1. 写一句明确判断式开场，控制在 50 个中文字符以内。
-2. 12 条动态都使用 `产品/工具名 | 核心动作短语` 格式，动作短语控制在 15 个中文字符以内。
+2. 12 条动态都写成可独立读懂的完整短新闻句，使用“公司/产品 + 明确谓语动词 + 对象”结构，不使用 `|` 分隔主语和动作。
 3. 每条描述先写事实，再写行业影响，长度约 60-80 个中文字符。
 4. 写一段跨栏目洞察，控制在 150 个中文字符以内，必须有明确判断，避免模糊套话。
 
 ## 构建
 
-1. 根据 `brief-data/YYYY-MM-DD.json` 生成 `briefs/YYYY-MM-DD.html`，使用规格文档中的星期色板和品牌规则。
-2. 更新 `index.html`，包含最新一期、`往期`推荐列表和七天色板入口；保留历史简报链接。
-3. 生成 `share-images/YYYY-MM-DD.png` 并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
+1. 运行 `node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD`。脚本校验 JSON、生成日期清单、构建 React 站点，并写入旧详情链接的兼容跳转页。
+2. `index.html` 是同一个阅读器入口；用户通过日期导航或 `?date=YYYY-MM-DD` 在一个页面内切换所有历史简报。
+3. 生成 `share-images/YYYY-MM-DD.png` 时打开 `/?date=YYYY-MM-DD&capture=1`，并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
 4. 每期简报都必须保留可点击来源链接和来源日期标注。
-5. 保留基础模板里的归档页/首页布局：
-   - 首页外层保持黑、白、灰的中性色，不要用当天主题色污染全局页面框架。
-   - 顶部导航使用中文标签，顺序为：`今日`、`色板`、`往期`。
-   - Hero 按钮使用：`阅读最新一期`、`查看七天色板`、`查看往期`；切换 Tab 的按钮不要强制页面滚回顶部。
-   - 使用手机形状预览来表达“一个手机里装着一份每日小报”。
-   - 首页七天色板使用色卡归档卡片，包含 `MON`-`SUN`、中文色调名和 HEX 色值，不使用普通胶囊条。
-   - 可见的归档/推荐区名称使用 `往期`，不要写成 `历史归档` 或 `精彩推荐`。
-6. 保留基础模板里的详情页双栏编辑版式：
+5. 保留 React 阅读器的国际化瑞士编辑版式：
+   - 全站使用中性纸张底色、强网格、清晰字级和克制边框；默认点缀色为 `#D9C7FF`。
+   - 七套主题是用户主动选择的阅读主题，不与星期绑定。选择写入浏览器本地存储，切换日期时保持不变。
+   - 顶栏提供主题选择、源码入口与移动端日期抽屉；左侧归档按月份分组，正文在同页切换。
+   - 不增加营销 Hero、手机模型、装饰卡片或旧版首页 Tab。
+6. 保留简报正文的双栏编辑版式：
    - 桌面端页面更接近横版 A3 编辑页，不要做成长图海报。
    - 默认 AI 简报的栏目顺序是：上排 `01 AI 产品前线`、`02 AI 行业现场`；下排 `03 AI 资本与牌局`、`04 AI 能力底座`。
    - 保留低对比 route-map 图层、纸张网格和 waypoint 风格栏目卡片，形成国际化编辑地图报刊感。
-   - 栏目数字标记、阴影和引导线必须来自当天的 `--primary` 和 `--primary-light` 色彩。
+   - 栏目数字标记、信号轴和引导线来自用户当前主题色。
    - 栏目内部条目标记使用非数字符号（`◆`、`◇`、`◈`），不要使用 `01/02/03`。
-   - 生成或编辑详情页时，保留桌面端动态行高对齐脚本。
+   - 移动端改为自然单栏，并确保日期、来源和长标题不产生横向溢出。
 
 ## 检查与发布
 
 1. 检查是否还有未替换占位符，并确认包含 4 个栏目、12 条内容和 12 个来源链接。
 2. 发布前重新运行去重检查，确保与历史简报没有重复。
-3. 在浏览器打开归档页和新详情页，确认卡片导航、头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记都正常。
+3. 在浏览器打开 `/?date=YYYY-MM-DD`，确认日期切换、七套主题、头部、页脚、换行、小屏可读性和栏目横向顺序都正常；再打开 `&capture=1` 检查分享图完整性。
 4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
 5. GitHub Pages 当前部署完全生效后，立即触发飞书图片推送，不要只等待 cron 巡逻。部署完成门槛是：归档首页已包含当天详情页链接、详情页日期/页脚正确、`share-images/YYYY-MM-DD.png` 已在公开站点返回 PNG：
    - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
@@ -103,6 +101,5 @@ npx skills add mondaylab/ai-industry-brief -y -g
 
 - 读取 [references/brief-spec.md](references/brief-spec.md)，获取内容规则、颜色、品牌、文件路径和发布检查要求。
 - 初始化或改造成新行业简报时，读取 [references/industry-starter.md](references/industry-starter.md)。
-- 使用 [assets/brief-page-base.html](assets/brief-page-base.html) 作为新详情页的视觉基础模板。
-- 使用 [assets/archive-page-base.html](assets/archive-page-base.html) 作为新归档页的视觉基础模板。
+- 旧 `assets/` HTML 只用于迁移参考；现有站点以仓库根目录的 `src/`、`app.html` 和 Vite 构建脚本为准。
 - 使用 `brief-data/_template.json` 创建每日配置，用 `scripts/check-brief-dedup.js` 防止重复。

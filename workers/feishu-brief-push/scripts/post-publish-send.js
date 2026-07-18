@@ -463,8 +463,9 @@ async function findChrome() {
   throw new Error("Chrome/Chromium not found. Set CHROME_BIN for local screenshot fallback.");
 }
 
-async function captureScreenshot({ date, detailUrl, imagePath }) {
+async function captureScreenshot({ date, archiveUrl, imagePath }) {
   fs.mkdirSync(path.dirname(imagePath), { recursive: true });
+  const captureUrl = `${archiveUrl}?date=${encodeURIComponent(date)}&capture=1&post_publish_image=${Date.now()}`;
 
   if (await commandExists("npx")) {
     await execFileAsync(
@@ -475,7 +476,7 @@ async function captureScreenshot({ date, detailUrl, imagePath }) {
         "screenshot",
         "--full-page",
         `--viewport-size=${DEFAULT_SCREENSHOT_WIDTH},${DEFAULT_SCREENSHOT_HEIGHT}`,
-        `${detailUrl}?post_publish_image=${Date.now()}`,
+        captureUrl,
         imagePath,
       ],
       {
@@ -493,7 +494,7 @@ async function captureScreenshot({ date, detailUrl, imagePath }) {
         "--hide-scrollbars",
         `--window-size=${DEFAULT_SCREENSHOT_WIDTH},${DEFAULT_SCREENSHOT_HEIGHT}`,
         `--screenshot=${imagePath}`,
-        `${detailUrl}?post_publish_image=${Date.now()}`,
+        captureUrl,
       ],
       {
         cwd: repoRoot,
@@ -578,7 +579,7 @@ async function main() {
   if (fs.existsSync(imagePath)) {
     console.log(`Using existing published fallback image asset: ${path.relative(repoRoot, imagePath)}`);
   } else {
-    await captureScreenshot({ date, detailUrl, imagePath });
+    await captureScreenshot({ date, archiveUrl, imagePath });
     await commitAndPushImage({ date, imagePath });
   }
   await waitForPublishedIssue({ detailUrl, archiveUrl, imageUrl, date });

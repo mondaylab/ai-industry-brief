@@ -7,7 +7,7 @@
 ## 工作流
 
 1. 计算当天日期，默认使用 `Asia/Shanghai`。
-2. 打开 `https://mondaylab.github.io/ai-industry-brief/briefs/YYYY-MM-DD.html`。
+2. 打开 `https://mondaylab.github.io/ai-industry-brief/?date=YYYY-MM-DD&capture=1`。
 3. 使用 Cloudflare Browser Rendering REST API 截取整页 PNG。
 4. 用飞书自建应用凭证获取 `tenant_access_token`。
 5. 上传截图到飞书图片接口，拿到 `image_key`。
@@ -135,7 +135,7 @@ MANUAL_TRIGGER_TOKEN=<MANUAL_TRIGGER_TOKEN> \
   npm --prefix workers/feishu-brief-push run post-publish-send -- --date 2026-05-29
 ```
 
-这个脚本会先等待 GitHub Pages 部署完成再触发飞书：当本地已有 `share-images/YYYY-MM-DD.png` 时，会确认首页包含当天详情链接、详情页日期正确、公开 PNG 已返回 `image/png` 后才调用生产 Worker 的 `/send`。如果本地还没有 PNG，则先等首页和详情页就绪；当 Worker 截图链路失败时，优先用 Playwright 整页截图生成详情页 PNG，提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。飞书图片卡使用 `fit_horizontal` 展示模式，避免长图在卡片中被裁切。
+这个脚本会先等待 GitHub Pages 部署完成再触发飞书：当本地已有 `share-images/YYYY-MM-DD.png` 时，会确认首页包含当天详情链接、兼容页日期正确、公开 PNG 已返回 `image/png` 后才调用生产 Worker 的 `/send`。如果本地还没有 PNG，则先等首页和兼容页就绪；当 Worker 截图链路失败时，优先用 Playwright 打开阅读器的 `capture=1` 模式生成完整 PNG，提交并推送 `share-images/YYYY-MM-DD.png`，等该 PNG 在 Pages 生效后调用 `/send-image-url` 发送图片卡。飞书图片卡使用 `fit_horizontal` 展示模式，避免长图在卡片中被裁切。
 
 周报生成后触发：
 

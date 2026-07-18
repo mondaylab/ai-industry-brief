@@ -2,8 +2,9 @@
 
 ## 输出文件
 
-- 详情页：`briefs/YYYY-MM-DD.html`
-- 聚合首页：`index.html`
+- 主阅读器：`index.html`，通过 `?date=YYYY-MM-DD` 切换日期
+- 旧链接兼容页：`briefs/YYYY-MM-DD.html`，只负责跳转到主阅读器
+- 日期清单：`brief-data/manifest.json`
 - 数据配置：`brief-data/YYYY-MM-DD.json`
 - 分享图片：`share-images/YYYY-MM-DD.png`
 - 详情页结构：今日一句话、4 个栏目 x 每栏 3 条动态、今日洞察、采集说明、页脚
@@ -28,19 +29,15 @@
 - 纯模型发布、默认模型切换、模型评测、API/SDK、开发框架、算力、芯片、安全和成本变化，默认归入 `AI 能力底座`，即使发布主体是 ChatGPT、Claude、Gemini 等大众品牌。
 - 同一栏目近 3 天内尽量不要重复同一产品或产品线，尤其是 `AI 产品前线`。如果当天重大事件必须连续出现，需要在 `methodNote` 中说明为什么它不是普通 release note 堆叠。
 
-## 首页布局
+## 阅读器布局
 
-- 聚合首页使用黑、白、灰为主的中性外壳，即使详情页使用当天莫兰迪主题色，也不要污染首页全局框架。
-- 顶部可见品牌文字以中文优先：`每日 AI 行业简报`；右上角保持 `星期一研究室`。
-- 顶部导航使用中文标签，并保持顺序：`今日`、`色板`、`往期`。
-- Hero 区保留英文刊名 `The AI Industry Brief`、手机形状的每日小报预览，以及三个操作按钮：
-  - `阅读最新一期` 链接到最新详情页。
-  - `查看七天色板` 切换到色板面板，不强制滚回页面顶部。
-  - `查看往期` 切换到往期面板，不强制滚回页面顶部。
-- 归档/推荐区的可见标题使用 `往期`；不要写成 `历史归档` 或 `精彩推荐`。
-- 首页七天色板使用独立色卡归档卡片，包含星期缩写、中文色调名和 HEX 色值；不要做成普通胶囊条。
-- `color-palette-demo.html` 保留为更完整的设计系统预览页，左右留白舒适，并使用七天预览 Tab。
-- 如果首页卡片 DOM 结构发生变化，必须同步更新飞书推送 Worker 的首页解析逻辑，确保定时推送仍能定位最新一期标题和摘要。
+- 阅读器使用黑、白、灰为主的中性外壳，以 `#D9C7FF` 作为默认点缀色。
+- 顶栏保持 `The AI Industry Brief` 品牌与 `星期一研究室` 署名；不要增加营销 Hero。
+- 桌面端左侧日期归档按月份分组，正文区域提供上一期、下一期与日期下拉选择；移动端使用日期抽屉。
+- 日期切换只更新 `?date=YYYY-MM-DD` 并在同一页面加载对应 JSON，不跳转到新的 HTML 页面。
+- 提供 7 套用户主题：Lilac、Cobalt、Glacier、Mint、Rose、Signal、Mono。主题是阅读偏好，不得根据星期自动切换。
+- 主题选择保存在 `localStorage`；截图模式 `capture=1` 固定使用默认 Lilac，确保每日分享图品牌一致。
+- 如果日期数据或路由结构变化，必须同步更新 `brief-data/manifest.json` 生成器、旧链接兼容页和飞书截图入口。
 
 ## 详情页布局
 
@@ -66,7 +63,7 @@
   - 下排：`03 AI 资本与牌局`、`04 AI 能力底座`
 - 每个栏目标题使用倾斜数字标记和轻量虚线引导。
 - 栏目内部条目标记使用非数字符号（`◆`、`◇`、`◈`），避免和栏目数字竞争。
-- 栏目编号色彩必须来自当天 `--primary` 莫兰迪主题色：
+- 栏目编号色彩必须来自用户当前主题色：
   - `--section-ink: var(--primary)`
   - `--section-ink-soft: var(--primary-light)`
   - `--section-guide: color-mix(in srgb, var(--primary) 42%, transparent)`
@@ -117,26 +114,24 @@
 - 公开刊名：`The AI Industry Brief`
 - 详情页右上角署名：`星期一研究室`
 - 详情页页脚左侧：`星期一研究室出品`
-- 详情页页脚右侧：`The AI Industry Brief · AI Product · AI PKM/PMO · AI System Design`
+- 详情页页脚右侧：`The AI Industry Brief`
 - 聚合首页标题：`The AI Industry Brief`
 
 如果新建其他行业简报，可以替换公开刊名和页脚行业词，但保留模板层级。建议格式：`The <Industry> Brief`，并搭配中文副标题，例如 `每日跨境电商简报`。
 
-## 色板
+## 用户主题
 
-| 星期 | 主色 | 色调 |
+| 主题 | 主色 | 方向 |
 | --- | --- | --- |
-| 星期一 | `#927BBE` | 莫兰迪紫 |
-| 星期二 | `#6F97A8` | 雾蓝 |
-| 星期三 | `#7FA6C9` | 晴蓝 |
-| 星期四 | `#7FA68B` | 鼠尾草绿 |
-| 星期五 | `#6F9F99` | 青瓷绿 |
-| 星期六 | `#8A93B7` | 紫蓝 |
-| 星期日 | `#EC9BC8` | 柔粉 |
+| Lilac | `#D9C7FF` | 默认品牌紫 |
+| Cobalt | `#B8C8FF` | 冷静蓝紫 |
+| Glacier | `#BFE5E7` | 冰川青 |
+| Mint | `#C7E3D2` | 清晰绿 |
+| Rose | `#EEC9DC` | 柔和粉 |
+| Signal | `#FF6B6B` | 高强度信号红 |
+| Mono | `#C9C9C9` | 中性灰 |
 
-用于 callout 和计数器的浅色背景应从当天主色派生，约为 10% tint。
-栏目编号、编号阴影和引导线使用当天主色家族。
-七天色板整体保持紫、蓝、绿、粉的均衡；不要引入棕色、橙色或蜂蜜金作为 weekday accent。
+浅色背景与信号轴从当前主题主色派生。七套主题只由用户选择，不再表达星期。
 
 ## 现有站点
 
@@ -149,8 +144,8 @@
 1. 页面中没有模板占位符。
 2. 新详情页必须包含 4 个栏目容器、12 条内容和 12 个来源链接。
 3. 去重检查通过：`node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`。
-4. 聚合首页包含新详情页的可点击卡片，并保留早期链接。
-5. 浏览器检查确认头部、页脚、换行、小屏可读性、栏目横向顺序和莫兰迪主题色标记正常，没有明显裁切。
-6. `share-images/YYYY-MM-DD.png` 存在，是详情页 PNG 截图，并和当期简报一起发布。
+4. `brief-data/manifest.json` 包含新日期，阅读器日期归档保留全部早期数据；`briefs/YYYY-MM-DD.html` 能跳转到该日期。
+5. 浏览器检查确认日期切换、主题持久化、头部、页脚、换行、小屏可读性和栏目横向顺序正常，没有明显裁切。
+6. `share-images/YYYY-MM-DD.png` 存在，是 `/?date=YYYY-MM-DD&capture=1` 的完整 PNG 截图，并和当期简报一起发布。
 7. 如果已经发布站点，等待 GitHub Pages 生效后验证聚合首页、当期详情页和当期分享图。部署完成标准是：首页包含 `briefs/YYYY-MM-DD.html`，详情页显示正确日期和页脚，`share-images/YYYY-MM-DD.png` 返回 `image/png`。
 8. Pages 部署验证通过后，立即触发飞书图片推送：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。如果 Worker 截图路径不可用，可以用已发布 PNG 调用 `/send-image-url`。不要只依赖定时巡逻。手动触发需要 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`。

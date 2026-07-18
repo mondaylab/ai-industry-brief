@@ -73,7 +73,7 @@ skills/ai-industry-brief/
 适合粘给其他 AI 产品的最短指令：
 
 ```text
-请阅读 SKILL.md 和 brief-spec.md，按其中的采集、写作、数据结构、版式、归档和发布规则，生成今天的行业简报。先创建 brief-data/YYYY-MM-DD.json，再生成 briefs/YYYY-MM-DD.html，并更新 index.html。
+请阅读 SKILL.md 和 brief-spec.md，按其中的采集、写作、数据结构、版式、归档和发布规则，生成今天的行业简报。先创建 brief-data/YYYY-MM-DD.json，再运行 render-brief.js 构建日期清单、React 阅读器和旧链接兼容页。
 ```
 
 ## 2.1 安装后的无脑初始化流程
@@ -115,20 +115,15 @@ cp brief-data/_template.json brief-data/YYYY-MM-DD.json
 node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json
 ```
 
-5. 生成当天详情页
+5. 构建日期清单、React 阅读器和旧链接兼容页
 
-```text
-briefs/YYYY-MM-DD.html
+```bash
+npm install
+node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
 ```
 
-6. 更新首页归档
-
-```text
-index.html
-```
-
-7. 本地检查页面
-8. 提交并推送到 GitHub Pages 仓库
+6. 运行 `npm run dev`，检查 `/?date=YYYY-MM-DD` 与 `/?date=YYYY-MM-DD&capture=1`
+7. 提交并推送到 GitHub Pages 仓库
 
 ## 4. 数据格式
 
@@ -149,7 +144,7 @@ index.html
       "subtitle": "产品A · 产品B · 产品C",
       "items": [
         {
-          "title": "产品/工具名 | 核心动作短语",
+          "title": "公司或产品发布某项明确能力",
           "description": "事实 + 影响",
           "sourceName": "domain.com",
           "sourceUrl": "https://example.com",
@@ -314,15 +309,17 @@ cp -R skills/ai-industry-brief skills/your-industry-brief
 
 ```text
 index.html
+assets/app/
 briefs/YYYY-MM-DD.html
 color-palette-demo.html
 brief-data/YYYY-MM-DD.json
+brief-data/manifest.json
 ```
 
 发布流程：
 
 ```bash
-git add index.html briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json
+git add index.html assets/app briefs/YYYY-MM-DD.html brief-data/YYYY-MM-DD.json brief-data/manifest.json
 git commit -m "Publish industry brief for YYYY-MM-DD"
 git push origin main
 ```
@@ -335,7 +332,7 @@ https://<your-org>.github.io/<your-repo>/
 
 ## 9. 维护建议
 
-- 每天先写 JSON，再生成 HTML。
+- 每天先写 JSON，再运行统一构建脚本。
 - 每天发布前跑去重检查。
 - 来源尽量使用官方或一手资料。
 - 如果使用窗口外资料，明确标注“邻近窗口”或“最近官方参考”。
