@@ -23,7 +23,7 @@
 ## 在线预览
 
 - 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
-- Signal Radar：[https://mondaylab.github.io/ai-industry-brief/radar.html](https://mondaylab.github.io/ai-industry-brief/radar.html)
+- 热点雷达：[https://mondaylab.github.io/ai-industry-brief/radar.html](https://mondaylab.github.io/ai-industry-brief/radar.html)
 - 七种色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
 - 强弱信号做图 SOP：[docs/weekly-call-log-sop.md](docs/weekly-call-log-sop.md)
 - 强弱信号小红书文案 Skill：`skills/xiaohongshu-weekly-letter/`
@@ -53,7 +53,7 @@
 7. **归档发布**
    自动维护日期 manifest 和旧链接兼容页，保留历史归档，并适配 GitHub Pages 发布。
 
-8. **Signal Radar**
+8. **热点雷达**
    从最近 14 天简报数据生成来源账本、信号评分、Agent 流水线和编辑队列。第一版使用 `brief-observed` 模式，编辑动作保存在当前浏览器；实时来源抓取尚未启用。
 
 ## 文件结构

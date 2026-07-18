@@ -48,6 +48,10 @@ function statusLabel(status) {
   return { queued: "已加入", tracking: "追踪中", dismissed: "已忽略", published: "已刊登" }[status] || "待处理";
 }
 
+function sourceTierLabel(tier) {
+  return { evidence: "一手证据", explanation: "解释来源", discovery: "发现线索" }[tier] || "来源证据";
+}
+
 function statusFor(signal, editorState) {
   return editorState[signal.id] || signal.workflowStatus || "new";
 }
@@ -57,12 +61,12 @@ function Header({ snapshot, queueCount, onOpenSources }) {
     <header className="radar-header">
       <a className="radar-brand" href="./">
         <span className="radar-mark"><Radio size={16} strokeWidth={1.8} /></span>
-        <span><b>Signal Radar</b><small>The AI Industry Brief</small></span>
+        <span><b>热点雷达</b><small>The AI Industry Brief</small></span>
       </a>
-      <div className="radar-edition">EDITORIAL INTELLIGENCE / {snapshot.latestBriefDate}</div>
+      <div className="radar-edition">编辑情报台 / {snapshot.latestBriefDate}</div>
       <div className="radar-header-actions">
         <button className="icon-command source-toggle" type="button" onClick={onOpenSources} title="打开来源列表" aria-label="打开来源列表"><Menu size={18} /></button>
-        <span className="queue-counter"><b>{queueCount}</b> EDITOR QUEUE</span>
+        <span className="queue-counter"><b>{queueCount}</b> 编辑队列</span>
         <a className="back-link" href="./"><ArrowLeft size={15} />返回首页</a>
       </div>
     </header>
@@ -73,7 +77,7 @@ function SourceRail({ sources, activeSource, onSelect, open, onClose }) {
   return (
     <aside className={`source-rail ${open ? "is-open" : ""}`} aria-label="信息来源">
       <div className="source-rail-head">
-        <div><span>SOURCE LEDGER</span><b>{sources.length} SOURCES</b></div>
+        <div><span>信息源账本</span><b>{sources.length} 个来源</b></div>
         <button className="icon-command source-close" type="button" onClick={onClose} aria-label="关闭来源列表"><X size={18} /></button>
       </div>
       <button className={`source-all ${activeSource === "" ? "is-active" : ""}`} type="button" onClick={() => onSelect("")}>
@@ -95,7 +99,7 @@ function SourceRail({ sources, activeSource, onSelect, open, onClose }) {
 function Pipeline({ pipeline }) {
   return (
     <section className="pipeline" aria-label="Agent 流水线">
-      <div className="pipeline-title"><Bot size={17} /><span>AGENT PIPELINE</span></div>
+      <div className="pipeline-title"><Bot size={17} /><span>Agent 流水线</span></div>
       <div className="pipeline-stages">
         {pipeline.map((stage, index) => (
           <div className="pipeline-stage" key={stage.id}>
@@ -111,11 +115,11 @@ function Pipeline({ pipeline }) {
 
 function Metrics({ snapshot, queueCount, trackingCount }) {
   const items = [
-    { label: "SIGNALS", value: snapshot.metrics.signalCount, icon: Activity },
-    { label: "STRONG", value: snapshot.metrics.strongCount, icon: Radio },
-    { label: "SOURCES", value: snapshot.metrics.sourceCount, icon: Database },
-    { label: "TRACKING", value: trackingCount, icon: Eye },
-    { label: "QUEUE", value: queueCount, icon: Plus },
+    { label: "信号", value: snapshot.metrics.signalCount, icon: Activity },
+    { label: "强信号", value: snapshot.metrics.strongCount, icon: Radio },
+    { label: "来源", value: snapshot.metrics.sourceCount, icon: Database },
+    { label: "追踪中", value: trackingCount, icon: Eye },
+    { label: "待编队列", value: queueCount, icon: Plus },
   ];
   return <div className="metrics-strip">{items.map(({ label, value, icon: Icon }) => <div className="metric" key={label}><Icon size={15} /><span>{label}</span><b>{String(value).padStart(2, "0")}</b></div>)}</div>;
 }
@@ -127,7 +131,7 @@ function SignalRow({ signal, status, selected, onSelect }) {
       <span className="signal-date"><b>{formatDate(signal.publishedAt)}</b><small>收录 {formatDate(signal.discoveredAt)}</small></span>
       <span className="signal-copy"><b>{signal.title}</b><small>{signal.description}</small></span>
       <span className="signal-section">{signal.section.replace(/^AI\s*/, "")}</span>
-      <span className="signal-source"><b>{signal.domain}</b><small>{signal.sourceTier}</small></span>
+      <span className="signal-source"><b>{signal.domain}</b><small>{sourceTierLabel(signal.sourceTier)}</small></span>
       <span className={`workflow-status ${status}`}>{statusLabel(status)}</span>
     </button>
   );
@@ -146,7 +150,7 @@ function DetailPanel({ signal, status, onAction, mobileOpen, onClose }) {
   return (
     <aside className={`detail-panel ${mobileOpen ? "is-open" : ""}`} aria-label="信号详情">
       <header className="detail-head">
-        <div><span>SIGNAL DETAIL</span><b>{signal.id}</b></div>
+        <div><span>信号详情</span><b>{signal.id}</b></div>
         <button className="icon-command detail-close" type="button" onClick={onClose} aria-label="关闭详情"><X size={18} /></button>
       </header>
       <div className={`detail-score ${signal.score.strength}`}><b>{signal.score.total}</b><span>{scoreLabel(signal.score.strength)}信号</span></div>
@@ -157,17 +161,17 @@ function DetailPanel({ signal, status, onAction, mobileOpen, onClose }) {
         <a className="source-link" href={signal.sourceUrl} target="_blank" rel="noreferrer">打开原始来源 <ExternalLink size={14} /></a>
       </div>
       <div className="detail-ledger">
-        <div><span>COMPANY</span><b>{signal.company}</b></div>
-        <div><span>PUBLISHED</span><b>{signal.publishedAt}</b></div>
-        <div><span>OBSERVED</span><b>{signal.discoveredAt}</b></div>
-        <div><span>CLUSTER</span><b>{signal.topicCluster}</b></div>
+        <div><span>公司 / 产品</span><b>{signal.company}</b></div>
+        <div><span>来源发布</span><b>{signal.publishedAt}</b></div>
+        <div><span>简报收录</span><b>{signal.discoveredAt}</b></div>
+        <div><span>主题簇</span><b>{signal.topicCluster}</b></div>
       </div>
       <div className="score-breakdown">
-        <div className="breakdown-head"><span>SCORE BREAKDOWN</span><b>{signal.score.total}/100</b></div>
+        <div className="breakdown-head"><span>评分明细</span><b>{signal.score.total}/100</b></div>
         {factors.map(([label, value, max]) => <div className="factor" key={label}><span>{label}</span><i><b style={{ width: `${Math.min(100, (value / max) * 100)}%` }} /></i><strong>{value}</strong></div>)}
       </div>
       <div className="editor-actions">
-        <span>EDITOR ACTION · {statusLabel(status)}</span>
+        <span>编辑动作 · {statusLabel(status)}</span>
         <button type="button" className={status === "queued" ? "is-active" : ""} onClick={() => onAction("queued")}><Plus size={15} />加入今日简报</button>
         <button type="button" className={status === "tracking" ? "is-active" : ""} onClick={() => onAction("tracking")}><Eye size={15} />持续追踪</button>
         <button type="button" className={status === "dismissed" ? "is-active" : ""} onClick={() => onAction("dismissed")}><X size={15} />忽略</button>
@@ -228,8 +232,8 @@ function RadarApp() {
     });
   }
 
-  if (error) return <div className="radar-fatal"><b>Signal Radar</b><span>{error}</span></div>;
-  if (!snapshot) return <div className="radar-loading"><Radio size={24} /><span>LOADING SIGNALS</span></div>;
+  if (error) return <div className="radar-fatal"><b>热点雷达</b><span>{error}</span></div>;
+  if (!snapshot) return <div className="radar-loading"><Radio size={24} /><span>正在加载信号</span></div>;
 
   return (
     <div className="radar-app">
@@ -238,7 +242,7 @@ function RadarApp() {
         <SourceRail sources={snapshot.sources} activeSource={source} onSelect={(value) => { setSource(value); setSourceOpen(false); }} open={sourceOpen} onClose={() => setSourceOpen(false)} />
         <main className="radar-main">
           <section className="radar-intro">
-            <div><span>AI SIGNAL OBSERVATORY</span><h1>热点进入简报前，先经过这里。</h1></div>
+            <div><span>AI 信号观察站</span><h1>热点进入简报前，先经过这里。</h1></div>
             <p>{snapshot.modeNote}</p>
           </section>
           <Pipeline pipeline={snapshot.pipeline} />
@@ -249,7 +253,7 @@ function RadarApp() {
               <label className="section-select"><span className="sr-only">选择栏目</span><select value={section} onChange={(event) => setSection(event.target.value)}><option value="all">全部栏目</option>{snapshot.sections.map((item) => <option value={item} key={item}>{item}</option>)}</select></label>
               <div className="filter-tabs" role="tablist" aria-label="信号筛选">{filters.map((item) => <button type="button" role="tab" aria-selected={filter === item.id} className={filter === item.id ? "is-active" : ""} key={item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}</div>
             </div>
-            <div className="table-head"><span>SCORE</span><span>TIME</span><span>SIGNAL</span><span>DESK</span><span>SOURCE</span><span>STATUS</span></div>
+            <div className="table-head"><span>评分</span><span>时间</span><span>新闻信号</span><span>栏目</span><span>来源</span><span>状态</span></div>
             <div className="signal-list">
               {visibleSignals.map((signal) => <SignalRow key={signal.id} signal={signal} status={statusFor(signal, editorState)} selected={selected?.id === signal.id} onSelect={() => selectSignal(signal)} />)}
               {!visibleSignals.length && <div className="empty-results"><Search size={22} /><b>没有符合条件的信号</b><span>调整搜索词、栏目或来源筛选。</span></div>}
