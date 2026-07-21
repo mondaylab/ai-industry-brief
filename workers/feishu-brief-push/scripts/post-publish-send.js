@@ -124,6 +124,13 @@ function formatDateLabel(date) {
   return `${date.slice(5, 7)}/${date.slice(8, 10)}`;
 }
 
+function hasIssueLink(archiveText, date) {
+  return (
+    archiveText.includes(`reader.html?date=${date}`) ||
+    archiveText.includes(`briefs/${date}.html`)
+  );
+}
+
 function describeReadyState({ archive, detail, image }) {
   return [
     `archive=${archive.status}${archive.hasCurrentLink === false ? ":missing-current-link" : ""}`,
@@ -157,7 +164,7 @@ async function checkPublishedIssue({ detailUrl, archiveUrl, imageUrl, date }) {
     archive: {
       ok: archiveResponse.ok,
       status: archiveResponse.status,
-      hasCurrentLink: archiveResponse.ok ? archiveText.includes(`briefs/${date}.html`) : null,
+      hasCurrentLink: archiveResponse.ok ? hasIssueLink(archiveText, date) : null,
     },
     detail: {
       ok: detailResponse.ok,
@@ -193,7 +200,7 @@ async function checkPublishedPage({ detailUrl, archiveUrl, date }) {
     archive: {
       ok: archiveResponse.ok,
       status: archiveResponse.status,
-      hasCurrentLink: archiveResponse.ok ? archiveText.includes(`briefs/${date}.html`) : null,
+      hasCurrentLink: archiveResponse.ok ? hasIssueLink(archiveText, date) : null,
     },
     detail: {
       ok: detailResponse.ok,
