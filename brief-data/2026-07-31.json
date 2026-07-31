@@ -1,0 +1,199 @@
+{
+  "date": "2026-07-31",
+  "weekday": "星期五",
+  "opening": "AI 正从追求更多能力，转向争夺真实入口、责任边界与产业控制权。",
+  "insight": "今天的共同信号是 AI 一旦进入真实入口，产品就必须处理真实性、收费和监管问题。资本同时收购身份安全与算力编排能力，底层系统则开始用 Multi-Agent 工作流持续发现错误、验证修复并监控行为偏差。",
+  "methodNote": "采集窗口覆盖 2026-07-23 至 2026-07-30，重点补齐 7 月 30 日缺刊后的最新动态；Amazon Bedrock AgentCore 条目为 8 天前的邻近窗口一手资料，用于补足生产 Agent 行为监控信号。来源覆盖 LinkedIn、Axios、NHTSA、Meta、Dili、Simile、Okta、Anyscale、Google、Microsoft 与 AWS 等 11 个域名；12 条动态均未与历史简报的标题或来源 URL 重复。",
+  "homepage": {
+    "headline": "AI 进入真实入口后的边界竞争",
+    "summary": "从社交内容、语音助手到 Robotaxi，AI 的竞争重点开始转向真实性、收费、监管与持续治理。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "消费产品开始调整 AI 的交互方式、内容治理和付费边界。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "交通、应用开发和工程合规正在把 AI 接入真实生产流程。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "并购和融资集中到合成用户、身份安全与算力软件栈。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "安全团队开始用 Multi-Agent 工作流发现、修复和监控错误。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Friend · LinkedIn · Apple",
+      "items": [
+        {
+          "title": "Friend 2.0 加入扬声器和固定人格并将售价提高至 249 美元",
+          "description": "新版 AI 吊坠可直接与用户语音交流，并用固定人格维持长期关系，售价由 99 美元升至 249 美元。陪伴硬件开始用持续关系而非工具能力定价。",
+          "sourceName": "x.com",
+          "sourceUrl": "https://x.com/AviSchiffmann/status/2082827785987629526?s=20",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Friend",
+          "topicCluster": "ai-companion-wearable-pricing",
+          "sourceTier": "primary",
+          "discoverySource": "Friend / TechCrunch",
+          "productFamily": "friend-2-wearable"
+        },
+        {
+          "title": "LinkedIn 增加疑似 AI 低质内容举报入口并停用 AI 改写",
+          "description": "用户可举报疑似 AI 生成的低质帖子，平台还会用新分类器降权，并把改写功能换成校对。内容平台正在从鼓励生成转向保护真实表达。",
+          "sourceName": "linkedin.com",
+          "sourceUrl": "https://www.linkedin.com/posts/hsrinivasan1_ai-slop-is-a-top-priority-for-all-of-us-share-7488612006321889282-Ps8Z/",
+          "sourceDateLabel": "2026-07-30",
+          "company": "LinkedIn",
+          "topicCluster": "ai-generated-content-quality-controls",
+          "sourceTier": "primary",
+          "discoverySource": "LinkedIn / TechCrunch",
+          "productFamily": "linkedin-ai-slop-controls"
+        },
+        {
+          "title": "苹果考虑向 Siri AI 重度用户收费以覆盖推理成本",
+          "description": "苹果称仍在设计新 Siri 的成本方案，并首次确认高频使用者可能需要额外付费。语音助手从系统功能变成持续推理服务后，免费边界正在收缩。",
+          "sourceName": "axios.com",
+          "sourceUrl": "https://www.axios.com/2026/07/30/tim-cook-apple-may-charge-for-ai-siri",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Apple",
+          "topicCluster": "consumer-ai-assistant-usage-pricing",
+          "sourceTier": "evidence",
+          "discoverySource": "Apple Q2 earnings / Axios",
+          "productFamily": "apple-siri-ai-pricing"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Zoox · Meta · Dili",
+      "items": [
+        {
+          "title": "Zoox 获美国监管豁免后可为无方向盘 Robotaxi 收费",
+          "description": "监管机构允许 Zoox 在两年内每年运营最多 2500 辆无方向盘和踏板的收费车辆。自动驾驶竞争正从道路测试进入受限商业运营。",
+          "sourceName": "nhtsa.gov",
+          "sourceUrl": "https://www.nhtsa.gov/press-releases/cutting-red-tape-safely-fast-track-automated-vehicle",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Zoox",
+          "topicCluster": "commercial-purpose-built-robotaxi-exemption",
+          "sourceTier": "primary",
+          "discoverySource": "NHTSA / TechCrunch",
+          "productFamily": "zoox-commercial-robotaxi"
+        },
+        {
+          "title": "Meta 用 LLM Agent 加快新应用开发和推荐系统测试",
+          "description": "Meta 已用 AI 推出卖家、群组和照片等独立应用，并让 Agent 评估内容质量与测试排序变化。大平台正在把 AI 从产品功能变成内部研发方法。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/30/meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming/",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Meta",
+          "topicCluster": "llm-agent-product-development",
+          "sourceTier": "evidence",
+          "discoverySource": "Meta Q2 earnings / TechCrunch",
+          "productFamily": "meta-llm-app-development"
+        },
+        {
+          "title": "Dili 将 AI 合规检查部署到约 700 个基础设施项目",
+          "description": "平台把承包商、工资和工程文件转成结构化数据，再用确定性规则完成合规判断。高风险行业采用 AI 时，模型提取与最终决策正在被明确分开。",
+          "sourceName": "techcrunch.com",
+          "sourceUrl": "https://techcrunch.com/2026/07/30/dili-raises-15-million-to-bring-ai-compliance-to-the-infrastructure-boom/",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Dili",
+          "topicCluster": "infrastructure-project-ai-compliance",
+          "sourceTier": "evidence",
+          "discoverySource": "Dili / TechCrunch",
+          "productFamily": "dili-infrastructure-compliance"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Simile · Okta · Nscale",
+      "items": [
+        {
+          "title": "Simile 获得 2 亿美元 B 轮融资扩展合成用户研究平台",
+          "description": "本轮融资由 Greenoaks 领投，公司估值达到 20 亿美元，距上一轮仅五个月。资本正押注用 AI 模拟用户，把市场研究前移到产品发布之前。",
+          "sourceName": "simile.com",
+          "sourceUrl": "https://www.simile.com/blog/series-b",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Simile",
+          "topicCluster": "synthetic-user-research-series-b",
+          "sourceTier": "primary",
+          "discoverySource": "Simile / TechCrunch",
+          "productFamily": "simile-synthetic-users"
+        },
+        {
+          "title": "Okta 同意收购 Permiso Security 扩展 Agent 身份威胁检测",
+          "description": "Permiso 可在用户、应用和 Agent 获得权限后持续发现异常行为，交易预计第三财季完成。身份安全的竞争正从登录验证延伸到执行全过程。",
+          "sourceName": "okta.com",
+          "sourceUrl": "https://www.okta.com/newsroom/press-releases/okta-signs-definitive-agreement-to-acquire-permiso-security/",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Okta",
+          "topicCluster": "agent-identity-threat-detection-acquisition",
+          "sourceTier": "primary",
+          "discoverySource": "Okta / TechCrunch",
+          "productFamily": "okta-permiso-acquisition"
+        },
+        {
+          "title": "Nscale 同意收购 Anyscale 补齐 AI 算力编排软件",
+          "description": "Anyscale 将把基于 Ray 的训练、推理和强化学习编排接入 Nscale 的能源与数据中心业务。新云厂商正在用并购控制从电力到工作负载的完整栈。",
+          "sourceName": "anyscale.com",
+          "sourceUrl": "https://www.anyscale.com/blog/anyscale-signs-definitive-agreement-to-join-nscale",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Nscale",
+          "topicCluster": "ai-compute-orchestration-acquisition",
+          "sourceTier": "primary",
+          "discoverySource": "Anyscale / Nscale / TechCrunch",
+          "productFamily": "nscale-anyscale-acquisition"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Google · Microsoft · AWS",
+      "items": [
+        {
+          "title": "Google 用 Multi-Agent 工作流修复 1072 个 Chrome 安全漏洞",
+          "description": "修复 Agent 先生成多个方案，批评 Agent 再筛选，测试 Agent 负责跨平台验证。Coding Agent 已从单次补丁进入持续集成的安全流水线。",
+          "sourceName": "blog.google",
+          "sourceUrl": "https://blog.google/security/chrome-stronger-with-every-update/",
+          "sourceDateLabel": "2026-07-30",
+          "company": "Google",
+          "topicCluster": "multi-agent-vulnerability-remediation",
+          "sourceTier": "primary",
+          "discoverySource": "Google Chrome Security",
+          "productFamily": "chrome-multi-agent-security"
+        },
+        {
+          "title": "Microsoft 发布 MAI-Cyber-1-Flash 并接入 MDASH 安全系统",
+          "description": "该模型可处理 MDASH 九成任务，系统再用 100 多个 Agent 发现、验证和证明漏洞。专用小模型开始承担高频工作，把大模型留给少数难题。",
+          "sourceName": "microsoft.ai",
+          "sourceUrl": "https://microsoft.ai/news/introducing-mai-cyber-1-flash-inside-mdash/",
+          "sourceDateLabel": "2026-07-27",
+          "company": "Microsoft",
+          "topicCluster": "specialized-cyber-model-multi-agent-harness",
+          "sourceTier": "primary",
+          "discoverySource": "Microsoft AI",
+          "productFamily": "mai-cyber-1-flash-mdash"
+        },
+        {
+          "title": "AWS 为 Bedrock AgentCore 增加静默行为故障分析",
+          "description": "系统会从跨会话轨迹中聚类错误、定位根因，并找出成功返回却执行错误的 Agent。生产监控正在从服务是否在线转向任务是否真正完成。",
+          "sourceName": "aws.amazon.com",
+          "sourceUrl": "https://aws.amazon.com/blogs/machine-learning/detecting-silent-agent-failures-with-amazon-bedrock-agentcore-optimization/",
+          "sourceDateLabel": "2026-07-23 · 邻近窗口",
+          "company": "AWS",
+          "topicCluster": "production-agent-behavior-failure-analysis",
+          "sourceTier": "primary",
+          "discoverySource": "AWS Machine Learning Blog",
+          "productFamily": "bedrock-agentcore-optimization-insights"
+        }
+      ]
+    }
+  ]
+}
