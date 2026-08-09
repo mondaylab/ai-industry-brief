@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { createRoot } from "react-dom/client";
 import {
   Activity,
-  ArrowLeft,
   BookOpen,
   Check,
   ChevronRight,
@@ -21,6 +20,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import "../assets/product-header.css";
 import "./papers.css";
 
 const baseUrl = new URL(".", window.location.href);
@@ -47,8 +47,8 @@ const themes = [
 ];
 
 const layouts = [
-  { id: "magazine", label: "杂志时间线", icon: List },
-  { id: "workbench", label: "研究工作台", icon: LayoutGrid },
+  { id: "magazine", label: "卡片时间线", icon: List },
+  { id: "workbench", label: "紧凑列表", icon: LayoutGrid },
 ];
 
 const themeIds = new Set(themes.map((theme) => theme.id));
@@ -190,14 +190,38 @@ function ThemePicker({ theme, onChange }) {
   );
 }
 
-function Header({ manifest, health, trackedCount, layout, theme, onLayoutChange, onThemeChange, onOpenSources, onRefresh, refreshing }) {
+function Header({ health }) {
   const healthy = health?.status === "healthy";
   return (
-    <header className="papers-header">
-      <a className="papers-brand" href="./" aria-label="The AI Industry Brief 首页">
-        <span className="papers-mark"><BookOpen size={16} strokeWidth={1.8} /></span>
-        <span><b>论文观察室</b><small>PAPER OBSERVATORY</small></span>
+    <header className="product-header">
+      <a className="product-brand" href="./" aria-label="The AI Industry Brief 首页">
+        <span className="product-brand-mark"><Radio size={16} strokeWidth={1.8} /></span>
+        <span><b>The AI Industry Brief</b><small>MONDAYLAB EDITORIAL INTELLIGENCE</small></span>
       </a>
+      <nav className="product-global-nav" aria-label="产品主导航">
+        <a href="./">首页</a>
+        <a href="reader.html">今日简报</a>
+        <a className="is-active" href="papers.html" aria-current="page">论文观察室</a>
+      </nav>
+      <div className={`product-header-status ${healthy ? "is-live" : "is-degraded"}`} aria-label="论文观察室状态">
+        <i />
+        <span>{healthy ? "官方论文源监听正常" : "论文数据暂有延迟"}</span>
+      </div>
+    </header>
+  );
+}
+
+function StreamControls({ health, trackedCount, layout, theme, onLayoutChange, onThemeChange, onOpenSources, onRefresh, refreshing }) {
+  const healthy = health?.status === "healthy";
+  return (
+    <div className="paper-stream-controls" aria-label="论文列表显示设置">
+      <div className="paper-stream-status">
+        <span className={`monitor-pill ${healthy ? "is-live" : "is-degraded"}`} aria-live="polite">
+          <i />
+          <span>{healthy ? "论文监听正常" : "使用成功快照"}</span>
+        </span>
+        <span className="tracked-pill"><Eye size={14} /><b>{trackedCount}</b><span>追踪中</span></span>
+      </div>
       <div className="layout-switch" role="group" aria-label="选择论文列表版式">
         {layouts.map(({ id, label, icon: Icon }) => (
           <button
@@ -212,21 +236,14 @@ function Header({ manifest, health, trackedCount, layout, theme, onLayoutChange,
           </button>
         ))}
       </div>
-      <div className="papers-header-actions">
-        <span className={`monitor-pill ${healthy ? "is-live" : "is-degraded"}`} title={`最近成功同步：${formatSyncTime(manifest?.lastSuccessfulAt)}`} aria-live="polite">
-          <i />
-          <span>{healthy ? "监听正常" : "数据延迟"}</span>
-        </span>
-        <span className="tracked-pill"><Eye size={14} /><b>{trackedCount}</b></span>
+      <div className="paper-stream-actions">
         <ThemePicker theme={theme} onChange={onThemeChange} />
-        <button className="round-command source-command" type="button" onClick={onOpenSources} title="查看优质信源" aria-label="查看优质信源"><Menu size={18} /></button>
-        <button className="round-command refresh-command" type="button" onClick={onRefresh} disabled={refreshing} title="检查本地论文快照" aria-label="检查本地论文快照">
+        <button className="round-command" type="button" onClick={onOpenSources} title="查看优质信源" aria-label="查看优质信源"><Menu size={18} /></button>
+        <button className="round-command" type="button" onClick={onRefresh} disabled={refreshing} title="检查论文快照" aria-label="检查论文快照">
           <RefreshCw size={16} className={refreshing ? "is-spinning" : ""} />
         </button>
-        <a className="header-text-link" href="radar.html"><Radio size={14} />热点雷达</a>
-        <a className="round-command home-command" href="./" title="返回首页" aria-label="返回首页"><ArrowLeft size={17} /></a>
       </div>
-    </header>
+    </div>
   );
 }
 
@@ -468,7 +485,7 @@ function DetailPanel({ paper, state, topicLabels, onClose, onToggleTracking, onT
   );
 }
 
-function PaperObservatory() {
+export function PaperObservatory({ embedded = false }) {
   const [config, setConfig] = useState(null);
   const [manifest, setManifest] = useState(null);
   const [health, setHealth] = useState(null);
@@ -637,83 +654,89 @@ function PaperObservatory() {
   if (loading && !manifest) return <div className="papers-loading"><BookOpen size={24} /><span>正在连接论文时间线</span></div>;
   if (error && !manifest) return <div className="papers-fatal"><BookOpen size={24} /><b>论文观察室</b><span>{error}</span><button type="button" onClick={() => loadData()}>重新加载</button></div>;
 
-  return (
-    <div className="papers-app" data-theme={theme} data-layout={layout}>
-      <div className="papers-page">
-        <div className="papers-shell">
-          <Header
+  const observatoryContent = (
+    <main>
+      <Hero manifest={manifest} health={health} papers={papers} trackedCount={trackedCount} onOpenSources={openSources} />
+      <section className="paper-stream" id="paper-stream">
+        <header className="stream-heading">
+          <div><span>CONTINUOUS TIMELINE</span><h2>论文时间线</h2></div>
+          <p>新的论文和版本修订会依照首次发布时间进入这里。点击任意卡片查看来源、观察理由与版本事件。</p>
+        </header>
+        <StreamControls
+          health={health}
+          trackedCount={trackedCount}
+          layout={layout}
+          theme={theme}
+          onLayoutChange={setLayout}
+          onThemeChange={setTheme}
+          onOpenSources={openSources}
+          onRefresh={() => loadData({ silent: true })}
+          refreshing={refreshing}
+        />
+        <FilterToolbar
+          query={query}
+          onQueryChange={setQuery}
+          topic={topic}
+          onTopicChange={setTopic}
+          filter={filter}
+          onFilterChange={setFilter}
+          topics={config.topics}
+          resultCount={visiblePapers.length}
+        />
+        <div className="paper-stage">
+          <div className="paper-list">
+            {[...groupedPapers.entries()].map(([day, dayPapers]) => (
+              <section className="timeline-group" key={day} aria-labelledby={`day-${day}`}>
+                <header className="timeline-day" id={`day-${day}`}>
+                  <span>{formatDate(day, { weekday: true })}</span>
+                  <b>{formatDate(day, { year: true })}</b>
+                  <small>{visibleDayCounts.get(day) || dayPapers.length} PAPERS</small>
+                </header>
+                <div className="timeline-cards">
+                  {dayPapers.map((paper) => (
+                    <PaperCard
+                      key={paper.id}
+                      paper={paper}
+                      selected={detailOpen && selected?.id === paper.id}
+                      state={paperState[paper.id]}
+                      topicLabels={topicLabels}
+                      onSelect={() => selectPaper(paper)}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))}
+            {!visiblePapers.length && <div className="paper-empty"><Search size={24} /><b>没有符合条件的论文</b><span>调整关键词、主题或观察状态。</span></div>}
+            {visibleLimit < visiblePapers.length && <button className="load-more" type="button" onClick={() => setVisibleLimit((current) => current + 60)}>继续加载 · 尚有 {visiblePapers.length - visibleLimit} 篇</button>}
+          </div>
+          <ObservatorySidebar
             manifest={manifest}
             health={health}
+            papers={papers}
             trackedCount={trackedCount}
-            layout={layout}
-            theme={theme}
-            onLayoutChange={setLayout}
-            onThemeChange={setTheme}
+            topicLabels={topicLabels}
+            onSelect={selectPaper}
             onOpenSources={openSources}
-            onRefresh={() => loadData({ silent: true })}
-            refreshing={refreshing}
           />
-          <main>
-            <Hero manifest={manifest} health={health} papers={papers} trackedCount={trackedCount} onOpenSources={openSources} />
-            <section className="paper-stream" id="paper-stream">
-              <header className="stream-heading">
-                <div><span>CONTINUOUS TIMELINE</span><h2>论文时间线</h2></div>
-                <p>新的论文和版本修订会依照首次发布时间进入这里。点击任意卡片查看来源、观察理由与版本事件。</p>
-              </header>
-              <FilterToolbar
-                query={query}
-                onQueryChange={setQuery}
-                topic={topic}
-                onTopicChange={setTopic}
-                filter={filter}
-                onFilterChange={setFilter}
-                topics={config.topics}
-                resultCount={visiblePapers.length}
-              />
-              <div className="paper-stage">
-                <div className="paper-list">
-                  {[...groupedPapers.entries()].map(([day, dayPapers]) => (
-                    <section className="timeline-group" key={day} aria-labelledby={`day-${day}`}>
-                      <header className="timeline-day" id={`day-${day}`}>
-                        <span>{formatDate(day, { weekday: true })}</span>
-                        <b>{formatDate(day, { year: true })}</b>
-                        <small>{visibleDayCounts.get(day) || dayPapers.length} PAPERS</small>
-                      </header>
-                      <div className="timeline-cards">
-                        {dayPapers.map((paper) => (
-                          <PaperCard
-                            key={paper.id}
-                            paper={paper}
-                            selected={detailOpen && selected?.id === paper.id}
-                            state={paperState[paper.id]}
-                            topicLabels={topicLabels}
-                            onSelect={() => selectPaper(paper)}
-                          />
-                        ))}
-                      </div>
-                    </section>
-                  ))}
-                  {!visiblePapers.length && <div className="paper-empty"><Search size={24} /><b>没有符合条件的论文</b><span>调整关键词、主题或观察状态。</span></div>}
-                  {visibleLimit < visiblePapers.length && <button className="load-more" type="button" onClick={() => setVisibleLimit((current) => current + 60)}>继续加载 · 尚有 {visiblePapers.length - visibleLimit} 篇</button>}
-                </div>
-                <ObservatorySidebar
-                  manifest={manifest}
-                  health={health}
-                  papers={papers}
-                  trackedCount={trackedCount}
-                  topicLabels={topicLabels}
-                  onSelect={selectPaper}
-                  onOpenSources={openSources}
-                />
-              </div>
-            </section>
-          </main>
+        </div>
+      </section>
+    </main>
+  );
+
+  return (
+    <div className={`papers-app ${embedded ? "is-embedded" : ""}`} data-theme={theme} data-layout={layout}>
+      {embedded ? observatoryContent : (
+        <div className="papers-page">
+          <div className="papers-shell">
+          <Header health={health} />
+          {observatoryContent}
           <footer className="papers-footer">
             <span>THE AI INDUSTRY BRIEF · PAPER OBSERVATORY</span>
             <span>官方来源优先 · 时间线持续更新</span>
           </footer>
         </div>
-      </div>
+        </div>
+      )}
       {sourceOpen && <SourceSheet config={config} health={health} onClose={closePanels} />}
       {detailOpen && (
         <DetailPanel
@@ -730,4 +753,7 @@ function PaperObservatory() {
   );
 }
 
-createRoot(document.getElementById("root")).render(<React.StrictMode><PaperObservatory /></React.StrictMode>);
+const papersRoot = document.getElementById("root");
+if (papersRoot?.dataset.app === "papers") {
+  createRoot(papersRoot).render(<React.StrictMode><PaperObservatory /></React.StrictMode>);
+}

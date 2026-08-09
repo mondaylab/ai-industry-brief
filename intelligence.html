@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="data:," />
     <meta name="robots" content="noindex" />
-    <title>今日简报的热点雷达 | The AI Industry Brief</title>
+    <title>对应页面 | The AI Industry Brief</title>
   </head>
   <body>
-    <p>正在进入今日简报的热点雷达……</p>
+    <p>正在进入对应页面……</p>
     <script>
       const current = new URL(window.location.href);
-      const isPaperView = "radar" === "intelligence" && current.searchParams.get("view") === "papers";
-      const target = new URL(isPaperView || "radar" === "papers" ? "./papers.html" : "./reader.html", current);
+      const isPaperView = "intelligence" === "intelligence" && current.searchParams.get("view") === "papers";
+      const target = new URL(isPaperView || "intelligence" === "papers" ? "./papers.html" : "./reader.html", current);
       for (const [key, value] of new URLSearchParams(window.location.search)) {
         if (key !== "view") target.searchParams.append(key, value);
       }
-      target.hash = isPaperView || "radar" === "papers" ? current.hash : "#radar";
+      target.hash = isPaperView || "intelligence" === "papers" ? current.hash : "#radar";
       window.location.replace(target.href);
     </script>
-    <noscript><a href="reader.html#radar">进入今日简报的热点雷达</a></noscript>
+    <noscript><a href="reader.html#radar">进入对应页面</a></noscript>
   </body>
 </html>
