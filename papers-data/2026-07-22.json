@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-22",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.19725",
+      "identifiers": {
+        "arxiv": "2607.19725",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Analytic Distribution of Classifier-Free Guidance for Schedule Design",
+      "abstract": "Classifier-free guidance (CFG) is the default mechanism for conditional generation in diffusion models, but the distribution sampled by its deterministic guided dynamics is not captured by the usual product-distribution heuristic $p_0^ωq_0^{1-ω}$. We analyze CFG through the probability flow ODE and derive exact analytic path-integral representations of the induced distributions for both constant and time-dependent guidance. The resulting formulas show that CFG modifies $p_{t_0}$ by an exponential path-integral correction, and that a time-dependent schedule enters this correction through the weight $ω(t)-1$. This characterization explains how score discrepancies accumulate along sampling trajectories and motivates Distribution-Guided CFG (DG-CFG), a schedule that balances timestep contributions while accounting for signal strength and low-noise score-error amplification. A toy model with analytic scores closely verifies the predicted distributions. Across Stable Diffusion~1.5, Stable Diffusion~2.1, and Stable Diffusion~XL, DG-CFG yields a stronger diversity--fidelity trade-off and robustly mitigates the saturation and quality degradation caused by strong constant or heuristic guidance. Complete NFE experiments on Stable Diffusion~1.5 and Stable Diffusion~2.1 confirm that these gains persist across sampling budgets, while fixed-quality experiments on both backbones show that DG-CFG reaches target metrics with fewer sampling steps.",
+      "authors": [
+        "Enze Jiang",
+        "Zheng Ma"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.LG",
+      "publishedAt": "2026-07-22T03:53:07Z",
+      "updatedAt": "2026-08-06T15:36:22Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.19725v2",
+        "pdf": "https://arxiv.org/pdf/2607.19725v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-22T03:53:07Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "multimodal"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 52,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

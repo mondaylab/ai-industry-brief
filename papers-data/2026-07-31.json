@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-31",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2608.00299",
+      "identifiers": {
+        "arxiv": "2608.00299",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "ReVoicer: Conversational Voice Annotation for Human-Centered, LLM-Assisted Peer Review",
+      "abstract": "We present ReVoicer, a prototype system that supports peer reviewers by letting them converse with a paper as they read it. The reviewer highlights a passage and speaks (or types) a train-of-thought comment. A large language model then cleans the comment using the surrounding prose as context, tags it by comment type, and anchors it to the passage. After the reviewer finishes reading, ReVoicer checks the accumulated notes against a venue-specific rubric and reports coverage gaps to assist with further reflection. Then ReVoicer drafts a review composed from the reviewer's comments, written to a style guide distilled from the reviewer's past reviews. We describe the system's design rationale and implementation, and we outline plans for future evaluations.",
+      "authors": [
+        "Matt Gottsacker",
+        "Ahinya Alwin",
+        "Hiroshi Furuya",
+        "Robert W. Lindeman",
+        "Gerd Bruder",
+        "Gregory F. Welch"
+      ],
+      "categories": [
+        "cs.HC"
+      ],
+      "primaryCategory": "cs.HC",
+      "publishedAt": "2026-07-31T21:26:20Z",
+      "updatedAt": "2026-08-05T14:51:00Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "IEEE ISMAR 2026 Alt'ISMAR workshop",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00299v2",
+        "pdf": "https://arxiv.org/pdf/2608.00299v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-31T21:26:20Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00186",
+      "identifiers": {
+        "arxiv": "2608.00186",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Normal-Anchored First-Order Model-Agnostic Meta-Learning based Whisper Fine-Tuning for Enhancing Fairness of Cleft Lip and Palate Speech Recognition",
+      "abstract": "Automatic speech recognition (ASR) for cleft lip and palate (CLP) speech is difficult because acoustic and articulatory patterns vary across severity levels. This variability reduces the performance of pretrained ASR systems, and conventional fine-tuning may not generalize well under low-resource, heterogeneous CLP conditions. This work proposes Normal-Anchored First-Order Model-Agnostic Meta-Learning (NA-FOMAML) for adapting Whisper to CLP speech. The method uses a first-order bilevel meta-learning framework in which normal speech is used in the inner loop as a stable support condition, while CLP severity groups are used in the outer loop to improve post-adaptation robustness. This design aims to reduce the performance gap between normal and pathological speech. Experiments are conducted on the NMCPC and AIISH datasets using four normal-anchored training configurations. Frozen encoder, full encoder, and selected Whisper encoder-layer tuning strategies are evaluated, including layers 0--5, 4--11, 6--11, and 8--11, with decoder and projection-head adaptation. Results show that outer-loop training with only normal speech is insufficient. For NMCPC, full encoder tuning with Normal to Normal+Mild+Moderate gives WERs of 4.40%, 5.53%, 16.14%, and 52.07% for normal, mild, moderate, and severe speech. For AIISH, full encoder tuning with Normal to Normal+Mild+Moderate+Severe gives WERs of 2.48%, 19.66%, 14.05%, and 57.50%. A transcription-based phoneme-category analysis shows that severe CLP speech has high error rates across fricatives, affricates, nasals, liquids, plosives, and vowels. Overall, NA-FOMAML improves cross-severity robustness, but severe speech still requires severity-aware sampling, phoneme-aware loss functions, and augmentation targeting pressure consonant and resonance-related distortions.",
+      "authors": [
+        "Susmita Bhattacharjee",
+        "Jagabandhu Mishra",
+        "H. S. Shekhawat",
+        "Ravi Jasuja",
+        "S. R. Mahadeva Prasanna"
+      ],
+      "categories": [
+        "eess.SP",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.SP",
+      "publishedAt": "2026-07-31T18:08:53Z",
+      "updatedAt": "2026-07-31T18:08:53Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "10 pages",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00186v1",
+        "pdf": "https://arxiv.org/pdf/2608.00186v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-31T18:08:53Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 46,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

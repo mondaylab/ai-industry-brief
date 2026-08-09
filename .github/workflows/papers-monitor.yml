@@ -1,0 +1,56 @@
+name: Paper Observatory monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    # arXiv search results update on a daily cycle; one non-peak request window is sufficient.
+    - cron: "23 2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-observatory-monitor
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Test paper pipeline
+        run: npm run papers:test
+
+      - name: Sync authoritative paper metadata
+        id: sync
+        continue-on-error: true
+        run: npm run papers:sync
+
+      - name: Commit updated timeline or health state
+        if: always()
+        run: |
+          if git diff --quiet -- papers-data; then
+            echo "No paper data changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add papers-data
+          git commit -m "Update Paper Observatory timeline"
+          git push
+
+      - name: Fail when synchronization failed
+        if: steps.sync.outcome == 'failure'
+        run: exit 1

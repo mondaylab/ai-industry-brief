@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "title": "论文观察室",
+  "retentionDays": 30,
+  "clientRefreshMinutes": 10,
+  "categories": [
+    { "id": "cs.AI", "label": "人工智能" },
+    { "id": "cs.LG", "label": "机器学习" },
+    { "id": "cs.CL", "label": "语言与大模型" },
+    { "id": "cs.CV", "label": "视觉与多模态" },
+    { "id": "cs.RO", "label": "机器人" },
+    { "id": "cs.HC", "label": "人机交互" },
+    { "id": "cs.CR", "label": "安全与隐私" },
+    { "id": "cs.IR", "label": "检索与搜索" },
+    { "id": "cs.MA", "label": "多智能体系统" },
+    { "id": "eess.AS", "label": "音频与语音" },
+    { "id": "stat.ML", "label": "统计机器学习" }
+  ],
+  "topics": [
+    { "id": "foundation-models", "label": "基础模型" },
+    { "id": "agents-reasoning", "label": "Agent 与推理" },
+    { "id": "multimodal", "label": "多模态" },
+    { "id": "safety-evaluation", "label": "安全与评测" },
+    { "id": "robotics-embodied", "label": "机器人与具身" },
+    { "id": "systems-efficiency", "label": "系统与效率" },
+    { "id": "other", "label": "其他前沿" }
+  ],
+  "sources": [
+    {
+      "id": "arxiv",
+      "name": "arXiv",
+      "tier": "A",
+      "role": "主监听",
+      "availability": "live",
+      "url": "https://arxiv.org/",
+      "policyUrl": "https://info.arxiv.org/help/api/user-manual.html",
+      "description": "预印本原始元数据、首次发布时间与版本更新。"
+    },
+    {
+      "id": "openreview",
+      "name": "OpenReview",
+      "tier": "A",
+      "role": "评审核验",
+      "availability": "verification",
+      "url": "https://openreview.net/",
+      "policyUrl": "https://docs.openreview.net/getting-started/using-the-api",
+      "description": "重点会议的投稿、评审与接收状态；用于核验而不是替代论文原文。"
+    },
+    {
+      "id": "proceedings",
+      "name": "官方论文集",
+      "tier": "A",
+      "role": "接收核验",
+      "availability": "verification",
+      "url": "https://proceedings.neurips.cc/",
+      "description": "ACL Anthology、PMLR、CVF 与 NeurIPS 官方 Proceedings。"
+    },
+    {
+      "id": "semantic-scholar",
+      "name": "Semantic Scholar",
+      "tier": "B",
+      "role": "元数据补全",
+      "availability": "enrichment",
+      "url": "https://www.semanticscholar.org/product/api",
+      "description": "引用、机构与关联论文补全；不作为论文状态的唯一证据。"
+    },
+    {
+      "id": "huggingface-papers",
+      "name": "HF Daily Papers",
+      "tier": "C",
+      "role": "热度线索",
+      "availability": "discovery",
+      "url": "https://huggingface.co/papers",
+      "description": "社区热度与代码线索，只影响发现顺序，不证明论文质量。"
+    },
+    {
+      "id": "frontier-labs",
+      "name": "前沿实验室官网",
+      "tier": "B",
+      "role": "首发哨兵",
+      "availability": "discovery",
+      "url": "https://openai.com/research/",
+      "description": "OpenAI、Anthropic、DeepMind、Meta 与 Microsoft Research 的技术报告和系统卡首发。"
+    }
+  ],
+  "sourcePolicy": [
+    "优先展示论文原页、PDF、作者项目页与官方评审记录。",
+    "明确区分预印本、修订版和已接收论文，不把 arXiv 等同于同行评审。",
+    "观察优先级用于编辑筛选，不代表学术质量或结论可靠性。",
+    "新论文不使用早期引用量做强判断，代码与多源核验只作为辅助信号。"
+  ]
+}

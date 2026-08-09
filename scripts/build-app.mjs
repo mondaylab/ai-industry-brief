@@ -18,12 +18,14 @@ readerHtml = readerHtml.replace(
   `  <meta name="latest-brief" content="briefs/${manifest.latest}.html">\n  </head>`,
 );
 const radarHtml = fs.readFileSync(path.join(buildDir, "radar-app.html"), "utf8");
+const papersHtml = fs.readFileSync(path.join(buildDir, "papers-app.html"), "utf8");
 
 fs.rmSync(targetAssets, { recursive: true, force: true });
 fs.mkdirSync(path.dirname(targetAssets), { recursive: true });
 fs.cpSync(path.join(buildDir, "assets", "app"), targetAssets, { recursive: true });
 fs.writeFileSync(path.join(root, "reader.html"), readerHtml);
 fs.writeFileSync(path.join(root, "radar.html"), radarHtml);
+fs.writeFileSync(path.join(root, "papers.html"), papersHtml);
 fs.rmSync(buildDir, { recursive: true, force: true });
 
-console.log(`Built React reader and Radar for ${manifest.latest}.`);
+console.log(`Built React reader, Radar and Paper Observatory for ${manifest.latest}.`);

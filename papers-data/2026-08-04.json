@@ -1,0 +1,2185 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-04",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2608.03623",
+      "identifiers": {
+        "arxiv": "2608.03623",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Speaker Verification Under Real Classroom Conditions for English Speech",
+      "abstract": "Developing speaker verification (SV) models that are robust to classroom noise and effective across both children and adult speakers is critical for AI tools supporting educational environments. In this study, we use a real-world English-speaking classrooms dataset containing partial speaker identity annotations, with most recordings remaining unlabeled. We adapt the WavLM-TDNN model for classroom SV, achieving average relative reductions in Equal Error Rate (EER) of 23.99% and 6.32% compared to the ECAPA-TDNN baseline and the ECAPA-TDNN model trained on classroom data, respectively. Additionally, we investigate two training strategies for SV in classroom settings: self-supervised learning (SSL) and a two-stage approach that first pre-trains with SSL and then fine-tunes with limited annotated data. Five-fold cross-validation demonstrates that the two-stage strategy consistently outperforms the SSL-only approach, achieving an average relative EER reduction of 13.39%.",
+      "authors": [
+        "Saba Tabatabaee",
+        "Jing Liu",
+        "Meghavarshini Krishnaswamy",
+        "Carol Espy-Wilson"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-04T13:12:41Z",
+      "updatedAt": "2026-08-06T17:30:44Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03623v2",
+        "pdf": "https://arxiv.org/pdf/2608.03623v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:12:41Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 59,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03695",
+      "identifiers": {
+        "arxiv": "2608.03695",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Accelerating Dynamic Graph Clustering on GPU Architectures with cuGraph",
+      "abstract": "This work addresses community detection in temporal networks through GPU-accelerated extensions of spectral clustering and modularity-based algorithms originally designed for static graphs. Built on the NVIDIA RAPIDS ecosystem, the framework enables the characterization and tracking of communities in snapshot-based dynamic graphs, either by Leiden greedy optimization with multi-GPU support via Dask-based workload distribution, or eigendecomposition of a symmetric Bethe-Hessian operator. Our multislice modularity backend achieves up to roughly three orders of magnitude speedup over the CPU reference under an equal-work budget, depending on graph density and snapshot count, while preserving compatibility with existing graph analytics pipelines. We demonstrate its applicability on real-world and synthetic datasets, facilitating exploratory analysis of structural network properties over time. Such capabilities are relevant across several application domains, such as epidemic spreading, financial systems, cybersecurity, and trajectory and mobility analysis. We release our implementation as free and open-source software, including Python bindings through the NetworkX-Temporal library for ease of use and zero-code acceleration with existing codebases.",
+      "authors": [
+        "Nelson Aloysio Reis de Almeida Passos",
+        "Emanuele Carlini",
+        "Salvatore Trani"
+      ],
+      "categories": [
+        "cs.DC",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.DC",
+      "publishedAt": "2026-08-04T14:01:00Z",
+      "updatedAt": "2026-08-06T17:06:20Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "12 pages, 2 figures. Accepted at FRAME 2026, Euro-Par 2026 Workshops; to appear in Springer LNCS",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03695v2",
+        "pdf": "https://arxiv.org/pdf/2608.03695v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T14:01:00Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "other"
+      ],
+      "whyWatch": "这是一条新进入观察范围的研究信号，需要结合方法、实验和后续评审继续判断。",
+      "score": {
+        "total": 45,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 18,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03836",
+      "identifiers": {
+        "arxiv": "2608.03836",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Resume Means Resume: A Machine-Checked Conformance Contract for Checkpoint, Interrupt, and Resume Semantics in Workflow Persistence Layers",
+      "abstract": "A framework that persists execution state so a run can be interrupted, survive a crash, and continue must decide what a resume means for effects that already fired. Five widely deployed agent workflow frameworks answer differently, none exposes a machine-checkable contract, and behavior violates even the fragments they state. The RESUME CONTRACT states six properties over the persistence API (prefix continuation, effect exactly-once, fork determinism, checkpoint validity, consume-once, recovery determinism), plus fork-intent and liveness obligations. A TLA+ model checks a reference semantics exhaustively, unchanged at scaled bounds (7.4 million states); a 39-cell fault matrix and two companion modules yield the separating models independence requires, and consume-once splits, its consumption clause independent of all six others. A deterministic, LLM-free harness measures them at pinned releases. LangGraph 1.2.9 durably records a second resume value and never consults it, persists schema-invalid state silently, and re-executes durably recorded work after a real SIGKILL: exactly-once across interrupts, at-least-once across crashes, on one API. CrewAI 1.15.2 re-executes completed effect-bearing methods against its written claim; pydantic-graph 1.x cannot resume after a mid-node crash; no two probed frameworks share a conformance profile. Consume-once holds sequentially and fails under concurrent delivery: k processes resuming one parked interrupt fire the gated effect k times, saturation 1.0 in 36 of 40 cells, and the failure crosses hosts. REMIT, a reference sequencer whose Verus-verified recovery core is line-identical to the shipped executable, repairs the fork and validity cells. The cross-process cell is repaired at the read path, and that repair ships: an opt-in gate claims consumption in the shared store, serving one racer and refusing the rest before any node executes.",
+      "authors": [
+        "Sajjad Khan"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.DC",
+        "cs.LO",
+        "cs.SE"
+      ],
+      "primaryCategory": "cs.LG",
+      "publishedAt": "2026-08-04T15:45:31Z",
+      "updatedAt": "2026-08-06T15:41:56Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "26 pages, 11 tables, 1 figure. Supplementary material included as an ancillary file. v2: corrects the R8 fork-fault counterexample depth (9->8, single-worker BFS-minimal), the TLC version string, and the abstract's attribution of the separating models; adds single-worker receipt pointers and an SDK patch-level disclosure. Results unchanged",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03836v2",
+        "pdf": "https://arxiv.org/pdf/2608.03836v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T15:45:31Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03105",
+      "identifiers": {
+        "arxiv": "2608.03105",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 3,
+      "title": "HomoEnsNER: Does Language Alignment Outperform Architectural Complexity in Gujarati Named Entity Recognition?",
+      "abstract": "Named Entity Recognition (NER) for Gujarati remains underexplored, hindered by the absence of capitalization cues, rich morphology, lexical ambiguity, and free word order. Prior ensemble work has emphasized architectural diversity by combining heterogeneous classifiers, multilingual encoders, or classical sequence models, rather than exploiting language-aligned monolingual pretraining. This study asks whether, for a low-resource, morphologically rich language like Gujarati, a homogeneous ensemble of a single monolingual encoder outperforms such architectural diversity. We propose HomoEnsNER, a homogeneous ensemble of five independently fine-tuned GujaratiBERT models combined via majority voting, evaluated against a single GujaratiBERT baseline and six heterogeneous alternatives, including combinations with MuRIL-base, MuRIL-large, IndicBERT, mBERT, BiLSTM, CRF, and a stacked BiLSTM-CRF-GujaratiBERT architecture. All eight models were trained under a consistent budget and evaluated using entity-level F1 on the Naamapadam Gujarati test split. HomoEnsNER achieved the highest F1 (0.8442), surpassing the baseline (0.8347) and every heterogeneous alternative (lowest: 0.7855), indicating that language alignment is a more effective, budget-conscious ensembling strategy than architectural complexity for low-resource Indian language NER.",
+      "authors": [
+        "Chandrakant K. Bhogayata"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-04T04:21:35Z",
+      "updatedAt": "2026-08-06T11:51:20Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "20 pages",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03105v3",
+        "pdf": "https://arxiv.org/pdf/2608.03105v3",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T04:21:35Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 64,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03964",
+      "identifiers": {
+        "arxiv": "2608.03964",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Identity-Faithful Audio-Visual Target Speaker Extraction with REAL-2MIX and VOXBLINK2-AVSE",
+      "abstract": "Audio-visual target speaker extraction should return the speaker indicated by the video, yet a separator can ignore the visual cue and repeatedly output the acoustically dominant voice. We introduce REAL-2MIX, a Mandarin AV-TSE benchmark of jointly recorded real two-speaker mixtures with synchronized multi-view video. Each scene also contains preceding A-only and B-only stages that provide in-scene speaker references. It contains 77 scenes and 7,598 clips (11.84 hours), including 6,042 dual-annotated mixtures. After processing there leave 6,038 evaluable mixtures and 12,076 target-speaker rows. We additionally curate VOXBLINK2-AVSE from VoxBlink2, comprising 250,828 synchronized audio--lip-ROI pairs from 28,421 identities and 766.17 hours of speech. Our extractor uses frozen, 1,280-dimensional projected AV-HuBERT features, target-conditioned training, and layer-wise feature modulation. We jointly evaluate content with Qwen3-ASR-1.7B CER and target identity with WeSpeaker ResNet34 plus Overlapped Speech Detection (OSD). On the complete manifest, the best archived checkpoint obtains 0.2261 CER, 82.22% strict output correctness, and 69.53% both-output strict success.",
+      "authors": [
+        "Peijun Yang",
+        "Zhan Jin",
+        "Xiaoyi Qin",
+        "Ruiyi Gan",
+        "Hao Wang",
+        "Juan Liu",
+        "Ming Li"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-04T17:28:41Z",
+      "updatedAt": "2026-08-06T06:35:08Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03964v2",
+        "pdf": "https://arxiv.org/pdf/2608.03964v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T17:28:41Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 70,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03421",
+      "identifiers": {
+        "arxiv": "2608.03421",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "When Truth Is Distributed: Misinformation Derails Collective Fact Recovery in LLM-Based Multi-Agent Systems",
+      "abstract": "LLM-based multi-agent systems promise effective collaborative reasoning, but communication may amplify local errors into collective risks. Existing evaluations emphasize final outcomes, leaving the reliability and propagation dynamics of distributed information aggregation unclear. We introduce Hi-Agreement, a controlled evaluation framework that strictly pairs all-honest collaboration with controlled deception by a key evidence holder and analyzes the aggregation process through multi-stage voting, testimony adoption, and evidence-root lineage propagation. Using 120 five-agent object-movement environments where partial observations jointly determine a unique endpoint, we evaluate 3 homogeneous LLM-based multi-agent systems. Across these paired conditions, aggregate truth recovery falls from 72.50% to 14.17%, with significant declines for every system. Process tracing and exit ablations show that a single false testimony is adopted more readily than truthful testimony, propagates to higher orders, and persists through honest agents after the deceiver exits. Observers without first-hand evidence suppress incorrect consensus but do not improve truth recovery. Together, these findings reveal both the fragility of distributed fact recovery and its underlying mechanism: false evidence gains collective influence through its adoption and continued propagation by other agents after entering communication.",
+      "authors": [
+        "Chenfei Yan",
+        "Zeyang Yue",
+        "Feifei Zhao",
+        "Erliang Lin",
+        "Lu Jia",
+        "Haibo Tong",
+        "Mingyang Lyu",
+        "Chengyi Sun",
+        "Yi Zeng"
+      ],
+      "categories": [
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-08-04T10:12:54Z",
+      "updatedAt": "2026-08-06T04:55:29Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03421v2",
+        "pdf": "https://arxiv.org/pdf/2608.03421v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T10:12:54Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 72,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03001",
+      "identifiers": {
+        "arxiv": "2608.03001",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Stochastic Saddle Avoidance Beyond Unit Excitation and Smoothness: A Pathwise Lyapunov-Perron Framework",
+      "abstract": "Unit excitation (UE) is a common assumption in stochastic saddle avoidance: the stochastic error must have a uniformly positive component along every direction, in expectation. This condition gives a direct way to rule out convergence to strict saddles, but it also oversimplifies the actual noise structure, and does not match many stochastic optimization regimes. In overparameterized or interpolation models, the noise may vanish near stationarity. In finite-sum problems, the stochastic gradient noise may lie in a low-dimensional, data-dependent subspace. In these (common) scenarios, UE is naturally not satisfied. In this paper, we prove an abstract almost sure avoidance theorem for stochastic recursions without UE. The theorem replaces UE-type requirements by verifiable pathwise conditions. In applications, these conditions follow, e.g., from local smoothness and finite-moment assumptions under standard i.i.d. sampling, or from the finite-sum structure under without-replacement sampling. Since the stochastically sampled maps generally do not share a fixed point, the celebrated center-stable manifold argument used in deterministic analyses is not directly applicable. Instead, we use a path-dependent change of variables together with a pathwise Lyapunov--Perron-based proof strategy. As applications, we obtain strict saddle avoidance for stochastic mirror descent (including SGD) and for random reshuffling. For nonsmooth composite objectives, we prove avoidance results for a proximal-type stochastic gradient method. Combining these insights with suitable iterate convergence guarantees, this allows establishing convergence to local minimizers of the original objective function.",
+      "authors": [
+        "Junwen Qiu",
+        "Bohao Ma",
+        "Andre Milzarek",
+        "Junyu Zhang"
+      ],
+      "categories": [
+        "math.OC",
+        "cs.LG",
+        "math.DS",
+        "stat.ML"
+      ],
+      "primaryCategory": "math.OC",
+      "publishedAt": "2026-08-04T01:34:36Z",
+      "updatedAt": "2026-08-06T04:18:49Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "39 pages",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03001v2",
+        "pdf": "https://arxiv.org/pdf/2608.03001v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T01:34:36Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "other"
+      ],
+      "whyWatch": "这是一条新进入观察范围的研究信号，需要结合方法、实验和后续评审继续判断。",
+      "score": {
+        "total": 45,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 18,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03274",
+      "identifiers": {
+        "arxiv": "2608.03274",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Right Divisibility in Erasing Semi-Thue Systems: A Minimal View of Intruder Deduction",
+      "abstract": "The intruder deduction problem is central to symbolic security-protocol analysis: it asks whether an attacker can derive a target message from observed messages using (cryptographic) operators available to the attacker. Although convergent rewrite systems provide canonical normal forms, deduction modulo convergent theories remains undecidable in general, and existing decidable fragments are often shaped by practical cryptographic examples. In this paper, we study deduction from a minimal structural perspective. When all function symbols are unary, terms collapse to words and deduction becomes a right-divisibility problem for semi-Thue systems: given words $u$ and $v$ decide whether there exists $w$ such that $wu \\equiv_S v$. We investigate this problem for several classes of semi-Thue systems and prove, to the best of our knowledge, new decidability results for convergent prefix-erasing and convergent suffix-erasing systems. We then extend this perspective to term rewriting systems whose rules erase contexts while lifting selected subterms or variables. Although these classes suggest possible decidable generalisations beyond the unary setting, we show that deduction is already undecidable for a convergent simultaneous variable-lifting system. This exposes both the potential and the limits of extending the right-divisibility results to richer equational theories.",
+      "authors": [
+        "Raja O. P. Damanik",
+        "Alwen Tiu"
+      ],
+      "categories": [
+        "cs.LO",
+        "cs.CR",
+        "cs.FL"
+      ],
+      "primaryCategory": "cs.LO",
+      "publishedAt": "2026-08-04T07:51:03Z",
+      "updatedAt": "2026-08-06T03:49:39Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "26 pages, 1 figure (Tikz generated), submitted to CSL 2027. Corrected author name; no changes to the content",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03274v2",
+        "pdf": "https://arxiv.org/pdf/2608.03274v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T07:51:03Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 52,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03070",
+      "identifiers": {
+        "arxiv": "2608.03070",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "AI Security Leaderboard: Methodology, Results and Minimal Standard",
+      "abstract": "The AI Security Leaderboard is an independent benchmark that ranks the safeguards of frontier AI models from least to most secure. It tests models against the FAR$.$AI Minimal Standard for Safeguards, which represents a minimum bar for security: meeting it does not guarantee a secure model, but failing to meet it guarantees a lack of state-of-the-art security. Version 1.0 covers severe misuse requests across chemical, biological, radiological, nuclear, and explosive (CBRNE) threats and offensive cybersecurity. In this report, we tested four leading models for universal jailbreaks in the context of this minimal standard, and found more than a hundredfold difference in security. Claude Fable 5 and GPT-5.6 Sol held against every attack we ran, with no universal jailbreak found; we estimate they would likely cost more than \\$14,200 to jailbreak, if it is possible with this methodology at all. Meanwhile, we found hundreds of universal jailbreaks for Grok 4.5 and Gemini 3.1 Pro; each broke for under \\$300, with universal jailbreaks in Grok's weakest domain, cybersecurity, accessible for as little as \\$24. The gap is fixable: every weakness we found belongs to a known class of attack that already has a defense deployed in production models. The leaderboard will be updated on a rolling basis as new models are released, and the evaluation methodology and Minimal Standard will be periodically revised to take into account the latest capabilities and the state-of-the-art in safeguards. The leaderboard is available at leaderboard.far.ai.",
+      "authors": [
+        "Jasper Timm",
+        "Lukas Struppek",
+        "Ziwei Xu",
+        "Grace Cheong",
+        "Oscar Mata",
+        "Dan Zhao",
+        "Mick Yang",
+        "Isadora De Andrade",
+        "Xiaojun Jia",
+        "Yiming Li",
+        "Samuel Bauer",
+        "Heather McIntyre",
+        "Adam Gleave",
+        "Edward Yee",
+        "Kellin Pelrine"
+      ],
+      "categories": [
+        "cs.CR",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "primaryCategory": "cs.CR",
+      "publishedAt": "2026-08-04T03:32:19Z",
+      "updatedAt": "2026-08-05T18:50:24Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03070v2",
+        "pdf": "https://arxiv.org/pdf/2608.03070v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T03:32:19Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.04270",
+      "identifiers": {
+        "arxiv": "2608.04270",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "CURATE: Leveraging LLM Agents to Compose, Catalog, and Deploy Reproducible Workflows",
+      "abstract": "Agentic code generation has shown promise in automating and accelerating software development by utilizing Large Language Models (LLMs) to generate, test, and deploy code. For engineers and scientists, such systems have the potential to accelerate the development of applied and scientific workflows while reducing barriers to entry in domains that have yet to fully realize their benefits. However, a key gap remains: existing coding agents primarily focus on code generation and do not address the entire workflow lifecycle, including deployment and sharing. As a result, users develop and stitch modules independently while managing deployment on their own. To address this gap, we propose CURATE - Composition, User-in-the-loop, Reuse, and Automated Task Execution - a novel human-in-the-loop multi-agent system that uses LLM agents to manage and develop composable workflows across their entire lifecycle. A key feature of the system is a catalog that allows for the storage and reuse of modules across workflows. Module catalogs provide a foundation that can be expanded to support FAIR principles by facilitating the sharing and reuse of curated modules and subgraphs. We demonstrate the feasibility of our system with an initial prototype using Claude Opus 4.8, comprising 6 experiments: reproducing and adapting 4 workflows derived from the SeBS-Flow benchmark suite, and automating the development and scaling of a workflow that leverages a complex mechanistic model in environmental engineering used to simulate anaerobic digestion.",
+      "authors": [
+        "Nolan Cutler",
+        "Chia-Chen Kuo",
+        "Nanda Velugoti",
+        "Kathryn Newhart",
+        "Renato Figueiredo"
+      ],
+      "categories": [
+        "cs.SE",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.SE",
+      "publishedAt": "2026-08-04T23:01:29Z",
+      "updatedAt": "2026-08-04T23:01:29Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "8 pages, 3 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.04270v1",
+        "pdf": "https://arxiv.org/pdf/2608.04270v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T23:01:29Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.04265",
+      "identifiers": {
+        "arxiv": "2608.04265",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Strategic Evaluation of Planning Strategies for LLM Agents in Cyber-Physical Systems",
+      "abstract": "Evaluations of LLM planning agents largely ask whether a task succeeds or a declared plan is followed. In strategic cyber-physical systems, a stronger question is whether the planning architecture remains appropriate after autonomous participants respond and physics constrains the outcome. We introduce a controlled, physics-grounded benchmark built around planning-induced control trajectories: the ordered planning operations and directives through which an execution architecture acts on other agents and the physical process. It implements predefined, sequential, hierarchical, and search executors in a smart-grid demand-response system with 40 heterogeneous prosumers and an independently simulated radial feeder. The LLM is bounded to typed policy declaration and short operator messages, while schedule construction, prosumer dynamics, and power flow remain explicit code. The protocol uses paired forced-mode counterfactuals, common random response draws, and event-level deadline feasibility. Three properties follow. Architecture materially changes outcomes: forced search is the oracle in all five baseline seeds. Execution fidelity needs more than mode agreement: objective substitution holds agreement at 1.0 while increasing voltage shortfall by 2.68x. A 144-scenario, 576-episode bank has feasible oracles from three of the four architectures. A prespecified stress-held-out ridge has mean regret 90.7 (95% interval [73.8, 108.6]) and no detectable value over fixed sequential; applying known deadline feasibility before quality prediction cuts regret to 29.0 and improves over fixed sequential by 61.1. An all-feasible ablation does not beat fixed search, localising the remaining challenge to within-feasible quality selection. A five-model extension separates stress-conditioned, state-blind, and invariant declarers; latency tails show that live feasibility should be treated probabilistically.",
+      "authors": [
+        "J. de Curtò",
+        "I. de Zarzà"
+      ],
+      "categories": [
+        "cs.MA",
+        "cs.AI",
+        "eess.SY"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-08-04T22:52:21Z",
+      "updatedAt": "2026-08-04T22:52:21Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.04265v1",
+        "pdf": "https://arxiv.org/pdf/2608.04265v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T22:52:21Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.04144",
+      "identifiers": {
+        "arxiv": "2608.04144",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Neighborhood-Aware Dual Biomedical Entity Linking",
+      "abstract": "Biomedical entity linking grounds mentions in clinical and scientific text to entities in a curated knowledge base (KB) with ontological structure, which supports downstream applications such as literature-scale information extraction and patient-record normalization. The task has several challenges at once: the KB contains large numbers of entities, mentions are often ambiguous, and gold labels follow annotation conventions specific to each corpus. To address these challenges, we propose PILOT, a three-stage framework made up of neighborhood-aware retrieval, dual reranking, and score fusion. The retriever injects ontological structure from both the query and KB side, by reformulating mentions and pooling entity embeddings. The retrieved pool is then scored from two complementary views, one over surface forms and one over context, and fused together. PILOT achieves the state of the art on average across five widely-used benchmarks and remains efficient at inference.",
+      "authors": [
+        "Yicheng Tao",
+        "Jie Liu"
+      ],
+      "categories": [
+        "cs.IR",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-04T18:55:14Z",
+      "updatedAt": "2026-08-04T18:55:14Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.04144v1",
+        "pdf": "https://arxiv.org/pdf/2608.04144v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T18:55:14Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 61,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.05013",
+      "identifiers": {
+        "arxiv": "2608.05013",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "OneDayAgent: Towards a Long-Horizon Harness for Autonomous Agents",
+      "abstract": "LLM agents are increasingly applied to open-ended everyday requests that span work, study, and life. These tasks are long-horizon, cross-environment, and multimodal, forcing the agent to preserve goals and constraints across many steps while navigating heterogeneous tools and attachments. While prior work has addressed individual failure modes such as goals drift, states loss, and context overflow, whether a single harness can manage them jointly and remain effective across backends has received less study. We present OneDayAgent, a long-horizon harness for autonomous agents. OneDayAgent turns an open-ended request into a managed execution process that decomposes tasks into bounded subtasks, maintains execution memory under context pressure, and verifies and repairs the final deliverable. We evaluate OneDayAgent on AgentIF-OneDay across 104 tasks. With the GLM-5.2 backend, OneDayAgent sets a new state of the art with an overall score of 0.821. The same harness runs across five backend LLMs from three model families, indicating the harness generalizes across backends without tuning, even as different models induce distinct execution styles under the same workflow.",
+      "authors": [
+        "Jingsheng Zheng",
+        "Xinyuan Fang",
+        "Jintian Zhang",
+        "Zhengke Gui",
+        "Huajun Chen",
+        "Ningyu Zhang"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.HC",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-04T17:55:41Z",
+      "updatedAt": "2026-08-04T17:55:41Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Ongoing work",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.05013v1",
+        "pdf": "https://arxiv.org/pdf/2608.05013v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T17:55:41Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "multimodal"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03910",
+      "identifiers": {
+        "arxiv": "2608.03910",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Socially Grounded Agentic AI: Coordinating Plural Perspectives through Social Theory",
+      "abstract": "As AI systems are deployed across increasingly diverse social contexts, alignment can no longer be framed as the optimization of a single, unified set of values. Instead, systems must be able to recognize, represent, and respond to multiple legitimate perspectives. This has led to growing interest in pluralistic alignment, which seeks to move beyond one-size-fits-all models of appropriate behaviour. However, current approaches often lack a clear account of how values are socially organized, contested, and coordinated in practice. In this paper, we argue that social theory provides essential conceptual and design resources for addressing these challenges. Drawing on established traditions in sociology, we show how perspectives can be understood as structured by roles, shaped through interaction, and distributed across fields of power and expertise. We translate these insights into concrete implications for AI system design, including role-based representations, structured coordination among perspectives, and context-sensitive evaluation. For agentic systems, this requires aligning not only final outputs, but also the role activations, deliberative traces, aggregation rules, and feedback loops through which those outputs are produced. Our contribution is to reposition pluralistic alignment as a problem of socially grounded coordination rather than output diversification. We outline a design space for systems that engage multiple perspectives in structured and accountable ways, and we identify directions for future work to implement and empirically evaluate these approaches in real-world settings.",
+      "authors": [
+        "Matt Ratto",
+        "Abhishek Moturu",
+        "Daniel Silver"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-08-04T16:37:09Z",
+      "updatedAt": "2026-08-04T16:37:09Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Pluralistic Alignment Workshop @ ICML 2026, Seoul, South Korea",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03910v1",
+        "pdf": "https://arxiv.org/pdf/2608.03910v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T16:37:09Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 63,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03899",
+      "identifiers": {
+        "arxiv": "2608.03899",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "ATLAS: Learning to Recommend Across Unseen Domains",
+      "abstract": "Recommender systems remain domain-bound: a model trained on one interaction environment typically requires retraining or target-domain adaptation before it can operate on a new catalogue. A recommender trained on movies cannot be directly deployed to recommend groceries or video games. Existing approaches mitigate this by transferring restricted forms of recommendation knowledge, adapting to the target domain, or leveraging large language models (LLMs) for transferable representations. We instead ask whether recommendation-specific knowledge learned solely from multiple heterogeneous domains can generalize to entirely unseen domains without target-domain adaptation or language-model pretraining. We introduce ATLAS, a multi-source recommendation domain generalization framework that learns a shared, domain-invariant user-item representation from disjoint source domains, enabling zero-shot recommendation on unseen domains. ATLAS combines a Gromov-Wasserstein alignment that preserves how users relate to one another across domains, an adversarial objective that makes item representations indistinguishable across domains, and residual vector quantization (RVQ) codebooks that compress user and item embeddings into a discrete latent space, capturing hierarchical interaction patterns while suppressing domain-specific variation. Trained on five Amazon domains and applied directly to ten unseen domains, ATLAS outperforms state-of-the-art sequential, graph-based, cross-domain, quantization-based, and LLM-based baselines on most unseen domains, with an average relative gain in HitRate of 24%. Ablations and representation analyses validate each component, and we identify a pronounced source-domain diversity effect: increasing source heterogeneity substantially improves zero-shot transfer. ATLAS establishes recommendation domain generalization as a promising paradigm for zero-shot recommendation.",
+      "authors": [
+        "Pervez Shaik",
+        "Prosenjit Biswas",
+        "Abhinav Thorat",
+        "Ravi Kolla",
+        "Niranjan Pedanekar"
+      ],
+      "categories": [
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-04T16:29:02Z",
+      "updatedAt": "2026-08-04T16:29:02Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "18 pages, 5 figures, 14 tables. Includes appendix with proofs and additional experiments",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03899v1",
+        "pdf": "https://arxiv.org/pdf/2608.03899v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T16:29:02Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "safety-evaluation",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 68,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03882",
+      "identifiers": {
+        "arxiv": "2608.03882",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "MultiGlobeQA: A Multilingual and Globally Diverse Benchmark for Geospatial Reasoning",
+      "abstract": "Geospatial reasoning, i.e., computing distances, containment, and other spatial relations over real-world entities, is central to navigation and logistics, yet large language models (LLMs) struggle with the required geometric and topological computation despite storing considerable geographic knowledge. Existing benchmarks localize these failures only partially: they are synthetic or smallscale, largely monolingual, and offer limited control over geographic coverage. We introduce MultiGlobeQA, a multilingual benchmark of 46,060 question-answer pairs spanning 14 spatial-function families and 15 answer formats, with execution-based ground truth over three knowledge graphs. It covers 201 countries and territories via income- and density-stratified sampling, with parallel questions in English and 16 additional high- and low-resource languages. Across parametric, reasoning, and agentic settings, LLMs collapse on tasks requiring grid indexing and shape computation, while topological relations and directions fare best. Retrieval and tool use yield considerable gains, yet performance plateaus below two thirds even when gold facts are supplied, indicating that computation, not access to knowledge, is the bottleneck. Models also underperform on low-income regions, a gap that gold facts widen rather than close.",
+      "authors": [
+        "Martin Böckling",
+        "Elizaveta Nosova",
+        "Heiko Paulheim",
+        "Andreea Iana"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-04T16:18:52Z",
+      "updatedAt": "2026-08-04T16:18:52Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03882v1",
+        "pdf": "https://arxiv.org/pdf/2608.03882v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T16:18:52Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "safety-evaluation",
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03860",
+      "identifiers": {
+        "arxiv": "2608.03860",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "SciRet: A Compute-Aware Empirical Study of Retrieval and Reranking for Scientific RAG",
+      "abstract": "We introduce SciRet, a compute-aware empirical study of retrieval-augmented generation for scientific question answering over CORD-19. Rather than proposing a new model, we evaluate a fixed scientific RAG pipeline across three corpus scales: 1,034 chunks (1K papers), 5,160 chunks (5K papers), and 15,480 chunks (15K papers). The pipeline combines sentence-window chunking, BM25, BGE-M3 dense retrieval, reciprocal rank fusion, optional cross-encoder reranking, and grounded answer generation. Across these settings, hybrid retrieval is more robust than either sparse-only or dense-only retrieval in our setting, reaching Recall@10 of 1.000 at 1K and 15K. In contrast, an MS MARCO-trained cross-encoder reranker reduces precision on the scientific corpus, suggesting that domain mismatch can outweigh the benefits of stronger query-passage interaction. Generation faithfulness measured with RAGAS increases with corpus scale in our setup. Retrieval evaluation uses pseudo-relevance labels derived from the hybrid system, so we treat the results as controlled comparative evidence rather than a benchmark claim. We release code, indexes, and evaluation outputs to support replication and follow-up studies.",
+      "authors": [
+        "Kaysarul Anas Apurba",
+        "Md. Hasibul Hasan",
+        "Rofiqul Alam Shehab",
+        "Asab Azad"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR",
+        "cs.PF"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-04T16:04:07Z",
+      "updatedAt": "2026-08-04T16:04:07Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "6 pages, 5 figures. Short paper",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03860v1",
+        "pdf": "https://arxiv.org/pdf/2608.03860v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T16:04:07Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation",
+        "systems-efficiency",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03852",
+      "identifiers": {
+        "arxiv": "2608.03852",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "FedCritic-MIMO: Communication-Efficient Serverless Federated Critic Learning for Massive-MIMO Resource Control in Open and Disaggregated 6G RANs",
+      "abstract": "This paper proposes FedCritic-MIMO, a communication-efficient serverless federated multi-agent reinforcement learning framework for AI-native resource control across independently deployable cell-level controllers in open and disaggregated 6G RANs. Controllers share no trainer, retain local actors and personalized critic components, and exchange only compatible shared critic parameters. FedCritic-MIMO targets reuse-$1$ multi-cell massive-MIMO OFDMA deployments, where RAN controllers jointly manage user scheduling, per-stream power allocation, beamforming, interference, and long-term QoS with limited inter-controller signaling. Each base station locally executes its actor without centralized training or actor federation, while critic knowledge is exchanged peer-to-peer over an interference-aware graph. It enables this collaboration through wireless-aware event triggering, adaptive layer-wise top-$k$ sparse critic exchange with error feedback, and balanced interference-aware fusion. We establish conditional finite-time stationarity and consensus guarantees for the balanced, compressed peer-to-peer critic recursion under a fixed-policy, frozen-target critic-regression model. In strongly interference-coupled reuse-$1$ simulations, FedCritic-MIMO achieves the best performance-communication tradeoff among heuristic, independent-learning, centralized-training, and communication-ablation baselines. It achieves the highest held-out throughput, improves user-rate distribution and mean SINR, increases QoS satisfaction, and attains the lowest interference cost per delivered bit among learning baselines. It reduces critic-communication overhead by $76\\%$ relative to uncompressed distributed critic exchange. These results demonstrate that serverless exchange of compatible shared critic parameters can coordinate RAN controllers without centralized trajectory collection or parameter-server aggregation.",
+      "authors": [
+        "Amin Farajzadeh",
+        "Melike Erol-Kantarci"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.MA",
+        "cs.NI"
+      ],
+      "primaryCategory": "cs.LG",
+      "publishedAt": "2026-08-04T15:56:32Z",
+      "updatedAt": "2026-08-04T15:56:32Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Submitted to IEEE for possible publication",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03852v1",
+        "pdf": "https://arxiv.org/pdf/2608.03852v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T15:56:32Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 62,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03833",
+      "identifiers": {
+        "arxiv": "2608.03833",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "History Matters: Meta-policy Delegation with Heterogeneous Multi-agent Reinforcement Learning",
+      "abstract": "AI agents are expected to play an increasingly important role in future decision-making systems. In this paper, we consider collaborative systems composed of heterogeneous multi-agent systems (MAS), where their members have different capabilities and operating costs. We study how agents can delegate tasks to one another so that certain research tasks can be completed effectively under resource-constrained scenarios. We first develop a multi-agent reinforcement learning-based (MARL) delegation training that enables agents to make sequential delegation decisions while minimizing the total execution cost. We then extend this approach to MARL with prescribed delegation topologies. Furthermore, we introduce two new frameworks for collaboration and delegation in multi-agent systems. The first framework proposes that an agent's policy depends not only on the current state of the underlying Markov decision process but also on the interaction history, including previous joint actions. This history-dependent formulation can improve coordination even in fully observable environments, where conventional MARL methods typically restrict policies to depend only on the current state. The second framework proposes a novel, potentially multi-dimensional monetary mechanism to facilitate the collaboration and delegation for MAS.",
+      "authors": [
+        "Ziqing Lu",
+        "Avinash Reddy Mudireddy",
+        "Sarra Alqahtani",
+        "Weiyu Xu"
+      ],
+      "categories": [
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-08-04T15:39:40Z",
+      "updatedAt": "2026-08-04T15:39:40Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03833v1",
+        "pdf": "https://arxiv.org/pdf/2608.03833v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T15:39:40Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 60,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 31,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03756",
+      "identifiers": {
+        "arxiv": "2608.03756",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "LegalPincite: Multi-level Legal Information Retrieval Dataset",
+      "abstract": "A common task in legal Information Retrieval (IR) is to find relevant legal sources from case-law collections. While legal practice often requires pinpoint citations (pincites) to specific case paragraphs, most existing public legal IR datasets lack paragraph-level citation annotations. Yet, publicly available datasets with such information contain data leakage in the query text and exclude paragraphs that are neither citing nor cited from the corpora, creating an unrealistic and oversimplified retrieval setting, potentially leading to inflated performance. To address these limitations, we contribute a large-scale legal IR dataset constructed from Court of Justice of the European Union (CJEU) judgments. The dataset contains: (i) masked case/paragraph queries, with removed citation information; (ii) a corpus that includes all paragraphs; and (iii) case- and paragraph-level ground-truth citations, with partial human expert validation. Our dataset supports both the development and rigorous evaluation of legal IR methods, at multiple query-document levels (case-to-case, paragraph-to-case, and paragraph-to-paragraph retrieval). Link to dataset: https://huggingface.co/datasets/theresiavr/legalpincite",
+      "authors": [
+        "Theresia Veronika Rampisela",
+        "Henrik Palmer Olsen",
+        "Giovanni Colavizza"
+      ],
+      "categories": [
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-04T14:46:19Z",
+      "updatedAt": "2026-08-04T14:46:19Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03756v1",
+        "pdf": "https://arxiv.org/pdf/2608.03756v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T14:46:19Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 49,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03735",
+      "identifiers": {
+        "arxiv": "2608.03735",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "An Actionable Diagnosis of Multilingual, Multi-Agent Planning Failures",
+      "abstract": "Multilingual multi-agent systems exhibit substantial degradation beyond English, yet prior work rarely identifies how task-critical information is lost when user requests are converted into executable plans. We study the planner in a multi-agent system as the request-to-action interface and derive an actionable taxonomy of planning-grounding failures from failed real-world task executions. LLM-based analysis shows that these failures constitute an increasing share of unsuccessful executions as language-resource availability declines, with the strongest effects in low-resource languages. To test whether the taxonomy supports mitigation, we introduce TART, Taxonomy-Guided Actionable Representation, that makes the taxonomy's key aspects explicit to the planner and downstream sub-agents. Across multiple languages, three LLM backbones, two datasets, and two agentic configurations, TART consistently improves performance. On multilingual GAIA, it raises a state-of-the-art system's accuracy by 5.6 percentage points averaged across eleven languages spanning low- to high-resource settings.",
+      "authors": [
+        "Vikas Pahuja",
+        "Jonathan Brokman",
+        "Omer Hofman",
+        "Tamir Nizri",
+        "Daniel Vishna",
+        "Seraphina Goldfarb-Tarrant",
+        "Kelly Marchisio",
+        "Hisashi Kojima",
+        "Roman Vainshtein"
+      ],
+      "categories": [
+        "cs.MA",
+        "cs.CL"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-08-04T14:29:14Z",
+      "updatedAt": "2026-08-04T14:29:14Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "22 pages, 11 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03735v1",
+        "pdf": "https://arxiv.org/pdf/2608.03735v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T14:29:14Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03692",
+      "identifiers": {
+        "arxiv": "2608.03692",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "SITA: Semantic Interest Tokens for Target-Aware Compression in Long-Sequence Recommendation",
+      "abstract": "As user behavior histories continue to grow on modern Internet platforms, effectively modeling long behavior sequences has become crucial for predicting user interests in candidate items. Existing methods have evolved along two directions. One line dynamically retrieves target-relevant behaviors from long histories, enabling target-aware modeling but requiring target-dependent computation during inference. The other line compresses entire behavior sequences into compact user representations, achieving high efficiency and scalability but sacrificing target-specific adaptation due to target-independent encoding. The key challenge is therefore to enable target-aware modeling while preserving the efficiency and scalability of compressed user representations. To address this challenge, we propose \\textbf{SITA}, a target-aware compression framework for long-sequence recommendation. SITA enables target-aware compression by organizing compressed interests into semantic structures through semantic identifiers learned via parallel semantic quantization. Conditioned on the semantic identifier of the target item, SITA adaptively aggregates the corresponding structured interests to construct the target-specific user representation. Extensive experiments on public datasets and a large-scale industrial dataset demonstrate that SITA consistently outperforms representative baselines while maintaining strong scalability, highlighting its strong potential for real-world recommender systems.",
+      "authors": [
+        "Rui Zhou",
+        "Bo Chen",
+        "Qinglin Jia",
+        "Jiezhou Ji",
+        "Chaoyi Ma",
+        "Ruiming Tang",
+        "Hao Wang",
+        "Enhong Chen"
+      ],
+      "categories": [
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-04T13:59:44Z",
+      "updatedAt": "2026-08-04T13:59:44Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03692v1",
+        "pdf": "https://arxiv.org/pdf/2608.03692v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:59:44Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03650",
+      "identifiers": {
+        "arxiv": "2608.03650",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Echo-Aware Modulation for Compact-Latent Frequency-Time Modeling in Lightweight Acoustic Echo Cancellation",
+      "abstract": "Existing lightweight acoustic echo cancellation (AEC) systems often combine linear AEC with Bark-domain DNN-based suppression to lower the computational footprint. In such systems, downsampling layers further compress the input features into a compact bottleneck representation, but this compression weakens frequency-time modeling capacity and degrades performance. To mitigate this limitation, we propose MSA-EchoLite, a lightweight Bark-domain AEC framework with an asymmetric dual-branch encoder and an echo-aware frequency-time modulation (EAM) module. The EAM module enriches the compressed bottleneck representation by modeling discrepancy and correlation cues between the dual-branch microphone and echo-related latent features. Experimental results show that the Bark-domain variant of MSA-EchoLite offers a better performance-complexity trade-off than its frequency-domain counterpart but is more sensitive to feature compression. With only 26.1% additional FLOPs over its non-EAM Bark-domain variant, its EAM-enhanced version achieves 99.1% of the PESQ of the frequency-domain counterpart, which requires nearly twice the FLOPs, and even surpasses it in SDR. Overall, MSA-EchoLite outperforms state-of-the-art lightweight AEC models while using only 0.2 M parameters and 100 M FLOPs/s.",
+      "authors": [
+        "Ye Ni",
+        "Ruiyu Liang",
+        "Qingyun Wang",
+        "Kai Xie",
+        "Cairong Zou",
+        "Björn W. Schuller"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-04T13:33:22Z",
+      "updatedAt": "2026-08-04T13:33:22Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03650v1",
+        "pdf": "https://arxiv.org/pdf/2608.03650v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:33:22Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03648",
+      "identifiers": {
+        "arxiv": "2608.03648",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Group Perspective Matters: Regulating Debate Relationships Can Mitigate Blind Conformity in Multi-Agent Debate",
+      "abstract": "Multi-Agent Debate (MAD) improves the reasoning performance of Large Language Models (LLMs) through multi-round interaction. However, LLMs in MAD are highly susceptible to blind conformity. Existing individual evaluation methods, typically based on confidence or perplexity, fail to reflect the correctness of reasoning and may even exacerbate blind conformity. To address this, we shift the perspective from individual evaluation to group interaction. We define mutual referencing among LLMs as \\textbf{Debate Relationships} and recognize that regulating these relationships is the key to mitigating blind conformity. In this paper, we propose a novel framework for \\textbf{D}ynamically r\\textbf{E}gulating deb\\textbf{A}te \\textbf{R}elationships (DEAR) from the group perspective. At first, DEAR quantifies consensus and divergence as \\textit{group evidence} to capture the debate state. Then, DEAR operates through three stages: 1) What: perceiving group consultation tendency and uncertainty; 2) Who: introducing a Selection RL-Agent to dynamically select reference peers; and 3) How: adopting a Behavior RL-Agent to adaptively adjust generation behaviors. Notably, we formulate the execution of the two RL-Agents as a sequential decision-making process, jointly optimizing via multi-agent reinforcement learning. Extensive experiments demonstrate that DEAR achieves superior performance while significantly reducing token consumption.",
+      "authors": [
+        "Hao Wu",
+        "Shoucheng Song",
+        "Chang Yao",
+        "Haoyu Wang",
+        "Huaiyu Wan",
+        "Youfang Lin",
+        "Kai Lv"
+      ],
+      "categories": [
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-08-04T13:31:24Z",
+      "updatedAt": "2026-08-04T13:31:24Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03648v1",
+        "pdf": "https://arxiv.org/pdf/2608.03648v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:31:24Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03647",
+      "identifiers": {
+        "arxiv": "2608.03647",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Conditionally Identifiable Latent-Environment Modeling for Out-of-Distribution Recommendation",
+      "abstract": "Out-of-distribution (OOD) recommendation is vulnerable to preference shifts induced by a latent environment. Existing methods can infer latent states from logged interactions, yet the statistical meaning of the latent environment and its effect on preference remain underdetermined. We formulate this task as conditionally identifiable risk-aware recommendation (CI-RR) and propose Conditionally Identifiable Latent-Environment Recommendation (CILER). CILER uses a user-conditioned exponential family to model the latent environment and a feature-indexed polynomial to specify how it changes preference. It predicts by marginalizing item probabilities over the inferred environment distribution. Under sufficient variation, correct specification, and decoder regularity, CILER identifies the environment-sensitive representation up to the stated equivalence class. We further bound excess deployment log-risk by environment-inference error. Controlled studies test the observable consequences of sufficient variation and model specification. Experiments on three datasets show that CILER improves all twelve OOD ranking metrics under feature, temporal, and geographical shifts within shared support.",
+      "authors": [
+        "Qianqian Wang",
+        "Wenwu Gong",
+        "Yunshan Li",
+        "Zhenqing Wu",
+        "Ruili Wang",
+        "Lili Yang"
+      ],
+      "categories": [
+        "cs.IR",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-04T13:30:51Z",
+      "updatedAt": "2026-08-04T13:30:51Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "20 pages, 9 figures, 9 tables",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03647v1",
+        "pdf": "https://arxiv.org/pdf/2608.03647v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:30:51Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 49,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03644",
+      "identifiers": {
+        "arxiv": "2608.03644",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Is Inter-Seed Cross-Play Enough? Evaluating the Robustness of Zero-Shot Coordination Algorithms to Implementation Details",
+      "abstract": "AI agents deployed in real-world settings must be capable of coordinating with humans and other AI agents they have not encountered before. Zero-shot coordination (ZSC) algorithms aim to achieve this by specifying high-level learning rules such that independently engineered agents can coordinate with each other at test time. Rigorous evaluation of ZSC algorithms remains difficult: ideally, multiple independent implementations of each proposed algorithm must be used, reflecting the variation that arises when independent parties interpret and implement the same specification. In practice, however, ZSC algorithms have almost exclusively been evaluated using a single implementation trained across different random seeds, with only a handful of works additionally varying the neural network architecture. This leaves open questions about robustness to specification ambiguities and implementation details. In this work, we provide the first systematic evaluation of this robustness. We introduce a new evaluation scheme, cross-implementation cross-play, varying implementation details that prior work has shown to affect the performance of multi-agent reinforcement learning (MARL) algorithms, and we evaluate Other-Play, a popular ZSC algorithm, with this scheme. Our findings are encouraging and suggest that, for Other-Play, the standard ZSC evaluation is, in fact, a reasonable proxy for this more thorough cross-implementation evaluation.",
+      "authors": [
+        "Maksymilian Wolski",
+        "Nicholas Hoernle",
+        "Johannes Forkel",
+        "Jakob Foerster"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-08-04T13:29:00Z",
+      "updatedAt": "2026-08-04T13:29:00Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03644v1",
+        "pdf": "https://arxiv.org/pdf/2608.03644v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:29:00Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03610",
+      "identifiers": {
+        "arxiv": "2608.03610",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Language-Specialized Multi-Teacher On-Policy Distillation for Multilingual LLM-Based ASR",
+      "abstract": "Modern LLM-based ASR systems have established multilingual capability as a standard feature, leveraging large-scale multilingual corpora and LLMs' cross-lingual knowledge to achieve competitive performance across multilingual benchmarks. However, joint modeling of languages with heterogeneous acoustic, phonological, and lexical characteristics inevitably introduces optimization conflicts, undermining language-wise specialization. To address this challenge, we propose Language-Specialized Multi-Teacher On-Policy Distillation (LS-MOPD), which decouples language-specific knowledge acquisition from multilingual capability integration: language-specialized teachers are independently optimized via reinforcement learning (RL), after which their expertise is integrated into a generalist multilingual student through language routing and token-level multi-teacher distillation, thereby reducing direct cross-lingual optimization conflicts. We further explore two acoustic-prefix configurations, static and dynamic, to examine how teacher--student prefix consistency influences the efficacy of on-policy distillation. Experiments on benchmarks covering Mandarin, Mandarin subdialects, Cantonese, and English demonstrate that LS-MOPD substantially outperforms RL baselines and consistently surpasses the empirical performance envelope defined by best-performing RL teachers, revealing its potential to generalize beyond all teachers in multilingual ASR.",
+      "authors": [
+        "Yuan Xie",
+        "Jiaqi Song",
+        "Xianliang Wang",
+        "Ming Lei",
+        "Jie Gao",
+        "Jie Wu"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.SD",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-04T13:02:47Z",
+      "updatedAt": "2026-08-04T13:02:47Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03610v1",
+        "pdf": "https://arxiv.org/pdf/2608.03610v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T13:02:47Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03569",
+      "identifiers": {
+        "arxiv": "2608.03569",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Adversarial Fast-Moving Real-World Domains as Test Beds for Benchmarking AI Scientist Capabilities",
+      "abstract": "Benchmarking the ability of AI scientists to generate novel ideas is notoriously difficult. Existing benchmarks in this field have made progress in evaluating scientific reasoning and research replication, but often rely on synthetic tasks or retrospective targets, which may be confounded by prior exposure. We hypothesize that complex, adversarial, fast-moving real-world domains where expert practitioners independently generate observable outputs can provide a practical solution to fill this gap and evaluate the capabilities needed for AI scientists, including reasoning, novelty, and hypothesis formulation. We instantiate this framework in two structurally different domains, Formula 1 (F1), where models ideate around car design concepts for the 2026 season, and real pre-season innovations provide a ground truth, and Magic: The Gathering (MTG), where models propose decks from a recently updated card pool and are evaluated against 19 Pro Tour (PT) decklists. Across both domains, models produce plausible outputs, but few align with real-world expert solutions. In F1, the best model, GPT-5.2 matched 10 of 40 real innovations with 166 ideas proposed across runs. In MTG, the best deck from Gemini 3 Flash recovered 5 of 7 new-set cards from the third-place PT deck, and across all 108 decks, the cards models selected most often were also the cards most widely adopted by PT decks (Spearman $ρ= 0.74$, $p = 0.0003$). These results suggest that a key capability gap for AI scientists is not idea generation, but filtering, prioritization, and coherent novelty.",
+      "authors": [
+        "William Bolton",
+        "Philip Torr"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CY",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-08-04T12:30:13Z",
+      "updatedAt": "2026-08-04T12:30:13Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted at the AI for Science workshop at ICML 2026. 14 pages, 11 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03569v1",
+        "pdf": "https://arxiv.org/pdf/2608.03569v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T12:30:13Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 60,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 31,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03215",
+      "identifiers": {
+        "arxiv": "2608.03215",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "GROW: Group-Relative Advantage-Weighted On-Policy Reinforcement Learning of Autoregressive-Diffusion Text-to-Speech model",
+      "abstract": "Reinforcement learning for flow-matching text-to-speech is complicated by deterministic ODE sampling: trajectory-level policy-gradient methods typically convert the ODE into an SDE and track per-step likelihood ratios, introducing stochastic perturbations and substantial overhead. We propose GROW, a group-relative advantage-weighted on-policy RL method that acts directly on the standard flow-matching objective. For each prompt, GROW samples a group of on-policy utterances, separately standardizes intelligibility and speaker-similarity rewards within the group, and combines them to reweight flow-matching regression. A Wasserstein-2 velocity penalty anchors the updated model to a frozen pretrained reference. A group-mean reward baseline is introduced to convert reward weighting into advantage weighting. For strong pretrained TTS models with concentrated rewards, positive exponential weighting is dominated by reward-agnostic self-imitation, whereas a zero-mean signed advantage preserves effective within-group credit assignment. Instantiated on DiTAR and evaluated on LibriSpeech and Seed-TTS EN/ZH, GROW reduces average WER from 2.016 to 1.558 and raises speaker similarity from 0.676 to 0.715 while keeping UTMOS. With 10-NFE training rollouts and 32-NFE evaluation, GROW retains comparable performance while training 2.9x faster than 32-NFE DiTAR-GRPO. We will open-source complete GROW codes, faithful DiTAR reproduction, and all model checkpoints.",
+      "authors": [
+        "Guanrou Yang",
+        "Tian Tan",
+        "Qian Chen",
+        "Ziyang Ma",
+        "Yakun Song",
+        "Zhikang Niu",
+        "Qi Chen",
+        "Wenming Tu",
+        "Haitao Li",
+        "Shan Yang",
+        "Xie Chen"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-04T06:50:55Z",
+      "updatedAt": "2026-08-04T06:50:55Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03215v1",
+        "pdf": "https://arxiv.org/pdf/2608.03215v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T06:50:55Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 68,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03050",
+      "identifiers": {
+        "arxiv": "2608.03050",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Learning Music Style for Piano Arrangement Through Cross-Modal Bootstrapping",
+      "abstract": "What is music style? Though often described using text labels such as \"swing,\" \"classical,\" or \"emotional,\" the real style remains implicit and hidden in concrete music examples. In this paper, we introduce a cross-modal framework that learns implicit music styles from raw audio and applies them to symbolic music generation. Inspired by BLIP-2, our model leverages a Querying Transformer (Q-Former) to extract style representations from a large, pre-trained audio language model (LM), and further applies them to condition a symbolic LM for generating piano arrangements. We adopt a two-stage training strategy: contrastive learning to align auditory style with symbolic expression, followed by generative modeling for music arrangement. Our model generates piano performances jointly conditioned on a lead sheet (content) and a reference audio example (style), enabling controllable and stylistically faithful arrangement. Experiments demonstrate the effectiveness of our approach in piano cover generation, style transfer, and audio-to-MIDI retrieval, achieving substantial improvements in style-aware alignment and music quality.",
+      "authors": [
+        "Jingwei Zhao",
+        "Gus Xia",
+        "Ziyu Wang",
+        "Ye Wang"
+      ],
+      "categories": [
+        "cs.SD",
+        "cs.AI",
+        "cs.MM",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "publishedAt": "2026-08-04T03:01:54Z",
+      "updatedAt": "2026-08-04T03:01:54Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted by ISMIR 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03050v1",
+        "pdf": "https://arxiv.org/pdf/2608.03050v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T03:01:54Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 68,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.03011",
+      "identifiers": {
+        "arxiv": "2608.03011",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Towards Real-world Environment-aware Zero-shot Text-to-speech Synthesis via Disentangled Audio Infilling",
+      "abstract": "Recent zero-shot text-to-speech (TTS) systems achieve remarkable naturalness and speaker similarity but typically require high-quality speaker prompts and either strip away or entangle the acoustic environment with speaker characteristics, limiting their real-world applicability. We present an extended DAIEN-TTS, an environment-aware zero-shot TTS framework that disentangles and jointly models speech, background noise, and reverberation, enabling independent control over timbre and acoustic environment through separate speaker and environment prompts. Built upon the flow-matching-based F5-TTS, it uses a speech-environment separation module to decompose environmental speech into speech, noise, and reverberation components, which are injected into the Diffusion Transformer for environment-aware generation. Training uses simulated data constructed by mixing clean speech with noise and room impulse responses, together with a cross-speaker conditioning strategy that suppresses speaker information leakage from the environment branch. When real-world data are available, the system can be further fine-tuned to bridge the simulated-to-real domain gap.At inference, a triple classifier-free guidance mechanism enables fine-grained control over speech, noise, and reverberation, and a signal-to-noise-ratio adaptation strategy aligns the synthesized speech with the environment prompt. Experiments on simulated and real-world test sets show that DAIEN-TTS generates environmental personalized speech with high naturalness, strong speaker similarity, and faithful noise and reverberation reproduction, while offering controllability beyond prior environment-aware TTS systems.",
+      "authors": [
+        "Ye-Xin Lu",
+        "Xin Wang",
+        "Yang Ai",
+        "Hui-Peng Du",
+        "Zhen-Hua Ling",
+        "Junichi Yamagishi"
+      ],
+      "categories": [
+        "eess.AS",
+        "eess.SP"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-04T01:45:08Z",
+      "updatedAt": "2026-08-04T01:45:08Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Submitted to IEEE Transactions on Audio, Speech, and Language Processing",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.03011v1",
+        "pdf": "https://arxiv.org/pdf/2608.03011v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-04T01:45:08Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 68,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

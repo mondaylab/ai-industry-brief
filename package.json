@@ -8,6 +8,8 @@
     "build:app": "node scripts/build-app.mjs",
     "homepage": "node scripts/update-homepage.mjs",
     "radar": "node scripts/generate-radar-snapshot.mjs",
+    "papers:sync": "node scripts/sync-papers.mjs",
+    "papers:test": "node --test tests/papers/*.test.mjs",
     "build": "npm run manifest && npm run radar && npm run homepage && npm run build:app",
     "preview": "vite preview --host 0.0.0.0"
   },

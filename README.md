@@ -24,6 +24,7 @@
 
 - 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
 - 热点雷达：[https://mondaylab.github.io/ai-industry-brief/radar.html](https://mondaylab.github.io/ai-industry-brief/radar.html)
+- 论文观察室：[https://mondaylab.github.io/ai-industry-brief/papers.html](https://mondaylab.github.io/ai-industry-brief/papers.html)
 - 七种色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
 - 强弱信号做图 SOP：[docs/weekly-call-log-sop.md](docs/weekly-call-log-sop.md)
 - 强弱信号小红书文案 Skill：`skills/xiaohongshu-weekly-letter/`
@@ -56,6 +57,9 @@
 8. **热点雷达**
    从最近 14 天简报数据生成来源账本、信号评分、Agent 流水线和编辑队列。第一版使用 `brief-observed` 模式，编辑动作保存在当前浏览器；实时来源抓取尚未启用。
 
+9. **论文观察室**
+   通过 arXiv 官方元数据持续监听前沿 AI 论文与版本更新，并把 OpenReview、官方论文集、Semantic Scholar、Hugging Face Daily Papers 和前沿实验室官网按“核验 / 补全 / 线索”分层。页面按时间线展示，明确区分预印本与同行评审状态；观察优先级只服务编辑筛选，不代表论文质量。
+
 ## 文件结构
 
 ```text
@@ -73,6 +77,11 @@
 │   └── generate-radar-snapshot.mjs
 ├── radar-data/
 │   └── snapshot.json
+├── papers-data/
+│   ├── config.json
+│   ├── manifest.json
+│   └── YYYY-MM-DD.json
+├── papers.html
 ├── color-palette-demo.html
 ├── briefs/
 │   └── YYYY-MM-DD.html
@@ -152,6 +161,17 @@ node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD
 ```bash
 npm run dev
 ```
+
+同步论文数据并检查采集逻辑：
+
+```bash
+npm run papers:test
+npm run papers:sync -- --force
+```
+
+仓库内的 `papers-monitor.yml` 每天在 arXiv 官方日更后运行。浏览器每 10 分钟检查本站 JSON 是否有新快照；外部 API 不会直接暴露给前端。
+
+信源以 [arXiv API](https://info.arxiv.org/help/api/user-manual.html) 为主发现源，以 [OpenReview API](https://docs.openreview.net/getting-started/using-the-api)、[ACL Anthology](https://aclanthology.org/info/development/) 和会议官方论文集核验发表状态；[Hugging Face Daily Papers](https://huggingface.co/papers) 只用于热度线索，[Semantic Scholar API](https://www.semanticscholar.org/product/api) 只用于后续元数据补全。采集只缓存元数据与短编辑判断，论文正文始终链回原站。
 
 ## 扩展到其他行业
 

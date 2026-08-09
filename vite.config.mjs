@@ -13,6 +13,7 @@ export default defineConfig({
       input: {
         reader: path.resolve(process.cwd(), "app.html"),
         radar: path.resolve(process.cwd(), "radar-app.html"),
+        papers: path.resolve(process.cwd(), "papers-app.html"),
       },
     },
   },

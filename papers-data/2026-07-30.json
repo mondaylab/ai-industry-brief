@@ -1,0 +1,388 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-30",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.28609",
+      "identifiers": {
+        "arxiv": "2607.28609",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "OSReward: Instituting Standardized Evaluation for Cross-Platform Computer-Use Reward Models",
+      "abstract": "Computer-using agents (CUAs) are advancing rapidly across the digital world. A CUA trajectory records the agent's actions, states, and reasoning. Verifying whether it fulfilled the task instruction is central to CUA evaluation, data curation, and reinforcement learning. Neither human-written verifiers nor human annotators can provide such verification at scale, so the field increasingly turns to vision-language models (VLMs) as judges of CUA trajectories. But a fundamental question has long gone unexamined: are these VLM judges reliable enough? To study it systematically, we introduce OSReward, a realistic, high-quality benchmark that evaluates VLM judges on CUA trajectories. The trajectories come from diverse agent backbones executing human-verified instructions across platforms, and are then rigorously labeled with ground-truth verdicts through multi-stage human annotation. Building on it, we derive OSReward-Hard, a challenge set concentrating genuinely hard cases, and OSReward-Multi for fine-grained efficiency and alignment scoring. The most comprehensive evaluation of VLM judges to date finds even state-of-the-art models fall short of an ideal judge, sharing a systematic leniency bias that mislabels failed runs as successes. The few reliable enough to trust are too expensive to run at scale, while affordable open models trail far behind. To close this gap, we construct and release OS-Shepherd-100K, an open corpus of reasoning-annotated trajectory judgments for the CUA community. On it, we train OS-Shepherd (9B and 35B), open reward models that supply low-cost, stable, and reliable reward signals, matching commercial judges at 30-60x lower cost than the frontier. Extensive analyses further inform the design of reliable CUA reward at scale. Our code, benchmark, dataset, and model checkpoints are available at https://os-copilot.github.io/OSReward-Home/.",
+      "authors": [
+        "Qiushi Sun",
+        "Kanzhi Cheng",
+        "Yian Wang",
+        "Bowen Yang",
+        "Hang Yan",
+        "Liheng Chen",
+        "Fangzhi Xu",
+        "Zichen Ding",
+        "Nuo Chen",
+        "Jialin Cao",
+        "Xingdong Gong",
+        "Zehao Li",
+        "Kaiming Jin",
+        "Xinfeng Yuan",
+        "Zhoumianze Liu",
+        "Jingyang Gong",
+        "Zhangyue Yin",
+        "Jiahui Gao",
+        "Zhiyong Wu",
+        "Tianbao Xie",
+        "Jianbing Zhang",
+        "Ben Kao",
+        "Lingpeng Kong"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-07-30T17:57:41Z",
+      "updatedAt": "2026-08-06T17:55:59Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Work in progress",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.28609v2",
+        "pdf": "https://arxiv.org/pdf/2607.28609v2",
+        "code": null,
+        "project": "https://os-copilot.github.io/OSReward-Home/"
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-30T17:57:41Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "multimodal"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 80,
+        "level": "focus",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 8,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.28443",
+      "identifiers": {
+        "arxiv": "2607.28443",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 3,
+      "title": "One Future, Every Robot: Label-Efficient Collective-State Prediction with Decentralized JEPA",
+      "abstract": "Decentralized robots often need a common view of what their team is becoming, even though each robot sees different evidence and cannot rely on a central estimate or output-level consensus. We ask whether compatible collective-state predictions can emerge under this constraint. Collective-State JEPA (CS-JEPA) trains every robot to predict the same fixed-width latent future from its own history and bounded neighbor messages, with no agreement loss; predictions and plans are never pooled at deployment. In a fresh independent replication, agreement improves for every seed and every evaluated split. Accuracy improves at the same time, ruling out the uninformative solution in which all robots merely collapse to one prediction: relative to capacity-matched raw-future reconstruction, collective-state error falls by 28.4 percent in distribution and by 64.4 to 75.6 percent under topology and swarm-size shift. Translation-free and crossed-pretraining controls preserve this joint result, while action-conditioned and rigid-body evaluations show that the receiver-local representation supports independent decisions. A shared latent future can therefore align decentralized predictions without consensus training while preserving useful, label-efficient information.",
+      "authors": [
+        "Alan-Barsag Gazzaev",
+        "Alexey Gavrilov",
+        "Sergey Muravyov"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-07-30T16:16:08Z",
+      "updatedAt": "2026-08-06T17:23:43Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Submitted to IEEE ICRA 2027",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.28443v3",
+        "pdf": "https://arxiv.org/pdf/2607.28443v3",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-30T16:16:08Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "robotics-embodied",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作把模型能力推进到物理环境，关键观察点是感知、决策与执行能否形成稳定闭环。",
+      "score": {
+        "total": 65,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.28617",
+      "identifiers": {
+        "arxiv": "2607.28617",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "AISPA: User-Centric System Prompt Auditing for Large Language Model Applications",
+      "abstract": "System prompts are instructions configured by developers to govern the behaviors of foundation models in AI applications. They are used throughout commercial AI products, but are rarely disclosed to the public or regulators, creating a serious trust and accountability gap in the wide deployment of AI systems. In this paper, we introduce Artificial Intelligence System Prompt Assurance (AISPA), a user-centric framework for systematically auditing system prompts in AI systems. AISPA examines specific parts of a system prompt and evaluates them along eight dimensions that matter to users. We then use this framework to review 3,249 instructions from system prompts in 88 commercial AI products, classifying each instruction as either protective (of users) or problematic. Our audit surfaces four core findings. First, system prompt design varies substantially across products and developers, with some organizations averaging over 60 protective instructions per product while others average fewer than 5. Second, protective instructions are widely adopted but shallow in scope: 98.9% of products contain at least one, yet only 24% cover all eight dimensions of the AISPA taxonomy. Third, system prompts have grown steadily longer and more protective of users, suggesting that user protection is becoming a more visible concern in commercial prompt design. Fourth, despite this progress, problematic instructions remain pervasive: roughly 40% of products contain at least one instruction that works against user interests, and protective and problematic instructions frequently coexist within the same prompt. Our findings highlight the need for greater transparency, standardization, and independent oversight for system prompts in commercial AI products.",
+      "authors": [
+        "Xiangning Lin",
+        "Shenzhe Zhu",
+        "Shu Yang",
+        "Zhenyu Zhang",
+        "Haoqian Zhang",
+        "Yipeng Zhao",
+        "Chengxuan Qian",
+        "Tianwei Wang",
+        "Ziheng Zhang",
+        "Zhenlong Yuan",
+        "Dingcheng Wang",
+        "Juncheng Wu",
+        "Yuan Si",
+        "Jiaxin Liu",
+        "Baolong Bi",
+        "Robert Mahari",
+        "Tobin South",
+        "Dazza Greenwood",
+        "Zexue He",
+        "Rishi Bommasani",
+        "Sophia Kazinnik",
+        "Andreas Haupt",
+        "Samuele Marro",
+        "Erik Brynjolfsson",
+        "Alex Pentland",
+        "Jiaxin Pei"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CY",
+        "cs.HC"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-07-30T17:58:58Z",
+      "updatedAt": "2026-08-06T17:19:16Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.28617v2",
+        "pdf": "https://arxiv.org/pdf/2607.28617v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-30T17:58:58Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 64,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.28247",
+      "identifiers": {
+        "arxiv": "2607.28247",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Space2Ground 2.0: A Multi-Source Dataset and Framework for Agricultural Monitoring through Fusion of Street-Level and Satellite Imagery",
+      "abstract": "Accurate and scalable parcel-level agricultural monitoring remains challenging because satellite Earth Observation alone provides only an overhead perspective of agricultural parcels, while optical observations are further affected by cloud-induced temporal gaps. This paper presents Space2Ground 2.0, a multi-source framework integrating Sentinel-1 SAR and Sentinel-2 multispectral time series with geo-tagged street-level imagery acquired using vehicle-mounted cameras and shared through the Mapillary platform. A largely automated processing pipeline performs semantic filtering, image quality assessment, viewpoint-based parcel association, and dataset refinement, transforming large volumes of crowdsourced imagery into parcel-linked, analysis-ready data. Applied over Cyprus during the 2022 growing season, the pipeline produced a curated dataset of 46,050 annotated street-level images, selected from an initial collection exceeding 900,000 images and linked with satellite information for 8,581 agricultural parcels. The practical value of the dataset was assessed through parcel-level crop classification experiments using both single- and multi-source observations. The results demonstrate that street-level imagery provides complementary fine-scale visual information that enhances classification when integrated with satellite time series. Overall, Space2Ground 2.0 provides an openly available benchmark dataset and a reproducible methodology for multimodal agricultural monitoring, with potential applications in visual verification, reduced reliance on costly field inspections, and data-driven agricultural policy implementation.",
+      "authors": [
+        "Iason Tsardanidis",
+        "Alkiviadis Koukos",
+        "George Choumos",
+        "Vasileios Sitokonstantinou",
+        "Charalampos Kontoes"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.CV",
+      "publishedAt": "2026-07-30T14:10:25Z",
+      "updatedAt": "2026-08-06T13:49:49Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "This paper has been accepted for presentation at the 45th EARSeL Symposium, Athens, Greece. The Space2Ground 2.0 dataset, is publicly available through Zenodo at: https://doi.org/10.5281/zenodo.21219542",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.28247v2",
+        "pdf": "https://arxiv.org/pdf/2607.28247v2",
+        "code": null,
+        "project": "https://doi.org/10.5281/zenodo.21219542"
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-30T14:10:25Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 73,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 8,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.28703",
+      "identifiers": {
+        "arxiv": "2607.28703",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Costs of Arbitrary Real Matrix Factorizations for Pure-DP Continual Counting",
+      "abstract": "Let $T_n$ be the lower-triangular prefix-sum matrix and let $c_{\\mathrm{F}}(T_n)$ and $c_2(T_n)$ be the factorization costs that govern the mean and maximum per-coordinate squared error of the Laplace matrix mechanism under pure $\\varepsilon$-differential privacy, for $\\varepsilon>0$. We prove $c_{\\mathrm{F}}(T_n),c_2(T_n)=Θ((\\log(n+1))^{3/2})$ with no sign, sparsity, or squareness restriction and with arbitrary finite inner dimension. Consequently, within the pure-$\\varepsilon$-DP matrix-mechanism class, the optimized maximum and mean squared errors are both $Θ(\\varepsilon^{-2}\\log^3(n+1))$. Under the factorization contract of Arkhipov and Kalinin (arXiv:2607.08963v1), who prove the matching lower order for factors with entries in $\\{0,1\\}$ and state the arbitrary-factor extension as open, the theorem below establishes the order for arbitrary real factors. The lower bound runs through a $p$-nuclear obstruction: an aggregate column-width estimate $D_k(T_n)\\asymp n^{3/2}k^{-1/2}$, valid in the low-rank range $1\\leq k\\leq n/16$, for the prefix chain, fed into the classical approximation-space conversion of Pietsch and Hinrichs--Pietsch, becomes harmonic at the critical exponent $p=2/3$, and Hölder's inequality transfers it to both factorization costs. The same computation determines $\\mathfrak{n}_p(T_n)$ for each fixed $0<p<1$: order $n$ below $2/3$, $n\\log n$ at $2/3$, and $n^{3p/2}$ above. A Fenwick interval factorization supplies matching upper bounds. The claims are confined to pure-$\\varepsilon$-DP Laplace matrix mechanisms and the two stated squared-error criteria; they do not cover non-matrix continual mechanisms, approximate-DP sensitivity, or expected maxima across coordinates.",
+      "authors": [
+        "Awnon Bhowmik",
+        "Mahmudul Hasan"
+      ],
+      "categories": [
+        "cs.CR",
+        "cs.DS",
+        "math.FA"
+      ],
+      "primaryCategory": "cs.CR",
+      "publishedAt": "2026-07-30T14:41:34Z",
+      "updatedAt": "2026-08-06T12:24:59Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.28703v2",
+        "pdf": "https://arxiv.org/pdf/2607.28703v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-30T14:41:34Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 52,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

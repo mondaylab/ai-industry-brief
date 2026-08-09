@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-27",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.23982",
+      "identifiers": {
+        "arxiv": "2607.23982",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 3,
+      "title": "Moral Hazard in Multi-Agent Language Models",
+      "abstract": "Cooperation can fail when socially valuable effort is costly, weakly observable, and mainly benefits others. Drawing on Holmström's team moral-hazard model, we introduce the Dialogue Moral Hazard Game, a controlled textual game that operationalizes this hidden-action structure for language agents. In each episode, an agent can preserve an immediate local reward or pay a query cost to reveal a hidden safety fact that primarily helps another agent's downstream decision. We evaluate nine open-weight language models and one frontier API model, decomposing behavior into query use, realized information transfer, local-reward preservation, unsafe choice, format validity, and team success. Base open-weight models commonly preserve local reward without team success or query without communicating information that changes the final decision. GPT-5.6 Sol reaches ceiling behavior in the primary setting, and autonomous sweeps respond strongly to query cost and team reward. In a 3,015-decision incentive-isolation experiment with scripted partners, its empirical query threshold tracks the Holmström-derived private-share boundary across nine query costs with mean absolute error 0.013. We then use supervised fine-tuning, RLOO, sequential SFT+RLOO, and GEPA prompt optimization as diagnostic update mechanisms where coverage permits. Their effects are heterogeneous: SmolLM3-3B and OLMo-7B show the clearest mechanism-consistent weight-level improvements, whereas GEPA sometimes improves team success while reducing or eliminating costly queries. Thus, optimization can shift aggregate reward without recovering the designated cooperative mechanism, motivating evaluations that report mechanism-level behavior rather than team success alone.",
+      "authors": [
+        "Dane Malenfant"
+      ],
+      "categories": [
+        "cs.MA",
+        "cs.AI"
+      ],
+      "primaryCategory": "cs.MA",
+      "publishedAt": "2026-07-27T04:13:42Z",
+      "updatedAt": "2026-08-04T17:56:56Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Post Social Simulation with LLMS: Fidelity in Applications at COLM 2026 workshop version. Included GPT 5.6 Sol for construct validity and theory tests",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.23982v3",
+        "pdf": "https://arxiv.org/pdf/2607.23982v3",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-27T04:13:42Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

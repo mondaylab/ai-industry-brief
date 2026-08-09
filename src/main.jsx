@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowLeft,
   ArrowRight,
+  BookOpen,
   Check,
   ExternalLink,
   GitBranch,
@@ -346,6 +347,9 @@ function App() {
               <Menu size={19} strokeWidth={1.7} />
             </button>
             <ThemePicker theme={theme} onChange={setTheme} />
+            <a className="icon-button" href="papers.html" aria-label="论文观察室" title="论文观察室">
+              <BookOpen size={18} strokeWidth={1.7} />
+            </a>
             <a className="icon-button" href="https://github.com/mondaylab/ai-industry-brief" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
               <GitBranch size={18} strokeWidth={1.7} />
             </a>

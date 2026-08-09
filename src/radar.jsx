@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   Activity,
   ArrowLeft,
+  BookOpen,
   Bot,
   Check,
   Clock,
@@ -67,6 +68,7 @@ function Header({ snapshot, queueCount, onOpenSources }) {
       <div className="radar-header-actions">
         <button className="icon-command source-toggle" type="button" onClick={onOpenSources} title="打开来源列表" aria-label="打开来源列表"><Menu size={18} /></button>
         <span className="queue-counter"><b>{queueCount}</b> 编辑队列</span>
+        <a className="back-link" href="papers.html"><BookOpen size={15} />论文观察室</a>
         <a className="back-link" href="./"><ArrowLeft size={15} />返回首页</a>
       </div>
     </header>

@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-02",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2608.01147",
+      "identifiers": {
+        "arxiv": "2608.01147",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "UniHEAR: Unified Heterogeneous-Source Attentive Retrieval for Knowledge-Based Visual Question Answering",
+      "abstract": "Knowledge-Based Visual Question Answering (KB-VQA) requires retrieving entity knowledge from external sources to answer visually grounded questions. Existing retrieval-augmented systems suffer from two critical limitations. First, relying on a single retrieval modality creates a Single-Source Retrieval Bottleneck, missing ground-truth entities that are only accessible through complementary sources. Second, dual-tower pointwise rerankers suffer from Retrieval-Source-Blind Reranking, as they overlook retrieval origins and candidate-level retrieval priors, leading to redundant modality reliance. To address these challenges, we propose UniHEAR, a unified lightweight framework for heterogeneous-source entity retrieval and reranking. UniHEAR constructs a Coarse Retrieval Descriptor for each candidate entity, and introduces Retrieval-Guided Attentive Modality Gating to condition modality attention weights on this descriptor, complemented by Entropy-Weighted Source Fusion of coarse retrieval priors. A hybrid training strategy combining contrastive learning with an auxiliary modality-preserving loss unifies entity-level and section-level retrieval within a single model. Extensive experiments on E-VQA and InfoSeek demonstrate that UniHEAR achieves state-of-the-art retrieval and VQA performance, improving Recall@1 by 6.7 and 1.2 points over the strongest baselines while maintaining a lightweight reranking architecture. Code and model are available at https://github.com/iven-luo/UniHEAR.",
+      "authors": [
+        "Ganzhong Luo",
+        "Yang Ren",
+        "Hanyong Wang",
+        "Shuyu Zheng",
+        "Menglong Yang"
+      ],
+      "categories": [
+        "cs.IR",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-02T10:57:53Z",
+      "updatedAt": "2026-08-05T14:42:29Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted by ACM MM 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01147v2",
+        "pdf": "https://arxiv.org/pdf/2608.01147v2",
+        "code": "https://github.com/iven-luo/UniHEAR",
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T10:57:53Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 76,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 15,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00938",
+      "identifiers": {
+        "arxiv": "2608.00938",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "GRACE: Generative Recommender Acceleration Engine for Real-Time Ads Retrieval",
+      "abstract": "Productionizing generative recommenders for high-volume, real-time ads retrieval creates two serving challenges: eligibility, ensuring that each generated ad is eligible for the request under the advertiser's audience targeting rules, and compute, which requires meeting strict latency and GPU cost requirements while remaining capable of generating thousands of ads per request with wide-beam decoding. This paper presents GRACE, a serving system for ads generative retrieval that addresses both challenges. For eligibility, GRACE introduces Generative Target Matching (GTM), which extends catalog-valid constrained decoding with personalized filtering over Semantic ID (SID) prefixes using bitmask and Bloom filter matchers derived from targeting rules. SID-level GTM improves final ad-level target matching pass rate from 23.55% to 40.42% over constrained decoding alone. For compute-cost and latency, GRACE targets encoder-decoder Transformers, which are more lightweight than LLMs. It redesigns the decoder around the wide-beam, short-sequence regime, covering attention kernels, KV cache, and beam search optimizations. On NVIDIA GH200, compared with the faster of FlashAttention-2 and FlashAttention-3 baselines, GRACE improves cross-attention latency by 68.0 times and self-attention latency by 23.4-25.8 times across decode steps. Together, these changes reduce decoder latency by 11.1 times, keeping ads generative retrieval within latency and compute requirements.",
+      "authors": [
+        "Zhou Fang",
+        "Yuhang Huang",
+        "Ang Zhang",
+        "Yihan He",
+        "Ruichao Xiao",
+        "Chao Li",
+        "Yavuz Yetim",
+        "Sibyl Yang",
+        "Xiaohan Wei",
+        "Fei Tian",
+        "Liang Wang",
+        "Chonglin Sun",
+        "Liyuan Li",
+        "Nathan Yan",
+        "Gaoxiang Liu"
+      ],
+      "categories": [
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-02T02:30:38Z",
+      "updatedAt": "2026-08-04T15:35:10Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "13 pages, 3 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00938v2",
+        "pdf": "https://arxiv.org/pdf/2608.00938v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T02:30:38Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 49,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.01463",
+      "identifiers": {
+        "arxiv": "2608.01463",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Where Reasoning Diverges: Localized Multi-Agent Debate for Multi-Hop Question Answering",
+      "abstract": "Multi-agent debate commonly exchanges complete rationales even when disagreements concern only a few intermediate claims. We introduce Localized Multi-Agent Debate (LMAD), an inference-time protocol that represents agent rationales as nodes, locates their earliest conflict, and restricts debate to the corresponding local segments. Guarded resolution extends a shared committed state so that later conflicts can be addressed without reopening accepted steps. We evaluate LMAD on four multi-hop question-answering benchmarks using ten backbones from four model families. Our method achieves the highest macro-averaged judge accuracy across all ten backbones, outperforming the strongest conventional baseline by up to 7.20 percentage points.",
+      "authors": [
+        "Weijun Gao",
+        "Xiang Ding",
+        "Haoyang Liu",
+        "Tiancheng Xing"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-08-02T19:47:03Z",
+      "updatedAt": "2026-08-04T14:19:10Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01463v2",
+        "pdf": "https://arxiv.org/pdf/2608.01463v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T19:47:03Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02673",
+      "identifiers": {
+        "arxiv": "2608.02673",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "dots.tts.edit: Precisely Controlled Speech Editing with a Continuous Autoregressive Model",
+      "abstract": "Speech editing for content creation requires precise control over both what an edit should do and where it should apply. Free-form natural language provides a flexible interface for expressing edit requests, but its ambiguity may leave the intended operation, parameters, or target region underspecified. We study a precise and explicit interface for speech editing: a transcript-grounded structural edit instruction with XML-style tags explicitly specifies typed operations and localizes them to transcript spans or boundaries. This semantic timeline avoids explicit timestamp alignment and provides an externally inspectable contract for compositional edits. We instantiate the interface in dots.tts.edit, an editor adapted from the continuous autoregressive dots.tts foundation model. Four representative speech-creation controls cover lexical content, affective expression, pitch and speaking-rate delivery, and temporal phrasing through text, emotion, prosody, and pause editing. Task-specific data pipelines construct operation- and scope-controlled pairs while retaining source-derived context outside each target region. We further introduce doteBench, a bilingual evaluation suite that measures precise instruction following, local preservation, and audio quality across the four controls and their composition. Experiments show leading overall instruction following and local preservation across its five editing categories, while audio quality remains comparable to existing open-source systems. Across three Seed-TTS-Eval shards, the model shows negligible differences from the base model in zero-shot TTS recognition error rate and speaker similarity. The code and model will be released soon.",
+      "authors": [
+        "Hankun Wang",
+        "Bohan Li",
+        "Shi Lian",
+        "Xiaoyu Gu",
+        "Jing Peng",
+        "Da Zheng",
+        "Colin Zhang",
+        "Kai Yu"
+      ],
+      "categories": [
+        "cs.SD",
+        "cs.AI",
+        "cs.CL",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "publishedAt": "2026-08-02T15:03:37Z",
+      "updatedAt": "2026-08-02T15:03:37Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Work in progress",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02673v1",
+        "pdf": "https://arxiv.org/pdf/2608.02673v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T15:03:37Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 64,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.01281",
+      "identifiers": {
+        "arxiv": "2608.01281",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Latent Softmax for Data-Efficient Phoneme-Based Multilingual ASR Across Tonal and Non-Tonal Languages",
+      "abstract": "Phoneme-based multilingual automatic speech recognition (ASR) can share acoustic evidence across languages more directly than language-specific subword modeling. When tonal and non-tonal languages are jointly trained, however, their supervision granularity does not match: tonal languages annotate tone-marked vowels, whereas non-tonal languages typically provide only base-vowel labels. A standard softmax either treats the two as unrelated classes, weakening cross-lingual sharing, or collapses tones, losing distinctions required by tonal languages. We propose Latent Softmax, a connectionist temporal classification (CTC)-compatible output layer that models tone-marked vowels as subclasses and base vowels as major classes, while consonants and the CTC blank remain singleton labels. When only a base-vowel major-class label is observed, the tone-marked vowel subclass is treated as latent and marginalized out. Multilingual experiments on AISHELL-1 Mandarin and LibriSpeech English show that Latent Softmax reduces speech-to-phoneme (S2P) phoneme error rates over a standard softmax multilingual baseline by 8.4% on AISHELL-1, 17.5% on LibriSpeech test-clean, and 12.6% on test-other. The improved speech-to-phoneme encoders also yield consistent word error rate gains for both large-language-model phoneme-to-grapheme conversion and projector-based interfaces. After code-switching adaptation, Latent Softmax further reduces projector-based mixed error rate by 2.6% on ASRU2019 and 9.5% on CS-Dialogue datasets.",
+      "authors": [
+        "Saierdaer Yusuyin",
+        "Nanling Jiang",
+        "Hao Huang",
+        "Zhijian Ou"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.LG"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-02T14:45:18Z",
+      "updatedAt": "2026-08-02T14:45:18Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01281v1",
+        "pdf": "https://arxiv.org/pdf/2608.01281v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T14:45:18Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 61,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00998",
+      "identifiers": {
+        "arxiv": "2608.00998",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Beyond One-Size-Fits-All: Personalized and Culturally Adaptive Emotional TTS via Interactive Optimization of Individual Emotion Perception Spaces",
+      "abstract": "The rise of conversational AI has increased interest in emotional Text-to-Speech (TTS). Most systems rely on discrete emotion labels, which fail to capture the nuanced nature of human affect. Recent models employ dimensional representations such as Russell's arousal-valence (A-V) model, offering finer control. However, emotional perception varies across individuals and cultures, which may cause mismatches between modeled and perceived emotions. We propose a personalized and culturally adaptive emotional TTS framework that performs interactive optimization of individualized A-V perception spaces using an Interactive Genetic Algorithm. By adapting emotion representations to each listener, the system produces speech with more perceptually aligned emotional expression than models using averaged A-V values. Evaluations with Japanese, Chinese, and Indonesian participants highlight the importance of personalization and cultural adaptation for moving beyond one-size-fits-all emotional TTS.",
+      "authors": [
+        "Wangzixi Zhou",
+        "Bagus Tris Atmaja",
+        "Sakriani Sakti"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-02T04:54:12Z",
+      "updatedAt": "2026-08-02T04:54:12Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted for publication at INTERSPEECH 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00998v1",
+        "pdf": "https://arxiv.org/pdf/2608.00998v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-02T04:54:12Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-29",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.26787",
+      "identifiers": {
+        "arxiv": "2607.26787",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Property-driven Causal Abstractions for Markov Decision Processes",
+      "abstract": "Markov Decision Processes (MDPs) are widely used as decision-making models, commonly specified over factored state spaces through state variables and their valuations. The exponential blowup in the number of states renders many reasoning tasks in MDPs challenging. Abstractions are promising techniques to reduce MDPs and thus mitigate scalability issues. In this work, we introduce a notion of causality on factored MDPs and a novel property-driven causal abstraction technique that retains many characteristics of the original MDP model. For this, we rely on causal relations over state variable predicates and identify those states that share the same reasons for fulfilling or violating a given abstraction property. We theoretically and empirically compare various causal MDP abstractions using different model types such as MDPs, interval MDPs, or stochastic games. Our evaluation demonstrates the potential of our approach: For several standard benchmarks, we obtain small abstractions that allow us to compute near-optimal policies for the original MDP. Furthermore, our causal abstractions often generalize to related large-scale MDP models.",
+      "authors": [
+        "Jule Schmidt",
+        "Maximilian Weininger",
+        "Clemens Dubslaff",
+        "David Parker",
+        "Nils Jansen"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LO"
+      ],
+      "primaryCategory": "cs.AI",
+      "publishedAt": "2026-07-29T11:28:16Z",
+      "updatedAt": "2026-08-06T15:45:37Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.26787v2",
+        "pdf": "https://arxiv.org/pdf/2607.26787v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-29T11:28:16Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 70,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.26657",
+      "identifiers": {
+        "arxiv": "2607.26657",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 3,
+      "title": "Enfold: Folding World Model Imagination into Predictive Representations for Ultra-Efficient Embodied Control",
+      "abstract": "World generative models are typically used through what they produce: a rendered future, a video-conditioned action, or latent context computed by a costly generative branch. We argue that their more reusable asset is the computation that constructs a future. As a generator transforms a corrupted future into a coherent trajectory, its intermediate states organize appearance, spatial layout, and interaction across levels of abstraction. Can this future-generative computation be internalized in a representation inferred from the present alone? We present Enfold, which transfers this computation into a representation predicted from the current visual context and language instruction. During training, multi-level states exposed as the generator processes the observed future supervise a current-only encoder. The learned representation is fed back to condition future generation and is read by task heads without allowing task gradients to reshape the encoder. At deployment, action prediction no longer executes the generator. Across LIBERO, RoboTwin2.0, and real-robot tasks, Enfold supports strong control while reducing action latency by $3.7\\times$ relative to Fast--WAM, Enfold-Flash reaches $10.1\\times$. Representation analyses show that it suppresses nuisance variation and preferentially captures changes that emerge over longer horizons. When the current scene is altered by human intervention, both the generated continuation and the executed actions adapt, which is inconsistent with fixed trajectory replay. These results recast a world generator as a source of predictive control representations: its future need not be materialized at every step if its internal structure can be enfolded into the present.",
+      "authors": [
+        "Weili Zeng",
+        "Yitong Xing",
+        "Fulong Liu",
+        "Chengqun Yang",
+        "Antao Xiang",
+        "Feng Tian",
+        "Jingnan Gao",
+        "Jisong Cai",
+        "Xin Wang",
+        "Xiaomin Wu",
+        "Yao Mu",
+        "Xiaokang Yang",
+        "Yichao Yan"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-07-29T09:17:33Z",
+      "updatedAt": "2026-08-06T05:25:07Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "project page, https://zwl666666.github.io/enfold/",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.26657v3",
+        "pdf": "https://arxiv.org/pdf/2607.26657v3",
+        "code": null,
+        "project": "https://zwl666666.github.io/enfold/"
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-29T09:17:33Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "robotics-embodied",
+        "systems-efficiency",
+        "multimodal"
+      ],
+      "whyWatch": "这项工作把模型能力推进到物理环境，关键观察点是感知、决策与执行能否形成稳定闭环。",
+      "score": {
+        "total": 80,
+        "level": "focus",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 8,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.26575",
+      "identifiers": {
+        "arxiv": "2607.26575",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Unfolded Recursive Expectation-Maximization Neural Network For Speaker Tracking",
+      "abstract": "We propose a deep unfolded REM network for robust tracking of a single moving speaker in mild reverberant environments. Unlike classical REM algorithms, which rely on fixed-step-size decay schedules, the proposed architecture learns an adaptive update policy by unfolding the iterative procedure into differentiable layers. We introduce a Step Size Network that leverages FiLM and PE to dynamically adjust the recursion weights based on temporal context and convergence state. Experimental results for tracking a single speaker under reverberant conditions demonstrate that the proposed unfolded network outperforms the classical CREM baseline, which employs a spatial grid search to map the estimated centroids to physical positions. In the single-speaker tracking task, the proposed method achieves a lower RMSE than the CREM baseline, highlighting its potential for dynamic acoustic scenarios.",
+      "authors": [
+        "Rina Veler",
+        "Sharon Gannot"
+      ],
+      "categories": [
+        "eess.AS",
+        "eess.SP"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-07-29T07:56:30Z",
+      "updatedAt": "2026-08-04T07:40:08Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "proceedings of IWAENC 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.26575v2",
+        "pdf": "https://arxiv.org/pdf/2607.26575v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-29T07:56:30Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 54,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

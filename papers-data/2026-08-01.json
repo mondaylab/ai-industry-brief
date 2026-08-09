@@ -1,0 +1,634 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-01",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2608.00793",
+      "identifiers": {
+        "arxiv": "2608.00793",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "DynamicWAM: Dual-Path Motion Conditioning for World-Action Models in Dynamic Manipulation",
+      "abstract": "Dynamic manipulation requires robots to infer target motion and respond promptly, yet existing World-Action Models (WAMs) typically condition only on the current frame and execute large backbones synchronously, limiting motion awareness and responsive control in dynamic scenes. We propose DynamicWAM, a compact WAM for dynamic object manipulation with dual-path motion conditioning. DynamicWAM introduces history-flow conditioning, encoding temporally aligned optical-flow frames alongside the current observation through a frozen pretrained video VAE to preserve spatial motion structure, while injecting kinematic descriptors of displacement, duration, velocity, and acceleration into the action expert to provide motion magnitude and timing. The two complementary paths are fused through joint world-action attention. A distilled compact backbone and real-time chunking (RTC)-based asynchronous execution further enable responsive control. On DOMINO, DynamicWAM achieves a 38.2% success rate and a 53.2 manipulation score, outperforming all evaluated baselines. Across 12 real-world tasks spanning linear, circular, and compound target motion, it achieves a 46.7% average success rate, exceeding the strongest baseline by 22.9 percentage points.",
+      "authors": [
+        "Yunfan Lou",
+        "Hewen Gao",
+        "Xiyu Zhu",
+        "Zhuoran Qiao",
+        "Xuan Han",
+        "Yifan Yang",
+        "Yifan Ye",
+        "Boxian Yao",
+        "Zhibo Pang"
+      ],
+      "categories": [
+        "cs.RO"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-08-01T17:49:39Z",
+      "updatedAt": "2026-08-06T05:24:35Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "18 pages, 9 figures. Project page: https://dynamicwam.github.io/",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00793v2",
+        "pdf": "https://arxiv.org/pdf/2608.00793v2",
+        "code": null,
+        "project": "https://dynamicwam.github.io/"
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T17:49:39Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作把模型能力推进到物理环境，关键观察点是感知、决策与执行能否形成稳定闭环。",
+      "score": {
+        "total": 65,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 8,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00747",
+      "identifiers": {
+        "arxiv": "2608.00747",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "When Prompts Control Robots: Prompt Injection Attacks in Multi-Agent Robotic Systems",
+      "abstract": "Large language models are increasingly integrated into autonomous robotic systems for task planning and control, but this integration exposes them to prompt injection attacks that can lead to unsafe decisions and physical harm. Multi-agent settings increase the risks through cross-agent contamination and broader attack surfaces. In this paper, we evaluate prompt injection attacks against an LLM-based multi-agent robotic system, considering both direct injections into task instructions and indirect injections through perception modules. In our experiments across varying attack-goal complexities and injection strategies in both single-agent and multi-agent settings, we show that prompt injection can induce adversarial actions while reducing task completion. We find that attacks can propagate from one agent to others through shared prompt structures, with impacts varying depending on prompt composition and the targeted agent. We further analyze how architectural changes affect LLM queries and, consequently, the attack success. To the best of our knowledge, this is the first study that systematically investigates prompt injection attacks in a multi-agent LLM-based robotic system.",
+      "authors": [
+        "Neha Nagaraja",
+        "Amisha Bagari",
+        "Hayretdin Bahsi"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CR",
+        "cs.MA"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-08-01T16:31:00Z",
+      "updatedAt": "2026-08-04T16:20:03Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00747v2",
+        "pdf": "https://arxiv.org/pdf/2608.00747v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T16:31:00Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 64,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00875",
+      "identifiers": {
+        "arxiv": "2608.00875",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "DRONEAUDIONET: Noise Suppression for Drone Audition-based Search and Rescue",
+      "abstract": "Microphones mounted on UAVs enable aerial acoustic scene analysis applications such as search-and-rescue, wildlife monitoring, and industrial inspection. However, drone rotor noise often dominates the mixture signal at SNRs well below -10 dB, making source recovery extremely challenging. Existing enhancement and source separation methods are typically designed for near-balanced mixtures and degrade substantially in drone audition settings. In this work, we propose DRONEAUDIONET, a drone noise suppression method that reframes a source separation model as a drone noise estimator. To better model drone-dominant mixtures, we introduce a learnable mask-scaling mechanism that allows mask magnitudes beyond unity, together with an additive residual correction term for improved drone estimation and source recovery. We train and evaluate our model on a publicly available drone audition dataset and test generalizability on an out-of-domain dataset with unseen drone hardware and flight modes. Results show that DRONEAUDIONET consistently improves downstream sound classification performance, with the largest gains observed for human vocal sounds. Our findings demonstrate the importance of drone-specific modeling for robust aerial acoustic perception and highlight the potential of source separation methods for real-world drone-assisted search-and-rescue.",
+      "authors": [
+        "Chitralekha Gupta",
+        "Soundarya Ramesh",
+        "Yifei Luo",
+        "Suranga Nanayakkara"
+      ],
+      "categories": [
+        "cs.SD",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "publishedAt": "2026-08-01T21:31:45Z",
+      "updatedAt": "2026-08-01T21:31:45Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "*first two authors are equal contributors",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00875v1",
+        "pdf": "https://arxiv.org/pdf/2608.00875v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T21:31:45Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 51,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00857",
+      "identifiers": {
+        "arxiv": "2608.00857",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "REIMU: Efficient Heterogeneous Hierarchical Reasoning for SSL-Based Speech Deepfake Detection",
+      "abstract": "The increasing realism of speech generated by text-to-speech and voice conversion systems poses growing challenges to media integrity and voice authentication. Self-supervised learning (SSL) has substantially advanced speech deepfake detection, where downstream backbones conventionally process SSL representations through a single forward pass. This work investigates the practical effectiveness of recurrent hierarchical reasoning for this task. We term this controlled study REIMU and systematically compare conventional single-pass backbones, weight-shared recurrence, homogeneous HRM, and heterogeneous HRM across four Base-scale SSL frontends. We further examine heterogeneous high- and low-level modules that combine self-attention with linear attention. Experiments on the ASVspoof 2019 and 2021 evaluation sets show that recurrence and hierarchical decomposition do not inherently improve detection, whereas heterogeneous operator assignment provides a more competitive configuration. Notably, the heterogeneous design remains competitive while using 10.8\\% fewer downstream parameters than the matched baseline, demonstrating its potential for parameter-efficient speech deepfake detection.",
+      "authors": [
+        "Kwok-Ho Ng",
+        "Tingting Song",
+        "Bingwen Feng",
+        "Peiya Li"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.AI",
+        "cs.SD"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-01T20:32:46Z",
+      "updatedAt": "2026-08-01T20:32:46Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00857v1",
+        "pdf": "https://arxiv.org/pdf/2608.00857v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T20:32:46Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 61,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00722",
+      "identifiers": {
+        "arxiv": "2608.00722",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Experience-Calibrated Contrastive Decoding for Mitigating Hallucinations in LM-Based Text-to-Speech",
+      "abstract": "Language model-based text-to-speech (LM-based TTS) remains vulnerable to speech hallucinations that deviate from the target text. Existing mitigation mainly relies on architectural changes or additional training, while decoding-time control remains underexplored. We present a conditional information view that distinguishes text-derived alignment information from experience information supplied by acoustic context and learned speech regularities. We hypothesize that an important class of hallucinations begins when alignment support is insufficiently reflected in the selected token at a vulnerable transition. Using predictions from the same speech LM with and without text conditions, we propose Experience-Calibrated Contrastive Decoding (ECCD), a training-free method that strengthens alignment support while preserving useful experience information. ECCD preserves the original expert distribution, applies only positive alignment enhancement, and calibrates its strength using set-level experience compatibility. Across four models, ECCD reduces WER/CER by up to 55.6% in all SeedTTS-Eval settings and 24 of 25 multilingual CV3-Eval settings. A listening test yields a CMOS gain of $+0.644$ while retaining strong speaker similarity. Further analysis shows that alignment influence and decision-level gain vary within linguistic units and are lower at first-error boundaries than at matched correct boundaries. Overall, these extensive experiments and analyses identify conditional information control as a promising decoding-time direction for mitigating speech hallucination.",
+      "authors": [
+        "Chenlin Liu",
+        "Minghui Fang",
+        "Zhonghao Bi",
+        "Zekai Su",
+        "Rong Wang",
+        "Jiqing Han"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.LG",
+        "eess.SP"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-01T15:41:55Z",
+      "updatedAt": "2026-08-01T15:41:55Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Work in progress",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00722v1",
+        "pdf": "https://arxiv.org/pdf/2608.00722v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T15:41:55Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 65,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00667",
+      "identifiers": {
+        "arxiv": "2608.00667",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Band-Count Dense Modal Estimation with Fixed-Frequency Differentiable Resonator Refinement",
+      "abstract": "Task B of the 1st DAFx Parameter Estimation Challenge requires estimating the frequencies, decay rates, gains, and number of modes in a dense plate-reverb impulse response. Weak and overlapping modes make sparse peak detection prone to severe undercounting. We train an ExtraTrees regressor on simulator-generated data to predict mode counts in four frequency bands. These counts define dense frequency grids, after which a differentiable all-pole resonator model refines decay and gain while keeping frequency fixed. On two separate synthetic validation sets, the system reduces a local challenge-style error by about 66% relative to the official default peak-picking baseline. The improvement is mainly associated with lower mode-count mismatch, while decay and gain remain the largest error sources. These findings support separating modal-density estimation from continuous parameter fitting.",
+      "authors": [
+        "Minhui Lu",
+        "Joshua D. Reiss"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.LG"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-01T13:42:31Z",
+      "updatedAt": "2026-08-01T13:42:31Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted as a challenge paper at the 29th International Conference on Digital Audio Effects (DAFx 2026), Cambridge, MA, USA, September, 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00667v1",
+        "pdf": "https://arxiv.org/pdf/2608.00667v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T13:42:31Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作关注训练或推理效率，可能直接改变模型能力进入真实产品的成本结构。",
+      "score": {
+        "total": 46,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00656",
+      "identifiers": {
+        "arxiv": "2608.00656",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Simulation-Based Plate-Reverb Parameter Estimation from a Single Impulse Response",
+      "abstract": "We present a simulation-trained, non-iterative estimator for Task A of the 1st DAFx Parameter Estimation Challenge. Each unnormalized plate-reverb impulse response is summarized by amplitude, spectral, and decay descriptors, and an ensemble of tree regressors estimates the six target parameters in one pass. Across two independent synthetic validation sets, the normalized models outperform the training-set mean and an earlier raw-regression baseline. On a shared set, the final ensemble also outperforms a single run of the official default PSO at substantially lower inference cost. Since the official labels are hidden, parameter accuracy is measured on simulator-matched data, and the released responses support only audio-side consistency checks. The estimator returns point estimates without uncertainty.",
+      "authors": [
+        "Minhui Lu",
+        "Joshua D. Reiss"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.LG"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-01T13:20:04Z",
+      "updatedAt": "2026-08-01T13:20:04Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted as a challenge paper at the 29th International Conference on Digital Audio Effects, Cambridge, MA, USA, 2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00656v1",
+        "pdf": "https://arxiv.org/pdf/2608.00656v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T13:20:04Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 65,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00507",
+      "identifiers": {
+        "arxiv": "2608.00507",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "The Learning Objective Governs Perceptual Narrowing: A Cross-Lingual, Layer-Wise, Ten-Seed Study of Self-Supervised Speech Encoders",
+      "abstract": "Perceptual narrowing---the developmental loss of non-native phoneme discrimination in the first year of life \\citep{werker1984}---is a canonical developmental finding, yet \\emph{what learning objective produces it} remains open. We train a \\(\\sim\\)7\\,M-parameter Transformer encoder on child-directed and read speech and evaluate phoneme ABX in English, French, and Mandarin over ten seeds, the seed as the unit of replication. Six results. \\textbf{(1)}~The objective sets the direction of cross-lingual transfer: reconstruction (masked mel-prediction) degrades non-native discrimination, prediction (frame-contrastive) improves it---a same-encoder, same-data gap of \\(+0.051\\) in first-layer Mandarin ABX (\\(p=3\\times10^{-8}\\)), unanimous in sign across twenty runs. \\textbf{(2)}~That decline combines a large arm-intrinsic difficulty gradient with a smaller language-specialization effect (matched vs.\\ mismatched \\(+0.022\\), \\(p=10^{-4}\\), all four layers). \\textbf{(3)}~Against a language-symmetric raw-mel floor, reconstruction pushes the first layer \\emph{below} the discriminability of its input; prediction pushes it \\emph{above}. \\textbf{(4)}~Read speech gives a \\(3.6\\times\\) steeper non-native decline than child-directed speech. \\textbf{(5)}~The customary three-seed budget cannot see this reliably: an effect unambiguous at ten seeds is called significant by as few as 70\\% of three-seed subsets. \\textbf{(6)}~Six objective configurations---sharpening, compression, consolidation, their composition, and word-level semantic grounding in two forms---fail to produce the full developmental signature (native improves \\emph{and} non-native declines): a single objective moves both languages the same way because it acts on a shared representation. We conclude that the objective, not the architecture, is the first-order determinant of narrowing-shaped representational change.",
+      "authors": [
+        "Sejin Yoo"
+      ],
+      "categories": [
+        "cs.CL",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.CL",
+      "publishedAt": "2026-08-01T08:02:35Z",
+      "updatedAt": "2026-08-01T08:02:35Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "11 pages, 6 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00507v1",
+        "pdf": "https://arxiv.org/pdf/2608.00507v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T08:02:35Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 60,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.00447",
+      "identifiers": {
+        "arxiv": "2608.00447",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Anomalous Sound Detection Meets Noise-Aware Self-Supervised Learning",
+      "abstract": "In this paper, we introduce noise-aware self-supervised learning (NA-SSL) models for noise-aware anomalous sound detection (NA-ASD). NA-ASD is an ASD task with two-channel audio recordings, where one microphone is located close to the target machine and the other is located farther away to capture noise. For this task, we simulate two-channel recordings using diverse audio datasets and train NA-SSL models to extract clean SSL representations of the close-microphone signal by using the far-microphone recording dominated by background noise as auxiliary information. The NA-SSL models are then used as frontends in the standard ASD framework. Our experimental evaluation on the DCASE 2026 Challenge Task 2 development dataset demonstrates the effectiveness of the NA-SSL framework across three base SSL models (BEATs, EAT, and Dasheng), both with and without discriminative fine-tuning. Furthermore, the challenge results proved the effectiveness of the proposed approach, where the NA-BEATs system won the challenge by a large margin, achieving an official score of 70.24%, while the second-place system achieved 65.46%.",
+      "authors": [
+        "Takuya Fujimura",
+        "Gordon Wichern",
+        "Yoshiki Masuyama",
+        "Christoph Boeddeker",
+        "Kohei Saijo",
+        "Julius Richter",
+        "Takahiro Edo",
+        "Jonathan Le Roux"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-01T05:14:02Z",
+      "updatedAt": "2026-08-01T05:14:02Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.00447v1",
+        "pdf": "https://arxiv.org/pdf/2608.00447v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-01T05:14:02Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 58,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}
