@@ -12,7 +12,9 @@ export default defineConfig({
     rollupOptions: {
       input: {
         reader: path.resolve(process.cwd(), "app.html"),
+        intelligence: path.resolve(process.cwd(), "intelligence-app.html"),
         radar: path.resolve(process.cwd(), "radar-app.html"),
+        papers: path.resolve(process.cwd(), "papers-app.html"),
       },
     },
   },

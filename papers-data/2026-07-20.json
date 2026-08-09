@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-20",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.18540",
+      "identifiers": {
+        "arxiv": "2607.18540",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Recti-Q: Feature-Space Rectification for Out-of-Distribution-Robust Quantized Perception in Edge Robotics",
+      "abstract": "Robotic perception pipelines increasingly rely on large vision backbones deployed on SWaP-constrained edge platforms, making post-training quantization (PTQ) attractive for real-time inference. However, while PTQ often preserves clean in-distribution accuracy, we show that it can substantially degrade reliability under deployment-relevant distribution shifts (e.g., sensor noise, severe weather, and novel operating environments), creating a Quantization-Induced Robustness Gap. Across foundational vision benchmarks (ImageNet-C and PACS), 4-bit PTQ models exhibit pronounced robustness degradation despite negligible ID accuracy loss. To address this, we propose Recti-Q, a lightweight feature-space rectification framework that freezes the quantized backbone and trains a small classifier-head LoRA adapter using only source data. Recti-Q is architecture-agnostic across CNNs and Transformers, supports efficient teacher-free training, and recovers a significant portion of the lost robustness, in some cases matching or exceeding FP32 performance. At less than 1% parameter overhead (as small as 6 KB), Recti-Q preserves over 99% of PTQ memory savings, adds negligible compute, and enables low-bandwidth Over-The-Air (OTA) resilience patching for deployed robotic fleets operating in unpredictable physical environments.",
+      "authors": [
+        "Hamidreza Yaghoubi Araghi",
+        "Parastoo Pilevar",
+        "Ming C. Lin"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "primaryCategory": "cs.CV",
+      "publishedAt": "2026-07-20T22:14:04Z",
+      "updatedAt": "2026-08-06T17:54:18Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted at the 2026 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2026)",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.18540v2",
+        "pdf": "https://arxiv.org/pdf/2607.18540v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-20T22:14:04Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "safety-evaluation",
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 71,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

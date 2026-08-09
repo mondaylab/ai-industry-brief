@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-17",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.18303",
+      "identifiers": {
+        "arxiv": "2607.18303",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Fretiq: Browser-Native Electric Guitar String Classification via Engineered Spectral Features and Held-Out Free-Play Evaluation",
+      "abstract": "Identifying which string produces a given pitch in monophonic electric guitar audio is a classification challenge: a single pitch can often be produced on multiple strings, with timbral differences largely imperceptible to untrained humans. We present Fretiq, a preliminary single-instrument, single-player browser-based string classification system using a 26-dimensional feature representation of frequency band energies, spectral statistics, and 13 Mel-Frequency Cepstral Coefficients. Across five seeds, a shuffled frame-level validation split yields 97.25 +/- 0.32 percent accuracy, with an ablation study identifying MFCCs as the primary accuracy driver (92.09 +/- 0.50 percent without MFCCs). We introduce Comparison Training, a data collection method recording same-pitch pairs on adjacent strings in deliberate alternation. An initial shuffled-split comparison found no net benefit but was confounded by non-comparable validation sets across conditions. A corrected matched evaluation, using an identical recording session held out from training and model selection, shows including comparison-session data improves accuracy by 25.78 +/- 1.46 percentage points; a size-matched control shows this is not explained by training-set size alone. A recording-session-held-out evaluation yields 86.53 +/- 1.23 percent accuracy, closely matching an independently collected free-play evaluation (87.8 percent), both well below the shuffled-split figure, showing shuffled validation substantially overestimates real generalization here. We describe the feature extraction pipeline in Python and TypeScript for training-inference parity and document two implementation failure modes. The system runs entirely in-browser with no specialized hardware required.",
+      "authors": [
+        "Aadi Garg"
+      ],
+      "categories": [
+        "cs.SD",
+        "cs.LG",
+        "eess.AS"
+      ],
+      "primaryCategory": "cs.SD",
+      "publishedAt": "2026-07-17T03:06:07Z",
+      "updatedAt": "2026-08-04T03:26:15Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "17 pages, 7 tables, preliminary single-instrument system paper. v2: corrects early-stopping methodology and a validation-set leak in supplementary experiments, replaces single-run figures with five-seed measurements, and substantially revises the Comparison Training analysis following a matched held-out evaluation",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.18303v2",
+        "pdf": "https://arxiv.org/pdf/2607.18303v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-17T03:06:07Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "safety-evaluation",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 68,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2607.15694",
+      "identifiers": {
+        "arxiv": "2607.15694",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "A Geometry-Limited Identification Floor and Its Consequences for Voice-Clone Attribution in Professional Voice Actors",
+      "abstract": "A voice actor's voice is their asset, and AI cloning directly threatens it. The natural defense flags the enrolled actor whose embedding similarity to a suspect recording crosses a threshold. We show it fails where it is most needed: trained voices crowd the embedding space, and each actor performs many styles. On 1,168 Japanese voice actors (56,568 segments, ~63 h), a misidentification floor survives calibration, score normalization, and discriminative re-ranking (linear and nonlinear, including PLDA): the residual is a limit of the embedding geometry, not of the back-ends we evaluate. The best ensemble still leaves ~2.6% closed-set misidentification, several-fold above matched controls; session-disjoint, re-ranking lowers the floor only to 13.0%. The same crowding drives false attribution: on a generic English encoder, roughly half the clones of non-enrolled people falsely accuse an enrolled actor, while -- by a separate real-vs-synthetic shift -- 32% of Seed-VC clones of enrolled targets are missed at the same threshold; one operating point couples the two, and none escapes both. A domain-matched, voice-actor-trained encoder mitigates substantially (a four-fold gender gap vanishes; wrongful misattribution falls to 1.5-10%), but does not remove the floor. Controls (codec, channel, vocoder, content) support reading the miss rate as a real-versus-synthetic covariate shift, not missing speaker information. Fixed-threshold clone attribution is thus unreliable here, and on a generic encoder unfair. Robust attribution must extend spoofing-aware speaker verification to open-set 1:N (anti-spoofing gate, domain-matched encoder, per-speaker calibration, abstain option), and even then supports detection, not autonomous enforcement.",
+      "authors": [
+        "Shuhei Kato"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.SD"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-07-17T07:13:11Z",
+      "updatedAt": "2026-08-01T08:45:58Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "24 pages, 6 figures, 8 tables. Submitted to IEEE Access. v2: adds related work on two concurrent ASJ Spring 2026 studies of acting voices (Yamamoto et al.; Hayashi et al.) with corresponding discussion and limitations updates; results unchanged",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.15694v2",
+        "pdf": "https://arxiv.org/pdf/2607.15694v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-17T07:13:11Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 46,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 2,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

@@ -1,0 +1,844 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-08-03",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2608.02880",
+      "identifiers": {
+        "arxiv": "2608.02880",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Field Aware Agent Skill Retrieval",
+      "abstract": "As lifelong learning agents accumulate lifelong growing skill banks, retrieving the correct skill becomes an increasingly important bottleneck. Most current skill retrieval methods treat each skill as one flat document by concatenating fields such as the name, description, and body. However, skills are naturally structured, multi-field objects, where each field provides different information about when and how the skill should be used. In this work, we study whether preserving this structure improves skill retrieval. We represent each skill as its separate components, and compute sparse and dense similarities for each field independently, exposing a naturally tensorized, field-aware representation of the skill bank. We then combine these field-level scores either with uniform weights or with a small learned MLP. Across two different skill retrieval benchmarks, SkillRet and SRA-Bench, we find that keeping fields separate improves hybrid retrieval, and learning over the field-level scores gives the strongest and most consistent results. Our field-aware MLP reaches $77.95$ Recall@10 on SkillRet and $83.78$ Recall@10 on SRA-Bench, outperforming the corresponding concatenated learned baselines. We also find that the advantage grows as the skill bank becomes larger, suggesting that field-aware skill retrieval becomes especially useful in the setting where retrieval is most difficult. Our results show that skill representation itself matters, and that simply preserving the structure already present in skill files can substantially improve retrieval.",
+      "authors": [
+        "Paimon Goulart",
+        "Liang Wu",
+        "Kelly Wan",
+        "Evangelos E. Papalexakis",
+        "Liangjie Hong"
+      ],
+      "categories": [
+        "cs.IR",
+        "cs.LG"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-03T21:01:48Z",
+      "updatedAt": "2026-08-06T17:01:34Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02880v2",
+        "pdf": "https://arxiv.org/pdf/2608.02880v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T21:01:48Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 65,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      },
+      "lastSeenAt": "2026-08-09T03:22:31.440Z"
+    },
+    {
+      "id": "arxiv:2608.01697",
+      "identifiers": {
+        "arxiv": "2608.01697",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Bridging the Sim-to-Real Gap in Parallel-Link Leg Mechanisms via Simulator-Side Dynamics Normalization",
+      "abstract": "This paper addresses the sim-to-real gap in dynamics arising when a parallel-link mechanism is represented by a serial-tree surrogate in simulation. Conventional Jacobian-based state and torque mappings preserve consistency with the kinematic and virtual-work relations but do not account for the coordinate-induced redistribution of actuator inertia and damping and the linkage inertia omitted during serial-tree reduction. To address this gap, Simulator-Side System Normalization (S3N) is proposed to normalize the serial-tree simulator's effective dynamics while preserving its tree topology. S3N-Act incorporates actuator inertia and damping into the serial-coordinate dynamics through coordinate transformation, whereas S3N-Full restores residual linkage inertia by separately identifying actuator- and leg-level frequency responses. In the 2-DoF validation, S3N-Full reduced the joint-position and torque RMSEs by 80.9% and 82.1%, respectively, relative to the Jacobian-mapping baseline. During pitch-in-place motion, S3N-Act and S3N-Full reduced the RMSE of the ground reaction force norm by 65.1% and 62.4%, respectively. During circular locomotion, S3N-Full reduced the phase-averaged, command-normalized sim-to-real gap from 17.3% to 9.9%. These results show that simulator-side normalization improves motion- and force-level sim-to-real consistency. It enables policy training in a serial-tree framework with hardware-consistent dynamics that better represent the physical parallel-link mechanism.",
+      "authors": [
+        "Jinsong Hong",
+        "Jangho Kim",
+        "Jihwan Lee",
+        "Donghyun Kim",
+        "Sehoon Oh"
+      ],
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-08-03T04:49:49Z",
+      "updatedAt": "2026-08-06T13:44:17Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "10 pages, 12 figures",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01697v2",
+        "pdf": "https://arxiv.org/pdf/2608.01697v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T04:49:49Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作把模型能力推进到物理环境，关键观察点是感知、决策与执行能否形成稳定闭环。",
+      "score": {
+        "total": 52,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02376",
+      "identifiers": {
+        "arxiv": "2608.02376",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Token-Native Storage: Read and Write in your Agent's Language",
+      "abstract": "Search and database engines still store text as UTF-8, a format built for humans. But the systems that increasingly read and write that text (embedders, rerankers, and language-model agents) work with token IDs, not characters, so every access pays to translate between the two. As agents become the primary readers and writers of stored text, we argue for token-native storage: keep the text as the model's own byte-pair-encoding (BPE) token IDs. Packing r50k IDs as uint16 already beats UTF-8 by 2.25x on English with no compression, and an entropy coder on top reaches 3.30x. Across six tokenizers and three corpora (English, code, Hindi), compressing token IDs matches or beats every byte codec, even a corpus-trained zstd dictionary. Two findings sharpen the case. BPE numbers tokens by merge order instead of frequency, and re-ranking by frequency lets a plain integer codec (streamvbyte) recover most of the entropy coder's ratio while decoding ~7x faster, a near-free change to how AI labs publish vocabularies. And because a model reads token IDs, not text, a token-native store hands over the IDs directly instead of re-tokenizing on every read. The only requirement is that reader and writer share a tokenizer, and different model families often use different ones today, so we argue for standardization: a published, shared vocabulary, the way ASCII and UTF-8 standardized text.",
+      "authors": [
+        "Kumar Shivendu"
+      ],
+      "categories": [
+        "cs.DB",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.DB",
+      "publishedAt": "2026-08-03T15:20:36Z",
+      "updatedAt": "2026-08-06T13:36:52Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "12 pages, 6 figures, 2 tables",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02376v2",
+        "pdf": "https://arxiv.org/pdf/2608.02376v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T15:20:36Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "systems-efficiency",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 40,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      },
+      "lastSeenAt": "2026-08-09T03:22:31.440Z"
+    },
+    {
+      "id": "arxiv:2608.01905",
+      "identifiers": {
+        "arxiv": "2608.01905",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "PhotoHOI: Synthesizing 3D Hand-Object Interactions from a Single RGB Photograph",
+      "abstract": "Hand-object interaction (HOI) is a fundamental human behavior with broad applications in AR/VR, digital humans, and embodied interaction. Existing methods typically require predefined object geometry, object trajectories, or task-specific conditions, limiting their use with natural real-world inputs. To address this, we study a more practical problem of synthesizing 3D hand-object interaction sequences from a single RGB photograph and an open-vocabulary language instruction, and introduce PhotoHOI. PhotoHOI first uses a vision-language model to parse the input image and instruction into a structured task specification, including the interaction object, target region, and spatial relation. It then recovers a compact task-relevant 3D scene and plans a smooth collision-aware object trajectory based on the recovered object states, support relations, and surrounding scene geometry. To synthesize hand motion that generalizes to real-world photographs and unseen objects, it learns transferable task-conditioned contact and contact-conditioned grasp priors from large-scale affordance and HOI data. The grasp is further refined in a learned latent space, constraining the optimization to a plausible hand-pose manifold. Experiments on GRAB and H2O demonstrate improved contact quality and reduced penetration over representative baselines. Results on real-world photographs further demonstrate higher task success and scene consistency, together with generalization to unseen objects and open-vocabulary instructions.",
+      "authors": [
+        "Zhenhao Zhang",
+        "Jiajun Zhang",
+        "Wei Min",
+        "Yebin Liu"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "primaryCategory": "cs.CV",
+      "publishedAt": "2026-08-03T08:39:31Z",
+      "updatedAt": "2026-08-06T13:24:49Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01905v2",
+        "pdf": "https://arxiv.org/pdf/2608.01905v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T08:39:31Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal",
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 66,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02738",
+      "identifiers": {
+        "arxiv": "2608.02738",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Knowledge-Geometry Decoupling: Refreshable Pretrained Transfer for Streaming Recommendation",
+      "abstract": "Industrial recommenders increasingly adopt the pretrain-then-transfer paradigm, yet behavioral distribution drift raises two questions: what to learn from behavior sequences, and how to transfer the learned knowledge while the pretrained model is continually refreshed. To resolve them, we propose Knowledge-Geometry Decoupling (KGD). For what to learn, conventional next-token prediction treats adjacency as dependency and may encode spurious transitions across unrelated sessions. We introduce Behavioral Multi-Token Prediction (BMTP) to retain only collaboratively or semantically related future items as supervision, yielding cleaner and more transferable behavioral knowledge. For how to transfer, pretrained knowledge and task-specific geometry impose conflicting optimization demands on shared parameters. To handle it, KGD assigns them to separate parameter sets: a refreshable encoder owns behavioral knowledge, while a task learner reads contextualized encoder states through read-only cross-attention and writes task-specific geometry through Anchored Calibration Residual (ACR) orthogonal to the pretrained embedding. The decoupled ownership enables continual knowledge refresh without task-gradient interference or invalidating downstream adaptation. KGD improves over strong pretrain-transfer baselines by 4-12% on eight public benchmarks and sustains its advantage over a 90-day production stream where baselines show no gains. KGD has been fully deployed in Shopee. In a live A/B test on Shopee Homepage Search, it increases GMV per user by 1.75% and advertising revenue by 1.53%, demonstrating its high practical value. We provide the core implementation of KGD at https://github.com/FuCongResearchSquad/KGD4REC.",
+      "authors": [
+        "Zixuan Wang",
+        "Yuhong Chen",
+        "Yuxuan Zhu",
+        "Guidong Lei",
+        "Zhiluohan Guo",
+        "Yu Zhao",
+        "Kun Wang",
+        "Bangyang Hong",
+        "Kangle Wu",
+        "Yabo Ni",
+        "Anxiang Zeng",
+        "Cong Fu",
+        "Hui Li"
+      ],
+      "categories": [
+        "cs.IR"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-03T18:00:05Z",
+      "updatedAt": "2026-08-06T05:18:40Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Withdrawn due to data sharing and privacy regulations of industrial co-authors",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02738v2",
+        "pdf": "https://arxiv.org/pdf/2608.02738v2",
+        "code": "https://github.com/FuCongResearchSquad/KGD4REC",
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T18:00:05Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 72,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 25,
+          "evidence": 12,
+          "reproducibility": 15,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02687",
+      "identifiers": {
+        "arxiv": "2608.02687",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 3,
+      "title": "PolicyGuard: Prompt-Configurable Semantic DLP for LLM Coding Agents",
+      "abstract": "AI coding agents accept free-form natural language prompts that may inadvertently contain credentials, personally identifiable information (PII), or proprietary business data. Existing data loss prevention (DLP) solutions rely on rigid regex patterns, model fine-tuning, or vendor-managed classifiers with limited customizability. We present PolicyGuard, a pre-model interception framework that classifies user prompts using an LLM guided by a natural language policy file. Our key contributions are: (1) the policy-as-prompt paradigm, where DLP classification criteria are defined entirely in a plaintext policy document editable by non-engineers without code changes or model retraining; (2) a sealed evaluation protocol with template-family-level data splits, hidden holdouts, and frozen test sets to rigorously assess generalization; and (3) a comprehensive empirical evaluation across 2,000 multilingual prompts demonstrating 96.5% effective block rate (EBR) with only 3.0% false positive rate (FPR) on a frozen test set of 927 prompts, and perfect 100% accuracy on a 217-prompt hidden holdout. Information-matched baseline experiments show that PolicyGuard's natural language format significantly outperforms equivalent content in JSON format (McNemar chi-squared = 31.58, p < 0.001) and dramatically outperforms zero-shot classification (Cohen's h = 0.915). Cross-model portability experiments demonstrate that the same policy achieves 86.4-96.5% EBR across four different LLMs without modification.",
+      "authors": [
+        "Kyutae Park",
+        "Jungwon Kim",
+        "Daeyeol Shim"
+      ],
+      "categories": [
+        "cs.CR",
+        "cs.SE"
+      ],
+      "primaryCategory": "cs.CR",
+      "publishedAt": "2026-08-03T08:10:15Z",
+      "updatedAt": "2026-08-06T01:19:44Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "This paper is being withdrawn because it was submitted prior to completion of a required institutional review process. The authors intend to resubmit after the review is complete",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02687v3",
+        "pdf": "https://arxiv.org/pdf/2608.02687v3",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T08:10:15Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "safety-evaluation"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 61,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02751",
+      "identifiers": {
+        "arxiv": "2608.02751",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Research Agents",
+      "abstract": "Existing deep-research agents use a Search--Visit workflow that retrieves whole webpages without considering the structure they expose through titles, headings, sections, and metadata. This prevents agents from directly constraining retrieval to parts of a webpage and often carries irrelevant content into their context. We introduce \\textsc{Sieve}, a search--inspect--fetch strategy driven by a Boolean Query Language (BQL): it searches webpage fields to filter candidates, uses an interchangeable ranker to order them, presents structure-rich result cards for inspection, and fetches only selected sections. Across three QA collections, \\textsc{Sieve} is more accurate than the strongest conventional Search--Visit configuration on each collection while using $20.7$--$50.6\\%$ fewer tokens. Boolean filtering improves every tested ranker, and the accuracy--context advantage persists across retriever choices and agent backbones. Our implementation is included in the SkimSearchAgent library at https://github.com/ielab/skim-search-agent.",
+      "authors": [
+        "Shuai Wang",
+        "Haodong Chen",
+        "Yu Yin",
+        "Shengyao Zhuang",
+        "Bevan Koopman",
+        "Guido Zuccon"
+      ],
+      "categories": [
+        "cs.IR",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "primaryCategory": "cs.IR",
+      "publishedAt": "2026-08-03T18:01:05Z",
+      "updatedAt": "2026-08-05T02:06:16Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "added statistical test, restructure appendix etc",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02751v2",
+        "pdf": "https://arxiv.org/pdf/2608.02751v2",
+        "code": "https://github.com/ielab/skim-search-agent",
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T18:01:05Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "agents-reasoning",
+        "foundation-models"
+      ],
+      "whyWatch": "这项工作直接触及 Agent 的推理、规划或工具使用能力，值得观察它是否改变长任务的可靠性边界。",
+      "score": {
+        "total": 82,
+        "level": "focus",
+        "factors": {
+          "topicRelevance": 38,
+          "evidence": 12,
+          "reproducibility": 15,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02023",
+      "identifiers": {
+        "arxiv": "2608.02023",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "SwanTale: Unified Multi-Speaker Speech and Audio Generation for Instruct and Zero-Shot Tasks",
+      "abstract": "Speech and audio generation is often needed in animation dubbing, audio drama, movies, advertising, games, podcasts, and short-video production. In these scenarios, creators may need to design voices without reference recordings, control speaker styles with natural language, support acoustic scenes with environments and audio effects, and later reuse the designed voices. Therefore, it is important to support multi-speaker speech and audio generation for both instruct and zero-shot tasks. The instruct task requires a caption of the environment, speaker styles, and fine-grained content, while the zero-shot task uses reference audio together with the same fine-grained content. We address these tasks from both the data and model sides. First, we propose SwanData-Caption, which cleans raw speech and audio data, adds targeted synthetic coverage, and annotates diverse and accurate multi-level captions. Then, we propose SwanTale, a multi-speaker expressive speech and audio generation model that supports both zero-shot and instruct tasks. We introduce SwanVAE to support high-quality multi-audio-modality generation. Then, we adopt reward-conditioned quality control and Engram conditioning, along with Unified MoE for multi-task and multi-audio-modality modeling. In addition, we use curriculum learning and GRPO post-training to let the model progressively learn and strengthen its capabilities. Experimental results show that SwanTale leads on multiple key zero-shot and instruct metrics, achieves the best expressiveness scores in both tasks, and supports complex instruct generation involving multi-speaker speech and audio. Demos can be found at https://swanaigc.github.io/#swantale.",
+      "authors": [
+        "Yu Zhang",
+        "Ruiqi Li",
+        "Changhao Pan",
+        "Ke Lei",
+        "Xiang Yin",
+        "Cheng Yang"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.SD"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-03T10:20:52Z",
+      "updatedAt": "2026-08-04T08:54:48Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Technical Report by ByteDance",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02023v2",
+        "pdf": "https://arxiv.org/pdf/2608.02023v2",
+        "code": null,
+        "project": "https://swanaigc.github.io/#swantale"
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T10:20:52Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "foundation-models",
+        "multimodal"
+      ],
+      "whyWatch": "这项工作位于基础模型训练或架构主线上，值得跟进它对能力、成本与可扩展性的实际影响。",
+      "score": {
+        "total": 69,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 8,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02918",
+      "identifiers": {
+        "arxiv": "2608.02918",
+        "doi": "10.17743/jaes.2022.0277",
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Efficient Audio Enhancement with a Differentiable Psychoacoustic Loss",
+      "abstract": "Audio enhancement consists of improving the perceived quality of audio signals. Initially, with the aim of addressing bandwidth extension, this work proposes \\(AEROMamba_{P}\\), an efficient variant of the AERO super-resolution architecture where attention and LSTM layers are replaced by the Mamba state-space model, and which incorporates a newly developed differentiable perceptual loss derived from the Perceptual Audio Quality Measure (PAQM). During training, the architecture requires approximately 2-4x less GPU memory than the baseline; during inference, it achieves a 14x speedup while using only one-fifth of the GPU memory. When upsampling both a piano dataset and MUSDB18 from 11.025 kHz to 44.1 kHz, subjective listening tests show that \\(AEROMamba_{P}\\) outperforms AERO by 15% in perceived quality scores. Next, to handle the enhancement of audio signals that have been highly compressed by lossy coding, it is further proposed \\(AEROMamba_{PS}\\), which applies the same framework but replaces STFT reconstruction losses with the PAQM loss, specifically to enhance MP3 encoded audio at 32 kbps. In listening evaluations, \\(AEROMamba_{PS}\\) achieves 52% higher quality rating than \\(AEROMamba_{P}\\) when restoring compressed audio. These results demonstrate that PAQM-driven training coupled with lightweight state-space modeling yields high perceptual quality and computational efficiency in both band-limited and compressed audio scenarios.",
+      "authors": [
+        "Wallace Abreu",
+        "Bernardo V. Miranda",
+        "Luiz W. P. Biscainho"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-03T22:12:54Z",
+      "updatedAt": "2026-08-03T22:12:54Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": "Journal of the Audio Engineering Society, v. 74, n. 6 p. 430-444, 2026",
+      "doi": "10.17743/jaes.2022.0277",
+      "comment": "Author's Accepted Manuscript (AAM). Accepted for publication in the Journal of the Audio Engineering Society (JAES) in June/2026",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02918v1",
+        "pdf": "https://arxiv.org/pdf/2608.02918v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T22:12:54Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 67,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 18,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 5
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02421",
+      "identifiers": {
+        "arxiv": "2608.02421",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Deep Learning-Based Active Trim Panels for Enhanced Aircraft Interior Noise Control",
+      "abstract": "Active noise control (ANC) trim panels offer an effective solution to suppress multi-tonal noise in aircraft. The selective fixed-filter ANC (SFANC) method, characterized by low computational complexity, high robustness and rapid response, is suitable to handle multi-tonal engine noise that varies in frequency due to changes in the rotational speed of the engine shaft. However, real-world conditions introduce variations in lining temperature, altering acoustic and structural paths and degrading noise reduction performance. To address this challenge, a temperature-perceptive SFANC (TP-SFANC) approach is proposed that employs a lightweight one-dimensional convolutional neural network (1D CNN) trained using a multi-task learning strategy. By processing both reference and error signals, the 1D CNN learns frequency and temperature characteristics to dynamically select the optimal control filter. Numerical simulations demonstrate the effectiveness of the proposed method in attenuating multi-tonal noise across varying frequencies and lining temperatures.",
+      "authors": [
+        "Boxiang Wang",
+        "Malte Misol",
+        "Zhengding Luo",
+        "Junwei Ji",
+        "Xiaoyi Shen",
+        "Dongyuan Shi",
+        "Woon-Seng Gan"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-03T16:02:09Z",
+      "updatedAt": "2026-08-03T16:02:09Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02421v1",
+        "pdf": "https://arxiv.org/pdf/2608.02421v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T16:02:09Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "other"
+      ],
+      "whyWatch": "这是一条新进入观察范围的研究信号，需要结合方法、实验和后续评审继续判断。",
+      "score": {
+        "total": 42,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 18,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.02203",
+      "identifiers": {
+        "arxiv": "2608.02203",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "MEMS Microphones as Ultrasonic Transducers: Nonlinear Electrostatic Actuation and a Parametric Array Prototype",
+      "abstract": "This paper investigates commercial-style capacitive MEMS microphone dies as air-coupled ultrasonic transmitters under nonlinear pull-in and snap-back actuation and demonstrates a compact parametric-array prototype. A single die produces large diaphragm displacement and measurable ultrasonic pressure in air. A 28-die array driven at 83 and 93 kHz generates a directional component at the 10 kHz difference frequency. Measurements are compared with analytical radiation theory and finite-element modeling, and the effects of aperture, fill factor, device uniformity, and receiver nonlinearity are discussed.",
+      "authors": [
+        "Xiaoyu Niu",
+        "Zihuan Liu",
+        "Ehsan Vatankhah",
+        "Yuqi Meng",
+        "Neal A. Hall"
+      ],
+      "categories": [
+        "eess.AS",
+        "physics.app-ph"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-03T13:28:49Z",
+      "updatedAt": "2026-08-03T13:28:49Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "14 pages, 9 figures. Expanded article based on work presented at the 183rd Meeting of the Acoustical Society of America. This version adds a 28-die parametric-array prototype, analytical and finite-element modeling, and extended discussion. An earlier meeting abstract covering part of this work appeared in J. Acoust. Soc. Am. 152, A50-A51 (2022), DOI: 10.1121/10.0015506",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.02203v1",
+        "pdf": "https://arxiv.org/pdf/2608.02203v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T13:28:49Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "other"
+      ],
+      "whyWatch": "这是一条新进入观察范围的研究信号，需要结合方法、实验和后续评审继续判断。",
+      "score": {
+        "total": 42,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 18,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 7,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    },
+    {
+      "id": "arxiv:2608.01972",
+      "identifiers": {
+        "arxiv": "2608.01972",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 1,
+      "title": "Music Restoration via Latent Operator Optimization and Diffusion Model Priors",
+      "abstract": "Music restoration seeks to recover a clean signal from an observed recording degraded by an unknown effect, distortion, or corruption. Existing systems often rely on paired training data and distortion-specific supervision, which limits their use when the forward process is not known in advance. We propose LOUDAR (Latent-space Optimization of Unknown Distortion for Audio Restoration) a general-purpose restoration method that operates in the latent space of a pretrained audio autoencoder and models the unknown distortion as a learnable latent operator. At inference time, LOUDAR alternates between estimating the clean latent variable and updating the latent operator parameters. An unconditional latent diffusion model provides a prior over clean audio and regularizes this inference by steering the latent estimate toward the manifold of clean recordings. Because the degradation model is adapted per input, the approach is broadly applicable across diverse restoration problems. We evaluate LOUDAR on singing voice effect removal and restoration, as well as guitar distortion removal, and show that it consistently improves over degraded inputs and is competitive with supervised and unsupervised baselines in waveform and latent domains.",
+      "authors": [
+        "Michal Švento",
+        "Eloi Moliner",
+        "Valtteri Kallinen",
+        "Lauri Juvela",
+        "Vesa Välimäki",
+        "Pavel Rajmic"
+      ],
+      "categories": [
+        "eess.AS",
+        "cs.AI"
+      ],
+      "primaryCategory": "eess.AS",
+      "publishedAt": "2026-08-03T09:36:40Z",
+      "updatedAt": "2026-08-03T09:36:40Z",
+      "firstSeenAt": "2026-08-09T03:22:31.440Z",
+      "discoveredAt": "2026-08-09T03:22:31.440Z",
+      "lastSeenAt": "2026-08-09T03:22:31.440Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": "Accepted to the the 27th International Society for Music Information Retrieval Conference (ISMIR 2026)",
+      "resources": {
+        "paper": "https://arxiv.org/abs/2608.01972v1",
+        "pdf": "https://arxiv.org/pdf/2608.01972v1",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-08-03T09:36:40Z",
+          "observedAt": "2026-08-09T03:22:31.440Z"
+        }
+      ],
+      "topics": [
+        "multimodal",
+        "systems-efficiency"
+      ],
+      "whyWatch": "这项工作连接两种以上模态或生成链路，值得观察它是否带来新的交互入口与数据闭环。",
+      "score": {
+        "total": 61,
+        "level": "new",
+        "factors": {
+          "topicRelevance": 32,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 5,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}

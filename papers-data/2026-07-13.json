@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-07-13",
+  "generatedAt": "2026-08-09T03:22:31.440Z",
+  "papers": [
+    {
+      "id": "arxiv:2607.11785",
+      "identifiers": {
+        "arxiv": "2607.11785",
+        "doi": null,
+        "openreview": null
+      },
+      "version": 2,
+      "title": "MIRA: A Modular Open-Source Micro-UAV for Indoor Research",
+      "abstract": "Indoor robotics research increasingly uses micro-UAV platforms whose airframes, electronics, and control software are open to modification. Off-the-shelf platforms often lack the low-level access required for such modifications, while building a custom alternative requires initial engineering effort before flight testing can begin, leaving many laboratories to work within constraints that limit the scope of their research. We present MIRA (Modular Indoor Research Architecture), a low-cost, open-source micro-UAV for indoor research, built around a replicable 3D-printed PLA airframe and a containerized low-level software package that manages the companion-to-autopilot communication bridge via Micro XRCE-DDS. Designed as a white-box architecture, core subsystems are individually replaceable without firmware refactoring, supporting local fabrication and component substitution from existing lab inventory. We characterize MIRA through autonomous flight evaluations, including sequences of takeoff, trajectory tracking, hovering, and landing, within an optical motion-capture volume. The communication pipeline sustains a median companion-to-autopilot latency of 0.02 ms, and time-domain analysis shows that structural vibration levels remain stable and within recommended autopilot safety thresholds during dynamic maneuvers.",
+      "authors": [
+        "Lucas K. de Oliveira",
+        "Felipe A. G. Tommaselli",
+        "João Aires Marsicano",
+        "Marco S. Tayar",
+        "Pedro A. R. Saraiva",
+        "Ricardo V. Godoy",
+        "Marcelo Becker"
+      ],
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "primaryCategory": "cs.RO",
+      "publishedAt": "2026-07-13T16:37:07Z",
+      "updatedAt": "2026-08-06T17:52:47Z",
+      "firstSeenAt": "2026-08-09T03:13:01.570Z",
+      "discoveredAt": "2026-08-09T03:13:01.570Z",
+      "status": "preprint",
+      "peerReviewStatus": "not-reviewed",
+      "source": {
+        "id": "arxiv",
+        "name": "arXiv",
+        "tier": "A",
+        "evidence": "primary-metadata"
+      },
+      "journalRef": null,
+      "doi": null,
+      "comment": null,
+      "resources": {
+        "paper": "https://arxiv.org/abs/2607.11785v2",
+        "pdf": "https://arxiv.org/pdf/2607.11785v2",
+        "code": null,
+        "project": null
+      },
+      "events": [
+        {
+          "type": "first_seen",
+          "occurredAt": "2026-07-13T16:37:07Z",
+          "observedAt": "2026-08-09T03:13:01.570Z"
+        }
+      ],
+      "topics": [
+        "safety-evaluation",
+        "systems-efficiency",
+        "robotics-embodied"
+      ],
+      "whyWatch": "这项工作提供安全、评测或可信度证据，适合用来检验前沿能力是否真正可控、可复核。",
+      "score": {
+        "total": 71,
+        "level": "watch",
+        "factors": {
+          "topicRelevance": 39,
+          "evidence": 12,
+          "reproducibility": 0,
+          "methodSignal": 12,
+          "freshness": 8,
+          "multiSource": 0
+        },
+        "note": "编辑观察优先级，不代表论文质量或结论可靠性。"
+      }
+    }
+  ]
+}
