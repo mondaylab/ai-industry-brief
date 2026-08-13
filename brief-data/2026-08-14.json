@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-14",
+  "weekday": "星期五",
+  "opening": "DeepSeek 发布 V4 Pro，Anthropic 洽购 Decart，Twitch 开放训练",
+  "insight": "DeepSeek 与 Grok 同日推高模型能力，HubSpot、Memmy 和 CraftStory 则把 Agent 带进客户运营、共享记忆与视频生产。与此同时，Anthropic 洽购 Decart、Twitch 默认开放训练数据，显示能力扩张正同步逼近算力控制和内容授权边界。",
+  "methodNote": "采集窗口为 2026-08-08 至 2026-08-14，优先采用官方发布、论文原文与可信媒体报道；本期 12 条信号来自 10 个来源域名，均位于最近 7 天窗口。",
+  "homepage": {
+    "headline": "模型升级撞上算力与内容边界",
+    "summary": "DeepSeek、Grok 推新模型，Anthropic 洽购 Decart，Twitch 引发训练数据争议。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "客户运营、跨 Agent 记忆和视频生产出现新的执行入口。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "内容授权、智能眼镜和制造人才暴露落地中的具体约束。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资金同时追逐世界模型、Coding Agent 与生物基础模型。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "模型升级之外，Agent 执行环境也在压缩启动时间与资源成本。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "HubSpot · Memmy · CraftStory",
+      "items": [
+        {
+          "title": "HubSpot 用 Agent CLI 和 Claude 连接器执行客户运营任务",
+          "description": "HubSpot 展示 Agent CLI 定时清理数据，并让 Claude 连接器创建落地页、更新定价。客户平台正把 Agent 从查询助手推进到业务执行入口。",
+          "sourceName": "offers.hubspot.com",
+          "sourceUrl": "https://offers.hubspot.com/dev-playground-august-reg",
+          "sourceDateLabel": "2026-08-13",
+          "company": "HubSpot",
+          "topicCluster": "customer-platform-agent-cli-governed-automation",
+          "sourceTier": "primary",
+          "discoverySource": "HubSpot Dev Platform Playground",
+          "productFamily": "hubspot-agent-cli-claude-connector"
+        },
+        {
+          "title": "Memmy 扩展跨 Agent 共享记忆并增加本地安装校验",
+          "description": "Memmy 1.0.6 新增 Pi 与 qwenwork 历史扫描，并为多款 Coding Agent 提供共享记忆预设和安装校验。跨工具记忆开始补齐安全细节。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/MemTensor/memmy-agent/releases/tag/v1.0.6",
+          "sourceDateLabel": "2026-08-12",
+          "company": "MemTensor",
+          "topicCluster": "cross-agent-shared-memory-local-validation",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Release",
+          "productFamily": "memmy-cross-agent-memory"
+        },
+        {
+          "title": "CraftStory 用视频 Agent 自动完成脚本、素材和字幕制作",
+          "description": "CraftStory 的视频 Agent 可从主题生成脚本、寻找补充画面、加入信息图与字幕，并允许用户用对话修改。生成式视频正从单段素材扩展为端到端制作流程。",
+          "sourceName": "craftstory.com",
+          "sourceUrl": "https://craftstory.com/",
+          "sourceDateLabel": "2026-08-14",
+          "company": "CraftStory",
+          "topicCluster": "video-agent-end-to-end-production",
+          "sourceTier": "primary",
+          "discoverySource": "Product Hunt",
+          "productFamily": "craftstory-video-agent"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Twitch · 智能眼镜 · 智能制造",
+      "items": [
+        {
+          "title": "Twitch 默认允许亚马逊用频道内容训练生成式 AI",
+          "description": "Twitch 新增训练授权开关并默认开启，创作者可手动退出，但平台未清楚说明跨频道内容如何处理。训练数据扩张再次把默认同意与知情授权推到台前。",
+          "sourceName": "kotaku.com",
+          "sourceUrl": "https://kotaku.com/twitch-is-now-using-your-content-to-train-amazon-ai-models-and-has-hidden-the-option-to-opt-out-2000723891",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Twitch",
+          "topicCluster": "creator-content-ai-training-opt-out-consent",
+          "sourceTier": "evidence",
+          "discoverySource": "Kotaku",
+          "productFamily": "twitch-amazon-generative-ai-training"
+        },
+        {
+          "title": "智能眼镜语音挑战用一百零六小时数据测试多人理解",
+          "description": "SLT 2026 挑战收集七百一十四场真实对话与会议，测试带说话人时间戳的识别和语义理解。说话重叠与语气信息仍是智能眼镜连续助理的主要短板。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.12034",
+          "sourceDateLabel": "2026-08-12",
+          "company": "SLT 2026 SmartGlasses Challenge",
+          "topicCluster": "smart-glasses-multitalker-speech-understanding",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "slt-smartglasses-challenge"
+        },
+        {
+          "title": "研究团队用九级框架评估智能制造人才准备度",
+          "description": "研究团队依据八十九个企业课题，从 AI 素养、信息物理系统、人机协作和数据决策四方面评分。结果显示，真实产业经历比追加课程更能推动能力进入高阶段。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.11540",
+          "sourceDateLabel": "2026-08-12",
+          "company": "Smart Manufacturing Workforce Research",
+          "topicCluster": "smart-manufacturing-workforce-readiness-framework",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "workforce-readiness-level-smart-manufacturing"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Anthropic · Cognition · Aureka",
+      "items": [
+        {
+          "title": "Anthropic 据报洽购 Decart 以补强世界模型与芯片优化",
+          "description": "Anthropic 据报正洽谈以约六十亿美元收购 Decart，后者开发世界模型和芯片优化软件。若交易落地，模型公司对算力成本与芯片设计的控制将进一步前移。",
+          "sourceName": "bloomberg.com",
+          "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-13/anthropic-said-in-talks-to-buy-ai-startup-decart-for-6-billion",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Anthropic",
+          "topicCluster": "world-model-chip-optimization-acquisition-talks",
+          "sourceTier": "evidence",
+          "discoverySource": "Bloomberg via Axios",
+          "productFamily": "anthropic-decart-acquisition-talks"
+        },
+        {
+          "title": "Cognition 据报按四百亿美元估值洽谈新一轮融资",
+          "description": "Devin 开发商 Cognition 据报按四百亿美元估值洽谈融资，距五月二百六十亿美元估值仅数月。高估值正提前计入 Coding Agent 企业采用速度。",
+          "sourceName": "bloomberg.com",
+          "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-12/ai-startup-cognition-in-new-funding-talks-at-40-billion-value",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Cognition",
+          "topicCluster": "coding-agent-new-funding-valuation-talks",
+          "sourceTier": "evidence",
+          "discoverySource": "Bloomberg via Axios",
+          "productFamily": "cognition-funding-talks-40b"
+        },
+        {
+          "title": "Aureka 融资一亿美元开发药物发现生物基础模型",
+          "description": "Aureka 完成一亿美元 B 轮融资，由 Granite Asia 领投，用于生物基础模型和药物发现。AI 制药资本正同时押注计算模型与实验验证形成的闭环。",
+          "sourceName": "allsci.com",
+          "sourceUrl": "https://allsci.com/news/venture-financing/ai-drug-discovery-funding-aureka-closes-usd-100m/",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Aureka Biotechnologies",
+          "topicCluster": "biological-foundation-model-drug-discovery-series-b",
+          "sourceTier": "evidence",
+          "discoverySource": "AllSci via Axios",
+          "productFamily": "aureka-biological-foundation-models"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "DeepSeek V4 Pro · Grok 4.6 · agentOS",
+      "items": [
+        {
+          "title": "DeepSeek 正式发布 V4 Pro 并接入应用、网页与 API",
+          "description": "DeepSeek V4 Pro 上线应用、网页与 API，强化 Agent 能力并兼容 Responses API 和 Codex。模型发布正围绕生产接口组织。",
+          "sourceName": "api-docs.deepseek.com",
+          "sourceUrl": "https://api-docs.deepseek.com/news/news260813",
+          "sourceDateLabel": "2026-08-13",
+          "company": "DeepSeek",
+          "topicCluster": "foundation-model-agent-responses-api-codex",
+          "sourceTier": "primary",
+          "discoverySource": "DeepSeek API Docs",
+          "productFamily": "deepseek-v4-pro"
+        },
+        {
+          "title": "SpaceXAI 发布 Grok 4.6 并缩小与头部模型差距",
+          "description": "Grok 4.6 已上线，第三方指数显示其接近 GPT-5.6 Sol Max，紧随 Fable 5 Max。模型竞争转向性能、价格与 Agent 任务的组合。",
+          "sourceName": "x.com",
+          "sourceUrl": "https://x.com/SpaceXAI/status/2087562800982077492",
+          "sourceDateLabel": "2026-08-12",
+          "company": "SpaceXAI",
+          "topicCluster": "frontier-model-agent-coding-performance",
+          "sourceTier": "primary",
+          "discoverySource": "SpaceXAI on X",
+          "productFamily": "spacexai-grok-4-6"
+        },
+        {
+          "title": "agentOS 用 WebAssembly 为 Coding Agent 提供轻量执行环境",
+          "description": "agentOS 把文件系统、会话持久化、权限和任务执行封装进后端库，并兼容 Claude Code、Codex。Agent 基础设施正用更轻的隔离换取更快启动。",
+          "sourceName": "producthunt.com",
+          "sourceUrl": "https://www.producthunt.com/products/agentos-3",
+          "sourceDateLabel": "2026-08-14",
+          "company": "Rivet",
+          "topicCluster": "coding-agent-webassembly-execution-runtime",
+          "sourceTier": "primary",
+          "discoverySource": "Product Hunt",
+          "productFamily": "rivet-agentos-webassembly-runtime"
+        }
+      ]
+    }
+  ]
+}
