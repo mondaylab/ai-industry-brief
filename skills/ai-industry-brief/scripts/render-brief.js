@@ -29,6 +29,10 @@ function formatMd(date) {
 function validateBrief(data, targetDate) {
   if (data.date !== targetDate) fail(`Data date ${data.date} does not match ${targetDate}.`);
   if (!data.weekday || !data.opening || !data.insight || !data.methodNote) fail("Brief metadata is incomplete.");
+  if ([...data.opening].length > 50) fail("Brief opening must not exceed 50 characters.");
+  if (/^AI\s*(?:正从|开始|进入|转向|走向|的竞争)/i.test(data.opening)) {
+    fail("Brief opening uses a generic AI-stage template; summarize today's concrete actors and events instead.");
+  }
   if (!Array.isArray(data.sections) || data.sections.length !== 4) fail("Brief must contain exactly four sections.");
   const items = data.sections.flatMap((section) => section.items || []);
   if (items.length !== 12) fail("Brief must contain exactly twelve items.");
