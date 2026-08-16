@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-17",
+  "weekday": "星期一",
+  "opening": "Lotti 更新目标 Agent，Dynatrace 收购 Arize，FIRE-VLA 改进规划",
+  "insight": "Lotti 和 Research Radar 把失败说明与来源账本带进个人工作台，FIRE-VLA 和临床世界模型则让系统依据运行事件持续更新。Dynatrace 收购 Arize，进一步说明 AI 竞争正在催生覆盖评测、运行与诊断的一体化观测层。",
+  "methodNote": "采集窗口为 2026-08-11 至 2026-08-17，优先采用官方版本记录、研究原文与可信媒体报道；本期 12 条信号来自 6 个来源域名，均位于最近 7 天窗口。",
+  "homepage": {
+    "headline": "目标 Agent、失败学习与 AI 观测同日推进",
+    "summary": "Lotti 解释任务失败，FIRE-VLA 吸收失败轨迹，Dynatrace 收购 Arize。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "个人 Agent、研究情报与本地训练工具补齐可诊断工作流。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "医疗、自动驾驶和公共政策系统开始依据事件与权威动态更新。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "AI 观测、数据中心与基础软件继续吸引大额资本。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "本地推理、过程评测与稀疏量化共同压低可靠部署门槛。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Lotti · Research Radar · LabLLM",
+      "items": [
+        {
+          "title": "Lotti 更新目标 Agent 并解释任务更新失败原因",
+          "description": "Lotti 让目标 Agent 在更新失败时说明原因，并增加按标签统计时间目标和关系任务界面。把失败从静默状态变成可诊断反馈，个人 Agent 才能长期托付。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/matthiasn/lotti/releases/tag/1.0.11%2B4330",
+          "sourceDateLabel": "2026-08-16",
+          "company": "Lotti",
+          "topicCluster": "personal-goal-agent-diagnostic-feedback",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "lotti-goal-agent"
+        },
+        {
+          "title": "Research Radar 发布自托管研究情报工作台首个 Alpha 版",
+          "description": "Research Radar 从 arXiv 与 RSS 采集、规范化、去重和排序资料，并提供今日、阅读与归档视图。研究情报工具先把来源账本做稳，再谈个性化。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/researchradar/research-radar/releases/tag/v0.1.0a1",
+          "sourceDateLabel": "2026-08-16",
+          "company": "Research Radar",
+          "topicCluster": "self-hosted-research-intelligence-dedup-ranking",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "research-radar-workspace"
+        },
+        {
+          "title": "LabLLM 发布可在 Mac 本地训练小模型的首个 Beta 版",
+          "description": "LabLLM 在 Apple Silicon 上提供模型搭建、预训练、微调、数据导入和损失监控，并打包 MLX 运行库。小模型实验正变成可观察的桌面流程。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/Greninja9257/LabLLM/releases/tag/Beta",
+          "sourceDateLabel": "2026-08-15",
+          "company": "LabLLM",
+          "topicCluster": "apple-silicon-local-small-model-training",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "labllm-mlx-training-lab"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Intervention-Aware · FIRE-VLA · ParliamentRAG",
+      "items": [
+        {
+          "title": "Intervention-Aware 模型按术后事件更新房颤复发风险",
+          "description": "该模型结合术前影像、手术过程和围术期生理信号，持续预测房颤复发与瘢痕变化。临床世界模型开始把时间与干预写入风险更新机制。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.13518",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Intervention-Aware Research Team",
+          "topicCluster": "clinical-world-model-postoperative-event-forecasting",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "intervention-aware-clinical-world-model"
+        },
+        {
+          "title": "FIRE-VLA 用失败轨迹改进自动驾驶规划",
+          "description": "FIRE-VLA 让同一模型读取隐藏的未来轨迹，自我蒸馏未解决的低回报场景，并降低规划误差。自动驾驶模型开始把失败样本变成下一轮教师。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.13395",
+          "sourceDateLabel": "2026-08-13",
+          "company": "FIRE-VLA Research Team",
+          "topicCluster": "autonomous-driving-failure-informed-self-evolution",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "fire-vla-autonomous-driving"
+        },
+        {
+          "title": "ParliamentRAG 按议题权威汇总意大利议会多方观点",
+          "description": "ParliamentRAG 根据职业、教育和发言记录判断议员在具体议题上的权威，再跨党派检索并引用原话。公共政策摘要因此更可核验，也更少遗漏立场。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.13410",
+          "sourceDateLabel": "2026-08-13",
+          "company": "ParliamentRAG Research Team",
+          "topicCluster": "authority-aware-parliamentary-rag",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "parliamentrag-policy-intelligence"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Dynatrace · Vantage Data Centers · Team8 Capital",
+      "items": [
+        {
+          "title": "Dynatrace 以九亿一千五百万美元收购 Arize",
+          "description": "Dynatrace 将以现金和股票收购 Arize，把模型评测、AI 可观测与运行时监控接入同一平台。企业部署 Agent 后，观测预算正在向全生命周期集中。",
+          "sourceName": "businesswire.com",
+          "sourceUrl": "https://www.businesswire.com/news/home/20260813982051/en/Dynatrace-to-Acquire-AI-Observability-Leader-Arize",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Dynatrace",
+          "topicCluster": "ai-observability-acquisition-lifecycle-consolidation",
+          "sourceTier": "primary",
+          "discoverySource": "Business Wire",
+          "productFamily": "dynatrace-arize-acquisition"
+        },
+        {
+          "title": "Vantage Data Centers 探索千亿美元估值上市或出售",
+          "description": "Vantage 据报考虑明年以约千亿美元估值上市，也不排除整体出售。AI 算力需求把数据中心从重资产设施推成全球资本争夺的稀缺入口。",
+          "sourceName": "reuters.com",
+          "sourceUrl": "https://www.reuters.com/legal/transactional/vantage-data-centers-explores-ipo-100-billion-valuation-or-sale-sources-say-2026-08-13/",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Vantage Data Centers",
+          "topicCluster": "ai-data-center-ipo-sale-valuation",
+          "sourceTier": "evidence",
+          "discoverySource": "Reuters",
+          "productFamily": "vantage-data-centers-strategic-options"
+        },
+        {
+          "title": "Team8 Capital 募集超三亿六千五百万美元新基金",
+          "description": "Team8 Capital 为第三支旗舰基金募集二亿六千五百万美元，并筹得逾一亿美元跟投资金。网络安全、AI 与数据基础设施仍吸引长期资本。",
+          "sourceName": "calcalistech.com",
+          "sourceUrl": "https://www.calcalistech.com/ctechnews/article/h1utecy8fx",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Team8 Capital",
+          "topicCluster": "venture-fund-cyber-ai-data-infrastructure",
+          "sourceTier": "evidence",
+          "discoverySource": "CTech",
+          "productFamily": "team8-capital-fund-three"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Lemonade · Beyond Final Scores · POCKET-35B",
+      "items": [
+        {
+          "title": "Lemonade 11.6 扩展 AMD 本地推理与多模态评测",
+          "description": "Lemonade 新增 AMD Instinct 的 ROCm 推理、Strix 平台图像生成和视觉基准，加入模型别名。本地服务层开始覆盖文本、图像与工具调用。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/lemonade-sdk/lemonade/releases/tag/v11.6.0",
+          "sourceDateLabel": "2026-08-14",
+          "company": "Lemonade",
+          "topicCluster": "amd-local-ai-multimodal-inference-benchmark",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "lemonade-local-ai-server"
+        },
+        {
+          "title": "Beyond Final Scores 拆解长任务 Agent 的过程瓶颈",
+          "description": "研究用三十六项长周期任务评估七款前沿模型，分开衡量问题框定、执行和反馈控制。最终得分相近的 Agent，过程稳定性和经验复用能力可能完全不同。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.13417",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Beyond Final Scores Research Team",
+          "topicCluster": "long-horizon-agent-process-evaluation",
+          "sourceTier": "primary",
+          "discoverySource": "arXiv",
+          "productFamily": "beyond-final-scores-agent-benchmark"
+        },
+        {
+          "title": "POCKET 更新三百五十亿参数模型的低比特量化版本",
+          "description": "POCKET-35B 采用二百五十六专家、每次激活八专家的稀疏结构，并提供低比特 GGUF。端侧模型竞争正在用激活效率换取更高参数容量。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/posts/SeaWolf-AI/745666844415915",
+          "sourceDateLabel": "2026-08-11",
+          "company": "POCKET",
+          "topicCluster": "sparse-moe-low-bit-edge-quantization",
+          "sourceTier": "evidence",
+          "discoverySource": "Hugging Face Community",
+          "productFamily": "pocket-35b-gguf"
+        }
+      ]
+    }
+  ]
+}
