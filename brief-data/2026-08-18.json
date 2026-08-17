@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-18",
+  "weekday": "星期二",
+  "opening": "OpenHands 更新 Agent，Vals AI 融资，AgentRewind 恢复长任务。",
+  "insight": "SheetCompass 开始保留电子表格的跨表关系，法律 RAG 和医生推荐审计则说明，答案有依据不等于过程无偏。与此同时，Agent 产品正在补配置预检、目标管理和故障回退，可靠性正被拆成可检查、可恢复的工程环节。",
+  "methodNote": "采集窗口为 2026-08-12 至 2026-08-18，覆盖 GitHub Releases、arXiv、公司公告、可信媒体与 Hugging Face 模型页；优先采用一手发布，并以媒体报道补充融资信息。",
+  "homepage": {
+    "headline": "Coding Agent 补上预检与恢复机制",
+    "summary": "OpenHands 更新配置预检，Vals AI 获投，AgentRewind 支持回退重试。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "Coding Agent 增加预检、异构运行时和长周期目标管理。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "表格、法律与医疗场景开始暴露结构理解和解释偏差。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "评测、施工机器人和语音输入公司同日获得大额融资。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "故障恢复、模型网关和稀疏注意力共同支撑长任务运行。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "OpenHands · Cherry Studio · LobeHub",
+      "items": [
+        {
+          "title": "OpenHands 1.14 为 Coding Agent 增加配置预检与 Git 同步",
+          "description": "OpenHands 在保存模型配置前校验 LLM，并增加 Git 同步页和结构化错误结果。把配置错误挡在运行前，可减少 Coding Agent 无效执行。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/OpenHands/OpenHands/releases/tag/v1.14.0",
+          "sourceDateLabel": "2026-08-17",
+          "company": "OpenHands",
+          "topicCluster": "coding-agent-configuration-validation-git-sync",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "openhands-coding-agent"
+        },
+        {
+          "title": "Cherry Studio 2.0.7 接入 DeepSeek Harness 并增加 Agent 自动权限",
+          "description": "Cherry Studio 接入 DeepSeek Harness，并为 Pi Agent 增加自动权限。桌面工作台开始统一不同 Coding Agent 的运行入口。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/CherryHQ/cherry-studio/releases/tag/v2.0.7",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Cherry Studio",
+          "topicCluster": "coding-agent-runtime-auto-permission",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "cherry-studio-agent-runtime"
+        },
+        {
+          "title": "LobeHub 2.2.14 用项目与目标管理长周期 Agent 工作",
+          "description": "LobeHub 把项目与目标设为 Agent 工作容器，支持生成验收标准，并接入七种 CLI Coding Agent。长任务有了可确认、可验收的管理边界。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/lobehub/lobehub/releases/tag/v2.2.14",
+          "sourceDateLabel": "2026-08-16",
+          "company": "LobeHub",
+          "topicCluster": "long-horizon-agent-project-goal-management",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "lobehub-agent-workspace"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "SheetCompass · 法律 RAG · 医生推荐审计",
+      "items": [
+        {
+          "title": "SheetCompass 用关系图让 Agent 理解跨表结构",
+          "description": "SheetCompass 显式建模工作表内部和跨表关系，并用任务记忆保留相关信息。表格 Agent 不再只读取扁平文本，而是按真实工作簿结构推理。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.14452",
+          "sourceDateLabel": "2026-08-14",
+          "company": "SheetCompass",
+          "topicCluster": "spreadsheet-agent-relation-graph-reasoning",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "sheetcompass-spreadsheet-agent"
+        },
+        {
+          "title": "法律 RAG 审计发现八套系统仍会大面积产生幻觉",
+          "description": "研究审计八套法律 RAG，最佳系统幻觉率低于一成，最差系统接近一半，错误前提问题尤其危险。检索增强不能替代逐项事实核验。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.14210",
+          "sourceDateLabel": "2026-08-14",
+          "company": "Legal RAG Audit",
+          "topicCluster": "legal-rag-hallucination-audit",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "legal-rag-evaluation"
+        },
+        {
+          "title": "医生推荐审计揭示模型解释会隐藏人口属性偏差",
+          "description": "研究让七个模型完成四万余次医生选择，人口属性显著影响结果，却几乎不出现在模型解释中。医疗推荐需要行为审计，不能只相信自述理由。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.14399",
+          "sourceDateLabel": "2026-08-14",
+          "company": "Physician Recommendation Audit",
+          "topicCluster": "healthcare-ai-recommendation-bias-audit",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "physician-choice-algorithm-audit"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Vals AI · Gravis Robotics · Wispr",
+      "items": [
+        {
+          "title": "Vals AI 融资四千万美元扩展 AI 评测平台",
+          "description": "Vals AI 完成由 a16z 领投的四千万美元 A 轮融资，估值四亿美元，将继续扩充模型评测与企业基准。评测平台正成为模型采购的独立基础设施。",
+          "sourceName": "vals.ai",
+          "sourceUrl": "https://www.vals.ai/blogs/series-a",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Vals AI",
+          "topicCluster": "ai-evaluation-platform-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "Company Blog",
+          "productFamily": "vals-ai-evaluation"
+        },
+        {
+          "title": "Gravis Robotics 获软银两亿美元投资扩展施工机器人",
+          "description": "软银向 Gravis Robotics 投资两亿美元 A 轮，用于扩大自主重型机械部署。资本开始押注能在非标准工地运行的 Physical AI。",
+          "sourceName": "gravisrobotics.com",
+          "sourceUrl": "https://www.gravisrobotics.com/series-a",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Gravis Robotics",
+          "topicCluster": "construction-robotics-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "Company Announcement",
+          "productFamily": "gravis-construction-autonomy"
+        },
+        {
+          "title": "Wispr 融资两亿八千万美元扩展语音输入产品",
+          "description": "Wispr 完成 Menlo Ventures 领投的两亿八千万美元 B 轮，投后估值二十亿美元，并计划超越听写场景。语音入口的竞争正转向更广泛的人机交互。",
+          "sourceName": "fortune.com",
+          "sourceUrl": "https://fortune.com/2026/08/17/wispr-2-billion-valuation-dictations-only-the-beginning/",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Wispr",
+          "topicCluster": "voice-input-series-b",
+          "sourceTier": "evidence",
+          "discoverySource": "Fortune",
+          "productFamily": "wispr-voice-interface"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "AgentRewind · LiteLLM · HiLS-Attention",
+      "items": [
+        {
+          "title": "AgentRewind 用上下文与环境检查点恢复长任务执行",
+          "description": "AgentRewind 同步记录 Agent 上下文和受控环境检查点，出错后可带着上次尝试信息回退重跑。长任务可靠性开始从预防错误扩展到运行时恢复。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.14380",
+          "sourceDateLabel": "2026-08-14",
+          "company": "AgentRewind",
+          "topicCluster": "long-horizon-agent-runtime-recovery",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "agentrewind-runtime-recovery"
+        },
+        {
+          "title": "LiteLLM 1.97 为自动路由增加成本统计与中文规则匹配",
+          "description": "LiteLLM 为自动路由增加分类成本、节省额和用量视图，并修复中文关键词规则匹配。模型网关开始让路由决策既可观测，也能适配中文请求。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/BerriAI/litellm/releases/tag/v1.97.0",
+          "sourceDateLabel": "2026-08-16",
+          "company": "LiteLLM",
+          "topicCluster": "llm-gateway-auto-routing-cost-observability",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "litellm-model-gateway"
+        },
+        {
+          "title": "腾讯更新 HiLS-Attention 7B 长上下文稀疏模型",
+          "description": "腾讯更新七十亿参数 HiLS-Attention，以分块稀疏注意力提升超长上下文外推和推理速度。它适合检索与长文档研究，但仍是未经安全对齐的基础模型。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/tencent/HiLS-Attention-7B",
+          "sourceDateLabel": "2026-08-14",
+          "company": "Tencent",
+          "topicCluster": "long-context-sparse-attention-model",
+          "sourceTier": "primary",
+          "discoverySource": "Hugging Face",
+          "productFamily": "hils-attention-model"
+        }
+      ]
+    }
+  ]
+}
