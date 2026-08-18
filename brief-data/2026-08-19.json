@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-19",
+  "weekday": "星期三",
+  "opening": "Stripe 拟购 OpenRouter，n8n 扩展 Agent，Astra 训练暂停。",
+  "insight": "今天的信号一端是 Agent 产品补齐跨设备会话、可写工作区与工具控制，另一端是模型能力逼近航空、医疗和网络安全的高风险边界。Stripe 拟收购 OpenRouter，则把模型选择入口推到支付平台的战略版图中。",
+  "methodNote": "采集窗口为 2026-08-13 至 2026-08-19，覆盖 GitHub Releases、arXiv、公司公告、可信媒体与模型社区；优先采用一手发布，并以权威媒体补充交易和融资信息。",
+  "homepage": {
+    "headline": "Agent 扩展执行边界，模型安全触发训练暂停",
+    "summary": "n8n 增加可写工作区，Stripe 拟收购 OpenRouter，OpenAI 暂缓 Astra 训练。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "Agent 产品增加跨设备会话、可写工作区和会话内工具控制。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "医疗与航空评测把模型放进高风险、可执行的真实任务中。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "模型路由入口成为并购目标，视频生成与推理基础设施继续吸金。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "并发工具调用与权限隔离加速落地，前沿能力也迫使实验室收紧规则。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "n8n · Cline Code · AnythingLLM",
+      "items": [
+        {
+          "title": "n8n 2.36 为 Agent 增加可写工作区与 MCP 工具",
+          "description": "n8n 为 Agent 增加可写工作区、MCP 工具接入和会话内执行数据。工作流 Agent 开始具备更完整的操作空间与调试依据。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/n8n-io/n8n/releases/tag/n8n%402.36.0",
+          "sourceDateLabel": "2026-08-18",
+          "company": "n8n",
+          "topicCluster": "workflow-agent-writable-workspace-mcp-tools",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "n8n-agent-builder"
+        },
+        {
+          "title": "Cline Code 发布桌面测试版并开放跨设备云会话",
+          "description": "Cline Code 桌面测试版可连接 GitHub，并同步跨设备的记录、审批和待发指令。Coding Agent 的连续工作不再绑定单台电脑。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/cline/cline/releases/tag/desktop-v0.0.14-beta.1",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Cline",
+          "topicCluster": "coding-agent-desktop-cloud-session-handoff",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "cline-code-desktop"
+        },
+        {
+          "title": "AnythingLLM 1.16 增加图像生成与会话内工具切换",
+          "description": "AnythingLLM 支持用指令生成和编辑图像，并可在 Agent 对话中直接切换工具。多模态创作与工具控制被收进同一个工作台。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/Mintplex-Labs/anything-llm/releases/tag/v1.16.0",
+          "sourceDateLabel": "2026-08-13",
+          "company": "AnythingLLM",
+          "topicCluster": "local-ai-workspace-image-generation-tool-toggle",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "anythingllm-workspace"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Foresight-England · AeroCopilotBench · PIHF",
+      "items": [
+        {
+          "title": "Foresight-England 用六千万人病历训练国家级医疗模型",
+          "description": "研究在英国国家医疗体系内用约六千万人去标识病历训练医疗事件预测模型。这为疾病预测提供统一底座，也抬高国家级数据治理门槛。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.16273",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Foresight-England",
+          "topicCluster": "national-scale-ehr-generative-model",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "foresight-england-ehr-model"
+        },
+        {
+          "title": "AeroCopilotBench 发现航空 Agent 最高仅完成七成应急任务",
+          "description": "该基准用七十三项异常与应急任务测试十二个模型，最高交互成功率为百分之七十二点六。航空安全评测必须检查完整的实际操作结果。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.16349",
+          "sourceDateLabel": "2026-08-17",
+          "company": "AeroCopilotBench",
+          "topicCluster": "aviation-copilot-agent-interactive-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "aerocopilotbench"
+        },
+        {
+          "title": "PIHF 让临床专家迭代罕见病 Agent 的诊断策略",
+          "description": "PIHF 让临床专家审核并迭代自然语言诊断策略，在固定模型上提升罕见病识别。高风险 Agent 的改进可以保留人工准入权。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.16831",
+          "sourceDateLabel": "2026-08-17",
+          "company": "PIHF",
+          "topicCluster": "clinical-agent-policy-iteration-human-feedback",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "pihf-clinical-agent"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Stripe × OpenRouter · Higgsfield · Groq",
+      "items": [
+        {
+          "title": "Stripe 拟以逾七十亿美元收购 OpenRouter",
+          "description": "Stripe 据报同意以超过七十亿美元收购模型路由平台 OpenRouter。支付平台正把模型选择与调用入口纳入基础设施版图。",
+          "sourceName": "bloomberg.com",
+          "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-16/stripe-nears-deal-to-buy-ai-firm-openrouter-for-over-7-billion",
+          "sourceDateLabel": "2026-08-16",
+          "company": "Stripe / OpenRouter",
+          "topicCluster": "model-router-acquisition-payments-infrastructure",
+          "sourceTier": "evidence",
+          "discoverySource": "Axios",
+          "productFamily": "openrouter-model-routing"
+        },
+        {
+          "title": "Higgsfield 融资四亿美元扩展 AI 视频平台",
+          "description": "Higgsfield 完成四亿美元融资，投后估值五十四亿美元，由 DST Global 领投。视频生成平台的竞争继续转向规模与分发。",
+          "sourceName": "axios.com",
+          "sourceUrl": "https://www.axios.com/newsletters/axios-pro-rata-8c095a04-c158-4df0-966e-a21492a42890",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Higgsfield",
+          "topicCluster": "ai-video-platform-growth-funding",
+          "sourceTier": "evidence",
+          "discoverySource": "Axios",
+          "productFamily": "higgsfield-ai-video"
+        },
+        {
+          "title": "Groq 融资三亿五千万美元扩建 AI 推理云",
+          "description": "Groq 完成三亿五千万美元 A 轮融资，估值三十五亿美元，由 Disruptive 领投。推理成本与供给仍是资本争夺的基础设施环节。",
+          "sourceName": "bloomberg.com",
+          "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-17/groq-valued-at-3-5-billion-in-funding-round-after-nvidia-deal",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Groq",
+          "topicCluster": "ai-inference-cloud-series-a",
+          "sourceTier": "evidence",
+          "discoverySource": "Axios",
+          "productFamily": "groq-inference-cloud"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Microsoft Agent Framework · Agno · OpenAI Astra",
+      "items": [
+        {
+          "title": "Microsoft Agent Framework 1.18 支持并发调用工具",
+          "description": "Microsoft Agent Framework 允许 Agent 并发调用工具，并增加托管会话与用户身份透传。执行速度提升后，身份边界也要同步保留。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/microsoft/agent-framework/releases/tag/dotnet-1.18.0",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Microsoft",
+          "topicCluster": "agent-framework-concurrent-tools-identity-pass-through",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "microsoft-agent-framework"
+        },
+        {
+          "title": "Agno 2.9 修复 MCP 工具越权与跨用户缓存泄漏",
+          "description": "Agno 修复模型借 MCP 工具名绕过许可的漏洞，并隔离不同用户的工具缓存。Agent 平台必须把权限校验落到实际执行路径。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/agno-agi/agno/releases/tag/v2.9.0",
+          "sourceDateLabel": "2026-08-13",
+          "company": "Agno",
+          "topicCluster": "mcp-tool-authorization-user-cache-isolation",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "agno-agent-framework"
+        },
+        {
+          "title": "OpenAI 暂缓 Astra 训练并重写前沿模型安全规则",
+          "description": "OpenAI 因 Astra 可能达到关键网络安全能力，暂停部分强化学习训练并重写安全框架。前沿能力首次直接改变训练节奏与发布规则。",
+          "sourceName": "axios.com",
+          "sourceUrl": "https://www.axios.com/2026/08/18/openai-pause-astra-preparedness-framework",
+          "sourceDateLabel": "2026-08-18",
+          "company": "OpenAI",
+          "topicCluster": "frontier-model-cyber-capability-training-pause",
+          "sourceTier": "evidence",
+          "discoverySource": "Axios",
+          "productFamily": "openai-astra-safety"
+        }
+      ]
+    }
+  ]
+}
