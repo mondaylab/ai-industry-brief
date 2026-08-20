@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-21",
+  "weekday": "星期五",
+  "opening": "Cursor 让云端 Agent 订阅事件，Velaura 融资研发低功耗芯片。",
+  "insight": "电商 Product Research Agent 已向约一万五千名用户发送选购建议，甲烷监测系统也把现场分析从数小时压到数分钟。Agent 开始承接持续触发的真实业务，但自动化能力不能直接等同于协作效果，权限、证据和人工角色仍需单独验证。",
+  "methodNote": "采集窗口为 2026-08-15 至 2026-08-21，覆盖官方产品更新、GitHub Releases、arXiv、公司公告与可信媒体；Notion 模型评分卡为邻近窗口参考，因其补充了面向普通办公用户的模型选择变化。",
+  "homepage": {
+    "headline": "Agent 开始持续接单，真实业务验证进入执行层",
+    "summary": "Cursor 让云端 Agent 订阅事件，电商 Agent 进入用户回访，Velaura 融资研发低功耗芯片。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "云端 Agent 接入事件订阅，本地模型和办公工具改善等待与选择体验。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "电商、物流和甲烷监测开始用生产数据检验 Agent 的执行价值。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资本同时押注低功耗芯片、数字孪生和生物演化预测平台。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "框架补齐持久执行与多模态输入，评测开始区分自动化和辅助能力。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Cursor · Ollama · Notion",
+      "items": [
+        {
+          "title": "Cursor 让云端 Agent 订阅 PR、Slack 和定时任务",
+          "description": "Cursor 云端 Agent 可订阅 PR、Slack 对话或定时任务，并在事件发生后继续工作。Coding Agent 不再只等待人发起单次指令。",
+          "sourceName": "cursor.com",
+          "sourceUrl": "https://cursor.com/changelog/08-19-26",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Cursor",
+          "topicCluster": "coding-agent-event-subscriptions-long-running-work",
+          "sourceTier": "primary",
+          "discoverySource": "Cursor Changelog",
+          "productFamily": "cursor-cloud-agents"
+        },
+        {
+          "title": "Ollama 0.32.15 缓存模型元数据并缩短首个 Token 等待",
+          "description": "Ollama 缓存解析后的模型元数据，将首个 Token 等待从约九百九十五毫秒缩短至五百二十四毫秒。本地模型体验开始优化真实等待感。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/ollama/ollama/releases/tag/v0.32.15",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Ollama",
+          "topicCluster": "local-model-metadata-cache-first-token-latency",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "ollama-local-model-runtime"
+        },
+        {
+          "title": "Notion 为模型选择器增加速度、能力和成本评分卡",
+          "description": "Notion 精简模型候选，并用评分卡比较速度、能力和成本，还可固定常用模型。办公 AI 正把复杂的模型选择翻译成用户可理解的取舍。",
+          "sourceName": "notion.com",
+          "sourceUrl": "https://www.notion.com/releases/2026-08-14",
+          "sourceDateLabel": "邻近窗口 · 2026-08-14",
+          "company": "Notion",
+          "topicCluster": "workspace-ai-model-picker-scorecard",
+          "sourceTier": "primary",
+          "discoverySource": "Notion Releases",
+          "productFamily": "notion-ai-model-picker"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Product Research Agent · ORBITER · Methane Monitoring",
+      "items": [
+        {
+          "title": "电商 Product Research Agent 向一万五千名用户推送选购建议",
+          "description": "该系统在二十三天内通过 WhatsApp 向约一万五千名用户发送个性化选购建议，并带来点击与成交。电商 Agent 开始跨过搜索页主动追回需求。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18543",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Product Research Agent",
+          "topicCluster": "ecommerce-product-research-agent-crm-reengagement",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "product-research-agent-crm"
+        },
+        {
+          "title": "ORBITER 在四座城市改进末端配送选单",
+          "description": "ORBITER 用提议者、证据工具和独立批评者判断骑手下一单，在四座城市数据上最高提升百分之九点二。物流 Agent 开始解释每次调度取舍。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18846",
+          "sourceDateLabel": "2026-08-19",
+          "company": "ORBITER",
+          "topicCluster": "last-mile-delivery-agent-conflict-aware-routing",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "orbiter-delivery-agent"
+        },
+        {
+          "title": "甲烷监测 Multi-Agent 系统把现场分析压缩至分钟级",
+          "description": "该系统连接传感器处理、气象数据、排放反演和报告生成，把现场工作从数小时压到数分钟。环境 Agent 的价值来自协调确定性工具而非替代测量。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18473",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Methane Monitoring Multi-Agent Framework",
+          "topicCluster": "methane-monitoring-tool-grounded-multi-agent",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "methane-monitoring-agent-framework"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Velaura AI · Twin1 AI · Astromech",
+      "items": [
+        {
+          "title": "Velaura AI 融资一点一亿美元研发低功耗 AI 芯片",
+          "description": "Velaura AI 完成一点一亿美元 A 轮融资，估值超过十亿美元，将推进低功耗芯片与软件。算力资本开始把能耗约束前置到芯片设计。",
+          "sourceName": "finance.yahoo.com",
+          "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/velaura-ai-raises-110-million-130000601.html",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Velaura AI",
+          "topicCluster": "low-power-ai-compute-series-a",
+          "sourceTier": "evidence",
+          "discoverySource": "Business Wire",
+          "productFamily": "velaura-low-power-ai-compute"
+        },
+        {
+          "title": "Twin1 AI 融资两千万美元扩展数字孪生平台",
+          "description": "Twin1 AI 完成两千万美元种子轮融资，Bessemer、Tribeca 与 Aramco Ventures 参投。数字孪生生成成为工业 AI 的新入口。",
+          "sourceName": "axios.com",
+          "sourceUrl": "https://www.axios.com/newsletters/axios-pro-rata-02cbb88e-fc63-4551-abd7-410518e1feea",
+          "sourceDateLabel": "2026-08-20",
+          "company": "Twin1 AI",
+          "topicCluster": "digital-twin-creation-seed-funding",
+          "sourceTier": "evidence",
+          "discoverySource": "Axios Pro",
+          "productFamily": "twin1-digital-twin-platform"
+        },
+        {
+          "title": "Astromech 融资两千万美元推进生物演化预测模型",
+          "description": "Astromech 融资两千万美元，总融资达到六千万美元，估值三十八亿美元。资本正把跨物种基因数据押注为生物预测模型的新底座。",
+          "sourceName": "gamesbeat.com",
+          "sourceUrl": "https://gamesbeat.com/astromech-raised-20m-to-advance-predictive-ai-models-of-biological-evolutionary-change/",
+          "sourceDateLabel": "2026-08-20",
+          "company": "Astromech",
+          "topicCluster": "evolutionary-biology-ai-funding",
+          "sourceTier": "evidence",
+          "discoverySource": "GamesBeat",
+          "productFamily": "astromech-life-model"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Mastra · LlamaIndex · CentaurBench",
+      "items": [
+        {
+          "title": "Mastra 1.60 让 API 创建的 Agent 支持持久化执行",
+          "description": "Mastra 让通过 Agents API 创建的 Agent 无需重新部署即可持久运行，并继承缓存和消息总线。Agent 配置开始与运行生命周期直接绑定。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/mastra-ai/mastra/releases/tag/%40mastra/core%401.60.0",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Mastra",
+          "topicCluster": "agent-api-durable-execution-runtime",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "mastra-agent-framework"
+        },
+        {
+          "title": "LlamaIndex 0.14.24 为 AG-UI 增加多模态输入",
+          "description": "LlamaIndex 为 AG-UI 协议增加图像、音频、视频和文档输入，并保留前端工具消息。Agent 前端与后端之间开始传递更完整的任务上下文。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/run-llama/llama_index/releases/tag/v0.14.24",
+          "sourceDateLabel": "2026-08-19",
+          "company": "LlamaIndex",
+          "topicCluster": "agent-ui-protocol-multimodal-input",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "llamaindex-ag-ui"
+        },
+        {
+          "title": "CentaurBench 发现自动化冠军未必擅长辅助工作",
+          "description": "CentaurBench 在七项真实任务中发现，自动化第一的模型有五项辅助能力落后，三项任务不如无辅助。选模型时必须区分代做和协作角色。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18554",
+          "sourceDateLabel": "2026-08-19",
+          "company": "CentaurBench",
+          "topicCluster": "automation-versus-augmentation-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "centaurbench-work-assistance"
+        }
+      ]
+    }
+  ]
+}
