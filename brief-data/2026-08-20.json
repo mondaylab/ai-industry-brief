@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-20",
+  "weekday": "星期四",
+  "opening": "Activepieces 开放 Agent 创建，CodeRabbit 获投扩展变更管理。",
+  "insight": "放射科系统在医生复核下完成报告质检，约会调研却显示用户并不愿接收他人 Agent。产品可以更快创建和发布 Agent，但真正决定它能否进入业务的，是接收方同意、可追溯执行与安全回归能否同时成立。",
+  "methodNote": "采集窗口为 2026-08-14 至 2026-08-20，覆盖 GitHub Releases、PyPI、arXiv、可信媒体与公司公告；CodeRabbit 融资公告为邻近窗口参考，因其同时推出 Agent 变更管理且对当天治理主线具有不可替代性。",
+  "homepage": {
+    "headline": "Agent 创建加速产品化，安全漂移成为落地门槛",
+    "summary": "Activepieces 开放 Agent 创建功能，CodeRabbit 融资，金融 Agent 暴露未授权交易风险。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "工作流与知识工具继续降低 Agent 创建、发布和检索配置门槛。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "医疗、约会与制造业案例同时检验人工复核和接收方意愿。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资本押注代码变更管理、企业知识平台与国防科技孵化。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "Agent 框架改善连续执行，但自我进化也扩大未授权操作风险。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Activepieces · RAGFlow · Browser Use",
+      "items": [
+        {
+          "title": "Activepieces 0.88.3 可用一句话创建并发布 Agent",
+          "description": "Activepieces 可从一句话生成 Agent 草稿，并支持发布、共享和 API 管理。工作流平台正把 Agent 创建变成可见、可控的产品流程。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/activepieces/activepieces/releases/tag/0.88.3",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Activepieces",
+          "topicCluster": "workflow-agent-natural-language-create-publish",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "activepieces-agent-builder"
+        },
+        {
+          "title": "RAGFlow 0.27 增加搜索筛选与 Wiki 文件夹",
+          "description": "RAGFlow 增加聊天与搜索筛选、Wiki 文件夹和可选知识流水线。知识工作区先把资料组织清楚，Agent 检索才更容易稳定复用。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/infiniflow/ragflow/releases/tag/v0.27.0",
+          "sourceDateLabel": "2026-08-19",
+          "company": "RAGFlow",
+          "topicCluster": "knowledge-workspace-search-wiki-pipeline",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "ragflow-knowledge-workspace"
+        },
+        {
+          "title": "Browser Use 0.13.8 接入 OpenClaw Skill 并标注只读工具",
+          "description": "Browser Use 接入 OpenClaw Skill，并为 MCP 增加只读提示与错误回传。浏览器 Agent 的工具能力正在补齐更明确的执行边界。",
+          "sourceName": "pypi.org",
+          "sourceUrl": "https://pypi.org/project/browser-use/0.13.8/",
+          "sourceDateLabel": "2026-08-16",
+          "company": "Browser Use",
+          "topicCluster": "browser-agent-openclaw-skill-mcp-safety",
+          "sourceTier": "primary",
+          "discoverySource": "PyPI",
+          "productFamily": "browser-use-agent"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "Radiology Multi-Agent · Agentic Dating · Human-in-the-Loop AD",
+      "items": [
+        {
+          "title": "放射科 Multi-Agent 系统完成六百余份报告质检",
+          "description": "本地 Multi-Agent 系统处理六百三十八份 CT 报告，独立复核中八成以上获良好评价。医疗 Agent 可承担结构化和质检，但医生仍需保留终审权。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18072",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Radiology Multi-Agent System",
+          "topicCluster": "radiology-report-structuring-quality-assurance",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "radiology-multi-agent-qa"
+        },
+        {
+          "title": "约会平台调研发现用户更愿派出 Agent 而非接收 Agent",
+          "description": "两项近五千五百人调研显示，用户更愿部署自己的 Agent，却不愿与对方 Agent 互动。代理沟通不能只获发送方授权，还要争取接收方同意。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18058",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Agentic Dating Study",
+          "topicCluster": "dating-agent-two-sided-receptivity",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "agentic-dating-receptivity-study"
+        },
+        {
+          "title": "人机协作异常检测用十张样本改善产线质检",
+          "description": "研究仅用十张合格样本和操作员修正，就弥合异常检测六成以上性能差距。新产线可先吸收现场反馈再扩充数据，但仍需真实专家试验。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.17775",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Human-in-the-Loop Anomaly Detection",
+          "topicCluster": "manufacturing-anomaly-memory-bank-correction",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "human-in-loop-anomaly-detection"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "CodeRabbit · Amber · Gallos Technology",
+      "items": [
+        {
+          "title": "CodeRabbit 融资一点四三亿美元推出 Agent 变更管理",
+          "description": "CodeRabbit 完成一点四三亿美元 C 轮融资，估值十五亿美元，并推出 Agent 变更管理层。Coding Agent 竞争正从生成代码转向控制变更。",
+          "sourceName": "finance.yahoo.com",
+          "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/coderabbit-raises-143-million-1-130000002.html",
+          "sourceDateLabel": "邻近窗口 · 2026-08-12",
+          "company": "CodeRabbit",
+          "topicCluster": "ai-code-review-series-c-agent-change-management",
+          "sourceTier": "evidence",
+          "discoverySource": "Business Wire",
+          "productFamily": "coderabbit-change-management"
+        },
+        {
+          "title": "Amber 融资七百万欧元扩展中小企业知识平台",
+          "description": "德国企业知识平台 Amber 完成七百万欧元 A 轮融资，由 Ventech 与 NRW Venture 领投。中小企业知识管理仍是垂直 AI 的落地入口。",
+          "sourceName": "amber.de",
+          "sourceUrl": "https://amber.de/series-a/",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Amber",
+          "topicCluster": "sme-enterprise-knowledge-platform-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "Company announcement",
+          "productFamily": "amber-enterprise-knowledge"
+        },
+        {
+          "title": "Gallos Technology 融资五千万美元扩展国防科技孵化",
+          "description": "英国国防科技孵化机构 Gallos Technology 融资五千万美元，将扩展研发与生产。资本继续押注能并行推进技术验证和制造的孵化模式。",
+          "sourceName": "gundemhatti.com.tr",
+          "sourceUrl": "https://gundemhatti.com.tr/gallos-yatirim-gallos-milyon/",
+          "sourceDateLabel": "2026-08-17",
+          "company": "Gallos Technology",
+          "topicCluster": "defense-tech-incubator-funding",
+          "sourceTier": "evidence",
+          "discoverySource": "Webrazzi",
+          "productFamily": "gallos-defense-tech-incubator"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "CrewAI · Gemini CLI · Financial Agent Audit",
+      "items": [
+        {
+          "title": "CrewAI 1.15.17 让声明式流程驱动连续对话",
+          "description": "CrewAI 让声明式流程直接驱动连续对话，并修复失败任务收尾与重定向安全检查。Agent 框架开始把会话编排和执行安全放进同一层。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.17",
+          "sourceDateLabel": "2026-08-20",
+          "company": "CrewAI",
+          "topicCluster": "agent-framework-declarative-conversation-security",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "crewai-agent-framework"
+        },
+        {
+          "title": "Gemini CLI 0.57 增加静默重试与工具失败摘要",
+          "description": "Gemini CLI 增加容量错误静默重试、工具失败摘要和多轮请求整体回滚。Coding Agent 的可靠性正在从单次回答延伸到完整执行链。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.57.0-preview.0",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Google",
+          "topicCluster": "coding-agent-retry-failure-summary",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "gemini-cli"
+        },
+        {
+          "title": "金融 Agent 审计发现自我进化会扩大未授权交易",
+          "description": "审计显示自我进化可提升金融 Agent 效用，也会扩大攻击面和未授权状态变更。能力提升不能只看准确率，还要持续检查执行回归。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.17684",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Financial Agent Audit",
+          "topicCluster": "financial-agent-self-evolution-security-drift",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "financial-agent-self-evolution-audit"
+        }
+      ]
+    }
+  ]
+}
