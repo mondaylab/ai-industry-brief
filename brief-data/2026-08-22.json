@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-22",
+  "weekday": "星期六",
+  "opening": "Anthropic 开放 Mythos 5 安全扫描，Starcloud 融资建设轨道数据中心。",
+  "insight": "Anthropic 把高能力安全模型封装进代码扫描，Sierra 把检查、审批和灰度发布做进 Agent 上线流程；Starcloud 则获得两点五亿美元押注轨道算力。今天的共同点不是能力变得更通用，而是模型被放进可控入口，并围绕上线风险与算力供给形成产品和资本动作。",
+  "methodNote": "采集窗口为 2026-08-16 至 2026-08-22，覆盖公司公告、官方产品更新、GitHub Releases、arXiv 与可信媒体；行业论文均标注为研究或框架证据，不将实验结果直接外推为生产成效。",
+  "homepage": {
+    "headline": "安全能力进入受控入口，Agent 上线开始走审批与灰度",
+    "summary": "Anthropic 开放 Mythos 5 代码扫描，Sierra 增加 Agent 发布治理，Starcloud 融资建设轨道数据中心。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "安全模型进入代码扫描，Agent 平台补齐检查、审批和灰度发布。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "金融、水务和车联网案例把检索证据、克制执行与时延约束摆到台前。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "资金流向轨道算力、业务自动化和触觉机器人三种基础设施路线。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "本地推理、上下文压缩和文档 Agent 继续补齐长任务运行能力。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Claude Security · Sierra · F5 AI Gateway",
+      "items": [
+        {
+          "title": "Anthropic 让 Claude Security 使用 Mythos 5 扫描代码漏洞",
+          "description": "Claude Enterprise 用户可用 Mythos 5 扫描自有代码库，查看漏洞分类、置信度和修复建议。Anthropic 用限定输出开放高风险模型能力。",
+          "sourceName": "claude.com",
+          "sourceUrl": "https://claude.com/blog/bringing-claude-mythos-5-to-more-defenders",
+          "sourceDateLabel": "2026-08-21",
+          "company": "Anthropic",
+          "topicCluster": "cybersecurity-model-controlled-code-scanning",
+          "sourceTier": "primary",
+          "discoverySource": "Claude Product Announcements",
+          "productFamily": "claude-security-mythos"
+        },
+        {
+          "title": "Sierra 为 Agent 发布增加检查、人工审批和灰度流量",
+          "description": "Sierra 将 Agent 检查、模拟测试、合并审批和分流发布接入同一流程，并支持快速回滚。客服 Agent 的上线开始采用软件工程式治理。",
+          "sourceName": "sierra.ai",
+          "sourceUrl": "https://sierra.ai/blog/release-governance-guardrails-for-agents-at-scale",
+          "sourceDateLabel": "2026-08-20",
+          "company": "Sierra",
+          "topicCluster": "agent-release-governance-approval-canary-rollout",
+          "sourceTier": "primary",
+          "discoverySource": "Sierra Blog",
+          "productFamily": "sierra-agent-release-governance"
+        },
+        {
+          "title": "F5 AI Gateway 统一管理模型路由、预算和 Agent 权限",
+          "description": "F5 将 AI Gateway 纳入安全平台，集中执行模型路由、预算策略与 Agent 访问控制。企业 AI 成本和权限开始共用一个运行控制面。",
+          "sourceName": "f5.com",
+          "sourceUrl": "https://www.f5.com/company/news/press-releases/f5-unleashes-next-generation-agentic-ready-ai-gateway-to-optimize-the-economics-and-governance-of-enterprise-ai-costs",
+          "sourceDateLabel": "2026-08-18",
+          "company": "F5",
+          "topicCluster": "enterprise-ai-gateway-cost-policy-agent-access",
+          "sourceTier": "primary",
+          "discoverySource": "F5 Press Release",
+          "productFamily": "f5-ai-gateway"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "FinRCA-Bench · Water Leak Diagnosis · V2X Security",
+      "items": [
+        {
+          "title": "FinRCA-Bench 发现财务 AI 的主要瓶颈在证据检索",
+          "description": "在两千二百五十个对账案例中，仅更换检索方式就把精确率从百分之二点零五提高到七十二点四四。财务 Agent 的审计性先取决于证据链。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18534",
+          "sourceDateLabel": "2026-08-19",
+          "company": "FinRCA-Bench",
+          "topicCluster": "financial-reconciliation-evidence-retrieval-benchmark",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "finrca-bench"
+        },
+        {
+          "title": "水务 Multi-Agent 系统用可验证弃答控制开挖决策",
+          "description": "系统让执行者、监督者和 LLM 审计器共同核验证据，在噪声测试中只对高置信事件行动。基础设施 Agent 的价值也来自知道何时不执行。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18836",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Verifiable Abstention Leak Diagnosis",
+          "topicCluster": "water-infrastructure-verifiable-abstention-agent",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "water-leak-diagnosis-multi-agent"
+        },
+        {
+          "title": "车联网 Multi-Agent 框架按十毫秒和五十毫秒分层响应",
+          "description": "研究提出车端十毫秒、路侧五十毫秒和云端联邦学习的三级防御架构，并把不确定消息升级处理。该方案仍需验证边缘投毒与监管问题。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.19135",
+          "sourceDateLabel": "2026-08-19",
+          "company": "V2X Multi-Agent Cyber Defense",
+          "topicCluster": "connected-vehicle-multi-agent-cyber-defense-latency",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "v2x-multi-agent-security"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Starcloud · Bardeen · Acorn Robot",
+      "items": [
+        {
+          "title": "Starcloud 融资两点五亿美元建设轨道 AI 数据中心",
+          "description": "Starcloud 完成两点五亿美元 A 轮扩展融资，估值二十三亿美元，将扩建制造设施并推进轨道数据中心卫星。算力竞赛开始押注太空供给。",
+          "sourceName": "finance.yahoo.com",
+          "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/starcloud-raises-250-million-2-140000211.html",
+          "sourceDateLabel": "2026-08-21",
+          "company": "Starcloud",
+          "topicCluster": "orbital-ai-data-center-series-a-extension",
+          "sourceTier": "evidence",
+          "discoverySource": "Business Wire",
+          "productFamily": "starcloud-orbital-compute"
+        },
+        {
+          "title": "Bardeen 获 Dropbox 和 HubSpot 三百万美元战略投资",
+          "description": "Bardeen 获得三百万美元战略投资，并发布面向重复业务流程的 AI Agent。云存储与 CRM 厂商开始直接押注跨应用自动化入口。",
+          "sourceName": "bardeen.ai",
+          "sourceUrl": "https://www.bardeen.ai/posts/bardeen-the-first-business-ready-ai-agent",
+          "sourceDateLabel": "2026-08-19",
+          "company": "Bardeen",
+          "topicCluster": "business-automation-agent-strategic-investment",
+          "sourceTier": "primary",
+          "discoverySource": "Bardeen Blog",
+          "productFamily": "bardeen-business-agent"
+        },
+        {
+          "title": "橡木果机器人完成天使轮融资并发布触觉基础模型",
+          "description": "橡木果机器人获招商局创投与蔚来资本联合领投，同时发布 Natus AGE-0 触觉模型。具身智能资本开始补视觉路线之外的接触能力。",
+          "sourceName": "donews.com",
+          "sourceUrl": "https://www.donews.com/news/detail/4/6675405.html",
+          "sourceDateLabel": "2026-08-18",
+          "company": "Acorn Robot",
+          "topicCluster": "tactile-foundation-model-robotics-angel-round",
+          "sourceTier": "evidence",
+          "discoverySource": "DoNews",
+          "productFamily": "acorn-robot-natus-age-0"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "LocalAI · Haystack · DocClaw",
+      "items": [
+        {
+          "title": "LocalAI 4.9 默认保护全部接口并压缩历史对话",
+          "description": "LocalAI 将接口认证改为默认拒绝，并可在推理前压缩旧对话且保留完整工具调用。自托管 Agent 开始同时处理暴露面与长上下文成本。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/mudler/LocalAI/releases/tag/v4.9.0",
+          "sourceDateLabel": "2026-08-20",
+          "company": "LocalAI",
+          "topicCluster": "local-ai-auth-default-context-compression",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "localai-runtime"
+        },
+        {
+          "title": "Haystack 3.1 候选版为 Agent 增加上下文压缩钩子",
+          "description": "Haystack 的压缩钩子会保留系统消息、最新任务和完整近期轮次，再按窗口移除旧历史。长任务记忆开始通过明确策略控制上下文消耗。",
+          "sourceName": "github.com",
+          "sourceUrl": "https://github.com/deepset-ai/haystack/releases/tag/v3.1.0-rc3",
+          "sourceDateLabel": "2026-08-21",
+          "company": "Haystack",
+          "topicCluster": "agent-context-compaction-hook-sliding-window",
+          "sourceTier": "primary",
+          "discoverySource": "GitHub Releases",
+          "productFamily": "haystack-agent-framework"
+        },
+        {
+          "title": "DocClaw 用统一 Agent 循环处理 OCR、问答和信息抽取",
+          "description": "DocClaw 让同一 Agent 按文档技能调用工具，并用结构化状态复用中间知识。文档 AI 正从任务专用流水线转向共享执行框架。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.18685",
+          "sourceDateLabel": "2026-08-19",
+          "company": "DocClaw",
+          "topicCluster": "unified-document-processing-agent-skills-state",
+          "sourceTier": "evidence",
+          "discoverySource": "arXiv",
+          "productFamily": "docclaw-document-agent"
+        }
+      ]
+    }
+  ]
+}
