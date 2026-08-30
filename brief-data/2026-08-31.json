@@ -1,0 +1,199 @@
+{
+  "date": "2026-08-31",
+  "weekday": "星期一",
+  "opening": "Slackbot 上线深度工作区，a16z 募集 11 亿美元建设 AI 硬件。",
+  "insight": "Claude Cowork 与 CodeArts Agent 把网页操作和软件开发带入独立执行环境；AWS、微软和新加坡医疗体系则分别补算力、安全控制与行业规模。产品能否被组织部署，越来越取决于浏览器、治理和基础设施能否一起到位。",
+  "methodNote": "采集窗口为 2026-08-24 至 2026-08-31，重点覆盖 8 月 26 至 30 日发布的产品、企业部署、融资和研究信号。8 月 30 日为周日，官方新增较少，因此本期以最近一周未收录的一手发布为主；GLM-5.3 此前已记录模型发布，本次仅记录 8 月 28 日新增的开放权重与自托管条件。",
+  "homepage": {
+    "headline": "工作入口扩展执行环境，资本转向 AI 硬件供给",
+    "summary": "Slackbot、Claude 和 CodeArts Agent 扩展执行入口，a16z 与 AWS 加码硬件。",
+    "mobileSections": [
+      {
+        "name": "AI 产品前线",
+        "summary": "协作、网页和开发任务获得更完整的 Agent 执行环境。"
+      },
+      {
+        "name": "AI 行业现场",
+        "summary": "算力扩容、安全验证和医疗应用同步进入规模化阶段。"
+      },
+      {
+        "name": "AI 资本与牌局",
+        "summary": "身份风控、无人机物流和 AI 硬件获得新的资本配置。"
+      },
+      {
+        "name": "AI 能力底座",
+        "summary": "开放权重、科学评测和 Multi-Agent 研究形成新供给。"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "Slackbot · Claude Cowork · CodeArts Agent",
+      "items": [
+        {
+          "title": "Slackbot 上线深度工作区和技能集",
+          "description": "Slackbot 新增全屏 Big Mode、可成组分发的 Skill Sets 和带引用的深度研究。团队能把成熟工作流一次配置给整组成员，协作入口开始承担标准化执行，管理者也能统一更新模板。",
+          "sourceName": "slack.com",
+          "sourceUrl": "https://slack.com/blog/news/slackbot-ai-workspace-for-deep-work",
+          "sourceDateLabel": "2026-08-27",
+          "company": "Slack",
+          "topicCluster": "collaboration-agent-deep-work-skill-sets",
+          "sourceTier": "primary",
+          "discoverySource": "Slack Product Blog",
+          "productFamily": "slackbot-deep-work"
+        },
+        {
+          "title": "Claude Cowork 增加独立内置浏览器",
+          "description": "Claude Cowork 可在桌面应用侧栏打开独立浏览器，读取网页、点击并填写表单，且不接触用户原有标签和密码。网页 Agent 开始把任务执行与个人浏览环境分开。",
+          "sourceName": "claude.com",
+          "sourceUrl": "https://claude.com/blog/cowork-built-in-browser",
+          "sourceDateLabel": "2026-08-26",
+          "company": "Anthropic",
+          "topicCluster": "desktop-agent-isolated-browser-computer-use",
+          "sourceTier": "primary",
+          "discoverySource": "Claude Product Blog",
+          "productFamily": "claude-cowork-browser"
+        },
+        {
+          "title": "华为云在亚太正式商用 CodeArts Agent",
+          "description": "华为云 CodeArts Agent 在亚太正式商用，提供代码生成、工程问答和单元测试自动化。Coding Agent 正从个人插件进入企业软件交付服务，采购与计费条件也随之明确。",
+          "sourceName": "huaweicloud.com",
+          "sourceUrl": "https://www.huaweicloud.com/intl/en-us/notice/20260825165944435.html",
+          "sourceDateLabel": "2026-08-26",
+          "company": "Huawei Cloud",
+          "topicCluster": "enterprise-coding-agent-commercial-launch",
+          "sourceTier": "primary",
+          "discoverySource": "Huawei Cloud Service Notice",
+          "productFamily": "huawei-codearts-agent"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "AWS × NVIDIA · Microsoft · AgentSea",
+      "items": [
+        {
+          "title": "AWS 与 NVIDIA 计划新增部署 200 万块 GPU",
+          "description": "AWS 与 NVIDIA 计划在全球基础设施中新增两百万块 GPU，并扩展 CPU、网络、开放模型和机器人合作。云厂商正用跨层联合设计消化 Agent 与物理 AI 的算力需求，扩容已不只是采购服务器。",
+          "sourceName": "aboutamazon.com",
+          "sourceUrl": "https://press.aboutamazon.com/aws/2026/8/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+          "sourceDateLabel": "2026-08-26",
+          "company": "AWS and NVIDIA",
+          "topicCluster": "cloud-gpu-agentic-physical-ai-infrastructure",
+          "sourceTier": "primary",
+          "discoverySource": "Amazon Press Center",
+          "productFamily": "aws-nvidia-infrastructure"
+        },
+        {
+          "title": "微软在内部企业环境验证 Agent 安全控制",
+          "description": "微软联合 Entra、Intune、Defender 和 Purview 团队，在公司租户中验证 Agent 身份、设备合规和数据防护。企业治理开始从发布政策转向逐次执行的技术控制，权限边界要随任务实时判断。",
+          "sourceName": "microsoft.com",
+          "sourceUrl": "https://www.microsoft.com/insidetrack/blog/securing-ai-agents-in-the-enterprise-learnings-from-our-journey-at-microsoft/",
+          "sourceDateLabel": "2026-08-27",
+          "company": "Microsoft",
+          "topicCluster": "enterprise-agent-security-identity-device-data",
+          "sourceTier": "primary",
+          "discoverySource": "Microsoft Inside Track",
+          "productFamily": "microsoft-securing-ai-agents"
+        },
+        {
+          "title": "新加坡公立医疗人员已创建 1.2 万个 Agent",
+          "description": "新加坡公共医疗平台 AgentSea 已让医护人员创建超过一万二千个 Agent，包括会诊前生成患者摘要。行业平台把建造权限交给一线人员，也把治理责任集中到统一底座。",
+          "sourceName": "moh.gov.sg",
+          "sourceUrl": "https://www.moh.gov.sg/newsroom/speech-by-mr-tan-kiat-how--senior-minister-of-state--ministry-of-digital-development-and-information---ministry-of-health--at-himss26-apac-health-conference-and-exhibition--24-august-2026/",
+          "sourceDateLabel": "2026-08-24",
+          "company": "Synapxe",
+          "topicCluster": "public-healthcare-agent-platform-clinician-builders",
+          "sourceTier": "primary",
+          "discoverySource": "Singapore Ministry of Health Speech",
+          "productFamily": "synapxe-agentsea"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Socure · Airbound · a16z",
+      "items": [
+        {
+          "title": "Socure 获战略投资并收购 Fravity",
+          "description": "Socure 获 Summit Partners 领投的战略投资，估值达五十二亿美元，并收购风控 Agent 平台 Fravity。资本正把身份数据、风险决策和 Agent 执行层并成一套基础设施，单点风控工具随之被平台化并购。",
+          "sourceName": "socure.com",
+          "sourceUrl": "https://www.socure.com/news-and-press/strategic-growth-investment-fravity-acquisition",
+          "sourceDateLabel": "2026-08-27",
+          "company": "Socure",
+          "topicCluster": "identity-risk-agent-platform-investment-acquisition",
+          "sourceTier": "primary",
+          "discoverySource": "Socure Newsroom",
+          "productFamily": "socure-riskos-agents"
+        },
+        {
+          "title": "Airbound 完成 3700 万美元 A 轮融资",
+          "description": "Airbound 完成由 Greenoaks 领投的三千七百万美元 A 轮，并计划在印度三座城市建设无人机配送网络。自主飞行项目开始用真实航线和运输成本检验商业规模。",
+          "sourceName": "globenewswire.com",
+          "sourceUrl": "https://www.globenewswire.com/news-release/2026/08/25/3350182/0/en/airbound-scales-new-class-of-aircraft-to-change-the-economics-of-flight.html",
+          "sourceDateLabel": "2026-08-25",
+          "company": "Airbound",
+          "topicCluster": "autonomous-drone-logistics-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "Airbound Press Release",
+          "productFamily": "airbound-autonomous-aircraft"
+        },
+        {
+          "title": "a16z 募集 11 亿美元设立 Machine Age 基金",
+          "description": "a16z 募集十一亿美元设立 Machine Age 基金，投资芯片、内存、网络、数据中心、机器人和家庭设备。AI 投资重心正向受供电、材料与制造约束的物理层扩展。",
+          "sourceName": "a16z.com",
+          "sourceUrl": "https://a16z.com/the-machine-age-fund/",
+          "sourceDateLabel": "2026-08-28",
+          "company": "Andreessen Horowitz",
+          "topicCluster": "ai-hardware-infrastructure-venture-fund",
+          "sourceTier": "primary",
+          "discoverySource": "a16z Announcement",
+          "productFamily": "a16z-machine-age-fund"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "GLM-5.3 · Terminal-Bench-Science · Multi-Agent 数学",
+      "items": [
+        {
+          "title": "Z.ai 开放 GLM-5.3 模型权重",
+          "description": "Z.ai 在 Hugging Face 开放 GLM-5.3 的一百四十一个权重分片和部署配置，可通过 SGLang 本地服务。模型发布两周后开放权重，让相关能力进入自托管验证，企业可直接检查成本、安全和数据边界。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/zai-org/GLM-5.3/tree/main",
+          "sourceDateLabel": "2026-08-28",
+          "company": "Z.ai",
+          "topicCluster": "open-weight-frontier-model-self-hosting",
+          "sourceTier": "primary",
+          "discoverySource": "Hugging Face Trending and Z.ai Blog",
+          "productFamily": "glm-5-3-open-weights"
+        },
+        {
+          "title": "Terminal-Bench-Science 发布科学 Agent 评测",
+          "description": "Terminal-Bench-Science 首版收录五类科学领域的七十项真实工作流，最佳系统完成率为百分之三十。科学 Agent 的比较标准开始从问答得分转向可复验的研究产物，而且高分仍然稀缺。",
+          "sourceName": "terminal-bench-science.ai",
+          "sourceUrl": "https://www.terminal-bench-science.ai/announcement",
+          "sourceDateLabel": "2026-08-28",
+          "company": "Terminal-Bench-Science",
+          "topicCluster": "scientific-agent-real-workflow-benchmark",
+          "sourceTier": "primary",
+          "discoverySource": "Hacker News and Official Announcement",
+          "productFamily": "terminal-bench-science"
+        },
+        {
+          "title": "研究团队让 Multi-Agent 系统自主发现数学结果",
+          "description": "研究团队让不同模型家族的 Agent 无中央协调完成十二项构造问题，并在其中五项得到相对既有文献的新结果。公开对话、证明和代码让自主发现可以被外部复核。",
+          "sourceName": "arxiv.org",
+          "sourceUrl": "https://arxiv.org/abs/2608.23691",
+          "sourceDateLabel": "2026-08-24",
+          "company": "The Station Research Team",
+          "topicCluster": "multi-agent-autonomous-mathematical-discovery",
+          "sourceTier": "primary",
+          "discoverySource": "Hacker News and arXiv",
+          "productFamily": "station-multi-agent-math"
+        }
+      ]
+    }
+  ]
+}
