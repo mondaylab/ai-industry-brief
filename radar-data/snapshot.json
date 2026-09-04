@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T23:59:00+08:00",
-  "latestBriefDate": "2026-09-04",
+  "generatedAt": "2026-09-05T23:59:00+08:00",
+  "latestBriefDate": "2026-09-05",
   "window": {
-    "from": "2026-08-22",
-    "to": "2026-09-04",
+    "from": "2026-08-23",
+    "to": "2026-09-05",
     "days": 14
   },
   "mode": "brief-observed",
   "modeNote": "当前快照来自已收录简报，用于验证编辑工作流；实时来源抓取尚未启用。",
   "metrics": {
     "signalCount": 168,
-    "sourceCount": 96,
-    "strongCount": 5,
-    "agentCount": 114
+    "sourceCount": 94,
+    "strongCount": 1,
+    "agentCount": 111
   },
   "pipeline": [
     {
@@ -38,13 +38,13 @@
       "id": "score",
       "name": "评分",
       "status": "ready",
-      "count": 5
+      "count": 1
     },
     {
       "id": "verify",
       "name": "核验",
       "status": "manual",
-      "count": 28
+      "count": 22
     }
   ],
   "sections": [
@@ -55,12 +55,57 @@
   ],
   "sources": [
     {
+      "id": "tech.eu",
+      "name": "tech.eu",
+      "domain": "tech.eu",
+      "latestPublishedAt": "2026-09-04",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 2,
+      "sections": [
+        "AI 资本与牌局"
+      ],
+      "sourceTier": "media-original",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
+      "id": "jnj.com",
+      "name": "jnj.com",
+      "domain": "jnj.com",
+      "latestPublishedAt": "2026-09-04",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 1,
+      "sections": [
+        "AI 行业现场"
+      ],
+      "sourceTier": "primary",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
+      "id": "publicnow.com",
+      "name": "publicnow.com",
+      "domain": "publicnow.com",
+      "latestPublishedAt": "2026-09-04",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 1,
+      "sections": [
+        "AI 资本与牌局"
+      ],
+      "sourceTier": "primary",
+      "ageDays": 1,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
       "id": "prnewswire.com",
       "name": "prnewswire.com",
       "domain": "prnewswire.com",
       "latestPublishedAt": "2026-09-03",
-      "lastIncludedAt": "2026-09-04",
-      "signalCount": 18,
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 20,
       "sections": [
         "AI 产品前线",
         "AI 行业现场",
@@ -68,7 +113,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -77,15 +122,31 @@
       "name": "globenewswire.com",
       "domain": "globenewswire.com",
       "latestPublishedAt": "2026-09-03",
-      "lastIncludedAt": "2026-09-04",
-      "signalCount": 10,
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 14,
       "sections": [
         "AI 产品前线",
         "AI 行业现场",
-        "AI 资本与牌局"
+        "AI 资本与牌局",
+        "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
+      "id": "techcrunch.com",
+      "name": "techcrunch.com",
+      "domain": "techcrunch.com",
+      "latestPublishedAt": "2026-09-03",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 7,
+      "sections": [
+        "AI 资本与牌局"
+      ],
+      "sourceTier": "media-original",
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -100,7 +161,23 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
+      "id": "blog.google",
+      "name": "blog.google",
+      "domain": "blog.google",
+      "latestPublishedAt": "2026-09-03",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 3,
+      "sections": [
+        "AI 产品前线",
+        "AI 能力底座"
+      ],
+      "sourceTier": "primary",
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -115,7 +192,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -130,7 +207,22 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "media-original",
-      "ageDays": 1,
+      "ageDays": 2,
+      "freshness": "fresh",
+      "monitorMode": "brief-observed"
+    },
+    {
+      "id": "president.georgetown.edu",
+      "name": "georgetown.edu",
+      "domain": "president.georgetown.edu",
+      "latestPublishedAt": "2026-09-03",
+      "lastIncludedAt": "2026-09-05",
+      "signalCount": 1,
+      "sections": [
+        "AI 行业现场"
+      ],
+      "sourceTier": "primary",
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -145,7 +237,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -160,7 +252,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -175,7 +267,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 1,
+      "ageDays": 2,
       "freshness": "fresh",
       "monitorMode": "brief-observed"
     },
@@ -190,8 +282,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -205,8 +297,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -220,8 +312,8 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -235,8 +327,8 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -250,8 +342,8 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -265,8 +357,8 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -280,8 +372,8 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "media-original",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -295,8 +387,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
+      "ageDays": 3,
+      "freshness": "watch",
       "monitorMode": "brief-observed"
     },
     {
@@ -310,21 +402,6 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 2,
-      "freshness": "fresh",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "techcrunch.com",
-      "name": "techcrunch.com",
-      "domain": "techcrunch.com",
-      "latestPublishedAt": "2026-09-01",
-      "lastIncludedAt": "2026-09-02",
-      "signalCount": 6,
-      "sections": [
-        "AI 资本与牌局"
-      ],
-      "sourceTier": "media-original",
       "ageDays": 3,
       "freshness": "watch",
       "monitorMode": "brief-observed"
@@ -341,7 +418,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -356,7 +433,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -371,7 +448,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -386,7 +463,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -401,7 +478,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -416,7 +493,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 3,
+      "ageDays": 4,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -431,7 +508,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -446,7 +523,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -461,7 +538,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -476,7 +553,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "media-original",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -491,7 +568,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -506,7 +583,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -521,7 +598,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 4,
+      "ageDays": 5,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -536,7 +613,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "evidence",
-      "ageDays": 6,
+      "ageDays": 7,
       "freshness": "watch",
       "monitorMode": "brief-observed"
     },
@@ -546,14 +623,14 @@
       "domain": "arxiv.org",
       "latestPublishedAt": "2026-08-28",
       "lastIncludedAt": "2026-09-01",
-      "signalCount": 9,
+      "signalCount": 5,
       "sections": [
         "AI 行业现场",
         "AI 能力底座"
       ],
       "sourceTier": "evidence",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -562,15 +639,15 @@
       "domain": "claude.com",
       "latestPublishedAt": "2026-08-28",
       "lastIncludedAt": "2026-09-01",
-      "signalCount": 5,
+      "signalCount": 4,
       "sections": [
         "AI 产品前线",
         "AI 行业现场",
         "AI 能力底座"
       ],
       "sourceTier": "evidence",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -585,8 +662,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -600,8 +677,8 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "evidence",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -615,8 +692,8 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -630,8 +707,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -645,8 +722,8 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -660,8 +737,8 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -675,8 +752,8 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -690,8 +767,8 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -705,8 +782,8 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 7,
-      "freshness": "watch",
+      "ageDays": 8,
+      "freshness": "stale",
       "monitorMode": "brief-observed"
     },
     {
@@ -723,7 +800,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -740,7 +817,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -755,7 +832,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -770,7 +847,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -785,7 +862,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -800,7 +877,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "evidence",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -815,7 +892,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -830,7 +907,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -845,7 +922,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -860,7 +937,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -875,7 +952,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -890,7 +967,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -905,7 +982,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -920,7 +997,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 8,
+      "ageDays": 9,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -930,13 +1007,13 @@
       "domain": "github.com",
       "latestPublishedAt": "2026-08-26",
       "lastIncludedAt": "2026-09-01",
-      "signalCount": 6,
+      "signalCount": 4,
       "sections": [
         "AI 产品前线",
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -951,23 +1028,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 9,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "blog.google",
-      "name": "blog.google",
-      "domain": "blog.google",
-      "latestPublishedAt": "2026-08-26",
-      "lastIncludedAt": "2026-08-27",
-      "signalCount": 2,
-      "sections": [
-        "AI 产品前线",
-        "AI 能力底座"
-      ],
-      "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -982,7 +1043,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -997,7 +1058,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1012,7 +1073,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1027,7 +1088,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1042,7 +1103,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 9,
+      "ageDays": 10,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1058,7 +1119,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "evidence",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1073,7 +1134,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1088,7 +1149,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1103,7 +1164,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1118,7 +1179,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1133,7 +1194,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 10,
+      "ageDays": 11,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1148,7 +1209,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "evidence",
-      "ageDays": 11,
+      "ageDays": 12,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1163,7 +1224,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "primary",
-      "ageDays": 11,
+      "ageDays": 12,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1178,7 +1239,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 11,
+      "ageDays": 12,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1193,7 +1254,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 11,
+      "ageDays": 12,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1208,7 +1269,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 11,
+      "ageDays": 12,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1223,22 +1284,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 12,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "finance.yahoo.com",
-      "name": "finance.yahoo.com",
-      "domain": "finance.yahoo.com",
-      "latestPublishedAt": "2026-08-21",
-      "lastIncludedAt": "2026-08-22",
-      "signalCount": 1,
-      "sections": [
-        "AI 资本与牌局"
-      ],
-      "sourceTier": "evidence",
-      "ageDays": 14,
+      "ageDays": 13,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1253,7 +1299,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 14,
+      "ageDays": 15,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1268,7 +1314,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 15,
+      "ageDays": 16,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1283,22 +1329,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 15,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "sierra.ai",
-      "name": "sierra.ai",
-      "domain": "sierra.ai",
-      "latestPublishedAt": "2026-08-20",
-      "lastIncludedAt": "2026-08-22",
-      "signalCount": 1,
-      "sections": [
-        "AI 产品前线"
-      ],
-      "sourceTier": "primary",
-      "ageDays": 15,
+      "ageDays": 16,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1308,21 +1339,6 @@
       "domain": "callosum.com",
       "latestPublishedAt": "2026-08-20",
       "lastIncludedAt": "2026-08-23",
-      "signalCount": 1,
-      "sections": [
-        "AI 资本与牌局"
-      ],
-      "sourceTier": "primary",
-      "ageDays": 15,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "bardeen.ai",
-      "name": "bardeen.ai",
-      "domain": "bardeen.ai",
-      "latestPublishedAt": "2026-08-19",
-      "lastIncludedAt": "2026-08-22",
       "signalCount": 1,
       "sections": [
         "AI 资本与牌局"
@@ -1343,7 +1359,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 16,
+      "ageDays": 17,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1358,7 +1374,7 @@
         "AI 能力底座"
       ],
       "sourceTier": "primary",
-      "ageDays": 17,
+      "ageDays": 18,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1373,22 +1389,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "evidence",
-      "ageDays": 17,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "donews.com",
-      "name": "donews.com",
-      "domain": "donews.com",
-      "latestPublishedAt": "2026-08-18",
-      "lastIncludedAt": "2026-08-22",
-      "signalCount": 1,
-      "sections": [
-        "AI 资本与牌局"
-      ],
-      "sourceTier": "evidence",
-      "ageDays": 17,
+      "ageDays": 18,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1403,22 +1404,7 @@
         "AI 产品前线"
       ],
       "sourceTier": "primary",
-      "ageDays": 17,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "f5.com",
-      "name": "f5.com",
-      "domain": "f5.com",
-      "latestPublishedAt": "2026-08-18",
-      "lastIncludedAt": "2026-08-22",
-      "signalCount": 1,
-      "sections": [
-        "AI 产品前线"
-      ],
-      "sourceTier": "primary",
-      "ageDays": 17,
+      "ageDays": 18,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1433,7 +1419,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 17,
+      "ageDays": 18,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1448,22 +1434,7 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 18,
-      "freshness": "stale",
-      "monitorMode": "brief-observed"
-    },
-    {
-      "id": "tech.eu",
-      "name": "tech.eu",
-      "domain": "tech.eu",
-      "latestPublishedAt": "2026-08-17",
-      "lastIncludedAt": "2026-08-24",
-      "signalCount": 1,
-      "sections": [
-        "AI 资本与牌局"
-      ],
-      "sourceTier": "evidence",
-      "ageDays": 18,
+      "ageDays": 19,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1478,7 +1449,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 18,
+      "ageDays": 19,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1493,7 +1464,7 @@
         "AI 资本与牌局"
       ],
       "sourceTier": "primary",
-      "ageDays": 18,
+      "ageDays": 19,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     },
@@ -1508,12 +1479,102 @@
         "AI 行业现场"
       ],
       "sourceTier": "evidence",
-      "ageDays": 24,
+      "ageDays": 25,
       "freshness": "stale",
       "monitorMode": "brief-observed"
     }
   ],
   "signals": [
+    {
+      "id": "2026-09-05-3-1",
+      "title": "AI Score 融资 540 万美元扩展企业 Agent 治理",
+      "description": "AI Score 获得 540 万美元种子轮，可持续盘点 Agent、分配责任与风险并施加运行护栏。资本把实时治理视为企业部署 Agent 的独立基础层。",
+      "company": "AI Score",
+      "topicCluster": "enterprise-agent-governance-seed-funding",
+      "productFamily": "ai-score-governance-platform",
+      "section": "AI 资本与牌局",
+      "sourceName": "tech.eu",
+      "sourceUrl": "https://tech.eu/2026/09/04/uk-startup-ai-score-raises-54m-to-scale-its-enterprise-ai-governance-platform/",
+      "sourceTier": "media-original",
+      "discoverySource": "Tech.eu",
+      "domain": "tech.eu",
+      "publishedAt": "2026-09-04",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 79,
+        "factors": {
+          "freshness": 30,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "strong"
+      }
+    },
+    {
+      "id": "2026-09-05-2-1",
+      "title": "Lumafield 发布 Quality Agent 自动识别工业零件缺陷",
+      "description": "Quality Agent 基于工业 X 射线 CT 基础模型，对照合格零件发现未知偏差，并向工程师提交根因证据。制造业 Agent 开始处理物理质量信号。",
+      "company": "Lumafield",
+      "topicCluster": "industrial-ct-physical-ai-quality-inspection",
+      "productFamily": "lumafield-quality-agent",
+      "section": "AI 行业现场",
+      "sourceName": "globenewswire.com",
+      "sourceUrl": "https://www.globenewswire.com/news-release/2026/09/03/3355956/0/en/lumafield-introduces-quality-agent-a-physical-ai-technology-that-automates-defect-detection-and-root-cause-analysis-for-manufacturers.html",
+      "sourceTier": "primary",
+      "discoverySource": "Lumafield GlobeNewswire Release",
+      "domain": "globenewswire.com",
+      "publishedAt": "2026-09-03",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 75,
+        "factors": {
+          "freshness": 26,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-4-3",
+      "title": "Deepdub 发布 Phantom Z 3.4 多语音合成模型",
+      "description": "Phantom Z 3.4 在 48 kHz 下将首包音频延迟压至 150 毫秒，并校正日期与金额读法。Voice Agent 可用性取决于细节准确率。",
+      "company": "Deepdub",
+      "topicCluster": "multilingual-real-time-voice-agent-tts",
+      "productFamily": "phantom-z-3-4-conversational",
+      "section": "AI 能力底座",
+      "sourceName": "prnewswire.com",
+      "sourceUrl": "https://www.prnewswire.com/news-releases/deepdub-launches-phantom-z-3-4-conversational-multilingual-text-to-speech-built-to-survive-real-customers-not-just-demos-302869134.html",
+      "sourceTier": "primary",
+      "discoverySource": "Deepdub Press Release",
+      "domain": "prnewswire.com",
+      "publishedAt": "2026-09-03",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 75,
+        "factors": {
+          "freshness": 26,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
     {
       "id": "2026-09-04-1-1",
       "title": "Hostinger 上线 Agent 承接建站后的经营任务",
@@ -1532,16 +1593,16 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 79,
+        "total": 75,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
-        "strength": "strong"
+        "strength": "medium"
       }
     },
     {
@@ -1562,16 +1623,16 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 79,
+        "total": 75,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
-        "strength": "strong"
+        "strength": "medium"
       }
     },
     {
@@ -1592,16 +1653,16 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 79,
+        "total": 75,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
-        "strength": "strong"
+        "strength": "medium"
       }
     },
     {
@@ -1622,16 +1683,16 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 79,
+        "total": 75,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
-        "strength": "strong"
+        "strength": "medium"
       }
     },
     {
@@ -1652,16 +1713,106 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 79,
+        "total": 75,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
-        "strength": "strong"
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-2-2",
+      "title": "强生用 AI 推荐临床试验站点使入组量提升 2.6 倍",
+      "description": "强生披露 AI 已用于药物发现、数字生物标志物、手术规划和供应预测，推荐站点的试验入组量提升 2.6 倍。医疗部署正用患者结果衡量价值。",
+      "company": "Johnson & Johnson",
+      "topicCluster": "healthcare-ai-clinical-trial-enrollment",
+      "productFamily": "jnj-healthcare-ai",
+      "section": "AI 行业现场",
+      "sourceName": "jnj.com",
+      "sourceUrl": "https://www.jnj.com/our-company/artificial-intelligence-advancing-healthcare-from-new-jersey-to-the-world",
+      "sourceTier": "primary",
+      "discoverySource": "Johnson & Johnson Company Story",
+      "domain": "jnj.com",
+      "publishedAt": "2026-09-04",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 74,
+        "factors": {
+          "freshness": 30,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-3-2",
+      "title": "Hivebotics 融资 600 万美元量产清洁机器人",
+      "description": "Hivebotics 完成 600 万美元 A 轮，将 Abluo 从试点推向量产，并扩展四个市场。机器人融资开始直接对应生产规模和完整场景交付。",
+      "company": "Hivebotics",
+      "topicCluster": "restroom-cleaning-robot-series-a-production",
+      "productFamily": "hivebotics-abluo",
+      "section": "AI 资本与牌局",
+      "sourceName": "publicnow.com",
+      "sourceUrl": "https://www.publicnow.com/view/1BD8BE16FB80DA6DF7C30C7429483351681546C3",
+      "sourceTier": "primary",
+      "discoverySource": "Vertex Ventures Press Release",
+      "domain": "publicnow.com",
+      "publishedAt": "2026-09-04",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 74,
+        "factors": {
+          "freshness": 30,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-4-2",
+      "title": "Multiverse Computing 发布 Quasar 438B 推理模型",
+      "description": "Quasar 438B 面向企业 Agent 与 Coding Agent，500 个输出 token 推理耗时 15.3 秒。模型将任务循环延迟列为核心指标。",
+      "company": "Multiverse Computing",
+      "topicCluster": "enterprise-reasoning-coding-agent-latency-model",
+      "productFamily": "quasar-438b",
+      "section": "AI 能力底座",
+      "sourceName": "globenewswire.com",
+      "sourceUrl": "https://www.globenewswire.com/news-release/2026/09/02/3355465/0/en/multiverse-computing-launches-quasar-438b-the-highest-scoring-european-model-on-artificial-analysis-intelligence-index.html",
+      "sourceTier": "primary",
+      "discoverySource": "Multiverse Computing GlobeNewswire Release",
+      "domain": "globenewswire.com",
+      "publishedAt": "2026-09-02",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 71,
+        "factors": {
+          "freshness": 22,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
       }
     },
     {
@@ -1682,9 +1833,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1712,9 +1863,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1742,9 +1893,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1772,9 +1923,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1802,9 +1953,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1832,9 +1983,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1862,9 +2013,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -1892,12 +2043,102 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 75,
+        "total": 71,
+        "factors": {
+          "freshness": 22,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-2-3",
+      "title": "乔治城大学启动全校 AI 使用规范与学生顾问试点",
+      "description": "学校将在本学年交付 AI 使用原则和实操指南，并培训学生顾问协助教师改造课程。高校治理开始把中央护栏与院系自主执行拆开设计。",
+      "company": "Georgetown University",
+      "topicCluster": "university-ai-policy-student-fellows",
+      "productFamily": "georgetown-ai-initiative",
+      "section": "AI 行业现场",
+      "sourceName": "georgetown.edu",
+      "sourceUrl": "https://president.georgetown.edu/messages/ai-initiative-sep-2026/",
+      "sourceTier": "primary",
+      "discoverySource": "Georgetown University President Message",
+      "domain": "president.georgetown.edu",
+      "publishedAt": "2026-09-03",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 70,
         "factors": {
           "freshness": 26,
           "evidence": 16,
           "metadata": 9,
-          "agentRelevance": 10,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-3-3",
+      "title": "Ultrahuman 融资 7000 万美元开发可编程智能戒指",
+      "description": "高通创投参与 7000 万美元融资，Ultrahuman 将增加戒指本地算力并开放第三方程序。可穿戴设备的资本故事转向常驻 AI 交互入口。",
+      "company": "Ultrahuman",
+      "topicCluster": "programmable-smart-ring-on-device-ai-funding",
+      "productFamily": "ultrahuman-programmable-ring",
+      "section": "AI 资本与牌局",
+      "sourceName": "techcrunch.com",
+      "sourceUrl": "https://techcrunch.com/2026/09/03/qualcomm-backs-ultrahuman-in-70m-round-on-bet-to-turn-smart-rings-into-computers/",
+      "sourceTier": "media-original",
+      "discoverySource": "TechCrunch",
+      "domain": "techcrunch.com",
+      "publishedAt": "2026-09-03",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 70,
+        "factors": {
+          "freshness": 26,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-4-1",
+      "title": "Google 发布 WeatherNext 3 每小时更新天气预测",
+      "description": "WeatherNext 3 直接读取实时卫星数据，每小时生成最高 5 公里分辨率预报，并已接入搜索、地图和云平台。天气模型正在缩短数据滞后。",
+      "company": "Google DeepMind and Google Research",
+      "topicCluster": "real-time-satellite-high-resolution-weather-model",
+      "productFamily": "weathernext-3",
+      "section": "AI 能力底座",
+      "sourceName": "blog.google",
+      "sourceUrl": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-weathernext-3/",
+      "sourceTier": "primary",
+      "discoverySource": "Google Blog",
+      "domain": "blog.google",
+      "publishedAt": "2026-09-03",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 70,
+        "factors": {
+          "freshness": 26,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
           "resonance": 0,
           "editorial": 14
         },
@@ -1922,9 +2163,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -1952,9 +2193,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -1982,9 +2223,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2012,9 +2253,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2042,9 +2283,9 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2072,12 +2313,72 @@
       "briefDate": "2026-09-04",
       "workflowStatus": "published",
       "score": {
-        "total": 74,
+        "total": 70,
         "factors": {
-          "freshness": 30,
+          "freshness": 26,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-1-1",
+      "title": "Fobi 发布 AgenticBrain 让客户对话直接完成服务操作",
+      "description": "AgenticBrain 接入企业现有系统，可在 WhatsApp 等渠道完成搜索、预订、修改、验证和追踪。客户服务产品开始把回答问题延伸到授权操作。",
+      "company": "Fobi AI",
+      "topicCluster": "conversational-customer-service-authorized-actions",
+      "productFamily": "fobi-agenticbrain",
+      "section": "AI 产品前线",
+      "sourceName": "globenewswire.com",
+      "sourceUrl": "https://www.globenewswire.com/news-release/2026/09/01/3354114/0/en/fobi-ai-launches-agenticbrain-bringing-conversational-agentic-ai-to-the-fobi-flywheel.html",
+      "sourceTier": "primary",
+      "discoverySource": "Fobi AI GlobeNewswire Release",
+      "domain": "globenewswire.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 67,
+        "factors": {
+          "freshness": 18,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-1-2",
+      "title": "Ema 发布 HR、IT 与财务 Agent 执行企业职能工作",
+      "description": "三类 Agent 可跨薪酬、身份、设备和协作系统执行入职、权限及报销流程，并保留审批和审计记录。企业自动化开始按职能直接交付完整工作。",
+      "company": "Ema",
+      "topicCluster": "enterprise-hr-it-finance-functional-agents",
+      "productFamily": "ema-hr-it-finance-hub",
+      "section": "AI 产品前线",
+      "sourceName": "globenewswire.com",
+      "sourceUrl": "https://www.globenewswire.com/news-release/2026/09/01/3354202/0/en/ema-launches-hr-it-and-finance-hub-to-help-enterprises-put-ai-employees-to-work-in-minutes.html",
+      "sourceTier": "primary",
+      "discoverySource": "Ema GlobeNewswire Release",
+      "domain": "globenewswire.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 67,
+        "factors": {
+          "freshness": 18,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
@@ -2102,9 +2403,9 @@
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
-        "total": 71,
+        "total": 67,
         "factors": {
-          "freshness": 22,
+          "freshness": 18,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -2132,9 +2433,9 @@
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
-        "total": 71,
+        "total": 67,
         "factors": {
-          "freshness": 22,
+          "freshness": 18,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -2162,9 +2463,9 @@
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
-        "total": 71,
+        "total": 67,
         "factors": {
-          "freshness": 22,
+          "freshness": 18,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -2192,9 +2493,9 @@
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
-        "total": 71,
+        "total": 67,
         "factors": {
-          "freshness": 22,
+          "freshness": 18,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -2222,9 +2523,9 @@
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
-        "total": 71,
+        "total": 67,
         "factors": {
-          "freshness": 22,
+          "freshness": 18,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 10,
@@ -2252,9 +2553,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 70,
+        "total": 66,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2282,9 +2583,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 70,
+        "total": 66,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2312,9 +2613,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 70,
+        "total": 66,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2342,9 +2643,9 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 70,
+        "total": 66,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
@@ -2372,132 +2673,12 @@
       "briefDate": "2026-09-03",
       "workflowStatus": "published",
       "score": {
-        "total": 70,
+        "total": 66,
         "factors": {
-          "freshness": 26,
+          "freshness": 22,
           "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-01-1-1",
-      "title": "Archive 发布 Archie 筛选创作者",
-      "description": "Archive 在 Slack 上线 Archie，可按品牌简报分析创作者内容、受众真实性和竞品冲突，并返回带理由的候选名单。营销团队可把人工筛选交给专用 Agent。",
-      "company": "Archive",
-      "topicCluster": "creator-marketing-agent-vetting-shortlist",
-      "productFamily": "archive-archie-creator-agent",
-      "section": "AI 产品前线",
-      "sourceName": "archive.com",
-      "sourceUrl": "https://archive.com/blog/archie-creator-search-agent",
-      "sourceTier": "primary",
-      "discoverySource": "Archive Product Blog",
-      "domain": "archive.com",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
-      "workflowStatus": "published",
-      "score": {
-        "total": 67,
-        "factors": {
-          "freshness": 18,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-01-1-2",
-      "title": "Broadcom 发布 AgentMinder 逐次授权 Agent 行动",
-      "description": "Broadcom 发布 AgentMinder，在 Agent 调用企业资源前核验身份、任务意图、工具与实时风险。企业权限控制由一次性准入转为逐次行动重新授权。",
-      "company": "Broadcom",
-      "topicCluster": "enterprise-agent-runtime-continuous-authorization",
-      "productFamily": "broadcom-agentminder",
-      "section": "AI 产品前线",
-      "sourceName": "broadcom.com",
-      "sourceUrl": "https://investors.broadcom.com/node/64636/pdf",
-      "sourceTier": "primary",
-      "discoverySource": "Broadcom Investor News",
-      "domain": "investors.broadcom.com",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
-      "workflowStatus": "published",
-      "score": {
-        "total": 67,
-        "factors": {
-          "freshness": 18,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-01-2-3",
-      "title": "CrowdStrike 推出 AI 合作伙伴专项计划",
-      "description": "CrowdStrike 在伙伴计划中新增 AI 专项，支持集成商构建、转售和交付安全的企业 AI 项目。Agent 安全正从产品采购扩展为渠道能力和实施服务。",
-      "company": "CrowdStrike",
-      "topicCluster": "agentic-security-partner-specialization-services",
-      "productFamily": "crowdstrike-ai-partner-specialization",
-      "section": "AI 行业现场",
-      "sourceName": "crowdstrike.com",
-      "sourceUrl": "https://ir.crowdstrike.com/node/17466/pdf",
-      "sourceTier": "primary",
-      "discoverySource": "CrowdStrike Investor Relations",
-      "domain": "ir.crowdstrike.com",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
-      "workflowStatus": "published",
-      "score": {
-        "total": 67,
-        "factors": {
-          "freshness": 18,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-01-3-2",
-      "title": "Apate.AI 完成 1140 万澳元种子轮融资",
-      "description": "Apate.AI 完成一千一百四十万澳元种子轮，其 Voice Agent 和文本 Agent 已替银行与诈骗者完成二百五十万次对话。资金将用于欧美扩张。",
-      "company": "Apate.AI",
-      "topicCluster": "anti-scam-voice-agent-seed-funding",
-      "productFamily": "apate-ai-scam-disruption",
-      "section": "AI 资本与牌局",
-      "sourceName": "startupdaily.net",
-      "sourceUrl": "https://www.startupdaily.net/topic/funding/anti-scammer-startup-apate-ai-nabs-11-4-million-seed-raise-amid-us-move/",
-      "sourceTier": "media-original",
-      "discoverySource": "Startup Daily",
-      "domain": "startupdaily.net",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
-      "workflowStatus": "published",
-      "score": {
-        "total": 67,
-        "factors": {
-          "freshness": 18,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
           "resonance": 0,
           "editorial": 14
         },
@@ -2522,192 +2703,12 @@
       "briefDate": "2026-08-30",
       "workflowStatus": "published",
       "score": {
-        "total": 67,
+        "total": 65,
         "factors": {
-          "freshness": 10,
+          "freshness": 8,
           "evidence": 24,
           "metadata": 9,
           "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-2-1",
-      "title": "Eudia 与 Harbor 合作部署企业法律 AI",
-      "description": "Eudia 与 Harbor 合作，把合同、政策和法规知识接入法律工作流，并面向大型律所和法务部门实施。法律 AI 的竞争延伸到交付与采用。",
-      "company": "Eudia and Harbor",
-      "topicCluster": "enterprise-legal-ai-services-workflow-deployment",
-      "productFamily": "eudia-harbor-legal-ai-partnership",
-      "section": "AI 行业现场",
-      "sourceName": "eudia.one",
-      "sourceUrl": "https://eudia.one/news/eudia-and-harbor-partner-to-accelerate-ai-transformation-for-enterprise-legal-teams",
-      "sourceTier": "primary",
-      "discoverySource": "Eudia Newsroom",
-      "domain": "eudia.one",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-2-3",
-      "title": "Medtronic 投资 Cornerstone 扩展手术机器人",
-      "description": "Medtronic 投资约七亿美元并取得 Sentire 手术机器人在部分海外市场的分销权，与 Hugo 组成双平台。医疗机器人竞争开始依赖全球渠道。",
-      "company": "Medtronic and Cornerstone Robotics",
-      "topicCluster": "surgical-robotics-global-distribution-investment",
-      "productFamily": "medtronic-cornerstone-sentire",
-      "section": "AI 行业现场",
-      "sourceName": "medtronic.com",
-      "sourceUrl": "https://news.medtronic.com/2026-09-01-Medtronic-Announces-Strategic-Partnership-with-Cornerstone-Robotics-to-Further-Expand-Global-Access-to-Robotic-Assisted-Surgery",
-      "sourceTier": "primary",
-      "discoverySource": "Medtronic Newsroom",
-      "domain": "news.medtronic.com",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-3-3",
-      "title": "Physical Superintelligence 获 5800 万美元研究物理",
-      "description": "Physical Superintelligence 完成五千八百万美元种子轮，将用虚拟物理学家构建世界模型并优化数据中心。AI 科研实验室获得独立资本配置。",
-      "company": "Physical Superintelligence",
-      "topicCluster": "ai-physics-research-lab-world-model-seed",
-      "productFamily": "physical-superintelligence-virtual-physicists",
-      "section": "AI 资本与牌局",
-      "sourceName": "prnewswire.com",
-      "sourceUrl": "https://www.prnewswire.com/news-releases/introducing-physical-superintelligence-the-worlds-most-advanced-physics-lab-staffed-by-virtual-physicists-to-discover-new-laws-of-the-universe-302865561.html",
-      "sourceTier": "primary",
-      "discoverySource": "Physical Superintelligence Press Release",
-      "domain": "prnewswire.com",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-4-1",
-      "title": "Anthropic 发布 Claude Fable 5.1 支持长任务",
-      "description": "Claude Fable 5.1 面向跨应用长任务，可规划、调用工具和恢复失败；缓存读取价格下降七成五。前沿模型开始同时优化能力与任务成本。",
-      "company": "Anthropic",
-      "topicCluster": "frontier-model-long-running-agent-cost-efficiency",
-      "productFamily": "claude-fable-5-1",
-      "section": "AI 能力底座",
-      "sourceName": "anthropic.com",
-      "sourceUrl": "https://www.anthropic.com/claude/fable",
-      "sourceTier": "primary",
-      "discoverySource": "Anthropic Model Page",
-      "domain": "anthropic.com",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-4-2",
-      "title": "OpenAI 确认 Astra 达到关键网络安全门槛",
-      "description": "OpenAI 评估 Astra 已能在较少人工引导下发现并利用高防护系统漏洞，因此将高级网络能力先限于测试者。模型发布开始按能力风险拆分访问范围。",
-      "company": "OpenAI",
-      "topicCluster": "critical-cyber-capability-tiered-model-access",
-      "productFamily": "openai-astra-cyber-safeguards",
-      "section": "AI 能力底座",
-      "sourceName": "openai.com",
-      "sourceUrl": "https://openai.com/index/path-to-astra/",
-      "sourceTier": "primary",
-      "discoverySource": "OpenAI Safety Blog",
-      "domain": "openai.com",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-09-02-4-3",
-      "title": "MLCommons 发布 MLPerf Storage 3.0 基准",
-      "description": "MLPerf Storage 3.0 新增 KV 缓存、向量数据库和 S3 对象存储测试，共十九家机构提交结果。AI 存储采购获得覆盖训练与推理的统一口径。",
-      "company": "MLCommons",
-      "topicCluster": "ai-storage-benchmark-kv-cache-vector-database-s3",
-      "productFamily": "mlperf-storage-3-0",
-      "section": "AI 能力底座",
-      "sourceName": "mlcommons.org",
-      "sourceUrl": "https://mlcommons.org/2026/09/mlperf-storage-v3-0-results/",
-      "sourceTier": "primary",
-      "discoverySource": "MLCommons",
-      "domain": "mlcommons.org",
-      "publishedAt": "2026-09-01",
-      "discoveredAt": "2026-09-02",
-      "briefDate": "2026-09-02",
-      "workflowStatus": "published",
-      "score": {
-        "total": 66,
-        "factors": {
-          "freshness": 22,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
           "resonance": 0,
           "editorial": 14
         },
@@ -3045,126 +3046,6 @@
       }
     },
     {
-      "id": "2026-08-22-2-1",
-      "title": "FinRCA-Bench 发现财务 AI 的主要瓶颈在证据检索",
-      "description": "在两千二百五十个对账案例中，仅更换检索方式就把精确率从百分之二点零五提高到七十二点四四。财务 Agent 的审计性先取决于证据链。",
-      "company": "FinRCA-Bench",
-      "topicCluster": "financial-reconciliation-evidence-retrieval-benchmark",
-      "productFamily": "finrca-bench",
-      "section": "AI 行业现场",
-      "sourceName": "arxiv.org",
-      "sourceUrl": "https://arxiv.org/abs/2608.18534",
-      "sourceTier": "evidence",
-      "discoverySource": "arXiv",
-      "domain": "arxiv.org",
-      "publishedAt": "2026-08-19",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 65,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-08-22-2-2",
-      "title": "水务 Multi-Agent 系统用可验证弃答控制开挖决策",
-      "description": "系统让执行者、监督者和 LLM 审计器共同核验证据，在噪声测试中只对高置信事件行动。基础设施 Agent 的价值也来自知道何时不执行。",
-      "company": "Verifiable Abstention Leak Diagnosis",
-      "topicCluster": "water-infrastructure-verifiable-abstention-agent",
-      "productFamily": "water-leak-diagnosis-multi-agent",
-      "section": "AI 行业现场",
-      "sourceName": "arxiv.org",
-      "sourceUrl": "https://arxiv.org/abs/2608.18836",
-      "sourceTier": "evidence",
-      "discoverySource": "arXiv",
-      "domain": "arxiv.org",
-      "publishedAt": "2026-08-19",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 65,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-08-22-2-3",
-      "title": "车联网 Multi-Agent 框架按十毫秒和五十毫秒分层响应",
-      "description": "研究提出车端十毫秒、路侧五十毫秒和云端联邦学习的三级防御架构，并把不确定消息升级处理。该方案仍需验证边缘投毒与监管问题。",
-      "company": "V2X Multi-Agent Cyber Defense",
-      "topicCluster": "connected-vehicle-multi-agent-cyber-defense-latency",
-      "productFamily": "v2x-multi-agent-security",
-      "section": "AI 行业现场",
-      "sourceName": "arxiv.org",
-      "sourceUrl": "https://arxiv.org/abs/2608.19135",
-      "sourceTier": "evidence",
-      "discoverySource": "arXiv",
-      "domain": "arxiv.org",
-      "publishedAt": "2026-08-19",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 65,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
-      "id": "2026-08-22-4-3",
-      "title": "DocClaw 用统一 Agent 循环处理 OCR、问答和信息抽取",
-      "description": "DocClaw 让同一 Agent 按文档技能调用工具，并用结构化状态复用中间知识。文档 AI 正从任务专用流水线转向共享执行框架。",
-      "company": "DocClaw",
-      "topicCluster": "unified-document-processing-agent-skills-state",
-      "productFamily": "docclaw-document-agent",
-      "section": "AI 能力底座",
-      "sourceName": "arxiv.org",
-      "sourceUrl": "https://arxiv.org/abs/2608.18685",
-      "sourceTier": "evidence",
-      "discoverySource": "arXiv",
-      "domain": "arxiv.org",
-      "publishedAt": "2026-08-19",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 65,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "medium"
-      }
-    },
-    {
       "id": "2026-08-24-3-3",
       "title": "Space 融资二百四十万美元建设 Agent 原生文件系统",
       "description": "Space 让应用、用户和 Agent 访问同一套实时文件，只按需传输数据片段。融资指向一个新瓶颈：长任务等待文件下载和重复索引。",
@@ -3255,19 +3136,169 @@
       }
     },
     {
-      "id": "2026-09-02-2-2",
-      "title": "NVIDIA 与 MediaTek 扩展端云 AI 芯片合作",
-      "description": "MediaTek 将采用 NVIDIA NVLink Fusion，为云厂商开发可接入机架级系统的定制 XPU，并把合作扩展到本地计算与汽车平台。",
-      "company": "NVIDIA and MediaTek",
-      "topicCluster": "edge-cloud-ai-custom-xpu-nvlink-platform",
-      "productFamily": "nvidia-mediatek-edge-cloud-ai",
-      "section": "AI 行业现场",
-      "sourceName": "nvidia.com",
-      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
+      "id": "2026-09-01-1-1",
+      "title": "Archive 发布 Archie 筛选创作者",
+      "description": "Archive 在 Slack 上线 Archie，可按品牌简报分析创作者内容、受众真实性和竞品冲突，并返回带理由的候选名单。营销团队可把人工筛选交给专用 Agent。",
+      "company": "Archive",
+      "topicCluster": "creator-marketing-agent-vetting-shortlist",
+      "productFamily": "archive-archie-creator-agent",
+      "section": "AI 产品前线",
+      "sourceName": "archive.com",
+      "sourceUrl": "https://archive.com/blog/archie-creator-search-agent",
       "sourceTier": "primary",
-      "discoverySource": "NVIDIA Newsroom",
-      "domain": "nvidianews.nvidia.com",
+      "discoverySource": "Archive Product Blog",
+      "domain": "archive.com",
       "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 63,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-01-1-2",
+      "title": "Broadcom 发布 AgentMinder 逐次授权 Agent 行动",
+      "description": "Broadcom 发布 AgentMinder，在 Agent 调用企业资源前核验身份、任务意图、工具与实时风险。企业权限控制由一次性准入转为逐次行动重新授权。",
+      "company": "Broadcom",
+      "topicCluster": "enterprise-agent-runtime-continuous-authorization",
+      "productFamily": "broadcom-agentminder",
+      "section": "AI 产品前线",
+      "sourceName": "broadcom.com",
+      "sourceUrl": "https://investors.broadcom.com/node/64636/pdf",
+      "sourceTier": "primary",
+      "discoverySource": "Broadcom Investor News",
+      "domain": "investors.broadcom.com",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 63,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-01-2-3",
+      "title": "CrowdStrike 推出 AI 合作伙伴专项计划",
+      "description": "CrowdStrike 在伙伴计划中新增 AI 专项，支持集成商构建、转售和交付安全的企业 AI 项目。Agent 安全正从产品采购扩展为渠道能力和实施服务。",
+      "company": "CrowdStrike",
+      "topicCluster": "agentic-security-partner-specialization-services",
+      "productFamily": "crowdstrike-ai-partner-specialization",
+      "section": "AI 行业现场",
+      "sourceName": "crowdstrike.com",
+      "sourceUrl": "https://ir.crowdstrike.com/node/17466/pdf",
+      "sourceTier": "primary",
+      "discoverySource": "CrowdStrike Investor Relations",
+      "domain": "ir.crowdstrike.com",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 63,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-01-3-2",
+      "title": "Apate.AI 完成 1140 万澳元种子轮融资",
+      "description": "Apate.AI 完成一千一百四十万澳元种子轮，其 Voice Agent 和文本 Agent 已替银行与诈骗者完成二百五十万次对话。资金将用于欧美扩张。",
+      "company": "Apate.AI",
+      "topicCluster": "anti-scam-voice-agent-seed-funding",
+      "productFamily": "apate-ai-scam-disruption",
+      "section": "AI 资本与牌局",
+      "sourceName": "startupdaily.net",
+      "sourceUrl": "https://www.startupdaily.net/topic/funding/anti-scammer-startup-apate-ai-nabs-11-4-million-seed-raise-amid-us-move/",
+      "sourceTier": "media-original",
+      "discoverySource": "Startup Daily",
+      "domain": "startupdaily.net",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 63,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 10,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-05-1-3",
+      "title": "Gauth 上线 AI Course 让学生生成并分享个性化课程",
+      "description": "Gauth 提供 200 多门高中数学课程，并允许学生围绕任意主题生成带可视化、测验和 AI 导师的课程。教育产品把内容生产权交给学习者。",
+      "company": "Gauth",
+      "topicCluster": "student-generated-personalized-ai-courses",
+      "productFamily": "gauth-ai-course",
+      "section": "AI 产品前线",
+      "sourceName": "prnewswire.com",
+      "sourceUrl": "https://www.prnewswire.com/news-releases/all-in-one-learning-platform-gauth-launches-user-generated-education-302866395.html",
+      "sourceTier": "primary",
+      "discoverySource": "Gauth Press Release",
+      "domain": "prnewswire.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-05",
+      "briefDate": "2026-09-05",
+      "workflowStatus": "published",
+      "score": {
+        "total": 62,
+        "factors": {
+          "freshness": 18,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-02-2-1",
+      "title": "Eudia 与 Harbor 合作部署企业法律 AI",
+      "description": "Eudia 与 Harbor 合作，把合同、政策和法规知识接入法律工作流，并面向大型律所和法务部门实施。法律 AI 的竞争延伸到交付与采用。",
+      "company": "Eudia and Harbor",
+      "topicCluster": "enterprise-legal-ai-services-workflow-deployment",
+      "productFamily": "eudia-harbor-legal-ai-partnership",
+      "section": "AI 行业现场",
+      "sourceName": "eudia.one",
+      "sourceUrl": "https://eudia.one/news/eudia-and-harbor-partner-to-accelerate-ai-transformation-for-enterprise-legal-teams",
+      "sourceTier": "primary",
+      "discoverySource": "Eudia Newsroom",
+      "domain": "eudia.one",
+      "publishedAt": "2026-09-01",
       "discoveredAt": "2026-09-02",
       "briefDate": "2026-09-02",
       "workflowStatus": "published",
@@ -3285,21 +3316,21 @@
       }
     },
     {
-      "id": "2026-09-01-2-2",
-      "title": "ARPA-H 授予罕见病 AI 研发合同",
-      "description": "ARPA-H 通过 RAPID 计划资助团队整合临床、基因、影像、语音和患者数据，用 AI 提前识别罕见病。医疗能力需由共享数据、评测和真实诊疗共同验证。",
-      "company": "ARPA-H",
-      "topicCluster": "rare-disease-multimodal-ai-contracts",
-      "productFamily": "arpa-h-rapid",
+      "id": "2026-09-02-2-3",
+      "title": "Medtronic 投资 Cornerstone 扩展手术机器人",
+      "description": "Medtronic 投资约七亿美元并取得 Sentire 手术机器人在部分海外市场的分销权，与 Hugo 组成双平台。医疗机器人竞争开始依赖全球渠道。",
+      "company": "Medtronic and Cornerstone Robotics",
+      "topicCluster": "surgical-robotics-global-distribution-investment",
+      "productFamily": "medtronic-cornerstone-sentire",
       "section": "AI 行业现场",
-      "sourceName": "arpa-h.gov",
-      "sourceUrl": "https://arpa-h.gov/news-and-events/arpa-h-announces-awards-advance-ai-rare-disease-diagnosis-and-treatment",
+      "sourceName": "medtronic.com",
+      "sourceUrl": "https://news.medtronic.com/2026-09-01-Medtronic-Announces-Strategic-Partnership-with-Cornerstone-Robotics-to-Further-Expand-Global-Access-to-Robotic-Assisted-Surgery",
       "sourceTier": "primary",
-      "discoverySource": "ARPA-H Newsroom",
-      "domain": "arpa-h.gov",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
+      "discoverySource": "Medtronic Newsroom",
+      "domain": "news.medtronic.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
         "total": 62,
@@ -3315,21 +3346,21 @@
       }
     },
     {
-      "id": "2026-09-01-3-1",
-      "title": "英国启动 1 亿英镑主权 AI 采购计划",
-      "description": "英国启动一亿英镑主权 AI 研发采购计划，首批竞赛覆盖医疗、国家安全、网络韧性和算力。政府用预付款和保留知识产权降低初创公司进入公共合同的门槛。",
-      "company": "UK Government",
-      "topicCluster": "sovereign-ai-public-procurement-startup-funding",
-      "productFamily": "uk-sovereign-ai-rd-procurement",
+      "id": "2026-09-02-3-3",
+      "title": "Physical Superintelligence 获 5800 万美元研究物理",
+      "description": "Physical Superintelligence 完成五千八百万美元种子轮，将用虚拟物理学家构建世界模型并优化数据中心。AI 科研实验室获得独立资本配置。",
+      "company": "Physical Superintelligence",
+      "topicCluster": "ai-physics-research-lab-world-model-seed",
+      "productFamily": "physical-superintelligence-virtual-physicists",
       "section": "AI 资本与牌局",
-      "sourceName": "gov.uk",
-      "sourceUrl": "https://www.gov.uk/government/news/100-million-competition-to-back-british-ai-companies-to-fix-public-services",
+      "sourceName": "prnewswire.com",
+      "sourceUrl": "https://www.prnewswire.com/news-releases/introducing-physical-superintelligence-the-worlds-most-advanced-physics-lab-staffed-by-virtual-physicists-to-discover-new-laws-of-the-universe-302865561.html",
       "sourceTier": "primary",
-      "discoverySource": "GOV.UK News",
-      "domain": "gov.uk",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
+      "discoverySource": "Physical Superintelligence Press Release",
+      "domain": "prnewswire.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
         "total": 62,
@@ -3345,21 +3376,81 @@
       }
     },
     {
-      "id": "2026-09-01-4-1",
-      "title": "Perceptron 开源 Isaac 0.5 机器人模型",
-      "description": "Perceptron 开放三百六十亿参数 Isaac 0.5 的权重、代码和评测工具，统一视频理解、空间定位、任务状态与机器人控制。机器人团队可直接微调动作策略。",
-      "company": "Perceptron AI",
-      "topicCluster": "open-robotics-foundation-model-control",
-      "productFamily": "perceptron-isaac-0-5",
+      "id": "2026-09-02-4-1",
+      "title": "Anthropic 发布 Claude Fable 5.1 支持长任务",
+      "description": "Claude Fable 5.1 面向跨应用长任务，可规划、调用工具和恢复失败；缓存读取价格下降七成五。前沿模型开始同时优化能力与任务成本。",
+      "company": "Anthropic",
+      "topicCluster": "frontier-model-long-running-agent-cost-efficiency",
+      "productFamily": "claude-fable-5-1",
       "section": "AI 能力底座",
-      "sourceName": "huggingface.co",
-      "sourceUrl": "https://huggingface.co/PerceptronAI/Isaac-0.5",
+      "sourceName": "anthropic.com",
+      "sourceUrl": "https://www.anthropic.com/claude/fable",
       "sourceTier": "primary",
-      "discoverySource": "Hugging Face Trending",
-      "domain": "huggingface.co",
-      "publishedAt": "2026-08-31",
-      "discoveredAt": "2026-09-01",
-      "briefDate": "2026-09-01",
+      "discoverySource": "Anthropic Model Page",
+      "domain": "anthropic.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
+      "workflowStatus": "published",
+      "score": {
+        "total": 62,
+        "factors": {
+          "freshness": 18,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-02-4-2",
+      "title": "OpenAI 确认 Astra 达到关键网络安全门槛",
+      "description": "OpenAI 评估 Astra 已能在较少人工引导下发现并利用高防护系统漏洞，因此将高级网络能力先限于测试者。模型发布开始按能力风险拆分访问范围。",
+      "company": "OpenAI",
+      "topicCluster": "critical-cyber-capability-tiered-model-access",
+      "productFamily": "openai-astra-cyber-safeguards",
+      "section": "AI 能力底座",
+      "sourceName": "openai.com",
+      "sourceUrl": "https://openai.com/index/path-to-astra/",
+      "sourceTier": "primary",
+      "discoverySource": "OpenAI Safety Blog",
+      "domain": "openai.com",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
+      "workflowStatus": "published",
+      "score": {
+        "total": 62,
+        "factors": {
+          "freshness": 18,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "medium"
+      }
+    },
+    {
+      "id": "2026-09-02-4-3",
+      "title": "MLCommons 发布 MLPerf Storage 3.0 基准",
+      "description": "MLPerf Storage 3.0 新增 KV 缓存、向量数据库和 S3 对象存储测试，共十九家机构提交结果。AI 存储采购获得覆盖训练与推理的统一口径。",
+      "company": "MLCommons",
+      "topicCluster": "ai-storage-benchmark-kv-cache-vector-database-s3",
+      "productFamily": "mlperf-storage-3-0",
+      "section": "AI 能力底座",
+      "sourceName": "mlcommons.org",
+      "sourceUrl": "https://mlcommons.org/2026/09/mlperf-storage-v3-0-results/",
+      "sourceTier": "primary",
+      "discoverySource": "MLCommons",
+      "domain": "mlcommons.org",
+      "publishedAt": "2026-09-01",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
       "workflowStatus": "published",
       "score": {
         "total": 62,
@@ -3495,66 +3586,6 @@
       }
     },
     {
-      "id": "2026-08-22-3-1",
-      "title": "Starcloud 融资两点五亿美元建设轨道 AI 数据中心",
-      "description": "Starcloud 完成两点五亿美元 A 轮扩展融资，估值二十三亿美元，将扩建制造设施并推进轨道数据中心卫星。算力竞赛开始押注太空供给。",
-      "company": "Starcloud",
-      "topicCluster": "orbital-ai-data-center-series-a-extension",
-      "productFamily": "starcloud-orbital-compute",
-      "section": "AI 资本与牌局",
-      "sourceName": "finance.yahoo.com",
-      "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/starcloud-raises-250-million-2-140000211.html",
-      "sourceTier": "evidence",
-      "discoverySource": "Business Wire",
-      "domain": "finance.yahoo.com",
-      "publishedAt": "2026-08-21",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 60,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
-      "id": "2026-08-22-3-3",
-      "title": "橡木果机器人完成天使轮融资并发布触觉基础模型",
-      "description": "橡木果机器人获招商局创投与蔚来资本联合领投，同时发布 Natus AGE-0 触觉模型。具身智能资本开始补视觉路线之外的接触能力。",
-      "company": "Acorn Robot",
-      "topicCluster": "tactile-foundation-model-robotics-angel-round",
-      "productFamily": "acorn-robot-natus-age-0",
-      "section": "AI 资本与牌局",
-      "sourceName": "donews.com",
-      "sourceUrl": "https://www.donews.com/news/detail/4/6675405.html",
-      "sourceTier": "evidence",
-      "discoverySource": "DoNews",
-      "domain": "donews.com",
-      "publishedAt": "2026-08-18",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 60,
-        "factors": {
-          "freshness": 8,
-          "evidence": 24,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
       "id": "2026-08-24-2-1",
       "title": "Grubhub 与 Vody 统一四十万商户数据改进搜索",
       "description": "双方统一目录、内容和行为数据，在六至十周内产出首批模型结果，并改善搜索召回与转化。零售 AI 的成效首先取决于商品数据基础。",
@@ -3636,6 +3667,126 @@
         "factors": {
           "freshness": 8,
           "evidence": 24,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "weak"
+      }
+    },
+    {
+      "id": "2026-09-02-2-2",
+      "title": "NVIDIA 与 MediaTek 扩展端云 AI 芯片合作",
+      "description": "MediaTek 将采用 NVIDIA NVLink Fusion，为云厂商开发可接入机架级系统的定制 XPU，并把合作扩展到本地计算与汽车平台。",
+      "company": "NVIDIA and MediaTek",
+      "topicCluster": "edge-cloud-ai-custom-xpu-nvlink-platform",
+      "productFamily": "nvidia-mediatek-edge-cloud-ai",
+      "section": "AI 行业现场",
+      "sourceName": "nvidia.com",
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
+      "sourceTier": "primary",
+      "discoverySource": "NVIDIA Newsroom",
+      "domain": "nvidianews.nvidia.com",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-02",
+      "briefDate": "2026-09-02",
+      "workflowStatus": "published",
+      "score": {
+        "total": 58,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "weak"
+      }
+    },
+    {
+      "id": "2026-09-01-2-2",
+      "title": "ARPA-H 授予罕见病 AI 研发合同",
+      "description": "ARPA-H 通过 RAPID 计划资助团队整合临床、基因、影像、语音和患者数据，用 AI 提前识别罕见病。医疗能力需由共享数据、评测和真实诊疗共同验证。",
+      "company": "ARPA-H",
+      "topicCluster": "rare-disease-multimodal-ai-contracts",
+      "productFamily": "arpa-h-rapid",
+      "section": "AI 行业现场",
+      "sourceName": "arpa-h.gov",
+      "sourceUrl": "https://arpa-h.gov/news-and-events/arpa-h-announces-awards-advance-ai-rare-disease-diagnosis-and-treatment",
+      "sourceTier": "primary",
+      "discoverySource": "ARPA-H Newsroom",
+      "domain": "arpa-h.gov",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 58,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "weak"
+      }
+    },
+    {
+      "id": "2026-09-01-3-1",
+      "title": "英国启动 1 亿英镑主权 AI 采购计划",
+      "description": "英国启动一亿英镑主权 AI 研发采购计划，首批竞赛覆盖医疗、国家安全、网络韧性和算力。政府用预付款和保留知识产权降低初创公司进入公共合同的门槛。",
+      "company": "UK Government",
+      "topicCluster": "sovereign-ai-public-procurement-startup-funding",
+      "productFamily": "uk-sovereign-ai-rd-procurement",
+      "section": "AI 资本与牌局",
+      "sourceName": "gov.uk",
+      "sourceUrl": "https://www.gov.uk/government/news/100-million-competition-to-back-british-ai-companies-to-fix-public-services",
+      "sourceTier": "primary",
+      "discoverySource": "GOV.UK News",
+      "domain": "gov.uk",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 58,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
+          "metadata": 9,
+          "agentRelevance": 5,
+          "resonance": 0,
+          "editorial": 14
+        },
+        "strength": "weak"
+      }
+    },
+    {
+      "id": "2026-09-01-4-1",
+      "title": "Perceptron 开源 Isaac 0.5 机器人模型",
+      "description": "Perceptron 开放三百六十亿参数 Isaac 0.5 的权重、代码和评测工具，统一视频理解、空间定位、任务状态与机器人控制。机器人团队可直接微调动作策略。",
+      "company": "Perceptron AI",
+      "topicCluster": "open-robotics-foundation-model-control",
+      "productFamily": "perceptron-isaac-0-5",
+      "section": "AI 能力底座",
+      "sourceName": "huggingface.co",
+      "sourceUrl": "https://huggingface.co/PerceptronAI/Isaac-0.5",
+      "sourceTier": "primary",
+      "discoverySource": "Hugging Face Trending",
+      "domain": "huggingface.co",
+      "publishedAt": "2026-08-31",
+      "discoveredAt": "2026-09-01",
+      "briefDate": "2026-09-01",
+      "workflowStatus": "published",
+      "score": {
+        "total": 58,
+        "factors": {
+          "freshness": 14,
+          "evidence": 16,
           "metadata": 9,
           "agentRelevance": 5,
           "resonance": 0,
@@ -5325,36 +5476,6 @@
       }
     },
     {
-      "id": "2026-08-22-4-2",
-      "title": "Haystack 3.1 候选版为 Agent 增加上下文压缩钩子",
-      "description": "Haystack 的压缩钩子会保留系统消息、最新任务和完整近期轮次，再按窗口移除旧历史。长任务记忆开始通过明确策略控制上下文消耗。",
-      "company": "Haystack",
-      "topicCluster": "agent-context-compaction-hook-sliding-window",
-      "productFamily": "haystack-agent-framework",
-      "section": "AI 能力底座",
-      "sourceName": "github.com",
-      "sourceUrl": "https://github.com/deepset-ai/haystack/releases/tag/v3.1.0-rc3",
-      "sourceTier": "primary",
-      "discoverySource": "GitHub Releases",
-      "domain": "github.com",
-      "publishedAt": "2026-08-21",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 57,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
       "id": "2026-08-25-1-3",
       "title": "Port AI Builder 让用户先审批计划再执行平台改动",
       "description": "Port AI Builder 可先分析软件目录并提交步骤计划，获批后再创建蓝图、更新实体和触发工作流。平台 Agent 开始绑定计划与执行记录。",
@@ -5475,66 +5596,6 @@
       }
     },
     {
-      "id": "2026-08-22-1-2",
-      "title": "Sierra 为 Agent 发布增加检查、人工审批和灰度流量",
-      "description": "Sierra 将 Agent 检查、模拟测试、合并审批和分流发布接入同一流程，并支持快速回滚。客服 Agent 的上线开始采用软件工程式治理。",
-      "company": "Sierra",
-      "topicCluster": "agent-release-governance-approval-canary-rollout",
-      "productFamily": "sierra-agent-release-governance",
-      "section": "AI 产品前线",
-      "sourceName": "sierra.ai",
-      "sourceUrl": "https://sierra.ai/blog/release-governance-guardrails-for-agents-at-scale",
-      "sourceTier": "primary",
-      "discoverySource": "Sierra Blog",
-      "domain": "sierra.ai",
-      "publishedAt": "2026-08-20",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 57,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
-      "id": "2026-08-22-4-1",
-      "title": "LocalAI 4.9 默认保护全部接口并压缩历史对话",
-      "description": "LocalAI 将接口认证改为默认拒绝，并可在推理前压缩旧对话且保留完整工具调用。自托管 Agent 开始同时处理暴露面与长上下文成本。",
-      "company": "LocalAI",
-      "topicCluster": "local-ai-auth-default-context-compression",
-      "productFamily": "localai-runtime",
-      "section": "AI 能力底座",
-      "sourceName": "github.com",
-      "sourceUrl": "https://github.com/mudler/LocalAI/releases/tag/v4.9.0",
-      "sourceTier": "primary",
-      "discoverySource": "GitHub Releases",
-      "domain": "github.com",
-      "publishedAt": "2026-08-20",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
-      "workflowStatus": "published",
-      "score": {
-        "total": 57,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
       "id": "2026-08-23-4-2",
       "title": "OpenAI 预览兼容零数据保留的私有安全处理",
       "description": "Private Safety Processing 可跨交互识别风险，仅返回有限安全信号，不暴露客户内容。企业不必在 Agent 监控与数据留存间二选一。",
@@ -5550,36 +5611,6 @@
       "publishedAt": "2026-08-19",
       "discoveredAt": "2026-08-23",
       "briefDate": "2026-08-23",
-      "workflowStatus": "published",
-      "score": {
-        "total": 57,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
-      "id": "2026-08-22-3-2",
-      "title": "Bardeen 获 Dropbox 和 HubSpot 三百万美元战略投资",
-      "description": "Bardeen 获得三百万美元战略投资，并发布面向重复业务流程的 AI Agent。云存储与 CRM 厂商开始直接押注跨应用自动化入口。",
-      "company": "Bardeen",
-      "topicCluster": "business-automation-agent-strategic-investment",
-      "productFamily": "bardeen-business-agent",
-      "section": "AI 资本与牌局",
-      "sourceName": "bardeen.ai",
-      "sourceUrl": "https://www.bardeen.ai/posts/bardeen-the-first-business-ready-ai-agent",
-      "sourceTier": "primary",
-      "discoverySource": "Bardeen Blog",
-      "domain": "bardeen.ai",
-      "publishedAt": "2026-08-19",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
       "workflowStatus": "published",
       "score": {
         "total": 57,
@@ -5670,36 +5701,6 @@
       "publishedAt": "2026-08-18",
       "discoveredAt": "2026-08-24",
       "briefDate": "2026-08-24",
-      "workflowStatus": "published",
-      "score": {
-        "total": 57,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 10,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
-      "id": "2026-08-22-1-3",
-      "title": "F5 AI Gateway 统一管理模型路由、预算和 Agent 权限",
-      "description": "F5 将 AI Gateway 纳入安全平台，集中执行模型路由、预算策略与 Agent 访问控制。企业 AI 成本和权限开始共用一个运行控制面。",
-      "company": "F5",
-      "topicCluster": "enterprise-ai-gateway-cost-policy-agent-access",
-      "productFamily": "f5-ai-gateway",
-      "section": "AI 产品前线",
-      "sourceName": "f5.com",
-      "sourceUrl": "https://www.f5.com/company/news/press-releases/f5-unleashes-next-generation-agentic-ready-ai-gateway-to-optimize-the-economics-and-governance-of-enterprise-ai-costs",
-      "sourceTier": "primary",
-      "discoverySource": "F5 Press Release",
-      "domain": "f5.com",
-      "publishedAt": "2026-08-18",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
       "workflowStatus": "published",
       "score": {
         "total": 57,
@@ -6330,36 +6331,6 @@
       "publishedAt": "2026-08-21",
       "discoveredAt": "2026-08-24",
       "briefDate": "2026-08-24",
-      "workflowStatus": "published",
-      "score": {
-        "total": 52,
-        "factors": {
-          "freshness": 8,
-          "evidence": 16,
-          "metadata": 9,
-          "agentRelevance": 5,
-          "resonance": 0,
-          "editorial": 14
-        },
-        "strength": "weak"
-      }
-    },
-    {
-      "id": "2026-08-22-1-1",
-      "title": "Anthropic 让 Claude Security 使用 Mythos 5 扫描代码漏洞",
-      "description": "Claude Enterprise 用户可用 Mythos 5 扫描自有代码库，查看漏洞分类、置信度和修复建议。Anthropic 用限定输出开放高风险模型能力。",
-      "company": "Anthropic",
-      "topicCluster": "cybersecurity-model-controlled-code-scanning",
-      "productFamily": "claude-security-mythos",
-      "section": "AI 产品前线",
-      "sourceName": "claude.com",
-      "sourceUrl": "https://claude.com/blog/bringing-claude-mythos-5-to-more-defenders",
-      "sourceTier": "primary",
-      "discoverySource": "Claude Product Announcements",
-      "domain": "claude.com",
-      "publishedAt": "2026-08-21",
-      "discoveredAt": "2026-08-22",
-      "briefDate": "2026-08-22",
       "workflowStatus": "published",
       "score": {
         "total": 52,
