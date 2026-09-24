@@ -1,0 +1,187 @@
+{
+  "date": "2026-09-25",
+  "weekday": "星期五",
+  "opening": "SoundHound 推出端侧语音 Agent，Ando 获 2000 万美元融资。",
+  "insight": "PageBreak 以确定性验证把安全 Agent 的误报压至近零，MSCI 又用约 1400 次对抗测试为高风险 Agent 留下审计证据；Google 的长视频框架则用持久记忆控制跨镜头漂移。Agent 从可演示走向可托付，验证机制和状态记忆正成为共同底座。",
+  "methodNote": "采集窗口为 2026-09-18 至 2026-09-25；9 条来源发布于 9 月 24 日，2 条发布于 9 月 23 日，1 条发布于 9 月 22 日。覆盖 11 个来源域名，最终证据均为发布主体原文、官方技术博客、官方案例或公司发布稿。PageBreak 的 500 余个 XSS、MSCI 的约 1400 次测试、Genesis III 的 1914.3 亿 token 与融资数字均为发布方披露；已完成历史去重。",
+  "homepage": {
+    "headline": "端侧运行，验证闭环",
+    "summary": "产品把 Agent 推向本地设备与既有采购入口，企业部署则用测试、权限和确定性验证约束执行。",
+    "mobileSections": [
+      {"name": "AI 产品前线", "summary": "语音、开放模型服务与手机芯片补齐端侧和采购入口。"},
+      {"name": "AI 行业现场", "summary": "银行与安全团队把 Agent 权限、对抗测试和漏洞验证带入生产。"},
+      {"name": "AI 资本与牌局", "summary": "团队协作、企业地产与 AI 光互连获得新资金。"},
+      {"name": "AI 能力底座", "summary": "长视频记忆、生物发现与高质量训练数据推进模型能力。"}
+    ]
+  },
+  "sections": [
+    {
+      "name": "AI 产品前线",
+      "subtitle": "SoundHound OASYS Edge · Hugging Face Marketplace · Snapdragon Gen 6",
+      "items": [
+        {
+          "title": "SoundHound 推出端侧语音 Agent 架构",
+          "description": "OASYS Edge 把 LLM 语音 Agent 完整部署到汽车和智能设备，并支持云端、端侧或混合复用。离线连续运行与默认本地隐私开始成为同一产品能力。",
+          "sourceName": "soundhound.com",
+          "sourceUrl": "https://investors.soundhound.com/news-releases/news-release-details/soundhound-ai-introduces-oasys-edge-bringing-fully-embedded",
+          "sourceDateLabel": "2026-09-24",
+          "company": "SoundHound AI",
+          "topicCluster": "embedded-voice-agent-architecture",
+          "sourceTier": "primary",
+          "discoverySource": "SoundHound AI Press Release",
+          "productFamily": "soundhound-oasys-edge"
+        },
+        {
+          "title": "Hugging Face 接入 Google Cloud Marketplace",
+          "description": "企业现可用 Google Cloud 账户采购推理、端点、Spaces、Jobs、存储和团队席位，并并入现有云账单。开放模型平台正在进入标准云采购链。",
+          "sourceName": "huggingface.co",
+          "sourceUrl": "https://huggingface.co/changelog/gcp-marketplace",
+          "sourceDateLabel": "2026-09-24",
+          "company": "Hugging Face",
+          "topicCluster": "open-model-cloud-procurement",
+          "sourceTier": "primary",
+          "discoverySource": "Hugging Face Changelog",
+          "productFamily": "hugging-face-google-cloud-marketplace"
+        },
+        {
+          "title": "Qualcomm 发布两款旗舰端侧 AI 芯片",
+          "description": "两款 Snapdragon 旗舰芯片均采用 2 纳米工艺，Extreme 版可端侧运行 300 亿以上参数的 MoE。手机 Agent 的能力上限继续向本地迁移。",
+          "sourceName": "qualcomm.com",
+          "sourceUrl": "https://www.qualcomm.com/news/releases/2026/09/snapdragon-leads-the-agentic-ai-age-with-two-of-the-world-s-fast",
+          "sourceDateLabel": "2026-09-22",
+          "company": "Qualcomm",
+          "topicCluster": "on-device-agentic-ai-chips",
+          "sourceTier": "primary",
+          "discoverySource": "Qualcomm Press Note",
+          "productFamily": "snapdragon-8-elite-gen-6"
+        }
+      ]
+    },
+    {
+      "name": "AI 行业现场",
+      "subtitle": "BNP Paribas Agents · MSCI Assurance · Google PageBreak",
+      "items": [
+        {
+          "title": "BNP Paribas 扩大 6.5 万人 AI 助手",
+          "description": "BNP Paribas 与 Google Cloud 签署五年合作，将 Gemini 接入 LLM@CIB，并规划信贷备忘录 Agent。银行正以最小资源授权推进规模部署。",
+          "sourceName": "googlecloudpresscorner.com",
+          "sourceUrl": "https://www.googlecloudpresscorner.com/2026-09-24-BNP-Paribas-and-Google-Cloud-Announce-New-Partnership-on-Agentic-AI-and-Cloud-Innovation",
+          "sourceDateLabel": "2026-09-24",
+          "company": "BNP Paribas and Google Cloud",
+          "topicCluster": "bank-agentic-ai-governed-deployment",
+          "sourceTier": "primary",
+          "discoverySource": "Google Cloud Press Corner",
+          "productFamily": "bnp-paribas-llm-cib-agents"
+        },
+        {
+          "title": "MSCI 用约 1400 次测试审计安全 Agent",
+          "description": "MSCI 让 AIUC 对高权限 SecOps Agent 执行约 1400 次测试，并向外部审计方提交签名证明。高风险 Agent 开始用运行证据过审。",
+          "sourceName": "aiuc-1.com",
+          "sourceUrl": "https://www.aiuc-1.com/research/how-msci-secures-its-highest-risk-ai-agents-with-aiuc-1",
+          "sourceDateLabel": "2026-09-24",
+          "company": "MSCI",
+          "topicCluster": "high-risk-agent-assurance-testing",
+          "sourceTier": "primary",
+          "discoverySource": "AIUC-1 Case Study",
+          "productFamily": "msci-secops-agent-aiuc-assurance"
+        },
+        {
+          "title": "Google PageBreak 验证 500 余个 XSS",
+          "description": "Google 的内部安全 Agent 以非 AI 验证器执行真实载荷，已确认 500 余个 XSS。安全扫描正从发现线索转向自动证明可利用性。",
+          "sourceName": "blog.google",
+          "sourceUrl": "https://blog.google/security/agentic-hacks-real-proofs-inside-googles-pagebreak-project/",
+          "sourceDateLabel": "2026-09-24",
+          "company": "Google",
+          "topicCluster": "deterministically-validated-agentic-security",
+          "sourceTier": "primary",
+          "discoverySource": "Google Security Blog",
+          "productFamily": "google-pagebreak-security-agent"
+        }
+      ]
+    },
+    {
+      "name": "AI 资本与牌局",
+      "subtitle": "Ando $20M · Trebellar $18M · PicoJool $27.5M",
+      "items": [
+        {
+          "title": "Ando 融资 2000 万美元重做团队消息",
+          "description": "Ando 获 Accel、Index 与 Emergence 投资，以持久身份、权限和共享上下文让 Agent 成为工作区成员。资本开始押注人机团队协作入口。",
+          "sourceName": "globenewswire.com",
+          "sourceUrl": "https://www.globenewswire.com/news-release/2026/09/24/3368344/0/en/Ando-Launches-Agent-Native-Messaging-Platform-Announces-20-Million-Seed.html",
+          "sourceDateLabel": "2026-09-24",
+          "company": "Ando",
+          "topicCluster": "agent-native-team-messaging-seed",
+          "sourceTier": "primary",
+          "discoverySource": "Ando Press Release",
+          "productFamily": "ando-agent-native-messaging"
+        },
+        {
+          "title": "Trebellar 融资 1800 万美元改造企业地产",
+          "description": "Trebellar 完成 Blossom Capital 领投的 1800 万美元 A 轮，扩展地产决策 Agent。垂直 AI 正进入企业核心支出领域。",
+          "sourceName": "businesswire.com",
+          "sourceUrl": "https://www.businesswire.com/news/home/20260924253792/en/",
+          "sourceDateLabel": "2026-09-24",
+          "company": "Trebellar",
+          "topicCluster": "corporate-real-estate-ai-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "Trebellar Press Release",
+          "productFamily": "trebellar-corporate-real-estate-platform"
+        },
+        {
+          "title": "PicoJool 融资 2750 万美元扩产光互连",
+          "description": "PicoJool 完成 2750 万美元 A 轮，推进 200G VCSEL 与低功耗 microVCSEL 量产。AI 集群瓶颈继续从计算芯片外溢到数据搬运。",
+          "sourceName": "businesswire.com",
+          "sourceUrl": "https://www.businesswire.com/news/home/20260922057600/en/",
+          "sourceDateLabel": "2026-09-24",
+          "company": "PicoJool",
+          "topicCluster": "ai-optical-interconnect-series-a",
+          "sourceTier": "primary",
+          "discoverySource": "PicoJool Press Release",
+          "productFamily": "picojool-vcsel-optical-connectivity"
+        }
+      ]
+    },
+    {
+      "name": "AI 能力底座",
+      "subtitle": "Google Video Co-Director · Claude Biology · QVAC Genesis III",
+      "items": [
+        {
+          "title": "Google 用多 Agent 生成十分钟连贯视频",
+          "description": "Google Research 以编排、持久视觉记忆和闭环评审协调 Gemini 与 Veo，展示十分钟连续叙事。长视频竞争正从单段画质转向世界状态和跨镜头一致性。",
+          "sourceName": "research.google",
+          "sourceUrl": "https://research.google/blog/coherent-long-form-video-generation/",
+          "sourceDateLabel": "2026-09-24",
+          "company": "Google",
+          "topicCluster": "multi-agent-long-form-video-consistency",
+          "sourceTier": "primary",
+          "discoverySource": "Google Research Blog",
+          "productFamily": "google-ai-video-co-director-canvas-a2rd"
+        },
+        {
+          "title": "Claude 发现类 CRISPR 重复酶系统",
+          "description": "约 950 个 Claude Agent 用 21 小时筛查 20 多万种逆转录酶，再由人类实验确认 ART 系统。科研 Agent 开始用真实发现衡量。",
+          "sourceName": "anthropic.com",
+          "sourceUrl": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system",
+          "sourceDateLabel": "2026-09-23",
+          "company": "Anthropic",
+          "topicCluster": "agentic-biological-discovery",
+          "sourceTier": "primary",
+          "discoverySource": "Anthropic Science",
+          "productFamily": "claude-art-enzyme-discovery"
+        },
+        {
+          "title": "Tether 发布 1914 亿 token STEM 数据集",
+          "description": "QVAC Genesis III 用错误分析和选项级推理构建 1.596 亿份文档，训练小模型解释错误路径。端侧模型竞争开始把高质量训练数据置于单纯扩参之前。",
+          "sourceName": "tether.io",
+          "sourceUrl": "https://tether.io/news/tether-releases-genesis-iii-to-train-ai-to-explain-not-just-answer-stem-problems/",
+          "sourceDateLabel": "2026-09-23",
+          "company": "Tether AI Research",
+          "topicCluster": "synthetic-stem-reasoning-data",
+          "sourceTier": "primary",
+          "discoverySource": "Tether AI Research",
+          "productFamily": "qvac-genesis-iii"
+        }
+      ]
+    }
+  ]
+}
