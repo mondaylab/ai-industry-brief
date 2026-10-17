@@ -44,7 +44,7 @@ readerHtml = readerHtml.replace(
   "</head>",
   `  <meta name="latest-brief" content="briefs/${manifest.latest}.html">\n  </head>`,
 );
-fs.accessSync(path.join(buildDir, "radar-app.html"), fs.constants.R_OK);
+const radarHtml = fs.readFileSync(path.join(buildDir, "radar-app.html"), "utf8");
 fs.accessSync(path.join(buildDir, "papers-app.html"), fs.constants.R_OK);
 fs.accessSync(path.join(buildDir, "intelligence-app.html"), fs.constants.R_OK);
 const papersHtml = fs.readFileSync(path.join(buildDir, "papers-app.html"), "utf8");
@@ -54,8 +54,8 @@ fs.mkdirSync(path.dirname(targetAssets), { recursive: true });
 fs.cpSync(path.join(buildDir, "assets", "app"), targetAssets, { recursive: true });
 fs.writeFileSync(path.join(root, "reader.html"), readerHtml);
 fs.writeFileSync(path.join(root, "papers.html"), papersHtml);
-fs.writeFileSync(path.join(root, "radar.html"), legacyRedirectHtml("radar", "今日简报的热点雷达"));
+fs.writeFileSync(path.join(root, "radar.html"), radarHtml);
 fs.writeFileSync(path.join(root, "intelligence.html"), legacyRedirectHtml("intelligence", "对应页面"));
 fs.rmSync(buildDir, { recursive: true, force: true });
 
-console.log(`Built React reader and canonical Paper Observatory for ${manifest.latest}; legacy Intelligence and Radar URLs remain compatible redirects.`);
+console.log(`Built React reader, Radar and canonical Paper Observatory for ${manifest.latest}; legacy Intelligence URL remains a compatible redirect.`);

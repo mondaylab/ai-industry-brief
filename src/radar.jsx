@@ -67,8 +67,8 @@ function StandaloneHeader({ queueCount, onOpenSources }) {
         <span><b>The AI Industry Brief</b><small>INTELLIGENCE TRACKING</small></span>
       </a>
       <nav className="radar-product-tabs" aria-label="追踪中心视图">
-        <a className="is-active" href="intelligence.html?view=radar">热点雷达</a>
-        <a href="intelligence.html?view=papers">论文观察</a>
+        <a className="is-active" href="radar.html" aria-current="page">热点雷达</a>
+        <a href="papers.html">论文观察</a>
       </nav>
       <div className="radar-header-actions">
         <span><b>{queueCount}</b> 编辑队列</span>

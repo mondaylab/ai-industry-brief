@@ -4,21 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="data:," />
-    <meta name="robots" content="noindex" />
-    <title>今日简报的热点雷达 | The AI Industry Brief</title>
+    <meta name="description" content="The AI Industry Brief 信号雷达与编辑工作台" />
+    <title>热点雷达 | The AI Industry Brief</title>
+    <script type="module" crossorigin src="./assets/app/jsx-runtime-DUSqqWPu.js"></script>
+    <script type="module" crossorigin src="./assets/app/shield-check-BNBfJE9I.js"></script>
+    <script type="module" crossorigin src="./assets/app/arrow-left-s_e7qsCj.js"></script>
+    <script type="module" crossorigin src="./assets/app/radar-CxICWKTt.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/app/radar-CMYRoM1d.css">
   </head>
   <body>
-    <p>正在进入今日简报的热点雷达……</p>
-    <script>
-      const current = new URL(window.location.href);
-      const isPaperView = "radar" === "intelligence" && current.searchParams.get("view") === "papers";
-      const target = new URL(isPaperView || "radar" === "papers" ? "./papers.html" : "./reader.html", current);
-      for (const [key, value] of new URLSearchParams(window.location.search)) {
-        if (key !== "view") target.searchParams.append(key, value);
-      }
-      target.hash = isPaperView || "radar" === "papers" ? current.hash : "#radar";
-      window.location.replace(target.href);
-    </script>
-    <noscript><a href="reader.html#radar">进入今日简报的热点雷达</a></noscript>
+    <div id="root" data-app="radar"></div>
   </body>
 </html>
