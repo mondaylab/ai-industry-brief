@@ -40,12 +40,12 @@ jobs:
           async function trigger(path, extra = {}) {
             const url = new URL(path, workerUrl);
             url.searchParams.set("date", date);
-            url.searchParams.set("force", "1");
             for (const [key, value] of Object.entries(extra)) {
               url.searchParams.set(key, value);
             }
 
             const response = await fetch(url, {
+              signal: AbortSignal.timeout(30000),
               headers: {
                 authorization: `Bearer ${token}`,
                 "cache-control": "no-cache",
@@ -64,6 +64,16 @@ jobs:
             return data;
           }
 
-          const result = await trigger("/send-image-url", { image_url: imageUrl });
-          console.log(`Feishu published PNG push sent: ${result.messageId || result.deliveryMode || "ok"}`);
+          const expectedImageUrl = `https://mondaylab.github.io/ai-industry-brief/share-images/${date}.png`;
+          if (imageUrl !== expectedImageUrl) throw new Error("Unexpected published image URL.");
+          const result = await trigger("/send");
+          if (result.skipped) {
+            if (result.reason !== "already_sent") {
+              throw new Error(`Feishu push not completed: ${JSON.stringify(result)}`);
+            }
+            console.log(`Feishu brief already sent: ${date} at ${result.sentAt}`);
+          } else {
+            if (!result.messageId) throw new Error(`Missing Feishu message ID: ${JSON.stringify(result)}`);
+            console.log(`Feishu published PNG push sent: ${result.messageId}`);
+          }
           NODE
