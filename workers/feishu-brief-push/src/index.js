@@ -968,7 +968,7 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, ima
       template: "blue",
       title: {
         tag: "plain_text",
-        content: `每日 AI 行业简报 · ${date}`,
+        content: `国际化行业报刊 · ${date}`,
       },
       subtitle: {
         tag: "plain_text",
@@ -986,7 +986,7 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, ima
         mode: "fit_horizontal",
         alt: {
           tag: "plain_text",
-          content: `The AI Industry Brief ${date}`,
+          content: `国际化行业报刊 ${date}`,
         },
       },
       {
@@ -1025,7 +1025,7 @@ function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline, corePoint }
       template: "blue",
       title: {
         tag: "plain_text",
-        content: `每日 AI 行业简报 · ${date}`,
+        content: `国际化行业报刊 · ${date}`,
       },
       subtitle: {
         tag: "plain_text",
