@@ -25,6 +25,7 @@
 - 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
 - 热点雷达：[https://mondaylab.github.io/ai-industry-brief/radar.html](https://mondaylab.github.io/ai-industry-brief/radar.html)
 - 论文观察室：[https://mondaylab.github.io/ai-industry-brief/papers.html](https://mondaylab.github.io/ai-industry-brief/papers.html)
+- 全球技术视野：[在线简报](https://mondaylab.github.io/ai-industry-brief/global-tech-radar/) · [Agent 与发布流程](global-tech-radar/)
 - 七种色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
 - 强弱信号做图 SOP：[docs/weekly-call-log-sop.md](docs/weekly-call-log-sop.md)
 - 强弱信号小红书文案 Skill：`skills/xiaohongshu-weekly-letter/`

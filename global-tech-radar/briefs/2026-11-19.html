@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>选 Agent 模型，算清每次成功交付的成本 | 全球技术视野</title>
+<style>:root {
+  color-scheme: light;
+  --paper: #f7f6f0;
+  --ink: #202722;
+  --muted: #505950;
+  --line: #c8cfc1;
+  --accent: #225847;
+  --tint: #e9efe5;
+  font-family: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.65;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+main { width: min(100% - 4rem, 74rem); margin: 2rem auto 4rem; }
+a { color: var(--accent); text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: .15em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+p, h1, h2, h3 { margin: 0; }
+ul { padding-left: 1.4rem; }
+.masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 800; color: var(--ink); text-decoration: none; }
+.subtitle { margin-left: 1.1rem; letter-spacing: .05em; }
+.subtitle, .meta, h2 span { color: var(--muted); font-size: .78rem; }
+.archive-link { white-space: nowrap; }
+.lead { padding: clamp(2rem, 7vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+.lead h1 {
+  margin: .55rem 0 1rem;
+  text-wrap: balance;
+  font: 700 clamp(1.9rem, 5.2vw, 4rem)/1.2 "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+}
+.lead p:not(.meta) { max-width: 48rem; font-size: clamp(1rem, 2vw, 1.2rem); }
+.read { display: inline-block; margin-top: 1rem; font-weight: 700; }
+.section-nav { display: flex; flex-wrap: wrap; gap: .4rem 1.5rem; padding: 1rem 0; }
+.section-nav a { font-weight: 650; }
+.columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+h2 { border-top: 2px solid var(--accent); padding: .65rem 0; font-size: 1.25rem; }
+h2 span { margin-left: .8rem; font-weight: 400; }
+h3 { margin-top: .2rem; font-size: 1.17rem; line-height: 1.45; }
+.signal { border-top: 1px solid var(--line); padding: 1rem 0; overflow-wrap: anywhere; }
+.signal p:not(.meta) { margin-top: .5rem; }
+.signal p strong, .coverage strong { color: var(--accent); margin-right: .3rem; }
+.check, .coverage { color: var(--muted); font-size: .9rem; }
+.sources { list-style: none; padding: 0; margin: .65rem 0 0; font-size: .8rem; }
+.sources span { color: var(--muted); }
+.editorial { margin-top: 2.6rem; padding: 1.3rem clamp(1rem, 4vw, 2.5rem); background: var(--tint); }
+.editorial h2 { border: 0; }
+.coverage { margin-top: .9rem; }
+#archive { margin-top: 2.4rem; }
+.issues { padding: 0; margin: 0; list-style: none; }
+.issues li { border-top: 1px solid var(--line); padding: .85rem 0; }
+.issues a { display: flex; flex-wrap: wrap; gap: .25rem 1.2rem; }
+.issues time { color: var(--muted); }
+@media (max-width: 700px) {
+  main { width: calc(100% - 2rem); margin-top: 1rem; }
+  .columns { grid-template-columns: 1fr; gap: 1.7rem; }
+  .subtitle { display: block; margin-left: 0; }
+}
+@media print {
+  main { width: auto; margin: 0; }
+  .signal { break-inside: avoid; }
+  .section-nav, .archive-link { display: none; }
+}
+</style>
+</head>
+<body>
+<main>
+<header class="masthead">
+  <div><a class="brand" href="../index.html">全球技术视野</a><span class="subtitle" lang="en">Global Technology Brief</span></div>
+  <a class="archive-link" href="../index.html">往期</a>
+</header>
+<header class="lead">
+  <p class="meta"><time datetime="2026-11-19">2026-11-19</time> · 观察窗口 2026-11-13 至 2026-11-19 · 北京时间</p>
+  <h1>选 Agent 模型，算清每次成功交付的成本</h1>
+  <p>中国和美国多家团队更新了旗舰模型。同期的终端榜单、独立综合评测和推理架构报告，给出了从任务成功率、调用成本到服务吞吐的不同证据。</p>
+</header>
+<nav class="section-nav" aria-label="栏目">
+  <a href="#models">模型</a><a href="#evaluations">评测</a><a href="#products">新产品</a><a href="#architecture">技术架构</a>
+</nav>
+<div class="columns"><section id="models"><h2>模型<span lang="en">Models</span></h2><article class="signal" id="qwen4-max-release">
+  <p class="meta">中国 · 正式版</p>
+  <h3>Qwen4-Max 正式发布</h3>
+  <p>阿里发布 Qwen4-Max。官方披露总参数 2.4 万亿，支持原生视觉输入，标称上下文为 100 万 token。</p>
+  <p><strong>影响</strong> 可纳入长文档和图文混合 Agent 的候选名单，优先测多轮工具调用后的交付质量。</p>
+  <p class="check"><strong>验证与限制</strong> 参数规模和上下文为厂商披露。正式版和预览版有独立模型 ID，接入前需核对地域、配额和实际请求上限。</p>
+  <ul class="sources"><li><a href="https://www.alibabacloud.com/en/press-room/alibaba-unveils-qwen4-max">阿里云发布公告 ↗</a> <span>2026-11-16 · 官方公告</span></li></ul>
+</article>
+<article class="signal" id="gpt-62-astra-sol-release">
+  <p class="meta">美国 · API 已开放</p>
+  <h3>GPT-6.2 Astra 与 Sol 同时开放</h3>
+  <p>OpenAI 同时推出面向高难度项目的 Astra 和面向日常 Agent 工作流的 Sol。两个模型都接收文本与图像输入，并输出文本。</p>
+  <p><strong>影响</strong> 同一工作流可以先对常规任务使用 Sol，再对高难度任务验证 Astra 升档是否带来净收益。</p>
+  <p class="check"><strong>验证与限制</strong> API 支持 Responses 与 Chat Completions。调用工具需要使用 Responses API，迁移时应核对接口差异。</p>
+  <ul class="sources"><li><a href="https://openai.com/index/introducing-gpt-6-2-astra-sol/">OpenAI 发布公告 ↗</a> <span>2026-11-17 · 官方公告</span></li><li><a href="https://help.openai.com/en/articles/9624314-model-release-notes">OpenAI 模型发布说明 ↗</a> <span>2026-11-17 · API 更新</span></li></ul>
+</article>
+<article class="signal" id="gemini-4-neon-rollout">
+  <p class="meta">美国 · 分批推出</p>
+  <h3>Gemini 4 Neon 开始推出</h3>
+  <p>Google 开始在 Gemini API、企业产品和部分付费用户入口提供 Gemini 4 Neon。官方公布百万 token 上下文，并将其定位在 Carbon 和 Hydrogen 之间。</p>
+  <p><strong>影响</strong> 对编程和分析任务，可以把 Neon 加入按延迟和质量分层的模型路由测试。</p>
+  <p class="check"><strong>验证与限制</strong> 不同入口的套餐和可用范围不同。端到端比较时应固定推理档位，并单独记录首 token 延迟与任务完成时间。</p>
+  <ul class="sources"><li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/">Google 发布公告 ↗</a> <span>2026-11-18 · 官方公告</span></li></ul>
+</article></section><section id="evaluations"><h2>评测<span lang="en">Evaluations</span></h2><article class="signal" id="terminal-bench-41-gpt62-codex-public-results">
+  <p class="meta">跨地区 · 公开榜单</p>
+  <h3>Terminal-Bench 记录 Astra 与 Sol 的完成率和成本</h3>
+  <p>Terminal-Bench 4.1 记录 GPT-6.2 Astra（max）搭配 Codex 的解决率为 62.1% ± 2.3%，Sol（max）搭配 Codex 为 61.5% ± 2.8%。榜单所列成本约为 1,400 与 300 美元。</p>
+  <p><strong>影响</strong> 对这组终端任务，Sol 值得作为成本基线，再看 Astra 能否提高自有任务的成功交付率。</p>
+  <p class="check"><strong>验证与限制</strong> 两项成绩的区间重叠。成本是榜单显示的舍入值。两行的模型发布日期均为 11 月 17 日，榜单于 11 月 19 日查阅。</p>
+  <ul class="sources"><li><a href="https://www.tbench.ai/?version=4">Terminal-Bench 4.1 榜单 ↗</a> <span>2026-11-19 · 榜单快照</span></li></ul>
+</article>
+<article class="signal" id="artificial-analysis-qwen4-max-initial-snapshot">
+  <p class="meta">中国模型 · 独立评测 · 独立实测</p>
+  <h3>独立评测补齐 Qwen4 Max 的任务成本</h3>
+  <p>Artificial Analysis 的 Qwen4 Max 页面记录 Intelligence Index 综合分 43，并披露该指数任务的平均评测成本为 3.27 美元。</p>
+  <p><strong>影响</strong> 选型时可以同时看任务得分和实测支出，尤其适合检查低单价模型在长输出任务中的实际成本。</p>
+  <p class="check"><strong>验证与限制</strong> 该指数汇总知识工作、编程、科学和通识任务。这里只引用页面快照，综合分与成本均限于该测试口径。</p>
+  <ul class="sources"><li><a href="https://artificialanalysis.ai/models/qwen4-max">Artificial Analysis 模型评测页 ↗</a> <span>2026-11-19 · 评测快照</span></li></ul>
+</article></section><section id="products"><h2>新产品<span lang="en">Products</span></h2><article class="signal" id="volcengine-seedance-25-4k-api-documented">
+  <p class="meta">中国 · API 可调用</p>
+  <h3>火山方舟确认 Seedance 2.5 视频 API 的 4K 输出参数</h3>
+  <p>更新后的火山方舟教程给出 Seedance 2.5 的 4K API 参数，并说明可输出 10-bit 4K 视频。</p>
+  <p><strong>影响</strong> 视频生产流程可以直接验证高分辨率母版交付，评估能否省去后续的独立上采样步骤。</p>
+  <p class="check"><strong>验证与限制</strong> 4K 能力对应 Seedance 2.5。方舟发布记录中的 2.5 Flash 只列出 480p 和 720p。日期采用官方文档更新时间。</p>
+  <ul class="sources"><li><a href="https://console.volcengine.com/ark/region:cn-beijing/docs/seedance-2-5">火山方舟 API 教程 ↗</a> <span>2026-11-16 · 文档更新</span></li><li><a href="https://console.volcengine.com/ark/region:cn-beijing/docs/model-release-announcement">火山方舟模型发布记录 ↗</a> <span>2026-11-16 · 文档更新</span></li></ul>
+</article>
+<article class="signal" id="github-copilot-team-plugin-defaults">
+  <p class="meta">美国 · Business 与 Enterprise 可用</p>
+  <h3>GitHub Copilot 支持团队级插件默认配置</h3>
+  <p>团队可以选择默认启用的插件，直接成员可在 VS Code、Copilot app 和 Copilot CLI 中获得这套配置。</p>
+  <p><strong>影响</strong> 多个工程团队可以共享经批准的插件组合，减少逐台配置的工作量。</p>
+  <p class="check"><strong>验证与限制</strong> 子团队成员不会继承默认插件。企业和组织策略优先，应按团队层级检查实际生效范围。</p>
+  <ul class="sources"><li><a href="https://github.blog/changelog/2026-11-18-customize-github-copilot-for-your-team/">GitHub Changelog ↗</a> <span>2026-11-18 · 官方更新</span></li></ul>
+</article>
+<article class="signal" id="gemini-enterprise-a2a-oauth-ga">
+  <p class="meta">美国 · 正式可用</p>
+  <h3>Gemini Enterprise 的 A2A 用户委托授权正式可用</h3>
+  <p>Google 为运行在 Agent Runtime 的 ADK 智能体开放三方 OAuth。需要授权时，Gemini Enterprise 获取当前用户同意，随后恢复 A2A 会话。</p>
+  <p><strong>影响</strong> 企业 Agent 可以按登录用户的权限调用下游 MCP 服务或第三方 API，便于把授权纳入原有工作流。</p>
+  <p class="check"><strong>验证与限制</strong> 公告适用于指定的 ADK 与 Agent Runtime 组合。上线前应单测拒绝授权、撤销授权和过期令牌。</p>
+  <ul class="sources"><li><a href="https://docs.cloud.google.com/gemini/enterprise/docs/release-notes#November_13_2026">Gemini Enterprise 发布说明 ↗</a> <span>2026-11-13 · 官方更新</span></li></ul>
+</article></section><section id="architecture"><h2>技术架构<span lang="en">Architecture</span></h2><article class="signal" id="tencent-hy4-flash-dfly2-open-weights">
+  <p class="meta">中国 · 开放权重</p>
+  <h3>混元 Hy4 flash 开放权重并披露缓存复用架构</h3>
+  <p>腾讯在 Hy4 flash 公布混合注意力、LatentMoE 和 Engram 设计。用于投机解码的 DFly2 复用目标模型的 KV 缓存与稀疏索引。</p>
+  <p><strong>影响</strong> 复用设计减少了草稿模型维护独立 KV 缓存的需求，值得在长上下文负载下测显存和解码速度。</p>
+  <p class="check"><strong>验证与限制</strong> 模型以 Tencent Hy License 发布。架构细节来自团队技术说明，跨硬件收益需要独立实测。日期采用技术仓库提交。</p>
+  <ul class="sources"><li><a href="https://github.com/Tencent-Hunyuan/Hy4-flash/tree/7ab20f35602b1d3fc863f85aee20cb87eb8e53c5">腾讯混元技术仓库 ↗</a> <span>2026-11-18 · 技术仓库提交</span></li><li><a href="https://huggingface.co/tencent/Hy4-flash">腾讯混元模型卡 ↗</a> <span>2026-11-19 · 模型卡快照</span></li></ul>
+</article>
+<article class="signal" id="nvidia-vera-rubin-agentic-inference-architecture">
+  <p class="meta">美国 · 技术披露 · 部分结果待核验</p>
+  <h3>NVIDIA 披露 Vera Rubin 的多轮 Agent 推理栈</h3>
+  <p>NVIDIA 技术文章披露 Vera Rubin NVL72 用前缀缓存、状态复用与 Dynamo 路由减少多轮 Agent 的重复计算，同时将预填充和解码分开优化。</p>
+  <p><strong>影响</strong> 部署团队可以把缓存命中率、交互速度和每千瓦吞吐放在同一压测中观察。</p>
+  <p class="check"><strong>验证与限制</strong> 技术文引用的 Rubin 数据为待 MLCommons 核验的提交结果。比较时必须保留模型、并发和每用户交互速率门槛。</p>
+  <ul class="sources"><li><a href="https://developer.nvidia.com/blog/?p=125279">NVIDIA 技术博客 ↗</a> <span>2026-11-16 · 厂商技术说明</span></li></ul>
+</article>
+<article class="signal" id="sglang-1-router-migration-tracking">
+  <p class="meta">跨地区开源 · 迁移进行中</p>
+  <h3>SGLang 1.0 计划切换至 sgl-router</h3>
+  <p>SGLang 1.0 的发布追踪将 sgl-router 列为旧网关的替代方案。11 月 17 日的维护讨论提出补齐前后命令对照、预填充与解码分离和缓存感知路由的迁移样例。</p>
+  <p><strong>影响</strong> 依赖旧网关启动参数的部署可提前盘点配置，并为切换后的服务发现与路由行为保留回归样本。</p>
+  <p class="check"><strong>验证与限制</strong> 独立路由器已有版本，1.0 迁移清单仍在推进，应以正式兼容表和目标硬件测试为准。</p>
+  <ul class="sources"><li><a href="https://github.com/sgl-project/sglang/issues/50045">SGLang 1.0 发布追踪 ↗</a> <span>2026-11-17 · 仓库进度更新</span></li></ul>
+</article></section></div>
+<section class="editorial">
+  <h2>编辑判断</h2>
+  <p>同一模型的综合评测、真实工具任务和线上吞吐回答的是三类问题。第一轮选型可以固定任务、工具权限和失败重试策略，记录成功交付率、每次成功交付成本与 P95 耗时，再决定哪些任务需要升级到更强模型。</p>
+  <h2>接下来验证</h2><ul><li>在自有仓库，用同一批有验收脚本的任务比较 Astra 与 Sol，保留超时、重试、工具调用和人工返工成本。</li><li>跟进 Hy4 flash 在长上下文并发条件下的第三方实测，记录硬件、量化版本、输入长度和 P95 首 token 延迟。</li><li>跟进 SGLang 1.0 的正式迁移文档，核对现网使用的命令行参数与缓存感知路由的兼容性。</li></ul>
+  <p class="coverage"><strong>覆盖说明</strong> 本期查了中国、北美、欧洲和其他亚洲来源，纳入的信号集中于中国、美国和跨地区开源项目。欧洲与其他亚洲市场在本期暂无纳入条目。评测均为公开资料核验，未在本地复跑。</p>
+</section>
+</main>
+</body>
+</html>
