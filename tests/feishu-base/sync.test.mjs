@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildRows, planSync } from "../../scripts/sync-feishu-base.mjs";
+import { buildPaperRows, buildRows, planSync, selectPaperRows } from "../../scripts/sync-feishu-base.mjs";
 
 const site = "https://example.com/site/";
 const date = "2026-11-21";
@@ -52,4 +52,40 @@ test("blocks duplicate identity on either side before a write", () => {
   const [row] = buildRows([issue()], "文本", site);
   const record = { id: row["同步 ID"], version: row["同步版本"], recordId: "recA" };
   assert.throws(() => planSync([row], [record, { ...record, recordId: "recB" }]), /Duplicate sync ID/);
+});
+
+const paper = {
+  id: "arxiv:2608.06377",
+  title: "A public paper",
+  publishedAt: "2026-08-06T10:00:00Z",
+  updatedAt: "2026-08-06T10:00:00Z",
+  version: 1,
+  primaryCategory: "cs.CL",
+  authors: ["Author A", "Author B"],
+  topics: ["foundation-models"],
+  resources: { paper: "https://arxiv.org/abs/2608.06377v1" },
+  score: { total: 50 },
+  abstract: "The table does not contain abstracts.",
+};
+
+test("arXiv revisions update the same record and only expose selected metadata", () => {
+  const [old] = buildPaperRows([paper]);
+  const [updated] = buildPaperRows([{ ...paper, id: `${paper.id}v2`, version: 2,
+    updatedAt: "2026-08-07T12:00:00Z", resources: { paper: "https://arxiv.org/abs/2608.06377v2" } }]);
+  assert.equal(old["同步 ID"], "paper:arxiv:2608.06377");
+  assert.equal(updated["同步 ID"], old["同步 ID"]);
+  assert.notEqual(updated["同步版本"], old["同步版本"]);
+  assert.equal(updated["版本"], 2);
+  assert.ok(!JSON.stringify(updated).includes(paper.abstract));
+  const existing = [{ id: old["同步 ID"], recordId: "recPaper", version: old["同步版本"] }];
+  assert.deepEqual(planSync([updated], existing, "paper:").update, [["recPaper", updated]]);
+});
+
+test("limits new papers while still considering existing entries for revisions", () => {
+  const lower = { ...paper, id: "arxiv:2608.06378", score: { total: 10 } };
+  const higher = { ...paper, id: "arxiv:2608.06379", score: { total: 90 } };
+  const [first, middle, last] = buildPaperRows([paper, lower, higher]);
+  assert.equal(first["arXiv ID"], "2608.06379");
+  assert.deepEqual(selectPaperRows([first, middle, last], [{ id: last["同步 ID"] }], 1), [first, last]);
+  assert.throws(() => buildPaperRows([paper, { ...paper, id: `${paper.id}v2` }]), /duplicated paper ID/);
 });

@@ -15,6 +15,7 @@ const DAY = 86_400_000;
 const PAGE_SIZE = 200;
 const BATCH_SIZE = 50;
 const COLUMNS = ["刊发日期", "栏目", "公司或产品", "主题", "摘要", "来源", "来源日期", "报刊链接", "原文链接"];
+const PAPER_COLUMNS = ["arXiv ID", "首次发布", "最近更新", "版本", "主分类", "主题", "作者", "论文链接"];
 
 function text(value) {
   return typeof value === "string" && value.trim() ? value.trim() : null;
@@ -70,10 +71,45 @@ export function buildRows(issues, titleField, site = SITE) {
   })));
 }
 
-export function planSync(rows, existing) {
+export function buildPaperRows(papers) {
+  const seen = new Set();
+  return [...papers].sort((a, b) =>
+    b.publishedAt.slice(0, 10).localeCompare(a.publishedAt.slice(0, 10)) ||
+    (b.score?.total ?? 0) - (a.score?.total ?? 0) ||
+    b.publishedAt.localeCompare(a.publishedAt) ||
+    a.id.localeCompare(b.id)
+  ).map((paper) => {
+    const arxivId = paper.id.replace(/^arxiv:/, "").replace(/v\d+$/i, "");
+    const id = `paper:arxiv:${arxivId}`;
+    if (!paper.id.startsWith("arxiv:") || !arxivId || seen.has(id)) {
+      throw new Error(`Invalid or duplicated paper ID: ${paper.id}.`);
+    }
+    seen.add(id);
+    const fields = {
+      "标题": paper.title,
+      "arXiv ID": arxivId,
+      "首次发布": paper.publishedAt,
+      "最近更新": paper.updatedAt,
+      "版本": paper.version,
+      "主分类": text(paper.primaryCategory),
+      "主题": text(paper.topics?.join(" · ")),
+      "作者": text(paper.authors?.join("、")),
+      "论文链接": webUrl(paper.resources.paper).href,
+      [KEY]: id,
+    };
+    return { ...fields, [VERSION]: digest(JSON.stringify(fields)) };
+  });
+}
+
+export function selectPaperRows(rows, existing, limit) {
+  const managed = new Set(existing.map(({ id }) => id));
+  return rows.filter((row, index) => index < limit || managed.has(row[KEY]));
+}
+
+export function planSync(rows, existing, prefix = "brief:") {
   const previous = new Map();
   for (const { id, version, recordId } of existing) {
-    if (!id.startsWith("brief:")) continue;
+    if (!id.startsWith(prefix)) continue;
     if (previous.has(id)) throw new Error(`Duplicate sync ID in Feishu: ${id}. No records changed.`);
     previous.set(id, { version, recordId });
   }
@@ -107,6 +143,24 @@ async function loadIssues(days) {
   }));
   if (!issues.some((issue) => issue.date === latest)) throw new Error("The latest structured issue is missing.");
   return { start, latest, issues };
+}
+
+async function loadPapers() {
+  const manifest = await readJson("papers-data/manifest.json");
+  if (!manifest.lastSuccessfulAt || !manifest.latestPaperDate || !manifest.days?.length) {
+    throw new Error("No successful paper snapshot is available.");
+  }
+  const groups = await Promise.all(manifest.days.map(async ({ date, dataUrl }) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || dataUrl !== `papers-data/${date}.json`) {
+      throw new Error("Unexpected paper snapshot path.");
+    }
+    const { papers, date: payloadDate } = await readJson(dataUrl);
+    if (payloadDate !== date || !Array.isArray(papers)) throw new Error(`Bad paper snapshot: ${dataUrl}.`);
+    return papers;
+  }));
+  const papers = groups.flat();
+  if (papers.length !== manifest.paperCount) throw new Error("Paper count differs from the published manifest.");
+  return { papers, latest: manifest.latestPaperDate, lastSuccessfulAt: manifest.lastSuccessfulAt };
 }
 
 function baseCli(target, identity) {
@@ -169,33 +223,45 @@ async function main() {
   const { values } = parseArgs({
     options: {
       days: { type: "string", default: "30" },
+      dataset: { type: "string", default: "briefs" },
+      "paper-limit": { type: "string", default: "30" },
       as: { type: "string", default: "user" },
       apply: { type: "boolean" },
       "wait-for-pages": { type: "boolean" },
     },
   });
   const days = Number(values.days);
+  const paperLimit = Number(values["paper-limit"]);
+  if (!["briefs", "papers"].includes(values.dataset)) throw new Error("--dataset must be briefs or papers.");
   if (!Number.isInteger(days) || days < 1 || days > 120) throw new Error("--days must be 1–120.");
+  if (!Number.isInteger(paperLimit) || paperLimit < 1 || paperLimit > 500) throw new Error("--paper-limit must be 1–500.");
   if (!["user", "bot"].includes(values.as)) throw new Error("--as must be user or bot.");
-  const target = { token: process.env.FEISHU_BASE_TOKEN, table: process.env.FEISHU_TABLE_ID };
-  if (!target.token || !target.table) throw new Error("Set FEISHU_BASE_TOKEN and FEISHU_TABLE_ID.");
+  const isPapers = values.dataset === "papers";
+  const tableVariable = isPapers ? "FEISHU_PAPERS_TABLE_ID" : "FEISHU_TABLE_ID";
+  const target = { token: process.env.FEISHU_BASE_TOKEN, table: process.env[tableVariable] };
+  if (!target.token || !target.table) throw new Error(`Set FEISHU_BASE_TOKEN and ${tableVariable}.`);
   const site = webUrl(process.env.FEISHU_BRIEF_SITE || SITE);
   site.pathname = site.pathname.replace(/\/?$/, "/");
   site.search = "";
   site.hash = "";
-  const { start, latest, issues } = await loadIssues(days);
+  const snapshot = isPapers ? await loadPapers() : await loadIssues(days);
   const run = baseCli(target, values.as);
   const { fields } = run("+field-list");
   const byName = new Map(fields.map((field) => [field.name, field.id]));
-  const titleField = byName.has("标题") ? "标题" : "文本";
-  const missing = [titleField, KEY, VERSION, ...COLUMNS].filter((name) => !byName.has(name));
+  const titleField = isPapers || byName.has("标题") ? "标题" : "文本";
+  const missing = [titleField, KEY, VERSION, ...(isPapers ? PAPER_COLUMNS : COLUMNS)].filter((name) => !byName.has(name));
   if (missing.length) throw new Error(`Missing Feishu columns: ${missing.join(", ")}.`);
-  const rows = buildRows(issues, titleField, site);
-  if (values.apply && values["wait-for-pages"]) {
-    await waitForPages(site, issues.find((issue) => issue.date === latest));
+  if (!isPapers && values.apply && values["wait-for-pages"]) {
+    await waitForPages(site, snapshot.issues.find((issue) => issue.date === snapshot.latest));
   }
-  const { create, update, unchanged } = planSync(rows, readExisting(run, byName.get(KEY), byName.get(VERSION)));
-  console.log(JSON.stringify({ start, latest, issues: issues.length, records: rows.length,
+  const existing = readExisting(run, byName.get(KEY), byName.get(VERSION));
+  const rows = isPapers ? selectPaperRows(buildPaperRows(snapshot.papers), existing, paperLimit)
+    : buildRows(snapshot.issues, titleField, site);
+  const { create, update, unchanged } = planSync(rows, existing, isPapers ? "paper:" : "brief:");
+  const coverage = isPapers
+    ? { lastSuccessfulAt: snapshot.lastSuccessfulAt, available: snapshot.papers.length }
+    : { start: snapshot.start, issues: snapshot.issues.length };
+  console.log(JSON.stringify({ dataset: values.dataset, latest: snapshot.latest, ...coverage, records: rows.length,
     create: create.length, update: update.length, unchanged, apply: Boolean(values.apply) }));
   if (!values.apply) return;
   for (let i = 0; i < update.length; i += BATCH_SIZE) {

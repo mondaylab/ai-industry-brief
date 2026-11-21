@@ -1,10 +1,15 @@
-name: Sync published brief to Feishu Base
+name: Sync published data to Feishu Base
 
 on:
   push:
     branches: [main]
     paths:
       - "brief-data/*.json"
+      - "papers-data/*.json"
+  workflow_run:
+    workflows: ["Paper Observatory monitor"]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -16,12 +21,13 @@ concurrency:
 
 jobs:
   sync:
-    if: ${{ github.ref == 'refs/heads/main' && vars.FEISHU_BASE_SYNC_ENABLED == 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' && vars.FEISHU_BASE_SYNC_ENABLED == 'true' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success') }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     env:
       FEISHU_BASE_TOKEN: ${{ vars.FEISHU_BASE_TOKEN }}
       FEISHU_TABLE_ID: ${{ vars.FEISHU_TABLE_ID }}
+      FEISHU_PAPERS_TABLE_ID: ${{ vars.FEISHU_PAPERS_TABLE_ID }}
       LARKSUITE_CLI_CONFIG_DIR: ${{ runner.temp }}/feishu-cli-config
       LARKSUITE_CLI_DATA_DIR: ${{ runner.temp }}/feishu-cli-data
       LARKSUITE_CLI_NO_UPDATE_NOTIFIER: "1"
@@ -38,10 +44,14 @@ jobs:
           APP_ID: ${{ vars.FEISHU_BASE_SYNC_APP_ID }}
           APP_SECRET: ${{ secrets.FEISHU_BASE_SYNC_APP_SECRET }}
         run: |
-          if [[ -z "$APP_ID" || -z "$APP_SECRET" || -z "$FEISHU_BASE_TOKEN" || -z "$FEISHU_TABLE_ID" ]]; then
+          if [[ -z "$APP_ID" || -z "$APP_SECRET" || -z "$FEISHU_BASE_TOKEN" ]] || [[ -z "$FEISHU_TABLE_ID" && -z "$FEISHU_PAPERS_TABLE_ID" ]]; then
             echo "::error::Configure the Feishu sync app and Base destination before enabling this workflow."
             exit 1
           fi
           printf '%s\n' "$APP_SECRET" | lark-cli config init --app-id "$APP_ID" --app-secret-stdin --brand feishu
       - name: Sync published issues
+        if: ${{ github.event_name != 'workflow_run' && env.FEISHU_TABLE_ID != '' }}
         run: npm run base:sync -- --as bot --apply --wait-for-pages
+      - name: Sync the Paper Observatory
+        if: ${{ env.FEISHU_PAPERS_TABLE_ID != '' }}
+        run: npm run base:sync -- --dataset papers --as bot --apply
