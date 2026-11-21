@@ -549,7 +549,7 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
   return {
     schema: "2.0",
     config: {
-      width_mode: "default",
+      width_mode: "fill",
       enable_forward: true,
       style: {
         color: {
@@ -561,7 +561,7 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
       },
     },
     header: {
-      template: "purple",
+      template: "blue",
       title: {
         tag: "plain_text",
         content: `国际化行业报刊 · ${date}`,
@@ -583,8 +583,7 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
             opening !== headline && briefCardText(opening),
           ].filter(Boolean).join("\n\n"),
         },
-        buildBriefSectionRow(sections.slice(0, 2), 1),
-        buildBriefSectionRow(sections.slice(2, 4), 3),
+        buildBriefSectionRow(sections),
         ...(insight ? [
           { tag: "markdown", content: `**今日洞察**<br>${briefCardText(insight)}` },
         ] : []),
@@ -597,13 +596,12 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
             { label: "打开首页", url: archiveUrl, type: "default" },
           ].map(({ label, url, type }) => ({
             tag: "column",
-            width: "weighted",
-            weight: 1,
+            width: "auto",
             elements: [{
               tag: "button",
               text: { tag: "plain_text", content: label },
               type,
-              width: "fill",
+              width: "default",
               behaviors: [{ type: "open_url", default_url: url }],
             }],
           })),
@@ -613,16 +611,16 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
   };
 }
 
-function buildBriefSectionRow(sections, start) {
+function buildBriefSectionRow(sections) {
   return {
     tag: "column_set",
     flex_mode: "stretch",
     horizontal_spacing: "12px",
     columns: sections.map((section, index) => {
-      const number = String(start + index).padStart(2, "0");
+      const number = String(index + 1).padStart(2, "0");
       const subtitle = stringOrNull(section.subtitle);
       const heading = [
-        `<text_tag color='purple'>${number}</text_tag> **${briefCardText(section.name)}**`,
+        `<text_tag color='blue'>${number}</text_tag> **${briefCardText(section.name)}**`,
         subtitle && `<font color='grey'>${briefCardText(subtitle.toUpperCase())}</font>`,
       ].filter(Boolean).join("<br>");
       return {

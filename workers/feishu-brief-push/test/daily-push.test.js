@@ -82,13 +82,13 @@ test("scheduled push sends a branded text card and shares deduplication with bot
   assert.equal((await f.scheduled()).deliveryMode, "text_card");
   const [card] = f.cards;
   assert.equal(card.schema, "2.0");
+  assert.equal(card.config.width_mode, "fill");
   assert.equal(card.header.subtitle.content, "坐标原点研究室");
-  assert.equal(card.header.template, "purple");
+  assert.equal(card.header.template, "blue");
   const elements = card.body.elements;
   const rows = elements.filter(({ tag, flex_mode }) => tag === "column_set" && flex_mode === "stretch");
   assert.deepEqual(rows.map(({ flex_mode, columns }) => [flex_mode, columns.map(({ weight }) => weight)]), [
-    ["stretch", [1, 1]],
-    ["stretch", [1, 1]],
+    ["stretch", [1, 1, 1, 1]],
   ]);
   assert.match(elements[0].content, /今日行业动态/);
   assert.match(elements[0].content, /坐标原点研究室发布今日简报/);
@@ -99,7 +99,7 @@ test("scheduled push sends a branded text card and shares deduplication with bot
     assert.ok(card.config.style.color[panel.background_style].light_mode);
     assert.ok(card.config.style.color[panel.background_style].dark_mode);
     const [header, ...items] = panel.elements.map(({ content }) => content);
-    assert.ok(header.startsWith(`<text_tag color='purple'>0${index + 1}</text_tag> **${section.name}**<br>`));
+    assert.ok(header.startsWith(`<text_tag color='blue'>0${index + 1}</text_tag> **${section.name}**<br>`));
     assert.match(header, /SECTION [1-4]/);
     assert.equal(items.length, 3);
     for (const [itemIndex, item] of section.items.entries()) {
