@@ -12,14 +12,14 @@ description: 创建、初始化并维护可追溯来源的每日行业简报和 
 当用户要求从 GitHub 安装这个 Skill 时，优先使用标准 Skills 安装器：
 
 ```bash
-npx skills add mondaylab/ai-industry-brief -y -g
+npx skills add mondaylab/zero-one-signals -y -g
 ```
 
 安装后，如果宿主环境需要重新发现 Skill，提醒用户重启或开启新会话。随后继续完成用户要求的初始化或第一期简报生成。
 
 以下用户话术都应该触发本 Skill：
 
-- `请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并初始化一个行业简报项目。`
+- `请帮我安装 mondaylab/zero-one-signals 这个行业简报 Skill，并初始化一个行业简报项目。`
 - `请用 ai-industry-brief Skill 生成第一期跨境电商简报。`
 - `基于这个 Skill 搭一个出海印尼日报，不要让我手动配。`
 
@@ -72,7 +72,7 @@ npx skills add mondaylab/ai-industry-brief -y -g
 1. 运行 `node skills/ai-industry-brief/scripts/render-brief.js YYYY-MM-DD`。脚本校验 JSON、生成日期清单、构建 React 站点，并写入旧详情链接的兼容跳转页。
 2. `index.html` 保留品牌首页，最新一期和往期入口进入 `reader.html?date=YYYY-MM-DD`；阅读器在同一页面内切换所有结构化历史简报。
 3. 生成 `radar-data/snapshot.json` 和 `radar.html`，让来源账本、信号评分和编辑状态使用稳定 schema；没有实时采集器时必须标明 `brief-observed`，不得暗示正在实时监控。
-4. 生成 `share-images/YYYY-MM-DD.png` 时打开 `reader.html?date=YYYY-MM-DD&capture=1`，并随当日简报一起发布，作为飞书图片卡的稳定兜底素材。
+4. 每日发布不生成截图。只有另有分享图需求时才使用 `reader.html?date=YYYY-MM-DD&capture=1`。
 4. 每期简报都必须保留可点击来源链接和来源日期标注。
 5. 保留 React 阅读器的国际化瑞士编辑版式：
    - 全站使用中性纸张底色、强网格、清晰字级和克制边框；默认点缀色为 `#D9C7FF`。
@@ -91,13 +91,12 @@ npx skills add mondaylab/ai-industry-brief -y -g
 
 1. 检查是否还有未替换占位符，并确认包含 4 个栏目、12 条内容和 12 个来源链接。
 2. 发布前重新运行去重检查，确保与历史简报没有重复。
-3. 在浏览器打开 `index.html` 检查入口，再检查 `reader.html?date=YYYY-MM-DD` 和 `radar.html`；确认日期切换、主题、Radar 筛选和编辑状态、小屏可读性都正常，最后加上 `&capture=1` 检查分享图完整性。
+3. 在浏览器打开 `index.html` 检查入口，再检查 `reader.html?date=YYYY-MM-DD` 和 `radar.html`；确认日期切换、主题、Radar 筛选和编辑状态、小屏可读性都正常。
 4. 如果用户要求发布，或仓库已经配置发布流程，只提交相关站点和 Skill 文件，推送到配置好的 GitHub 仓库，并在部署后验证 GitHub Pages URL。
-5. GitHub Pages 当前部署完全生效后，立即触发飞书图片推送，不要只等待 cron 巡逻。部署完成门槛是：归档首页已包含当天详情页链接、详情页日期/页脚正确、`share-images/YYYY-MM-DD.png` 已在公开站点返回 PNG：
-   - `MANUAL_TRIGGER_TOKEN=<token> npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
-   - 该脚本会等待上述部署门槛通过后再触发 Worker，避免 Pages 仍为旧版本或 PNG 尚未生效时发送链接卡。
-   - 如果本地环境没有 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`，但当前 Wrangler 已登录且能管理 Worker secrets，可以临时轮换 `MANUAL_TRIGGER_TOKEN`，用新 token 调用 `/send-image-url?date=YYYY-MM-DD&image_url=<published_png_url>`，成功后删除本地临时 token 文件，不要在输出或记忆中记录 token 明文。
-   - 如果无法取得或轮换触发 token，明确报告“站点已发布，但发布后飞书即时推送缺少 Worker 手动触发 token”，并说明定时 Worker 仍会按 cron 巡逻；此时因为 `share-images/YYYY-MM-DD.png` 已发布，Worker 截图失败时也应优先发送该图片而不是链接卡。
+5. GitHub Pages 生效后，立即触发飞书文字卡片推送。验证首页入口、当期详情页及当期 JSON，不需要 PNG。
+   - `npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`
+   - 脚本优先使用 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`；未提供时，通过 GitHub CLI 触发仓库工作流，使用已配置的 secret。以工作流成功和发送日志为准。
+   - 如果即时推送未确认，分别报告站点发布和飞书推送状态。不要为每日推送回退到截图或上传图片。
 6. 如果这个流程由定时任务驱动，保持品牌、页脚、归档页、Worker 解析逻辑和发布说明与本 Skill 同步。
 
 ## 资源

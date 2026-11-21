@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev --test-scheduled",
+    "test": "node --test",
     "deploy": "wrangler deploy",
     "check": "wrangler deploy --dry-run",
     "post-publish-send": "node scripts/post-publish-send.js"

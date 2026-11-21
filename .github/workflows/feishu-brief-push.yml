@@ -7,73 +7,23 @@ on:
         description: Brief date in YYYY-MM-DD format
         required: true
         type: string
-      image_url:
-        description: Published PNG fallback URL
-        required: true
-        type: string
       worker_url:
         description: Worker base URL
         required: false
-        default: https://ai-industry-brief-feishu-push.zelina-ceo-os.workers.dev
         type: string
+
+permissions:
+  contents: read
 
 jobs:
   push:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - name: Trigger Worker push
+      - uses: actions/checkout@v4
+      - name: Send text card
         env:
-          WORKER_MANUAL_TRIGGER_TOKEN: ${{ secrets.WORKER_MANUAL_TRIGGER_TOKEN }}
+          MANUAL_TRIGGER_TOKEN: ${{ secrets.WORKER_MANUAL_TRIGGER_TOKEN }}
           BRIEF_DATE: ${{ inputs.date }}
-          IMAGE_URL: ${{ inputs.image_url }}
-          WORKER_URL: ${{ inputs.worker_url }}
-        run: |
-          node <<'NODE'
-          const token = process.env.WORKER_MANUAL_TRIGGER_TOKEN;
-          if (!token) throw new Error("Missing WORKER_MANUAL_TRIGGER_TOKEN repository secret.");
-
-          const workerUrl = process.env.WORKER_URL.replace(/\/+$/, "");
-          const date = process.env.BRIEF_DATE;
-          const imageUrl = process.env.IMAGE_URL;
-
-          async function trigger(path, extra = {}) {
-            const url = new URL(path, workerUrl);
-            url.searchParams.set("date", date);
-            for (const [key, value] of Object.entries(extra)) {
-              url.searchParams.set(key, value);
-            }
-
-            const response = await fetch(url, {
-              signal: AbortSignal.timeout(30000),
-              headers: {
-                authorization: `Bearer ${token}`,
-                "cache-control": "no-cache",
-              },
-            });
-            const text = await response.text();
-            let data;
-            try {
-              data = JSON.parse(text);
-            } catch {
-              data = { raw: text };
-            }
-            if (!response.ok || data.ok === false) {
-              throw new Error(`${path} failed with ${response.status}: ${JSON.stringify(data)}`);
-            }
-            return data;
-          }
-
-          const expectedImageUrl = `https://mondaylab.github.io/ai-industry-brief/share-images/${date}.png`;
-          if (imageUrl !== expectedImageUrl) throw new Error("Unexpected published image URL.");
-          const result = await trigger("/send");
-          if (result.skipped) {
-            if (result.reason !== "already_sent") {
-              throw new Error(`Feishu push not completed: ${JSON.stringify(result)}`);
-            }
-            console.log(`Feishu brief already sent: ${date} at ${result.sentAt}`);
-          } else {
-            if (!result.messageId) throw new Error(`Missing Feishu message ID: ${JSON.stringify(result)}`);
-            console.log(`Feishu published PNG push sent: ${result.messageId}`);
-          }
-          NODE
+          FEISHU_PUSH_WORKER_URL: ${{ inputs.worker_url }}
+        run: node workers/feishu-brief-push/scripts/post-publish-send.js --date "$BRIEF_DATE"

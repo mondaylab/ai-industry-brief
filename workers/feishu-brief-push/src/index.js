@@ -1,8 +1,9 @@
-const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/ai-industry-brief";
+const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/zero-one-signals";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
 const DEFAULT_SCREENSHOT_HEIGHT = 2200;
 const PRIMARY_CRON = "40 22 * * *";
+const CARD_PUBLISHER = "坐标原点研究室";
 
 export default {
   async fetch(request, env, ctx) {
@@ -12,10 +13,11 @@ export default {
       return jsonResponse(200, {
         ok: true,
         service: "ai-industry-brief-feishu-image-push",
+        dailyDelivery: "text_card",
       });
     }
 
-    if (url.pathname === "/send") {
+    if (url.pathname === "/send" || url.pathname === "/send-link") {
       if (!isManualTriggerAuthorized(request, env)) {
         return jsonResponse(401, {
           ok: false,
@@ -24,6 +26,9 @@ export default {
       }
 
       const requestedDate = url.searchParams.get("date");
+      if (requestedDate !== null && !/^\d{4}-\d{2}-\d{2}$/.test(requestedDate)) {
+        return jsonResponse(400, { ok: false, error: "date must be YYYY-MM-DD." });
+      }
       const force = url.searchParams.get("force") === "1";
 
       try {
@@ -39,41 +44,7 @@ export default {
           ...result,
         });
       } catch (error) {
-        log("manual_image_push_failed", {
-          error: error instanceof Error ? error.message : String(error),
-          requestedDate,
-        });
-        return jsonResponse(500, {
-          ok: false,
-          error: error instanceof Error ? error.message : String(error),
-        });
-      }
-    }
-
-    if (url.pathname === "/send-link") {
-      if (!isManualTriggerAuthorized(request, env)) {
-        return jsonResponse(401, {
-          ok: false,
-          error: "Unauthorized manual trigger.",
-        });
-      }
-
-      const requestedDate = url.searchParams.get("date");
-      const force = url.searchParams.get("force") === "1";
-
-      try {
-        const result = await pushBriefLink({
-          env,
-          requestedDate,
-          force,
-          requestId: crypto.randomUUID(),
-        });
-        return jsonResponse(200, {
-          ok: true,
-          ...result,
-        });
-      } catch (error) {
-        log("manual_link_push_failed", {
+        log("manual_brief_push_failed", {
           error: error instanceof Error ? error.message : String(error),
           requestedDate,
         });
@@ -124,61 +95,6 @@ export default {
       }
     }
 
-    if (url.pathname === "/send-image-url") {
-      if (!isManualTriggerAuthorized(request, env)) {
-        return jsonResponse(401, {
-          ok: false,
-          error: "Unauthorized manual trigger.",
-        });
-      }
-      if (request.method !== "GET") {
-        return jsonResponse(405, {
-          ok: false,
-          error: "GET required.",
-        });
-      }
-
-      const requestedDate = url.searchParams.get("date");
-      const imageUrl = normalizeSameOriginAssetUrl(url.searchParams.get("image_url"), env);
-      const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
-      const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
-      const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
-      const archiveUrl = `${siteBaseUrl}/`;
-      const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
-      const pageMeta = await fetchPageMeta(detailUrl);
-      const result = await pushBriefImageFromUrl({
-        env,
-        archiveUrl,
-        detailUrl,
-        date,
-        pageMeta,
-        imageUrl,
-        requestId: crypto.randomUUID(),
-        deliveryMode: "manual_image",
-      });
-
-      const state = getPushStateStore(env);
-      if (state) {
-        await writePushState(state, `brief-push:${date}`, {
-          status: "sent",
-          date,
-          detailUrl,
-          source: "manual",
-          sentAt: new Date().toISOString(),
-          headline: result.headline,
-          deliveryMode: result.deliveryMode,
-          imageUrl,
-          imageKey: result.imageKey,
-          messageId: result.messageId,
-        });
-      }
-
-      return jsonResponse(200, {
-        ok: true,
-        ...result,
-      });
-    }
-
     return jsonResponse(404, {
       ok: false,
       error: "Not found.",
@@ -193,7 +109,7 @@ export default {
         cron: controller?.cron,
         requestId: crypto.randomUUID(),
       }).catch((error) => {
-        log("scheduled_image_push_failed", {
+        log("scheduled_brief_push_failed", {
           error: error instanceof Error ? error.message : String(error),
         });
         throw error;
@@ -216,7 +132,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   const state = getPushStateStore(env);
   const isPatrol = source === "scheduled" && cron !== PRIMARY_CRON;
   if (!state && isPatrol) {
-    log("brief_image_push_skipped", {
+    log("brief_push_skipped", {
       requestId,
       date,
       source,
@@ -235,7 +151,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   const stateKey = `brief-push:${date}`;
   const existing = state ? await readPushState(state, stateKey) : null;
   if (!force && existing?.status === "sent") {
-    log("brief_image_push_skipped", {
+    log("brief_push_skipped", {
       requestId,
       date,
       source,
@@ -252,8 +168,11 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
     };
   }
 
-  const pageMeta = await tryFetchPageMeta(detailUrl);
-  if (!pageMeta.ok) {
+  let brief;
+  try {
+    brief = await fetchPublishedBrief(siteBaseUrl, date, detailUrl);
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
     if (state) {
       await writePushState(state, stateKey, {
         status: "waiting_for_page",
@@ -262,7 +181,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
         source,
         cron,
         checkedAt: new Date().toISOString(),
-        error: pageMeta.error,
+        error: reason,
       });
     }
     log("brief_page_not_ready", {
@@ -271,7 +190,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
       detailUrl,
       source,
       cron,
-      error: pageMeta.error,
+      error: reason,
     });
     return {
       date,
@@ -279,22 +198,20 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
       archiveUrl,
       skipped: true,
       reason: "page_not_ready",
-      error: pageMeta.error,
+      error: reason,
     };
   }
 
-  const publishedImageUrl = `${siteBaseUrl}/share-images/${date}.png`;
   try {
-    const publishedImage = await pushBriefImageFromUrl({
-      env,
-      date,
-      archiveUrl,
-      detailUrl,
-      pageMeta: pageMeta.value,
-      imageUrl: publishedImageUrl,
-      requestId,
-      deliveryMode: "published_image",
+    const tenantAccessToken = await getTenantAccessToken(env);
+    const card = buildBriefTextCard({ archiveUrl, detailUrl, date, ...brief });
+    const { messageId } = await sendFeishuBotMessage({
+      tenantAccessToken,
+      chatId: env.FEISHU_CHAT_ID,
+      card,
     });
+    const delivery = { headline: brief.headline, messageId, deliveryMode: "text_card" };
+
     if (state) {
       await writePushState(state, stateKey, {
         status: "sent",
@@ -303,143 +220,13 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
         source,
         cron,
         sentAt: new Date().toISOString(),
-        headline: publishedImage.headline,
-        deliveryMode: publishedImage.deliveryMode,
-        imageUrl: publishedImageUrl,
-        imageKey: publishedImage.imageKey,
-        imageBytes: publishedImage.imageBytes,
-      });
-    }
-    return publishedImage;
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    log("brief_published_image_push_failed", {
-      requestId,
-      date,
-      detailUrl,
-      imageUrl: publishedImageUrl,
-      source,
-      cron,
-      error: errorMessage,
-    });
-  }
-
-  try {
-    const result = await pushBriefImage({
-      env,
-      date,
-      archiveUrl,
-      detailUrl,
-      pageMeta: pageMeta.value,
-      requestId,
-    });
-    if (state) {
-      await writePushState(state, stateKey, {
-        status: "sent",
-        date,
-        detailUrl,
-        source,
-        cron,
-        sentAt: new Date().toISOString(),
-        headline: result.headline,
-        deliveryMode: result.deliveryMode,
-        imageKey: result.imageKey,
-        screenshotBytes: result.screenshotBytes,
-      });
-    }
-    return result;
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    try {
-      log("brief_image_push_fallback_to_published_image", {
-        requestId,
-        date,
-        detailUrl,
-        imageUrl: publishedImageUrl,
-        source,
-        cron,
-        error: errorMessage,
-      });
-      const fallbackImage = await pushBriefImageFromUrl({
-        env,
-        date,
-        archiveUrl,
-        detailUrl,
-        pageMeta: pageMeta.value,
-        imageUrl: publishedImageUrl,
-        requestId,
-        deliveryMode: "published_image_fallback",
-      });
-      if (state) {
-        await writePushState(state, stateKey, {
-          status: "sent",
-          date,
-          detailUrl,
-          source,
-          cron,
-          sentAt: new Date().toISOString(),
-          headline: fallbackImage.headline,
-          deliveryMode: fallbackImage.deliveryMode,
-          fallbackFrom: "screenshot",
-          imageUrl: publishedImageUrl,
-          imageKey: fallbackImage.imageKey,
-          messageId: fallbackImage.messageId,
-          error: errorMessage,
-        });
-      }
-      return {
-        ...fallbackImage,
-        fallbackFrom: "screenshot",
-        fallbackError: errorMessage,
-      };
-    } catch (publishedImageError) {
-      log("brief_published_image_fallback_failed", {
-        requestId,
-        date,
-        detailUrl,
-        imageUrl: publishedImageUrl,
-        source,
-        cron,
-        error: publishedImageError instanceof Error ? publishedImageError.message : String(publishedImageError),
+        ...delivery,
       });
     }
 
-    if (source === "scheduled") {
-      log("brief_image_push_fallback_to_link", {
-        requestId,
-        date,
-        detailUrl,
-        source,
-        cron,
-        error: errorMessage,
-      });
-      const fallback = await pushBriefLink({
-        env,
-        requestedDate: date,
-        force: true,
-        requestId,
-      });
-      if (state) {
-        await writePushState(state, stateKey, {
-          status: "sent",
-          date,
-          detailUrl,
-          source,
-          cron,
-          sentAt: new Date().toISOString(),
-          headline: fallback.headline,
-          deliveryMode: "link_fallback",
-          fallbackFrom: "image",
-          error: errorMessage,
-        });
-      }
-      return {
-        ...fallback,
-        deliveryMode: "link_fallback",
-        fallbackFrom: "image",
-        fallbackError: errorMessage,
-      };
-    }
+    log("brief_text_pushed", { requestId, date, source, ...delivery });
+    return { date, detailUrl, archiveUrl, ...delivery };
+  } catch (error) {
     if (state) {
       await writePushState(state, stateKey, {
         status: "failed",
@@ -448,188 +235,33 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
         source,
         cron,
         failedAt: new Date().toISOString(),
-        error: errorMessage,
+        error: error instanceof Error ? error.message : String(error),
       });
     }
     throw error;
   }
 }
 
-async function pushBriefLink({ env, requestedDate, force = false, requestId }) {
-  const siteBaseUrl = normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL);
-  const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
-  const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
-  const archiveUrl = `${siteBaseUrl}/`;
-  const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
-
-  assertRequiredSecret(env, "FEISHU_APP_ID");
-  assertRequiredSecret(env, "FEISHU_APP_SECRET");
-  assertRequiredSecret(env, "FEISHU_CHAT_ID");
-
-  const state = getPushStateStore(env);
-  const stateKey = `brief-link-push:${date}`;
-  const existing = state ? await readPushState(state, stateKey) : null;
-  if (!force && existing?.status === "sent") {
-    log("brief_link_push_skipped", {
-      requestId,
-      date,
-      detailUrl,
-      reason: "already_sent",
-      sentAt: existing.sentAt,
-    });
-    return {
-      date,
-      detailUrl,
-      archiveUrl,
-      skipped: true,
-      reason: "already_sent",
-      sentAt: existing.sentAt,
-    };
+async function fetchPublishedBrief(siteBaseUrl, date, detailUrl) {
+  const options = { headers: { "cache-control": "no-cache" } };
+  const [detail, data] = await Promise.all([
+    fetch(detailUrl, { ...options, method: "HEAD" }),
+    fetch(`${siteBaseUrl}/brief-data/${date}.json`, options),
+  ]);
+  if (!detail.ok || !data.ok) {
+    throw new Error(`Issue ${date} is not published (page=${detail.status}, data=${data.status}).`);
   }
 
-  const pageMeta = await fetchPageMeta(detailUrl);
-  const tenantAccessToken = await getTenantAccessToken(env);
-  const card = buildBriefLinkCard({
-    archiveUrl,
-    detailUrl,
-    date,
-    headline: pageMeta.headline,
-    corePoint: pageMeta.corePoint,
-  });
-  const delivery = await sendFeishuBotMessage({
-    tenantAccessToken,
-    chatId: env.FEISHU_CHAT_ID,
-    card,
-  });
-
-  if (state) {
-    await writePushState(state, stateKey, {
-      status: "sent",
-      date,
-      detailUrl,
-      sentAt: new Date().toISOString(),
-      headline: pageMeta.headline,
-      deliveryMode: delivery.mode,
-    });
+  const brief = await data.json();
+  const opening = stringOrNull(brief?.opening);
+  if (brief?.date !== date || !opening) {
+    throw new Error(`Issue data is incomplete or has the wrong date: ${date}.`);
   }
 
-  log("brief_link_pushed", {
-    requestId,
-    date,
-    detailUrl,
-    deliveryMode: delivery.mode,
-  });
-
   return {
-    date,
-    detailUrl,
-    archiveUrl,
-    headline: pageMeta.headline,
-    deliveryMode: delivery.mode,
-    messageId: delivery.messageId,
-    responseText: delivery.responseText,
-  };
-}
-
-async function pushBriefImage({ env, date, archiveUrl, detailUrl, pageMeta, requestId }) {
-  const screenshot = await capturePageScreenshot({
-    env,
-    url: `${archiveUrl}reader.html?date=${encodeURIComponent(date)}&capture=1&image_push=1`,
-  });
-  const tenantAccessToken = await getTenantAccessToken(env);
-  const imageKey = await uploadFeishuImage({
-    tenantAccessToken,
-    filename: `ai-industry-brief-${date}.png`,
-    imageBytes: screenshot,
-  });
-  const card = buildFeishuCard({
-    archiveUrl,
-    detailUrl,
-    date,
-    headline: pageMeta.headline,
-    corePoint: pageMeta.corePoint,
-    imageKey,
-  });
-  const delivery = await sendFeishuBotMessage({
-    tenantAccessToken,
-    chatId: env.FEISHU_CHAT_ID,
-    card,
-  });
-
-  log("brief_image_pushed", {
-    requestId,
-    date,
-    detailUrl,
-    deliveryMode: delivery.mode,
-    imageKey,
-    screenshotBytes: screenshot.byteLength,
-  });
-
-  return {
-    date,
-    detailUrl,
-    archiveUrl,
-    headline: pageMeta.headline,
-    deliveryMode: delivery.mode,
-    messageId: delivery.messageId,
-    imageKey,
-    screenshotBytes: screenshot.byteLength,
-    responseText: delivery.responseText,
-  };
-}
-
-async function pushBriefImageFromUrl({
-  env,
-  date,
-  archiveUrl,
-  detailUrl,
-  pageMeta,
-  imageUrl,
-  requestId,
-  deliveryMode,
-}) {
-  const imageBytes = await fetchImageBytes(imageUrl);
-  const tenantAccessToken = await getTenantAccessToken(env);
-  const imageKey = await uploadFeishuImage({
-    tenantAccessToken,
-    filename: `ai-industry-brief-${date}.png`,
-    imageBytes,
-  });
-  const card = buildFeishuCard({
-    archiveUrl,
-    detailUrl,
-    date,
-    headline: pageMeta.headline,
-    corePoint: pageMeta.corePoint,
-    imageKey,
-  });
-  const delivery = await sendFeishuBotMessage({
-    tenantAccessToken,
-    chatId: env.FEISHU_CHAT_ID,
-    card,
-  });
-
-  log("brief_image_url_pushed", {
-    requestId,
-    date,
-    detailUrl,
-    imageUrl,
-    deliveryMode,
-    imageKey,
-    imageBytes: imageBytes.byteLength,
-  });
-
-  return {
-    date,
-    detailUrl,
-    archiveUrl,
-    headline: pageMeta.headline,
-    deliveryMode,
-    messageId: delivery.messageId,
-    imageUrl,
-    imageKey,
-    imageBytes: imageBytes.byteLength,
-    responseText: delivery.responseText,
+    headline: stringOrNull(brief.homepage?.headline) || opening,
+    opening,
+    insight: stringOrNull(brief.insight),
   };
 }
 
@@ -768,42 +400,6 @@ async function capturePageScreenshot({ env, url }) {
   return response.arrayBuffer();
 }
 
-async function fetchImageBytes(imageUrl) {
-  const response = await fetch(imageUrl, {
-    headers: {
-      "cache-control": "no-cache",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch image ${imageUrl}: ${response.status}`);
-  }
-
-  const contentType = response.headers.get("content-type") || "";
-  if (!contentType.includes("image/png")) {
-    throw new Error(`Expected PNG image at ${imageUrl}, got ${contentType || "unknown content type"}`);
-  }
-
-  return response.arrayBuffer();
-}
-
-function normalizeSameOriginAssetUrl(value, env) {
-  if (!value) {
-    throw new Error("Missing image_url.");
-  }
-
-  const imageUrl = new URL(value);
-  if (imageUrl.protocol !== "https:") {
-    throw new Error("image_url must use https.");
-  }
-
-  const siteBaseUrl = new URL(normalizeBaseUrl(env.SITE_BASE_URL || DEFAULT_SITE_BASE_URL));
-  if (imageUrl.origin !== siteBaseUrl.origin || !imageUrl.pathname.startsWith("/ai-industry-brief/")) {
-    throw new Error(`image_url must be under ${siteBaseUrl.origin}/ai-industry-brief/.`);
-  }
-
-  return imageUrl.toString();
-}
 
 async function parseReportRequest(request, env) {
   const requestUrl = new URL(request.url);
@@ -877,27 +473,9 @@ async function fetchPageMeta(url) {
     matchText(html, /<h1[^>]*>([\s\S]*?)<\/h1>/i) ||
     matchText(html, /<title[^>]*>([\s\S]*?)<\/title>/i) ||
     "The AI Industry Brief";
-  const corePoint = extractCorePoint(html);
-
-  return {
-    headline,
-    corePoint,
-  };
+  return { headline };
 }
 
-async function tryFetchPageMeta(url) {
-  try {
-    return {
-      ok: true,
-      value: await fetchPageMeta(url),
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      error: error instanceof Error ? error.message : String(error),
-    };
-  }
-}
 
 function getPushStateStore(env) {
   return env.BRIEF_PUSH_STATE || null;
@@ -958,7 +536,8 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
   return data.data.image_key;
 }
 
-function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, imageKey }) {
+
+function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, insight }) {
   return {
     config: {
       wide_screen_mode: true,
@@ -972,22 +551,17 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, ima
       },
       subtitle: {
         tag: "plain_text",
-        content: "星期一研究室",
+        content: CARD_PUBLISHER,
       },
     },
     elements: [
       {
         tag: "markdown",
-        content: buildBriefIntroMarkdown({ headline, corePoint }),
-      },
-      {
-        tag: "img",
-        img_key: imageKey,
-        mode: "fit_horizontal",
-        alt: {
-          tag: "plain_text",
-          content: `国际化行业报刊 ${date}`,
-        },
+        content: [
+          `**${escapeForMarkdown(cardBrandText(headline))}**`,
+          opening !== headline && escapeForMarkdown(cardBrandText(opening)),
+          insight && `**今日洞察**\n${escapeForMarkdown(cardBrandText(insight))}`,
+        ].filter(Boolean).join("\n\n"),
       },
       {
         tag: "action",
@@ -1015,60 +589,8 @@ function buildFeishuCard({ archiveUrl, detailUrl, date, headline, corePoint, ima
   };
 }
 
-function buildBriefLinkCard({ archiveUrl, detailUrl, date, headline, corePoint }) {
-  return {
-    config: {
-      wide_screen_mode: true,
-      enable_forward: true,
-    },
-    header: {
-      template: "blue",
-      title: {
-        tag: "plain_text",
-        content: `国际化行业报刊 · ${date}`,
-      },
-      subtitle: {
-        tag: "plain_text",
-        content: "星期一研究室",
-      },
-    },
-    elements: [
-      {
-        tag: "markdown",
-        content: `${buildBriefIntroMarkdown({ headline, corePoint })}\n\n今日简报补发，点击按钮查看详情。`,
-      },
-      {
-        tag: "action",
-        actions: [
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "查看当日详情",
-            },
-            type: "primary",
-            url: detailUrl,
-          },
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "打开首页",
-            },
-            url: archiveUrl,
-          },
-        ],
-      },
-    ],
-  };
-}
-
-function buildBriefIntroMarkdown({ headline, corePoint }) {
-  const lines = [`**${escapeForMarkdown(headline)}**`];
-  if (corePoint) {
-    lines.push(`核心观点：${escapeForMarkdown(corePoint)}`);
-  }
-  return lines.join("\n");
+function cardBrandText(value) {
+  return value.replaceAll("星期一研究室", CARD_PUBLISHER).replace(/Monday\s*Lab/gi, CARD_PUBLISHER);
 }
 
 function buildReportCard({ reportUrl, title, label, imageKey }) {
@@ -1081,17 +603,17 @@ function buildReportCard({ reportUrl, title, label, imageKey }) {
       template: "blue",
       title: {
         tag: "plain_text",
-        content: label,
+        content: cardBrandText(label),
       },
       subtitle: {
         tag: "plain_text",
-        content: "星期一研究室",
+        content: CARD_PUBLISHER,
       },
     },
     elements: [
       {
         tag: "markdown",
-        content: `**${escapeForMarkdown(title)}**`,
+        content: `**${escapeForMarkdown(cardBrandText(title))}**`,
       },
       {
         tag: "img",
@@ -1099,7 +621,7 @@ function buildReportCard({ reportUrl, title, label, imageKey }) {
         mode: "fit_horizontal",
         alt: {
           tag: "plain_text",
-          content: title,
+          content: cardBrandText(title),
         },
       },
       {
@@ -1263,19 +785,6 @@ function matchText(value, pattern) {
   const match = value.match(pattern);
   if (!match) return "";
   return decodeHtml(stripTags(match[1])).trim();
-}
-
-function extractCorePoint(html) {
-  const quoteCopy = html.match(/<div class="quote-copy">([\s\S]*?)<\/div>\s*<svg class="hero-illustration"/i)?.[1] || "";
-  const corePoint = matchText(quoteCopy, /<div class="quote-label">[\s\S]*?<\/div>([\s\S]*)/i);
-  if (corePoint) return normalizeWhitespace(corePoint);
-  return normalizeWhitespace(
-    matchText(html, /<meta[^>]+name=["']description["'][^>]+content=["']([^"']*)["'][^>]*>/i),
-  );
-}
-
-function normalizeWhitespace(value) {
-  return value.replace(/\s+/g, " ").trim();
 }
 
 function stripTags(value) {

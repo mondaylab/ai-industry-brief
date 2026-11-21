@@ -9,7 +9,7 @@
 - 旧链接兼容页：`briefs/YYYY-MM-DD.html`，只负责跳转到主阅读器
 - 日期清单：`brief-data/manifest.json`
 - 数据配置：`brief-data/YYYY-MM-DD.json`
-- 分享图片：`share-images/YYYY-MM-DD.png`
+- 可选分享图片（非每日发布产物）：`share-images/YYYY-MM-DD.png`
 - 详情页结构：今日一句话、4 个栏目 x 每栏 3 条动态、今日洞察、采集说明、页脚
 - 聚合首页结构：最新一期卡片置顶；所有历史简报都保留可点击入口
 
@@ -41,7 +41,7 @@
 - 日期切换只更新 `?date=YYYY-MM-DD` 并在同一页面加载对应 JSON，不跳转到新的 HTML 页面。
 - 提供 7 套用户主题：Lilac、Cobalt、Glacier、Mint、Rose、Signal、Mono。主题是阅读偏好，不得根据星期自动切换。
 - 主题选择保存在 `localStorage`；截图模式 `capture=1` 固定使用默认 Lilac，确保每日分享图品牌一致。
-- 如果日期数据或路由结构变化，必须同步更新 `brief-data/manifest.json` 生成器、旧链接兼容页和飞书截图入口。
+- 如果日期数据或路由结构变化，必须同步更新 `brief-data/manifest.json` 生成器、旧链接兼容页和飞书文字卡入口。
 
 ## Signal Radar
 
@@ -149,8 +149,8 @@
 
 ## 现有站点
 
-- 仓库：`mondaylab/ai-industry-brief`
-- 公开首页：`https://mondaylab.github.io/ai-industry-brief/`
+- 仓库：`mondaylab/zero-one-signals`
+- 公开首页：`https://mondaylab.github.io/zero-one-signals/`
 - 发布方式：从 `main` 分支通过 GitHub Pages 发布。
 
 ## 发布门槛
@@ -160,6 +160,5 @@
 3. 去重检查通过：`node skills/ai-industry-brief/scripts/check-brief-dedup.js brief-data/YYYY-MM-DD.json`。
 4. `brief-data/manifest.json` 包含新日期，阅读器日期归档保留全部早期数据；`briefs/YYYY-MM-DD.html` 能跳转到该日期。
 5. 浏览器检查确认日期切换、主题持久化、头部、页脚、换行、小屏可读性和栏目横向顺序正常，没有明显裁切。
-6. `share-images/YYYY-MM-DD.png` 存在，是 `reader.html?date=YYYY-MM-DD&capture=1` 的完整 PNG 截图，并和当期简报一起发布。
-7. 如果已经发布站点，等待 GitHub Pages 生效后验证聚合首页、当期详情页和当期分享图。部署完成标准是：首页包含 `briefs/YYYY-MM-DD.html`，详情页显示正确日期和页脚，`share-images/YYYY-MM-DD.png` 返回 `image/png`。
-8. Pages 部署验证通过后，立即触发飞书图片推送：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。如果 Worker 截图路径不可用，可以用已发布 PNG 调用 `/send-image-url`。不要只依赖定时巡逻。手动触发需要 `MANUAL_TRIGGER_TOKEN` 或 `FEISHU_PUSH_TOKEN`。
+6. GitHub Pages 生效后验证聚合首页、当期详情页及 `brief-data/YYYY-MM-DD.json`。每日发布不需要分享图。
+7. Pages 部署验证通过后，立即触发飞书文字卡：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。无本地 token 时使用仓库的 GitHub Actions 工作流。飞书卡片署名为「坐标原点研究室」，与网站页脚区分。
