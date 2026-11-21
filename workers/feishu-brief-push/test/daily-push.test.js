@@ -81,31 +81,36 @@ test("scheduled push sends a branded text card and shares deduplication with bot
   const f = fixture(t);
   assert.equal((await f.scheduled()).deliveryMode, "text_card");
   const [card] = f.cards;
+  assert.equal(card.schema, "2.0");
   assert.equal(card.header.subtitle.content, "坐标原点研究室");
   assert.equal(card.header.template, "purple");
-  const rows = card.elements.filter(({ tag }) => tag === "column_set");
+  const elements = card.body.elements;
+  const rows = elements.filter(({ tag, flex_mode }) => tag === "column_set" && flex_mode === "stretch");
   assert.deepEqual(rows.map(({ flex_mode, columns }) => [flex_mode, columns.map(({ weight }) => weight)]), [
     ["stretch", [1, 1]],
     ["stretch", [1, 1]],
   ]);
-  assert.equal(card.elements.filter(({ tag }) => tag === "hr").length, 3);
-  assert.match(card.elements[0].content, /今日行业动态/);
-  assert.match(card.elements[0].content, /坐标原点研究室发布今日简报/);
-  const modules = rows.flatMap(({ columns }) => columns.map(({ elements }) => elements[0].content));
+  assert.match(elements[0].content, /今日行业动态/);
+  assert.match(elements[0].content, /坐标原点研究室发布今日简报/);
+  const modules = rows.flatMap(({ columns }) => columns);
   for (const [index, section] of makeSections().entries()) {
-    const [header, ...items] = modules[index].split("\n\n");
-    assert.ok(header.startsWith(`**0${index + 1} · ${section.name}**\n`));
+    const panel = modules[index];
+    assert.equal(panel.padding, "12px");
+    assert.ok(card.config.style.color[panel.background_style].light_mode);
+    assert.ok(card.config.style.color[panel.background_style].dark_mode);
+    const [header, ...items] = panel.elements.map(({ content }) => content);
+    assert.ok(header.startsWith(`<text_tag color='purple'>0${index + 1}</text_tag> **${section.name}**<br>`));
     assert.match(header, /SECTION [1-4]/);
     assert.equal(items.length, 3);
     for (const [itemIndex, item] of section.items.entries()) {
-      assert.match(items[itemIndex], /\*\*动态 .+\*\*\n动态正文 .+/);
+      assert.match(items[itemIndex], /\*\*动态 .+\*\*<br>动态正文 .+/);
       assert.ok(items[itemIndex].includes(`[官方来源](${item.sourceUrl})`));
     }
   }
-  assert.match(card.elements.at(-2).content, /今日洞察[\s\S]*坐标原点研究室 观察/);
+  assert.match(elements.at(-2).content, /今日洞察[\s\S]*坐标原点研究室 观察/);
   assert.ok(!JSON.stringify(card).includes(legacyPublisher));
   assert.doesNotMatch(JSON.stringify(card), /MondayLab|img_key/);
-  assert.deepEqual(card.elements.at(-1).actions.map(({ url }) => url), [
+  assert.deepEqual(elements.at(-1).columns.map(({ elements }) => elements[0].behaviors[0].default_url), [
     `${base}/reader.html?date=${date}`, `${base}/`,
   ]);
   assert.equal(f.values.get(`brief-push:${date}`).messageId, "test-message");
@@ -153,7 +158,7 @@ test("source links keep URL delimiters out of the markdown and reject non-web pr
   sections[0].items[1].sourceUrl = "javascript:alert(1)";
   const f = fixture(t, { sections });
   assert.equal((await (await f.run()).json()).deliveryMode, "text_card");
-  const content = f.cards[0].elements[2].columns[0].elements[0].content;
+  const content = f.cards[0].body.elements[1].columns[0].elements[1].content;
   assert.match(content, /article_%281%29/);
   assert.doesNotMatch(content, /javascript:/);
 });

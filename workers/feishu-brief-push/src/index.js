@@ -547,9 +547,18 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
 
 function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, insight, sections }) {
   return {
+    schema: "2.0",
     config: {
-      wide_screen_mode: true,
+      width_mode: "default",
       enable_forward: true,
+      style: {
+        color: {
+          "cus-0": {
+            light_mode: "rgba(245,246,248,1)",
+            dark_mode: "rgba(39,41,46,1)",
+          },
+        },
+      },
     },
     header: {
       template: "purple",
@@ -562,45 +571,45 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
         content: CARD_PUBLISHER,
       },
     },
-    elements: [
-      {
-        tag: "markdown",
-        content: [
-          `**${briefCardText(headline)}**`,
-          opening !== headline && briefCardText(opening),
-        ].filter(Boolean).join("\n\n"),
-      },
-      { tag: "hr" },
-      buildBriefSectionRow(sections.slice(0, 2), 1),
-      { tag: "hr" },
-      buildBriefSectionRow(sections.slice(2, 4), 3),
-      ...(insight ? [
-        { tag: "hr" },
-        { tag: "markdown", content: `**今日洞察**\n${briefCardText(insight)}` },
-      ] : []),
-      {
-        tag: "action",
-        actions: [
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "查看当日详情",
-            },
-            type: "primary",
-            url: detailUrl,
-          },
-          {
-            tag: "button",
-            text: {
-              tag: "plain_text",
-              content: "打开首页",
-            },
-            url: archiveUrl,
-          },
-        ],
-      },
-    ],
+    body: {
+      direction: "vertical",
+      padding: "12px",
+      vertical_spacing: "12px",
+      elements: [
+        {
+          tag: "markdown",
+          content: [
+            `**${briefCardText(headline)}**`,
+            opening !== headline && briefCardText(opening),
+          ].filter(Boolean).join("\n\n"),
+        },
+        buildBriefSectionRow(sections.slice(0, 2), 1),
+        buildBriefSectionRow(sections.slice(2, 4), 3),
+        ...(insight ? [
+          { tag: "markdown", content: `**今日洞察**<br>${briefCardText(insight)}` },
+        ] : []),
+        {
+          tag: "column_set",
+          flex_mode: "none",
+          horizontal_spacing: "8px",
+          columns: [
+            { label: "查看当日详情", url: detailUrl, type: "primary_filled" },
+            { label: "打开首页", url: archiveUrl, type: "default" },
+          ].map(({ label, url, type }) => ({
+            tag: "column",
+            width: "weighted",
+            weight: 1,
+            elements: [{
+              tag: "button",
+              text: { tag: "plain_text", content: label },
+              type,
+              width: "fill",
+              behaviors: [{ type: "open_url", default_url: url }],
+            }],
+          })),
+        },
+      ],
+    },
   };
 }
 
@@ -608,23 +617,26 @@ function buildBriefSectionRow(sections, start) {
   return {
     tag: "column_set",
     flex_mode: "stretch",
-    horizontal_spacing: "default",
+    horizontal_spacing: "12px",
     columns: sections.map((section, index) => {
       const number = String(start + index).padStart(2, "0");
       const subtitle = stringOrNull(section.subtitle);
       const heading = [
-        `**${number} · ${briefCardText(section.name)}**`,
+        `<text_tag color='purple'>${number}</text_tag> **${briefCardText(section.name)}**`,
         subtitle && `<font color='grey'>${briefCardText(subtitle.toUpperCase())}</font>`,
-      ].filter(Boolean).join("\n");
+      ].filter(Boolean).join("<br>");
       return {
         tag: "column",
         width: "weighted",
         weight: 1,
         vertical_align: "top",
-        elements: [{
-          tag: "markdown",
-          content: [heading, ...section.items.map(formatBriefItem)].join("\n\n"),
-        }],
+        background_style: "cus-0",
+        padding: "12px",
+        vertical_spacing: "10px",
+        elements: [
+          { tag: "markdown", content: heading },
+          ...section.items.map((item, index) => ({ tag: "markdown", content: formatBriefItem(item, index) })),
+        ],
       };
     }),
   };
@@ -649,7 +661,7 @@ function formatBriefItem(item, index) {
     .filter(Boolean).join(" · ");
   const mark = ["◆", "◇", "◈"][index];
   return [`${mark}  **${briefCardText(item.title)}**`, briefCardText(item.description), citation]
-    .filter(Boolean).join("\n");
+    .filter(Boolean).join("<br>");
 }
 
 function briefCardText(value) {
