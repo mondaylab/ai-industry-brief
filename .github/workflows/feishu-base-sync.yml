@@ -1,0 +1,47 @@
+name: Sync published brief to Feishu Base
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "brief-data/*.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: feishu-base-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: ${{ github.ref == 'refs/heads/main' && vars.FEISHU_BASE_SYNC_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      FEISHU_BASE_TOKEN: ${{ vars.FEISHU_BASE_TOKEN }}
+      FEISHU_TABLE_ID: ${{ vars.FEISHU_TABLE_ID }}
+      LARKSUITE_CLI_CONFIG_DIR: ${{ runner.temp }}/feishu-cli-config
+      LARKSUITE_CLI_DATA_DIR: ${{ runner.temp }}/feishu-cli-data
+      LARKSUITE_CLI_NO_UPDATE_NOTIFIER: "1"
+      LARKSUITE_CLI_NO_SKILLS_NOTIFIER: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          ref: main
+      - name: Install Feishu CLI
+        run: npm install --global --no-audit --no-fund @larksuite/cli@1.0.96
+      - name: Configure the sync app
+        env:
+          APP_ID: ${{ vars.FEISHU_BASE_SYNC_APP_ID }}
+          APP_SECRET: ${{ secrets.FEISHU_BASE_SYNC_APP_SECRET }}
+        run: |
+          if [[ -z "$APP_ID" || -z "$APP_SECRET" || -z "$FEISHU_BASE_TOKEN" || -z "$FEISHU_TABLE_ID" ]]; then
+            echo "::error::Configure the Feishu sync app and Base destination before enabling this workflow."
+            exit 1
+          fi
+          printf '%s\n' "$APP_SECRET" | lark-cli config init --app-id "$APP_ID" --app-secret-stdin --brand feishu
+      - name: Sync published issues
+        run: npm run base:sync -- --as bot --apply --wait-for-pages
