@@ -7,6 +7,10 @@ on:
         description: Brief date in YYYY-MM-DD format
         required: true
         type: string
+      force:
+        description: Resend even if this issue has already been sent
+        type: boolean
+        default: false
       worker_url:
         description: Worker base URL
         required: false
@@ -25,5 +29,9 @@ jobs:
         env:
           MANUAL_TRIGGER_TOKEN: ${{ secrets.WORKER_MANUAL_TRIGGER_TOKEN }}
           BRIEF_DATE: ${{ inputs.date }}
+          FORCE_RESEND: ${{ inputs.force }}
           FEISHU_PUSH_WORKER_URL: ${{ inputs.worker_url }}
-        run: node workers/feishu-brief-push/scripts/post-publish-send.js --date "$BRIEF_DATE"
+        run: |
+          args=(--date "$BRIEF_DATE")
+          if [[ "$FORCE_RESEND" == "true" ]]; then args+=(--force); fi
+          node workers/feishu-brief-push/scripts/post-publish-send.js "${args[@]}"

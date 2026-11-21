@@ -41,10 +41,14 @@ async function waitForIssue(site, date) {
 
 async function main() {
   const { values } = parseArgs({
-    options: { date: { type: "string" }, help: { type: "boolean", short: "h" } },
+    options: {
+      date: { type: "string" },
+      force: { type: "boolean" },
+      help: { type: "boolean", short: "h" },
+    },
   });
   if (values.help) {
-    console.log("Usage: npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD");
+    console.log("Usage: npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD [--force]");
     console.log("Uses MANUAL_TRIGGER_TOKEN / FEISHU_PUSH_TOKEN, or dispatches the GitHub workflow when run locally without a token.");
     return;
   }
@@ -62,6 +66,7 @@ async function main() {
   if (!token) {
     const repo = process.env.GH_REPO || "mondaylab/zero-one-signals";
     const args = ["workflow", "run", WORKFLOW, "--repo", repo, "--ref", "main", "-f", `date=${date}`];
+    if (values.force) args.push("-f", "force=true");
     if (process.env.FEISHU_PUSH_WORKER_URL) args.push("-f", `worker_url=${process.env.FEISHU_PUSH_WORKER_URL}`);
     execFileSync("gh", args, { stdio: "inherit", timeout: 30000 });
     console.log(`Feishu text-card workflow dispatched for ${date}.`);
@@ -73,12 +78,15 @@ async function main() {
   if (!health.ok || (await health.json()).dailyDelivery !== "text_card") {
     throw new Error("Worker does not advertise text-card delivery; no message was sent.");
   }
-  const response = await request(`${worker}/send?date=${date}`, {
+  const sendUrl = new URL(`${worker}/send`);
+  sendUrl.searchParams.set("date", date);
+  if (values.force) sendUrl.searchParams.set("force", "1");
+  const response = await request(sendUrl, {
     headers: { authorization: `Bearer ${token}` },
   });
   const result = await response.json();
   if (!response.ok || !result.ok) throw new Error(result.error || `Worker returned HTTP ${response.status}.`);
-  if (result.skipped && result.reason === "already_sent") {
+  if (!values.force && result.skipped && result.reason === "already_sent") {
     console.log(`Feishu brief already sent: ${date}`);
   } else if (result.deliveryMode === "text_card" && result.messageId) {
     console.log(`Feishu text card sent: ${result.messageId}`);
