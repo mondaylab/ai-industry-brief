@@ -44,7 +44,7 @@ Use this pattern unless the user provides brand copy:
 
 - Public title: `The <Industry> Brief`
 - Chinese title: `每日<行业>简报`
-- Producer: keep `星期一研究室` unless the user gives another publisher
+- Producer: keep `坐标原点研究室` unless the user gives another publisher
 - Footer: `<Chinese title> · 行业动态 · 机会判断 · 来源可追溯`
 
 ## Prompt Examples

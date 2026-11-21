@@ -590,7 +590,7 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
 }
 
 function cardBrandText(value) {
-  return value.replaceAll("星期一研究室", CARD_PUBLISHER).replace(/Monday\s*Lab/gi, CARD_PUBLISHER);
+  return value.replaceAll(["星期一", "研究室"].join(""), CARD_PUBLISHER).replace(/Monday\s*Lab/gi, CARD_PUBLISHER);
 }
 
 function buildReportCard({ reportUrl, title, label, imageKey }) {

@@ -272,7 +272,7 @@ function BriefCanvas({ data, issueNumber, showRadar, radarSnapshot, radarError }
           <h1>The AI Industry Brief</h1>
         </div>
         <div className="issue-publisher">
-          <b>星期一研究室</b>
+          <b>坐标原点研究室</b>
           <span>ISSUE {String(issueNumber).padStart(3, "0")}</span>
         </div>
       </header>
@@ -326,7 +326,7 @@ function BriefCanvas({ data, issueNumber, showRadar, radarSnapshot, radarError }
       </section>
 
       <footer className="issue-footer">
-        <b>星期一研究室出品</b>
+        <b>坐标原点研究室出品</b>
         <span>The AI Industry Brief</span>
       </footer>
     </main>
@@ -399,7 +399,7 @@ function App() {
         setData(value);
         setError("");
         setLoading(false);
-        document.title = `The AI Industry Brief | ${issueLabel(issue)} | 星期一研究室`;
+        document.title = `The AI Industry Brief | ${issueLabel(issue)} | 坐标原点研究室`;
         const nextParams = new URLSearchParams(window.location.search);
         nextParams.set("date", activeDate);
         if (!captureMode) nextParams.delete("capture");
@@ -483,7 +483,7 @@ function App() {
             <a className="icon-button" href="https://github.com/mondaylab/ai-industry-brief" target="_blank" rel="noreferrer" aria-label="GitHub" title="GitHub">
               <GitBranch size={18} strokeWidth={1.7} />
             </a>
-            <span className="publisher-name">星期一研究室</span>
+            <span className="publisher-name">坐标原点研究室</span>
           </div>
         </header>
       )}

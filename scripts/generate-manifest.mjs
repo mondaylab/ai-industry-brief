@@ -65,7 +65,7 @@ if (!issues.length) throw new Error("No daily brief JSON files found.");
 
 const manifest = {
   publication: "The AI Industry Brief",
-  publisher: "星期一研究室",
+  publisher: "坐标原点研究室",
   generatedAt: new Date().toISOString(),
   latest: dataIssues[0].date,
   issueCount: issues.length,

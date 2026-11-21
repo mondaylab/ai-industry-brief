@@ -71,7 +71,7 @@ Notion 让第三方 Agent 进入工作区，GitHub 让 Copilot Agent 的执行�
 Default tags:
 
 ```text
-#AI #AI工具 #AIAgent #AI行业 #AI周报 #强弱信号 #星期一研究室
+#AI #AI工具 #AIAgent #AI行业 #AI周报 #强弱信号 #坐标原点研究室
 ```
 
 Add context tags only when relevant:

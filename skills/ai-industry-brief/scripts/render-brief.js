@@ -55,7 +55,7 @@ function buildCompatibilityPage(data) {
   <meta name="description" content="${escapeHtml(data.opening)}">
   <meta http-equiv="refresh" content="0; url=${target}">
   <link rel="canonical" href="${target}">
-  <title>The AI Industry Brief | ${escapeHtml(dateLabel)} | 星期一研究室</title>
+  <title>The AI Industry Brief | ${escapeHtml(dateLabel)} | 坐标原点研究室</title>
   <style>
     *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#efefeb;color:#111;font:14px Arial,sans-serif}.redirect{width:min(620px,calc(100% - 32px));padding:32px;border:1px solid #111;background:#fbfbf8}.brand{font-size:28px;font-weight:700}.lab{margin-top:8px}.date{margin:34px 0 14px;font-size:13px}.redirect a{color:#604d8f}.footer{display:flex;justify-content:space-between;margin-top:40px;padding-top:16px;border-top:1px solid #111;font-size:11px}
   </style>
@@ -63,11 +63,11 @@ function buildCompatibilityPage(data) {
 <body>
   <main class="redirect">
     <div class="brand">The AI Industry Brief</div>
-    <div class="lab">星期一研究室</div>
+    <div class="lab">坐标原点研究室</div>
     <div class="date">${escapeHtml(dateLabel)}</div>
     <h1>${escapeHtml(data.opening)}</h1>
     <p>正在打开新版简报阅读器。<a href="${target}">继续阅读</a></p>
-    <footer class="footer"><div class="footer-lab">星期一研究室出品</div><div class="footer-sub">The AI Industry Brief</div></footer>
+    <footer class="footer"><div class="footer-lab">坐标原点研究室出品</div><div class="footer-sub">The AI Industry Brief</div></footer>
   </main>
   <script>location.replace(${JSON.stringify(target)});</script>
 </body>
