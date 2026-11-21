@@ -6,6 +6,7 @@ const date = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Asia/Shanghai", year: "numeric", month: "2-digit", day: "2-digit",
 }).format(new Date());
 const base = "https://brief.example";
+const legacyPublisher = ["星期一", "研究室"].join("");
 
 function fixture(t, { ready = true, issueDate = date, reject = false } = {}) {
   const values = new Map();
@@ -28,7 +29,7 @@ function fixture(t, { ready = true, issueDate = date, reject = false } = {}) {
     }
     if (url === `${base}/brief-data/${date}.json`) {
       return Response.json({
-        date: issueDate, opening: "星期一研究室发布今日简报。",
+        date: issueDate, opening: `${legacyPublisher}发布今日简报。`,
         homepage: { headline: "今日行业动态" }, insight: "MondayLab 观察。",
       });
     }
@@ -69,7 +70,8 @@ test("scheduled push sends a branded text card and shares deduplication with bot
   assert.match(card.elements[0].content, /今日行业动态/);
   assert.match(card.elements[0].content, /坐标原点研究室发布今日简报/);
   assert.match(card.elements[0].content, /今日洞察[\s\S]*坐标原点研究室 观察/);
-  assert.doesNotMatch(JSON.stringify(card), /星期一研究室|MondayLab|img_key/);
+  assert.ok(!JSON.stringify(card).includes(legacyPublisher));
+  assert.doesNotMatch(JSON.stringify(card), /MondayLab|img_key/);
   assert.equal(card.elements[1].actions[0].url, `${base}/briefs/${date}.html`);
   assert.equal(f.values.get(`brief-push:${date}`).messageId, "test-message");
   for (const path of ["/send", "/send-link"]) {

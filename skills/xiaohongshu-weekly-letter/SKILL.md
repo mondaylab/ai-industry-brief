@@ -61,7 +61,7 @@ For a normal request, return:
 ...
 
 话题：
-#AI #AI工具 #AIAgent #AI行业 #强弱信号 #星期一研究室
+#AI #AI工具 #AIAgent #AI行业 #强弱信号 #坐标原点研究室
 ```
 
 If the user asks for multiple styles, provide concise variants:
