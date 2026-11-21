@@ -161,4 +161,4 @@
 4. `brief-data/manifest.json` 包含新日期，阅读器日期归档保留全部早期数据；`briefs/YYYY-MM-DD.html` 能跳转到该日期。
 5. 浏览器检查确认日期切换、主题持久化、头部、页脚、换行、小屏可读性和栏目横向顺序正常，没有明显裁切。
 6. GitHub Pages 生效后验证聚合首页、当期详情页及 `brief-data/YYYY-MM-DD.json`。每日发布不需要分享图。
-7. Pages 部署验证通过后，立即触发飞书文字卡：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。无本地 token 时使用仓库的 GitHub Actions 工作流。卡片使用宽屏模式展开四栏十二条动态，按 01／02、03／04 两排双栏排布，窄屏纵向堆叠。署名为「坐标原点研究室」，详情按钮直接打开当期阅读器。
+7. Pages 部署验证通过后，立即触发飞书文字卡：`npm --prefix workers/feishu-brief-push run post-publish-send -- --date YYYY-MM-DD`。无本地 token 时使用仓库的 GitHub Actions 工作流。卡片用两排双栏列出四栏共十二条标题及发布日期，窄屏纵向堆叠。标题链接直达阅读器对应条目；全文和来源只在网站上展示。

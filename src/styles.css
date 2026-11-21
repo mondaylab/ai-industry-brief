@@ -188,7 +188,7 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid
 .section-head h2 { margin: 0; font-size: 21px; }
 .section-head p { margin: 8px 0 0; color: var(--muted); font-size: 9px; line-height: 1.5; text-transform: uppercase; }
 .section-signals { border-top: 1px solid var(--ink); }
-.signal-item { display: grid; grid-template-columns: 28px 1fr; gap: 10px; min-height: 196px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.signal-item { display: grid; grid-template-columns: 28px 1fr; gap: 10px; min-height: 196px; padding: 22px 0; border-bottom: 1px solid var(--line); scroll-margin-top: calc(var(--reader-header-offset) + 90px); }
 .signal-item:last-child { border-bottom: 0; }
 .signal-index { padding-top: 3px; color: var(--accent-strong); font-size: 13px; }
 .signal-body { display: flex; min-width: 0; flex-direction: column; }
@@ -280,7 +280,7 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid
   .brief-radar-signal:last-child { border-bottom: 0; }
   .sections-grid { grid-template-columns: 1fr; }
   .brief-section, .brief-section:nth-child(odd) { padding: 28px 20px 16px; border-right: 0; }
-  .signal-item { min-height: 0; }
+  .signal-item { min-height: 0; scroll-margin-top: calc(var(--reader-header-offset) + 70px); }
   .editorial-note { grid-template-columns: 1fr; }
   .note-label { flex-direction: row; padding: 22px 20px; border-right: 0; border-bottom: 1px solid var(--ink); }
   .note-copy { padding: 26px 20px; }

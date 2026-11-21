@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import "../assets/product-header.css";
 import "./styles.css";
+import { BRIEF_ITEM_ANCHOR_PREFIX, briefItemAnchor } from "../shared/brief-item-anchor.mjs";
 
 const themes = [
   { id: "lilac", name: "Lilac", color: "#D9C7FF" },
@@ -164,10 +165,10 @@ function DateIndex({ issues, activeDate, onSelect, open, onClose }) {
   );
 }
 
-function SignalItem({ item, index }) {
+function SignalItem({ item, index, anchor }) {
   const marks = ["◆", "◇", "◈"];
   return (
-    <article className="signal-item">
+    <article className="signal-item" id={anchor}>
       <div className="signal-index" aria-hidden="true">{marks[index] || "◆"}</div>
       <div className="signal-body">
         <h3>{cleanTitle(item.title)}</h3>
@@ -307,7 +308,12 @@ function BriefCanvas({ data, issueNumber, showRadar, radarSnapshot, radarError }
             </header>
             <div className="section-signals">
               {(section.items || []).map((item, itemIndex) => (
-                <SignalItem item={item} index={itemIndex} key={`${item.sourceUrl}-${itemIndex}`} />
+                <SignalItem
+                  item={item}
+                  index={itemIndex}
+                  anchor={briefItemAnchor(sectionIndex, itemIndex)}
+                  key={`${item.sourceUrl}-${itemIndex}`}
+                />
               ))}
             </div>
           </section>
@@ -343,6 +349,8 @@ function App() {
   const [radarSnapshot, setRadarSnapshot] = useState(null);
   const [radarError, setRadarError] = useState("");
   const radarAnchorRequested = useRef(window.location.hash === "#radar");
+  const itemAnchorRequested = useRef(!captureMode &&
+    window.location.hash.startsWith(`#${BRIEF_ITEM_ANCHOR_PREFIX}`));
   const requestedDate = params.get("date");
   const [activeDate, setActiveDate] = useState(requestedDate || "");
 
@@ -443,6 +451,18 @@ function App() {
     };
   }, [manifest, activeDate, data]);
 
+  useEffect(() => {
+    if (!itemAnchorRequested.current || !data || (requestedDate && data.date !== requestedDate)) return;
+    if (data.date === manifest?.latest && !radarSnapshot && !radarError) return;
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (!target) return;
+    const frame = window.requestAnimationFrame(() => {
+      target.scrollIntoView({ block: "start" });
+      itemAnchorRequested.current = false;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [data, manifest, radarSnapshot, radarError, requestedDate]);
+
   function selectDate(date) {
     const issue = manifest?.issues.find((item) => item.date === date);
     if (issue?.legacyOnly) {
@@ -450,6 +470,7 @@ function App() {
       return;
     }
     radarAnchorRequested.current = false;
+    itemAnchorRequested.current = false;
     if (window.location.hash) {
       window.history.replaceState({}, "", `${window.location.pathname}${window.location.search}`);
     }
