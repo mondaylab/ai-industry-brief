@@ -583,7 +583,8 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
             opening !== headline && briefCardText(opening),
           ].filter(Boolean).join("\n\n"),
         },
-        buildBriefSectionRow(sections),
+        buildBriefSectionRow(sections.slice(0, 2), 1),
+        buildBriefSectionRow(sections.slice(2), 3),
         ...(insight ? [
           { tag: "markdown", content: `**今日洞察**<br>${briefCardText(insight)}` },
         ] : []),
@@ -611,13 +612,13 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
   };
 }
 
-function buildBriefSectionRow(sections) {
+function buildBriefSectionRow(sections, start) {
   return {
     tag: "column_set",
     flex_mode: "stretch",
     horizontal_spacing: "12px",
     columns: sections.map((section, index) => {
-      const number = String(index + 1).padStart(2, "0");
+      const number = String(start + index).padStart(2, "0");
       const subtitle = stringOrNull(section.subtitle);
       const heading = [
         `<text_tag color='blue'>${number}</text_tag> **${briefCardText(section.name)}**`,

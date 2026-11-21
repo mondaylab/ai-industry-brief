@@ -88,7 +88,8 @@ test("scheduled push sends a branded text card and shares deduplication with bot
   const elements = card.body.elements;
   const rows = elements.filter(({ tag, flex_mode }) => tag === "column_set" && flex_mode === "stretch");
   assert.deepEqual(rows.map(({ flex_mode, columns }) => [flex_mode, columns.map(({ weight }) => weight)]), [
-    ["stretch", [1, 1, 1, 1]],
+    ["stretch", [1, 1]],
+    ["stretch", [1, 1]],
   ]);
   assert.match(elements[0].content, /今日行业动态/);
   assert.match(elements[0].content, /坐标原点研究室发布今日简报/);
