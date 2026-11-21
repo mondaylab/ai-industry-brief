@@ -7,8 +7,23 @@ const date = new Intl.DateTimeFormat("en-CA", {
 }).format(new Date());
 const base = "https://brief.example";
 const legacyPublisher = ["星期一", "研究室"].join("");
+const sectionNames = ["AI 产品前线", "AI 行业现场", "AI 资本与牌局", "AI 能力底座"];
 
-function fixture(t, { ready = true, issueDate = date, reject = false } = {}) {
+function makeSections() {
+  return sectionNames.map((name, section) => ({
+    name,
+    subtitle: `Section ${section + 1}`,
+    items: Array.from({ length: 3 }, (_, item) => ({
+      title: `动态 ${section + 1}-${item + 1}`,
+      description: `动态正文 ${section + 1}-${item + 1}`,
+      sourceName: "官方来源",
+      sourceUrl: `https://source.example/${section + 1}/${item + 1}`,
+      sourceDateLabel: date,
+    })),
+  }));
+}
+
+function fixture(t, { ready = true, issueDate = date, reject = false, sections = makeSections() } = {}) {
   const values = new Map();
   const cards = [];
   const env = {
@@ -31,6 +46,7 @@ function fixture(t, { ready = true, issueDate = date, reject = false } = {}) {
       return Response.json({
         date: issueDate, opening: `${legacyPublisher}发布今日简报。`,
         homepage: { headline: "今日行业动态" }, insight: "MondayLab 观察。",
+        sections,
       });
     }
     if (url === "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal") {
@@ -66,13 +82,32 @@ test("scheduled push sends a branded text card and shares deduplication with bot
   assert.equal((await f.scheduled()).deliveryMode, "text_card");
   const [card] = f.cards;
   assert.equal(card.header.subtitle.content, "坐标原点研究室");
-  assert.deepEqual(card.elements.map(({ tag }) => tag), ["markdown", "action"]);
+  assert.equal(card.header.template, "purple");
+  const rows = card.elements.filter(({ tag }) => tag === "column_set");
+  assert.deepEqual(rows.map(({ flex_mode, columns }) => [flex_mode, columns.map(({ weight }) => weight)]), [
+    ["stretch", [1, 1]],
+    ["stretch", [1, 1]],
+  ]);
+  assert.equal(card.elements.filter(({ tag }) => tag === "hr").length, 3);
   assert.match(card.elements[0].content, /今日行业动态/);
   assert.match(card.elements[0].content, /坐标原点研究室发布今日简报/);
-  assert.match(card.elements[0].content, /今日洞察[\s\S]*坐标原点研究室 观察/);
+  const modules = rows.flatMap(({ columns }) => columns.map(({ elements }) => elements[0].content));
+  for (const [index, section] of makeSections().entries()) {
+    const [header, ...items] = modules[index].split("\n\n");
+    assert.ok(header.startsWith(`**0${index + 1} · ${section.name}**\n`));
+    assert.match(header, /SECTION [1-4]/);
+    assert.equal(items.length, 3);
+    for (const [itemIndex, item] of section.items.entries()) {
+      assert.match(items[itemIndex], /\*\*动态 .+\*\*\n动态正文 .+/);
+      assert.ok(items[itemIndex].includes(`[官方来源](${item.sourceUrl})`));
+    }
+  }
+  assert.match(card.elements.at(-2).content, /今日洞察[\s\S]*坐标原点研究室 观察/);
   assert.ok(!JSON.stringify(card).includes(legacyPublisher));
   assert.doesNotMatch(JSON.stringify(card), /MondayLab|img_key/);
-  assert.equal(card.elements[1].actions[0].url, `${base}/briefs/${date}.html`);
+  assert.deepEqual(card.elements.at(-1).actions.map(({ url }) => url), [
+    `${base}/reader.html?date=${date}`, `${base}/`,
+  ]);
   assert.equal(f.values.get(`brief-push:${date}`).messageId, "test-message");
   for (const path of ["/send", "/send-link"]) {
     assert.equal((await (await f.run(path)).json()).reason, "already_sent");
@@ -101,6 +136,26 @@ test("mismatched issue data is not sent", async (t) => {
   const f = fixture(t, { issueDate: "2000-01-01" });
   assert.equal((await (await f.run()).json()).reason, "page_not_ready");
   assert.equal(f.cards.length, 0);
+});
+
+test("an incomplete issue is retried rather than sending fewer than twelve items", async (t) => {
+  const sections = makeSections();
+  sections[2].items.pop();
+  const f = fixture(t, { sections });
+  assert.equal((await (await f.run()).json()).reason, "page_not_ready");
+  assert.equal(f.values.get(`brief-push:${date}`).status, "waiting_for_page");
+  assert.equal(f.cards.length, 0);
+});
+
+test("source links keep URL delimiters out of the markdown and reject non-web protocols", async (t) => {
+  const sections = makeSections();
+  sections[0].items[0].sourceUrl = "https://source.example/article_(1)";
+  sections[0].items[1].sourceUrl = "javascript:alert(1)";
+  const f = fixture(t, { sections });
+  assert.equal((await (await f.run()).json()).deliveryMode, "text_card");
+  const content = f.cards[0].elements[2].columns[0].elements[0].content;
+  assert.match(content, /article_%281%29/);
+  assert.doesNotMatch(content, /javascript:/);
 });
 
 test("Feishu rejection is recorded as failed and does not trigger an image fallback", async (t) => {

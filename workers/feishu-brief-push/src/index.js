@@ -123,7 +123,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   const timeZone = env.TIME_ZONE || DEFAULT_TIME_ZONE;
   const date = requestedDate || formatDateInTimeZone(new Date(), timeZone);
   const archiveUrl = `${siteBaseUrl}/`;
-  const detailUrl = `${siteBaseUrl}/briefs/${date}.html`;
+  const detailUrl = `${siteBaseUrl}/reader.html?date=${date}`;
 
   assertRequiredSecret(env, "FEISHU_APP_ID");
   assertRequiredSecret(env, "FEISHU_APP_SECRET");
@@ -170,7 +170,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
 
   let brief;
   try {
-    brief = await fetchPublishedBrief(siteBaseUrl, date, detailUrl);
+    brief = await fetchPublishedBrief(siteBaseUrl, date);
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
     if (state) {
@@ -242,10 +242,10 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
   }
 }
 
-async function fetchPublishedBrief(siteBaseUrl, date, detailUrl) {
+async function fetchPublishedBrief(siteBaseUrl, date) {
   const options = { headers: { "cache-control": "no-cache" } };
   const [detail, data] = await Promise.all([
-    fetch(detailUrl, { ...options, method: "HEAD" }),
+    fetch(`${siteBaseUrl}/briefs/${date}.html`, { ...options, method: "HEAD" }),
     fetch(`${siteBaseUrl}/brief-data/${date}.json`, options),
   ]);
   if (!detail.ok || !data.ok) {
@@ -257,11 +257,19 @@ async function fetchPublishedBrief(siteBaseUrl, date, detailUrl) {
   if (brief?.date !== date || !opening) {
     throw new Error(`Issue data is incomplete or has the wrong date: ${date}.`);
   }
+  const sections = brief.sections;
+  if (!Array.isArray(sections) || sections.length !== 4 || sections.some((section) =>
+    !stringOrNull(section?.name) || !Array.isArray(section.items) || section.items.length !== 3 ||
+    section.items.some((item) => !stringOrNull(item?.title) || !stringOrNull(item?.description))
+  )) {
+    throw new Error(`Issue ${date} must contain four complete sections with three items each.`);
+  }
 
   return {
     headline: stringOrNull(brief.homepage?.headline) || opening,
     opening,
     insight: stringOrNull(brief.insight),
+    sections,
   };
 }
 
@@ -537,14 +545,14 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
 }
 
 
-function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, insight }) {
+function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, insight, sections }) {
   return {
     config: {
       wide_screen_mode: true,
       enable_forward: true,
     },
     header: {
-      template: "blue",
+      template: "purple",
       title: {
         tag: "plain_text",
         content: `国际化行业报刊 · ${date}`,
@@ -558,11 +566,18 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
       {
         tag: "markdown",
         content: [
-          `**${escapeForMarkdown(cardBrandText(headline))}**`,
-          opening !== headline && escapeForMarkdown(cardBrandText(opening)),
-          insight && `**今日洞察**\n${escapeForMarkdown(cardBrandText(insight))}`,
+          `**${briefCardText(headline)}**`,
+          opening !== headline && briefCardText(opening),
         ].filter(Boolean).join("\n\n"),
       },
+      { tag: "hr" },
+      buildBriefSectionRow(sections.slice(0, 2), 1),
+      { tag: "hr" },
+      buildBriefSectionRow(sections.slice(2, 4), 3),
+      ...(insight ? [
+        { tag: "hr" },
+        { tag: "markdown", content: `**今日洞察**\n${briefCardText(insight)}` },
+      ] : []),
       {
         tag: "action",
         actions: [
@@ -587,6 +602,58 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
       },
     ],
   };
+}
+
+function buildBriefSectionRow(sections, start) {
+  return {
+    tag: "column_set",
+    flex_mode: "stretch",
+    horizontal_spacing: "default",
+    columns: sections.map((section, index) => {
+      const number = String(start + index).padStart(2, "0");
+      const subtitle = stringOrNull(section.subtitle);
+      const heading = [
+        `**${number} · ${briefCardText(section.name)}**`,
+        subtitle && `<font color='grey'>${briefCardText(subtitle.toUpperCase())}</font>`,
+      ].filter(Boolean).join("\n");
+      return {
+        tag: "column",
+        width: "weighted",
+        weight: 1,
+        vertical_align: "top",
+        elements: [{
+          tag: "markdown",
+          content: [heading, ...section.items.map(formatBriefItem)].join("\n\n"),
+        }],
+      };
+    }),
+  };
+}
+
+function formatBriefItem(item, index) {
+  const name = briefCardText(stringOrNull(item.sourceName) || "来源");
+  let source = stringOrNull(item.sourceName) ? name : "";
+  if (stringOrNull(item.sourceUrl)) {
+    try {
+      const url = new URL(item.sourceUrl);
+      if (["http:", "https:"].includes(url.protocol) && !url.username && !url.password) {
+        const href = url.href.replaceAll("(", "%28").replaceAll(")", "%29");
+        source = `[${name}](${href})`;
+      }
+    } catch {
+      // Keep the source label when an archive URL cannot be linked.
+    }
+  }
+  const date = stringOrNull(item.sourceDateLabel);
+  const citation = [source, date && `<font color='grey'>${briefCardText(date)}</font>`]
+    .filter(Boolean).join(" · ");
+  const mark = ["◆", "◇", "◈"][index];
+  return [`${mark}  **${briefCardText(item.title)}**`, briefCardText(item.description), citation]
+    .filter(Boolean).join("\n");
+}
+
+function briefCardText(value) {
+  return escapeForMarkdown(cardBrandText(value).replaceAll("<", "&lt;"));
 }
 
 function cardBrandText(value) {
