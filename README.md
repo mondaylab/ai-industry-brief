@@ -22,11 +22,11 @@
 
 ## 在线预览
 
-- 简报首页：[https://mondaylab.github.io/ai-industry-brief/](https://mondaylab.github.io/ai-industry-brief/)
-- 热点雷达：[https://mondaylab.github.io/ai-industry-brief/radar.html](https://mondaylab.github.io/ai-industry-brief/radar.html)
-- 论文观察室：[https://mondaylab.github.io/ai-industry-brief/papers.html](https://mondaylab.github.io/ai-industry-brief/papers.html)
-- 全球技术视野：[在线简报](https://mondaylab.github.io/ai-industry-brief/global-tech-radar/) · [Agent 与发布流程](global-tech-radar/)
-- 七种色板 Demo：[https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html](https://mondaylab.github.io/ai-industry-brief/color-palette-demo.html)
+- 简报首页：[https://mondaylab.github.io/zero-one-signals/](https://mondaylab.github.io/zero-one-signals/)
+- 热点雷达：[https://mondaylab.github.io/zero-one-signals/radar.html](https://mondaylab.github.io/zero-one-signals/radar.html)
+- 论文观察室：[https://mondaylab.github.io/zero-one-signals/papers.html](https://mondaylab.github.io/zero-one-signals/papers.html)
+- 全球技术视野：[在线简报](https://mondaylab.github.io/zero-one-signals/global-tech-radar/) · [Agent 与发布流程](global-tech-radar/)
+- 七种色板 Demo：[https://mondaylab.github.io/zero-one-signals/color-palette-demo.html](https://mondaylab.github.io/zero-one-signals/color-palette-demo.html)
 - 强弱信号做图 SOP：[docs/weekly-call-log-sop.md](docs/weekly-call-log-sop.md)
 - 强弱信号小红书文案 Skill：`skills/xiaohongshu-weekly-letter/`
 
@@ -107,19 +107,19 @@
 如果你使用 Codex 或支持 Skills 的 AI 编程助手，不需要手动复制文件。直接把下面这句话发给它即可。
 
 ```text
-请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并根据提示帮我初始化一个行业简报项目。
+请帮我安装 mondaylab/zero-one-signals 这个行业简报 Skill，并根据提示帮我初始化一个行业简报项目。
 ```
 
 如果已经知道要做哪个行业，也可以直接说：
 
 ```text
-请帮我安装 mondaylab/ai-industry-brief 这个行业简报 Skill，并帮我生成第一期跨境电商简报。
+请帮我安装 mondaylab/zero-one-signals 这个行业简报 Skill，并帮我生成第一期跨境电商简报。
 ```
 
 AI Agent 通常会执行：
 
 ```bash
-npx skills add mondaylab/ai-industry-brief -y -g
+npx skills add mondaylab/zero-one-signals -y -g
 ```
 
 如果你已经克隆了本仓库，也可以从本地路径安装：
