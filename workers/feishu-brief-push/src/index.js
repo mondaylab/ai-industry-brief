@@ -1,3 +1,5 @@
+import { briefItemAnchor } from "../../../shared/brief-item-anchor.mjs";
+
 const DEFAULT_SITE_BASE_URL = "https://mondaylab.github.io/zero-one-signals";
 const DEFAULT_TIME_ZONE = "Asia/Shanghai";
 const DEFAULT_SCREENSHOT_WIDTH = 1600;
@@ -204,7 +206,7 @@ async function pushBriefIfNeeded({ env, requestedDate, force = false, source, cr
 
   try {
     const tenantAccessToken = await getTenantAccessToken(env);
-    const card = buildBriefTextCard({ archiveUrl, detailUrl, date, ...brief });
+    const card = buildBriefTextCard({ detailUrl, date, sections: brief.sections });
     const { messageId } = await sendFeishuBotMessage({
       tenantAccessToken,
       chatId: env.FEISHU_CHAT_ID,
@@ -267,8 +269,6 @@ async function fetchPublishedBrief(siteBaseUrl, date) {
 
   return {
     headline: stringOrNull(brief.homepage?.headline) || opening,
-    opening,
-    insight: stringOrNull(brief.insight),
     sections,
   };
 }
@@ -545,7 +545,7 @@ async function uploadFeishuImage({ tenantAccessToken, filename, imageBytes }) {
 }
 
 
-function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, insight, sections }) {
+function buildBriefTextCard({ detailUrl, date, sections }) {
   return {
     schema: "2.0",
     config: {
@@ -576,54 +576,27 @@ function buildBriefTextCard({ archiveUrl, detailUrl, date, headline, opening, in
       padding: "12px",
       vertical_spacing: "12px",
       elements: [
+        buildBriefSectionRow(sections.slice(0, 2), 0, detailUrl),
+        buildBriefSectionRow(sections.slice(2), 2, detailUrl),
         {
-          tag: "markdown",
-          content: [
-            `**${briefCardText(headline)}**`,
-            opening !== headline && briefCardText(opening),
-          ].filter(Boolean).join("\n\n"),
-        },
-        buildBriefSectionRow(sections.slice(0, 2), 1),
-        buildBriefSectionRow(sections.slice(2), 3),
-        ...(insight ? [
-          { tag: "markdown", content: `**今日洞察**<br>${briefCardText(insight)}` },
-        ] : []),
-        {
-          tag: "column_set",
-          flex_mode: "none",
-          horizontal_spacing: "8px",
-          columns: [
-            { label: "查看当日详情", url: detailUrl, type: "primary_filled" },
-            { label: "打开首页", url: archiveUrl, type: "default" },
-          ].map(({ label, url, type }) => ({
-            tag: "column",
-            width: "auto",
-            elements: [{
-              tag: "button",
-              text: { tag: "plain_text", content: label },
-              type,
-              width: "default",
-              behaviors: [{ type: "open_url", default_url: url }],
-            }],
-          })),
+          tag: "button",
+          text: { tag: "plain_text", content: "查看当日详情" },
+          type: "primary_filled",
+          behaviors: [{ type: "open_url", default_url: detailUrl }],
         },
       ],
     },
   };
 }
 
-function buildBriefSectionRow(sections, start) {
+function buildBriefSectionRow(sections, start, detailUrl) {
   return {
     tag: "column_set",
     flex_mode: "stretch",
     horizontal_spacing: "12px",
     columns: sections.map((section, index) => {
-      const number = String(start + index).padStart(2, "0");
-      const subtitle = stringOrNull(section.subtitle);
-      const heading = [
-        `<text_tag color='blue'>${number}</text_tag> **${briefCardText(section.name)}**`,
-        subtitle && `<font color='grey'>${briefCardText(subtitle.toUpperCase())}</font>`,
-      ].filter(Boolean).join("<br>");
+      const sectionIndex = start + index;
+      const number = String(sectionIndex + 1).padStart(2, "0");
       return {
         tag: "column",
         width: "weighted",
@@ -633,34 +606,21 @@ function buildBriefSectionRow(sections, start) {
         padding: "12px",
         vertical_spacing: "10px",
         elements: [
-          { tag: "markdown", content: heading },
-          ...section.items.map((item, index) => ({ tag: "markdown", content: formatBriefItem(item, index) })),
+          { tag: "markdown", content: `<text_tag color='blue'>${number}</text_tag> **${briefCardText(section.name)}**` },
+          ...section.items.map((item, itemIndex) => ({
+            tag: "markdown",
+            content: formatBriefItem(item, `${detailUrl}#${briefItemAnchor(sectionIndex, itemIndex)}`),
+          })),
         ],
       };
     }),
   };
 }
 
-function formatBriefItem(item, index) {
-  const name = briefCardText(stringOrNull(item.sourceName) || "来源");
-  let source = stringOrNull(item.sourceName) ? name : "";
-  if (stringOrNull(item.sourceUrl)) {
-    try {
-      const url = new URL(item.sourceUrl);
-      if (["http:", "https:"].includes(url.protocol) && !url.username && !url.password) {
-        const href = url.href.replaceAll("(", "%28").replaceAll(")", "%29");
-        source = `[${name}](${href})`;
-      }
-    } catch {
-      // Keep the source label when an archive URL cannot be linked.
-    }
-  }
-  const date = stringOrNull(item.sourceDateLabel);
-  const citation = [source, date && `<font color='grey'>${briefCardText(date)}</font>`]
-    .filter(Boolean).join(" · ");
-  const mark = ["◆", "◇", "◈"][index];
-  return [`${mark}  **${briefCardText(item.title)}**`, briefCardText(item.description), citation]
-    .filter(Boolean).join("<br>");
+function formatBriefItem(item, url) {
+  const title = `[${briefCardText(item.title)}](${url})`;
+  const date = stringOrNull(item.sourceDateLabel)?.match(/\b\d{4}-\d{2}(?:-\d{2})?\b/)?.[0];
+  return date ? `${title} <font color='grey'>${date}</font>` : title;
 }
 
 function briefCardText(value) {
